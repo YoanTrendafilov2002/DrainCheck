@@ -184,6 +184,10 @@ product, bias-corrected radar or raw radar for **27 June 2025, Europe/Sofia**.
 Values and legends are accumulated **mm per local day**, not mm/hour. Final
 merged is the default product; its optional 0.5 mm visibility threshold affects
 display only. Fine-product legends span 0–30 mm and raw radar spans 0–110 mm.
+Rainfall is supplemental: the raster and station groups start off. When enabled,
+its default opacity is 30%, with hillshade, screening and vector layers above it.
+Rainfall inspection details are collapsed while the overlay is off; selecting a
+rain station exposes its full readout. Explicit saved display choices still apply.
 Visibility, opacity, native-cell/bilinear display preference, threshold and station
 filters are independent of terrain and routes and are retained in shared URLs.
 

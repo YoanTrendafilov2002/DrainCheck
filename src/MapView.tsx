@@ -23,17 +23,17 @@ export function MapView({state,meta,pluvialMeta,buildingsMeta,cadastreMeta,histo
     const overlayBefore=(ids:string[])=>ids.find(id=>m.getLayer(id))||before;
     if(s.terrain&&s.opacity>0&&!m.getSource('terrain')&&meta.terrain_available&&scale){
       m.addSource('terrain',{type:'raster',tileSize:256,tiles:[`${origin}/api/raster/${scale.id}/{z}/{x}/{y}.png?v=${v}&r=${meta.renderer_revision||'v1'}`],minzoom:5,maxzoom:20,attribution:'SofiaPlan DTM · Baltic 1982'});
-      m.addLayer({id:'terrain',type:'raster',source:'terrain',layout:{visibility:'visible'},paint:{'raster-opacity':s.opacity,'raster-resampling':'linear','raster-fade-duration':0}},overlayBefore(['hillshade','rainfall','pluvial','green-fill','route-existing','points']));
+      m.addLayer({id:'terrain',type:'raster',source:'terrain',layout:{visibility:'visible'},paint:{'raster-opacity':s.opacity,'raster-resampling':'linear','raster-fade-duration':0}},overlayBefore(['rainfall','hillshade','pluvial','green-fill','route-existing','points']));
     }
     if(s.hillshade&&!m.getSource('hillshade')&&meta.terrain_available){
       m.addSource('hillshade',{type:'raster',tileSize:256,tiles:[`${origin}/api/hillshade/{z}/{x}/{y}.png?v=${v}&r=${meta.renderer_revision||'v1'}`],minzoom:5,maxzoom:20,attribution:'SofiaPlan DTM · Baltic 1982'});
-      m.addLayer({id:'hillshade',type:'raster',source:'hillshade',layout:{visibility:'visible'},paint:{'raster-opacity':.22,'raster-fade-duration':0}},overlayBefore(['rainfall','pluvial','green-fill','route-existing','points']));
+      m.addLayer({id:'hillshade',type:'raster',source:'hillshade',layout:{visibility:'visible'},paint:{'raster-opacity':.22,'raster-fade-duration':0}},overlayBefore(['pluvial','green-fill','history-survey-fill','cadastre-fill','buildings-fill','route-existing','points']));
     }
     if(s.rain&&s.rainOpacity>0&&rainfallMeta?.available&&!m.getSource('rainfall')){
       const extents=Object.values(rainfallMeta.products||{}).map((p:any)=>p.bbox).filter((b:any)=>Array.isArray(b)&&b.length===4);
       const bounds=extents.length?[Math.min(...extents.map(b=>b[0])),Math.min(...extents.map(b=>b[1])),Math.max(...extents.map(b=>b[2])),Math.max(...extents.map(b=>b[3]))] as [number,number,number,number]:undefined;
       m.addSource('rainfall',{type:'raster',tileSize:256,tiles:[rainfallTileUrl(s,rainfallMeta,meta.renderer_revision||'v1')],bounds,minzoom:5,maxzoom:20,attribution:'Daily rainfall · OPERA / Weather Underground · 2025-06-27'});
-      m.addLayer({id:'rainfall',type:'raster',source:'rainfall',layout:{visibility:'visible'},paint:{'raster-opacity':s.rainOpacity,'raster-resampling':'nearest','raster-fade-duration':0}},overlayBefore(['pluvial','green-fill','history-survey-fill','buildings-fill','route-existing','points']));
+      m.addLayer({id:'rainfall',type:'raster',source:'rainfall',layout:{visibility:'visible'},paint:{'raster-opacity':s.rainOpacity,'raster-resampling':'nearest','raster-fade-duration':0}},overlayBefore(['hillshade','pluvial','green-fill','history-survey-fill','cadastre-fill','buildings-fill','route-existing','points']));
     }
     if(!m.getSource('green')){
       m.addSource('green',{type:'vector',tiles:vector('green',`&display=${s.green==='all'?'all':'subset'}`),maxzoom:18,attribution:'Green areas · source 2020'});

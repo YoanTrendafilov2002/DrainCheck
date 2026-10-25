@@ -1,0 +1,112 @@
+{
+  "verified_utc": "2026-10-25T09:03:33.972796+00:00",
+  "scope": "Supplemental rainfall presentation; native source data and scientific calculations unchanged",
+  "defaults": {
+    "rainfall_overlay": false,
+    "accepted_stations": false,
+    "rejected_stations": false,
+    "rainfall_opacity": 0.3
+  },
+  "layer_order_bottom_to_top": [
+    "terrain colours",
+    "optional rainfall",
+    "hillshade",
+    "pluvial screening",
+    "vector context"
+  ],
+  "inspector": "Rainfall collapsed when overlay is off; original full readout available on expansion, overlay activation or station selection",
+  "compatibility": "Explicit saved rainfall visibility/opacity and independent station choices retained; older links without rainfall fields start with rain off",
+  "browser_checks": {
+    "default_off_and_30_percent_controls": "PASS",
+    "inspector_collapsed_and_manually_expandable": "PASS",
+    "overlay_on_restores_full_readout_with_same_native_value": "PASS",
+    "terrain_hillshade_routes_remain_visible": "PASS",
+    "current_user_camera_and_other_filters_preserved": "PASS",
+    "existing_inside_routes": 543,
+    "existing_inside_length_km_display": 137.86,
+    "sample_location": {
+      "longitude": 23.267111,
+      "latitude": 42.684845,
+      "elevation_m_display": 585.08,
+      "terrain_source_column": 17641,
+      "terrain_source_row": 23485,
+      "rainfall_mm_display": 15.02,
+      "ponding_index_display": 0.0
+    },
+    "qa_browser_errors": []
+  },
+  "actual_native_rainfall_sample": {
+    "status": "ok",
+    "longitude": 23.267111,
+    "latitude": 42.684845,
+    "products": {
+      "merged_250m": {
+        "product": "merged_250m",
+        "label": "Merged radar + stations",
+        "status": "ok",
+        "rain_mm": 15.020280838012695,
+        "row": 33,
+        "column": 28,
+        "sampling": "containing native cell; no interpolation",
+        "reason": null,
+        "hidden_by_display_threshold": false,
+        "pixel_center_longitude": 23.267063266555173,
+        "pixel_center_latitude": 42.6847664390945
+      },
+      "radar_bias_corrected_250m": {
+        "product": "radar_bias_corrected_250m",
+        "label": "Bias-corrected radar",
+        "status": "ok",
+        "rain_mm": 13.019757270812988,
+        "row": 33,
+        "column": 28,
+        "sampling": "containing native cell; no interpolation",
+        "reason": null,
+        "hidden_by_display_threshold": false,
+        "pixel_center_longitude": 23.267063266555173,
+        "pixel_center_latitude": 42.6847664390945
+      },
+      "radar_raw_1km": {
+        "product": "radar_raw_1km",
+        "label": "Raw radar daily accumulation",
+        "status": "ok",
+        "rain_mm": 53.12101745605469,
+        "row": 35,
+        "column": 41,
+        "sampling": "containing native cell; no interpolation",
+        "reason": null,
+        "hidden_by_display_threshold": false,
+        "pixel_center_longitude": 23.263265234640006,
+        "pixel_center_latitude": 42.68800297009661
+      }
+    },
+    "revision": "88036868558c20ce",
+    "period": {
+      "local_date": "2025-06-27",
+      "timezone": "Europe/Sofia",
+      "start_utc": "2025-06-26T21:00:00Z",
+      "end_utc": "2025-06-27T21:00:00Z",
+      "utc_start_inclusive": "2025-06-26T21:00:00Z",
+      "utc_end_exclusive": "2025-06-27T21:00:00Z",
+      "aggregation_window_verified_from_upstream_code": false
+    },
+    "units": "mm"
+  },
+  "unchanged_rainfall_sha256": {
+    "data/rainfall/merged_250m.tif": "902b743d49cf077bf0c738042c62c4c7ed6fbf154a5f30590f6e038f82f7c66f",
+    "data/rainfall/radar_bias_corrected_250m.tif": "d572da07990aa5dde0fc485a37f14531198d56376d3d26bd39a62e0217c3bcf6",
+    "data/rainfall/radar_raw_1km.tif": "b925fe1aa37aa29fc7773d3345f2b358245cd46c1ad9e5424850847acb06acdb",
+    "data/rainfall/wu_stations.geojson": "067e6e63078cd2945c2a14098fa77224eee964711f95cdc1a1da62bbc61c955b"
+  },
+  "automated_tests": {
+    "python": 196,
+    "javascript": 24,
+    "total": 220,
+    "failed": 0
+  },
+  "production_build": "PASS: TypeScript, Vite and precompressed assets",
+  "screenshots": {
+    "rainfall-supplemental.jpg": "11afd36bb2eb65620e4dafd7bc67f1ecd072e6f364c5a958ffe0acf7234478bd",
+    "rainfall-light-overlay.jpg": "dbb1a1cfc94d02175f1b92fbae1946aa14b1368218f48580a8a97d9d2b3cb276"
+  }
+}

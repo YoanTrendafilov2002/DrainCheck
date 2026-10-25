@@ -37,6 +37,8 @@ Every valid raster cell matches the corresponding native-array Float32 value exa
 
 There are no exact zero-valued valid raster cells in this particular snapshot, but the application must still distinguish zero from missing. Of **55 unique station IDs**, **43 have `qc='ok'`** and **12 are rejected**. All station coordinates, original properties and QC reasons are retained. Six stations report zero, including accepted **ISOFIA682** at longitude 23.43, latitude 42.65 (`rain_mm=0`, `rows=589`). That is a valid recorded zero. Rejected **ISOFIA667** records 441.7 mm with `qc='implausible'`; it remains inspectable as rejected data. No new QC or fitting rule has been invented.
 
+Rainfall and both station groups are off by default. The optional raster starts at 30% opacity, below hillshade, terrain screening and vector context; explicit saved visibility/opacity choices remain respected. Native rainfall readouts remain available as supplemental inspection details when the overlay is off.
+
 Final rainfall defaults to a 0–30 mm continuous colour range; corrected uses the same range, raw uses 0–110 mm. The source's optional final display threshold is 0.5 mm. Display thresholds and optional bilinear smoothing must not modify native samples, summaries, exports or mask coverage. Nearest native-cell sampling is authoritative. Rain stations, archived sewer routes and water-supply infrastructure remain separate datasets.
 
 ## Independently reproduced summaries
