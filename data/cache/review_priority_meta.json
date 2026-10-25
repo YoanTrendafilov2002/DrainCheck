@@ -1,0 +1,253 @@
+{
+  "available": true,
+  "revision": "853d77c47901ec54",
+  "method": "evidence-review-priority-v1",
+  "title": "Evidence-informed review priority",
+  "interpretation": "Rule-based inspection categories; no calibrated flood likelihood, intensity, depth, vulnerability or damage",
+  "scenario_assumption": "At the user’s request, the available datasets are treated as compatible for a combined review scenario. Actual source dates, spatial gaps and unknown currency remain recorded. This does not establish that the 2025 rainfall caused the 2021 mapped flooding or calibrate forecast skill.",
+  "output_file": "data/derived/review_priority_5m.tif",
+  "output_sha256": "6da518c22b2dd002c153532b270aaa572ccb088dc7b0c09794ddf4d84527b64c",
+  "grid": {
+    "crs": "EPSG:7801",
+    "shape": [
+      10869,
+      10345
+    ],
+    "transform": [
+      5,
+      0,
+      299392,
+      0,
+      -5,
+      4753611
+    ],
+    "nodata": 255
+  },
+  "band": "evidence_based_review_priority",
+  "classes": [
+    {
+      "code": 0,
+      "label": "Lower ponding terrain signal",
+      "colour": "#fff1c4",
+      "cell_count": 50809711,
+      "area_km2": 1270.242775,
+      "color_rgba": [
+        255,
+        241,
+        196,
+        190
+      ]
+    },
+    {
+      "code": 1,
+      "label": "Raised ponding terrain signal",
+      "colour": "#fbc66e",
+      "cell_count": 380965,
+      "area_km2": 9.524125,
+      "color_rgba": [
+        251,
+        198,
+        110,
+        190
+      ]
+    },
+    {
+      "code": 2,
+      "label": "Higher ponding terrain signal",
+      "colour": "#ed824b",
+      "cell_count": 408694,
+      "area_km2": 10.21735,
+      "color_rgba": [
+        237,
+        130,
+        75,
+        190
+      ]
+    },
+    {
+      "code": 3,
+      "label": "Higher ponding + potential building footprint",
+      "colour": "#bb3d40",
+      "cell_count": 7233,
+      "area_km2": 0.180825,
+      "color_rgba": [
+        187,
+        61,
+        64,
+        190
+      ]
+    },
+    {
+      "code": 4,
+      "label": "Historical flood footprint",
+      "colour": "#8b75c2",
+      "cell_count": 75791,
+      "area_km2": 1.894775,
+      "color_rgba": [
+        139,
+        117,
+        194,
+        190
+      ]
+    },
+    {
+      "code": 5,
+      "label": "Historical footprint + potential building footprint",
+      "colour": "#632476",
+      "cell_count": 229,
+      "area_km2": 0.005725,
+      "color_rgba": [
+        99,
+        36,
+        118,
+        190
+      ]
+    },
+    {
+      "code": 253,
+      "label": "Excluded mapped open water",
+      "colour": "#00000000",
+      "cell_count": 1519688,
+      "area_km2": 37.9922,
+      "color_rgba": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "code": 254,
+      "label": "Uncertain terrain",
+      "colour": "#80878c",
+      "cell_count": 480475,
+      "area_km2": 12.011875,
+      "color_rgba": [
+        128,
+        135,
+        140,
+        185
+      ]
+    },
+    {
+      "code": 255,
+      "label": "Outside terrain",
+      "colour": "#00000000",
+      "cell_count": 58757019,
+      "area_km2": 1468.925475,
+      "color_rgba": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "counts": {
+    "all_cells": 112439805,
+    "eligible_land_cells": 51682623,
+    "known_terrain_cells": 53682786,
+    "mapped_water_cells": 1519688,
+    "uncertain_cells": 480475,
+    "outside_cells": 58757019,
+    "potential_footprint_cells_known_terrain": 2677243,
+    "potential_footprint_cells_eligible_land": 2675795,
+    "historical_union_cell_centres": 76343,
+    "historical_union_known_terrain_cells": 76262,
+    "queried_distinct_cadastral_source_records": 274633,
+    "query_rows_including_repeated_window_candidates": 290395
+  },
+  "formula": {
+    "ordered_rules": [
+      "Outside known DTM =>255",
+      "Mapped qualifying water on known terrain=>253",
+      "Known nonwater terrain with boundary influence or invalid required P/C/S factor=>254",
+      "Eligible historical footprint plus potential cadastral footprint=>5",
+      "Eligible historical footprint=>4",
+      "Eligible P>=70 plus potential cadastral footprint=>3",
+      "Eligible P>=70=>2",
+      "Eligible50<=P<70=>1",
+      "Other eligible land=>0"
+    ],
+    "historical": "Union of actual136 display polygons; no overlap double-count; pixel centres",
+    "building": "Actual AGKK geometry queried via read-only RTree, reprojected into existing EPSG7801 cells; all_touched=True; source record != unique physical building",
+    "thresholds": "Existing exploratory P thresholds50 and70 reused; no fitted weights or predictive validation",
+    "unchanged": "Original P/C/S raster, ground heights and source values remain unchanged; historical evidence changes this separate display class only"
+  },
+  "source_revisions": {
+    "terrain": "f42644a668cdc14d",
+    "cadastre": "568d80b32ddb42f2",
+    "rainfall_context": "88036868558c20ce",
+    "water": "ee06795221a5005e",
+    "history": "7fbfbcee6ee933f4",
+    "pluvial": "2a0d5f6899cd036c"
+  },
+  "source_dates": {
+    "terrain": "Source filename2024; measurement date/vertical accuracy unverified",
+    "historical": "2021; January/February discrepancy; no per-feature timestamp",
+    "cadastre": "Source date unknown; snapshot retrieved25Oct2026",
+    "rainfall": "27June2025 Europe/Sofia daily totals",
+    "green": "Supplied municipal2020-labelled source",
+    "sewer": "Supplied municipal2009-labelled route source; some planned routes"
+  },
+  "source_files": {
+    "terrain_scores": {
+      "file": "data/cache/pluvial_5m.tif",
+      "size_bytes": 892396676,
+      "mtime_ns": 1792863601405364000,
+      "sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e"
+    },
+    "water_mask": {
+      "file": "data/cache/open_water_mask_5m.tif",
+      "size_bytes": 303620,
+      "mtime_ns": 1792913643817910200,
+      "sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030"
+    },
+    "historical_polygons": {
+      "file": "data/reference/historical_floods/sofiaplan_flood_zones_2021_display.geojson",
+      "size_bytes": 246224,
+      "mtime_ns": 1792915073549689300,
+      "sha256": "215afe46b02716e72b61852cae1bd0abcdec81e81e2264fddc9e938e06e73bb5"
+    },
+    "cadastre_index": {
+      "file": "data/cache/cadastral_buildings.sqlite",
+      "size_bytes": 419184640,
+      "mtime_ns": 1792917259165180300,
+      "sha256": "e6aa6ac4744b8899527652b7a6579ea5db1865982513a5cca78ffce5bfe92eef"
+    }
+  },
+  "source_counts": {
+    "historical_features": 136,
+    "cadastre_source_records": 334033
+  },
+  "context_not_numerical_hazard_inputs": [
+    "2025 daily rainfall",
+    "green-area labels",
+    "sewer route/point density or status",
+    "reported clogging or drainage narratives without spatially resolved hydraulic inputs"
+  ],
+  "limitations": [
+    "This is review priority, not a calibrated flood hazard/risk index; category ordering is an explicit analyst operational choice.",
+    "Historical footprints are partial northern survey coverage and mixed river/rainfall/snowmelt context. No polygon does not mean no previous flooding.",
+    "Cadastral footprints indicate potential exposure only; no floor levels, occupancy, protective measures or damage model enter the classification.",
+    "All-touched5m building membership can include a small footprint sliver; cells are not treated as100% sealed and cell area is not exposed building area.",
+    "Rainfall daily totals provide event context, not short-duration intensity or sewer exceedance; fine-rain grids have zero spatial overlap with2021 survey polygons.",
+    "Green polygons do not establish soil infiltration; route/point presence does not establish operational drainage or blockage probability.",
+    "Original concentration/combined modes retain D8 routing/terrain-facet limitations; C is intentionally not added to review priority.",
+    "Open-water exclusions preserve source policy, including unmapped/intermittent channel gaps; adjacent land is not assumed safe.",
+    "No changes to buildings as terrain barriers, upstream hydrology, DTM resolution, original source files or legacy map modes."
+  ],
+  "verification": {
+    "all_listed_sources_unchanged": true,
+    "source_hashes_checked_before_after": true
+  },
+  "created_utc": "2026-10-25T09:12:39.130461+00:00",
+  "runtime_seconds": 69.457,
+  "reproduce": "python scripts/prepare_review_priority.py",
+  "source_urls": {
+    "historical": "https://urbandata.sofia.bg/dataset/flooded-areas-identified-by-drone-survey-february-2021",
+    "cadastre": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
+    "open_water": "https://www.openstreetmap.org",
+    "terrain": "https://api.sofiaplan.bg/datasets/656"
+  }
+}

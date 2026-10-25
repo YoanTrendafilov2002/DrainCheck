@@ -1,0 +1,627 @@
+{
+  "schema_version": 1,
+  "available": true,
+  "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+  "processed_utc": "2026-10-25T09:16:09.214279+00:00",
+  "title": "Official flood assessment context — supplier ordinal zones and draft PFRA designations",
+  "zones_file": "data/reference/flood_assessment/assessment_zones.geojson",
+  "data_file": "data/reference/flood_assessment/assessment_zones_display.geojson",
+  "geojson_file": "data/reference/flood_assessment/assessment_zones_display.geojson",
+  "original_zones_file": "data/reference/flood_assessment/assessment_zones.geojson",
+  "browser_zones_file": "data/reference/flood_assessment/assessment_zones_browser.geojson",
+  "browser_sha256": "d0765cb4fa1ab78902576ff59f4267e4d83946cdbdcfc23cc665000f691284c3",
+  "browser_size_bytes": 5127546,
+  "browser_simplification": {
+    "tolerance_m": 1.0,
+    "projection": "EPSG:7801",
+    "preserve_topology": true,
+    "role": "Browser display only; validated full-precision data_file remains authoritative for hit predicates, masks, areas and exposure.",
+    "note": "Display simplification1m; full validated source preserved. No global Hausdorff maximum was measured.",
+    "features": [
+      {
+        "source_id": "sofiaplan-306-1",
+        "valid": true,
+        "full_unique_vertices": 8573,
+        "browser_unique_vertices": 5927,
+        "polygon_component_count_preserved": true,
+        "hole_count_preserved": true,
+        "full_area_m2": 5796573.170376412,
+        "browser_area_m2": 5796148.150830046,
+        "area_delta_m2": -425.0195463653654,
+        "max_absolute_bbox_coordinate_change_m": 0.0,
+        "hausdorff_distance_checked": false
+      },
+      {
+        "source_id": "sofiaplan-306-2",
+        "valid": true,
+        "full_unique_vertices": 57415,
+        "browser_unique_vertices": 33363,
+        "polygon_component_count_preserved": true,
+        "hole_count_preserved": true,
+        "full_area_m2": 25279082.68549188,
+        "browser_area_m2": 25282576.07687412,
+        "area_delta_m2": 3493.391382239759,
+        "max_absolute_bbox_coordinate_change_m": 0.0,
+        "hausdorff_distance_checked": false
+      },
+      {
+        "source_id": "sofiaplan-307-1",
+        "valid": true,
+        "full_unique_vertices": 57505,
+        "browser_unique_vertices": 34559,
+        "polygon_component_count_preserved": true,
+        "hole_count_preserved": true,
+        "full_area_m2": 33822689.24969588,
+        "browser_area_m2": 33824613.42157095,
+        "area_delta_m2": 1924.1718750670552,
+        "max_absolute_bbox_coordinate_change_m": 0.0,
+        "hausdorff_distance_checked": false
+      },
+      {
+        "source_id": "sofiaplan-307-2",
+        "valid": true,
+        "full_unique_vertices": 8232,
+        "browser_unique_vertices": 5731,
+        "polygon_component_count_preserved": true,
+        "hole_count_preserved": true,
+        "full_area_m2": 6520955.069816402,
+        "browser_area_m2": 6520605.51772899,
+        "area_delta_m2": -349.55208741221577,
+        "max_absolute_bbox_coordinate_change_m": 0.0,
+        "hausdorff_distance_checked": false
+      },
+      {
+        "source_id": "sofiaplan-308-1",
+        "valid": true,
+        "full_unique_vertices": 8106,
+        "browser_unique_vertices": 5589,
+        "polygon_component_count_preserved": true,
+        "hole_count_preserved": true,
+        "full_area_m2": 7393517.681263821,
+        "browser_area_m2": 7392956.632276018,
+        "area_delta_m2": -561.0489878030494,
+        "max_absolute_bbox_coordinate_change_m": 0.0,
+        "hausdorff_distance_checked": false
+      },
+      {
+        "source_id": "sofiaplan-308-2",
+        "valid": true,
+        "full_unique_vertices": 69563,
+        "browser_unique_vertices": 43157,
+        "polygon_component_count_preserved": true,
+        "hole_count_preserved": true,
+        "full_area_m2": 57145217.55992884,
+        "browser_area_m2": 57148380.902107656,
+        "area_delta_m2": 3163.342178814113,
+        "max_absolute_bbox_coordinate_change_m": 0.0,
+        "hausdorff_distance_checked": false
+      }
+    ]
+  },
+  "context_file": "data/reference/flood_assessment/assessment_context.geojson",
+  "crs": "EPSG:4326",
+  "native_atlas_crs": "EPSG:7801",
+  "zone_features": 6,
+  "context_features": 23,
+  "zone_levels": {
+    "high": 2,
+    "medium": 2,
+    "low": 2
+  },
+  "context_geometry_types": {
+    "Point": 4,
+    "MultiLineString": 19
+  },
+  "context_mechanisms": {
+    "pluvial": 1,
+    "infrastructure": 3,
+    "mixed": 4,
+    "river": 15
+  },
+  "zone_areas_m2": {
+    "high": 31075655.85587011,
+    "medium": 40343644.31951259,
+    "low": 64538735.24119233
+  },
+  "zone_validation": [
+    {
+      "source_id": "sofiaplan-306-1",
+      "valid": false,
+      "geometry_type": "Polygon",
+      "bounds": [
+        23.17107803133662,
+        42.872697629676644,
+        23.48650321033306,
+        43.10036502612727
+      ],
+      "coordinates_unchanged_from_source_wgs84_response": true,
+      "source_properties_equal_native_response": true
+    },
+    {
+      "source_id": "sofiaplan-306-2",
+      "valid": false,
+      "geometry_type": "MultiPolygon",
+      "bounds": [
+        23.02456407567797,
+        42.606224551742294,
+        23.67621374382277,
+        42.890668768208826
+      ],
+      "coordinates_unchanged_from_source_wgs84_response": true,
+      "source_properties_equal_native_response": true
+    },
+    {
+      "source_id": "sofiaplan-307-1",
+      "valid": false,
+      "geometry_type": "MultiPolygon",
+      "bounds": [
+        23.024555528088992,
+        42.606232123932365,
+        23.676255078692705,
+        42.89072092918987
+      ],
+      "coordinates_unchanged_from_source_wgs84_response": true,
+      "source_properties_equal_native_response": true
+    },
+    {
+      "source_id": "sofiaplan-307-2",
+      "valid": false,
+      "geometry_type": "Polygon",
+      "bounds": [
+        23.171069333022814,
+        42.87269837898018,
+        23.486525570681906,
+        43.10038432759867
+      ],
+      "coordinates_unchanged_from_source_wgs84_response": true,
+      "source_properties_equal_native_response": true
+    },
+    {
+      "source_id": "sofiaplan-308-1",
+      "valid": false,
+      "geometry_type": "Polygon",
+      "bounds": [
+        23.171059175025682,
+        42.87269731615681,
+        23.486548287610653,
+        43.10041944078779
+      ],
+      "coordinates_unchanged_from_source_wgs84_response": true,
+      "source_properties_equal_native_response": true
+    },
+    {
+      "source_id": "sofiaplan-308-2",
+      "valid": false,
+      "geometry_type": "MultiPolygon",
+      "bounds": [
+        23.024533530521847,
+        42.60622462870091,
+        23.681924996496438,
+        42.89082976845714
+      ],
+      "coordinates_unchanged_from_source_wgs84_response": true,
+      "source_properties_equal_native_response": true
+    }
+  ],
+  "zone_sha256": "074ab9919b22042b47a92365e446a123b504fb89a2741dd29bea35c17ccdce47",
+  "context_sha256": "73ca1d039dfb694b8be3c2e419d377492c37b458966125c4cad6b84070096293",
+  "sha256": "7f0ad6bf1a5ead218cad73fe361fbc2cca3af9ffce82c0b2c0e86954c9ac6ad6",
+  "display_sha256": "7f0ad6bf1a5ead218cad73fe361fbc2cca3af9ffce82c0b2c0e86954c9ac6ad6",
+  "geometry_repair_receipt": "data/reference/flood_assessment/geometry_repair_receipt.json",
+  "geometry_repairs": [
+    {
+      "source_id": "sofiaplan-306-1",
+      "source_validity": "Ring Self-intersection[23.4752011853845 43.0700517257409]",
+      "source_geometry_type": "Polygon",
+      "display_geometry_type": "Polygon",
+      "display_valid": true,
+      "polygon_components": 1,
+      "area_before_m2": 5796573.170376864,
+      "area_after_m2": 5796573.170376412,
+      "area_delta_m2": -4.5262277126312256e-07,
+      "source_unique_vertices": 8573,
+      "display_unique_vertices": 8573,
+      "source_vertices_absent_from_area_copy": 0,
+      "new_intersection_vertices": 0,
+      "non_area_remnant_parts": 0,
+      "effect": "Source coordinates are retained in originals; topology repair can reorder rings or insert intersection vertices. No grid resampling, smoothing, buffering or manual extent adjustment."
+    },
+    {
+      "source_id": "sofiaplan-306-2",
+      "source_validity": "Ring Self-intersection[23.5911944775971 42.6782340085406]",
+      "source_geometry_type": "MultiPolygon",
+      "display_geometry_type": "MultiPolygon",
+      "display_valid": true,
+      "polygon_components": 278,
+      "area_before_m2": 25279082.685493246,
+      "area_after_m2": 25279082.68549188,
+      "area_delta_m2": -1.3671815395355225e-06,
+      "source_unique_vertices": 57415,
+      "display_unique_vertices": 57415,
+      "source_vertices_absent_from_area_copy": 0,
+      "new_intersection_vertices": 0,
+      "non_area_remnant_parts": 0,
+      "effect": "Source coordinates are retained in originals; topology repair can reorder rings or insert intersection vertices. No grid resampling, smoothing, buffering or manual extent adjustment."
+    },
+    {
+      "source_id": "sofiaplan-307-1",
+      "source_validity": "Ring Self-intersection[23.6120262430626 42.655333474355]",
+      "source_geometry_type": "MultiPolygon",
+      "display_geometry_type": "MultiPolygon",
+      "display_valid": true,
+      "polygon_components": 246,
+      "area_before_m2": 33822689.2496965,
+      "area_after_m2": 33822689.24969588,
+      "area_delta_m2": -6.183981895446777e-07,
+      "source_unique_vertices": 57505,
+      "display_unique_vertices": 57505,
+      "source_vertices_absent_from_area_copy": 0,
+      "new_intersection_vertices": 0,
+      "non_area_remnant_parts": 0,
+      "effect": "Source coordinates are retained in originals; topology repair can reorder rings or insert intersection vertices. No grid resampling, smoothing, buffering or manual extent adjustment."
+    },
+    {
+      "source_id": "sofiaplan-307-2",
+      "source_validity": "Ring Self-intersection[23.4358055001029 42.8965858561077]",
+      "source_geometry_type": "Polygon",
+      "display_geometry_type": "Polygon",
+      "display_valid": true,
+      "polygon_components": 1,
+      "area_before_m2": 6520955.069816088,
+      "area_after_m2": 6520955.069816402,
+      "area_delta_m2": 3.1385570764541626e-07,
+      "source_unique_vertices": 8232,
+      "display_unique_vertices": 8232,
+      "source_vertices_absent_from_area_copy": 0,
+      "new_intersection_vertices": 0,
+      "non_area_remnant_parts": 0,
+      "effect": "Source coordinates are retained in originals; topology repair can reorder rings or insert intersection vertices. No grid resampling, smoothing, buffering or manual extent adjustment."
+    },
+    {
+      "source_id": "sofiaplan-308-1",
+      "source_validity": "Ring Self-intersection[23.4503449885124 42.8856571370554]",
+      "source_geometry_type": "Polygon",
+      "display_geometry_type": "Polygon",
+      "display_valid": true,
+      "polygon_components": 1,
+      "area_before_m2": 7393517.681263476,
+      "area_after_m2": 7393517.681263821,
+      "area_delta_m2": 3.4552067518234253e-07,
+      "source_unique_vertices": 8106,
+      "display_unique_vertices": 8106,
+      "source_vertices_absent_from_area_copy": 0,
+      "new_intersection_vertices": 0,
+      "non_area_remnant_parts": 0,
+      "effect": "Source coordinates are retained in originals; topology repair can reorder rings or insert intersection vertices. No grid resampling, smoothing, buffering or manual extent adjustment."
+    },
+    {
+      "source_id": "sofiaplan-308-2",
+      "source_validity": "Ring Self-intersection[23.4620830124897 42.7282657170151]",
+      "source_geometry_type": "MultiPolygon",
+      "display_geometry_type": "MultiPolygon",
+      "display_valid": true,
+      "polygon_components": 472,
+      "area_before_m2": 57145217.55992886,
+      "area_after_m2": 57145217.55992884,
+      "area_delta_m2": -1.4901161193847656e-08,
+      "source_unique_vertices": 69563,
+      "display_unique_vertices": 69563,
+      "source_vertices_absent_from_area_copy": 0,
+      "new_intersection_vertices": 0,
+      "non_area_remnant_parts": 0,
+      "effect": "Source coordinates are retained in originals; topology repair can reorder rings or insert intersection vertices. No grid resampling, smoothing, buffering or manual extent adjustment."
+    }
+  ],
+  "sources": [
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer306_metadata.json",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/306?f=pjson",
+      "sha256": "63b316e2394a5f178c87a3ac763b3bac3fc6318c6a1e45d776a6836352000a24",
+      "size_bytes": 4869,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:02 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "4869",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"4018eef6\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer306_count.json",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/306/query?where=1%3D1&returnCountOnly=true&f=json",
+      "sha256": "57413ce83ee1d989e384dfd3a82c6e2d9052a23c4204706bd2d7df11aa4c2d7c",
+      "size_bytes": 11,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:02 GMT",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "11",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"0\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer306_native.json",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/306/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=7801&f=json",
+      "sha256": "efa2da436457c9d936d2234887eaa4b0f31a30c42a763b867fc7ae2e3c60445e",
+      "size_bytes": 2660493,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:03 GMT",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"0\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer306_wgs84.geojson",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/306/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson",
+      "sha256": "3e0fc56221127dca7edc75964b0437aa0656c3a70193b0b0f2e009caa96d39fa",
+      "size_bytes": 2668567,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:03 GMT",
+        "Content-Type": "application/geo+json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"0\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer307_metadata.json",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/307?f=pjson",
+      "sha256": "1c74c65c8653816da5ee9560e2a9f5c93c54fc518543a5565a98de9f083befdb",
+      "size_bytes": 4877,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:04 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "4877",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"4018eef6\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer307_count.json",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/307/query?where=1%3D1&returnCountOnly=true&f=json",
+      "sha256": "57413ce83ee1d989e384dfd3a82c6e2d9052a23c4204706bd2d7df11aa4c2d7c",
+      "size_bytes": 11,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:04 GMT",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "11",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"0\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer307_native.json",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/307/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=7801&f=json",
+      "sha256": "310d65302b8a2827522576a10c3803085549f6157f641298cf3621309c1e196d",
+      "size_bytes": 2648947,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:04 GMT",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"0\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer307_wgs84.geojson",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/307/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson",
+      "sha256": "8fafb651c200db6b83c14a3fa0bb2d70850f72546d8f0877a96231b553bf8632",
+      "size_bytes": 2657009,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:05 GMT",
+        "Content-Type": "application/geo+json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"0\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer308_metadata.json",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/308?f=pjson",
+      "sha256": "dada13e55f66bc63a9019fc78f42be70870000b074d0309f4dfaac249b321147",
+      "size_bytes": 4873,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:06 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "4873",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"4018eef6\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer308_count.json",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/308/query?where=1%3D1&returnCountOnly=true&f=json",
+      "sha256": "57413ce83ee1d989e384dfd3a82c6e2d9052a23c4204706bd2d7df11aa4c2d7c",
+      "size_bytes": 11,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:06 GMT",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "11",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"0\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer308_native.json",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/308/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=7801&f=json",
+      "sha256": "9570388bb5ef81ab8ebddcea72652c37c0776856fc1ea9968b55325ef1708883",
+      "size_bytes": 3146628,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:06 GMT",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"0\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/sofiaplan_layer308_wgs84.geojson",
+      "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/308/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson",
+      "sha256": "7043672c1713cfe38a035ad976f70d4fe4b1492f157d7d8c34feea889ee9ffcc",
+      "size_bytes": 3156796,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Server": "nginx/1.18.0 (Ubuntu)",
+        "Date": "Sun, 25 Oct 2026 09:11:07 GMT",
+        "Content-Type": "application/geo+json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "max-age=0,must-revalidate",
+        "ETag": "\"0\"",
+        "Vary": "Origin",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "response_header_names_redacted": [
+        "Set-Cookie"
+      ]
+    },
+    {
+      "file": "data/reference/flood_assessment/originals/12_PFRA_BG1_APP12_APSFR_kmz.zip",
+      "url": "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN%202028-2033/aktual_PORN/12_PFRA_BG1_APP12_APSFR_kmz.zip",
+      "sha256": "6a9cab7d6ba08072442fb87534eb095ab0166da9513e09a74e67967f8d74f29e",
+      "size_bytes": 1957944,
+      "retrieved_utc": "2026-10-25T09:11:02.713481+00:00",
+      "response_headers": {
+        "Date": "Sun, 25 Oct 2026 09:11:08 GMT",
+        "Server": "Apache/2.4.67 (Debian)",
+        "Last-Modified": "Wed, 05 Aug 2026 10:02:05 GMT",
+        "Accept-Ranges": "bytes",
+        "Content-Length": "1957944",
+        "Cache-Control": "max-age=0",
+        "Expires": "Sun, 25 Oct 2026 09:11:08 GMT",
+        "Connection": "close",
+        "Content-Type": "application/zip"
+      }
+    }
+  ],
+  "publication_page": "https://www.bd-dunav.bg/content/upravlenie-na-vodite/plan-za-upravlenie-na-riska-ot-navodneniia-2028-2033/aktualizaciia-na-porn/",
+  "scenario": {
+    "temporal_compatibility": "assumed_by_user",
+    "meaning": "All supplied dates are treated as compatible inputs to this screening scenario; original dates and unresolved dates remain recorded. This does not establish event calibration."
+  },
+  "license": "No specific reuse licence is stated in the inspected source-layer metadata or PFRA publication; preserve attribution and source links.",
+  "limitations": [
+    "Municipal high/medium/low are supplier ordinal labels, with no numerical return period or probability supplied by the acquired fields.",
+    "Assessment zones and reaches are prospective assessment context, never historical observations or current floodwater extents.",
+    "The four PFRA points identify an urban assessment area or reservoir scenario; they are not precise incident locations or inundation polygons. No radius or buffer is assigned.",
+    "River reach geometry identifies the studied watercourse only; no river-bank hazard width or affected property footprint can be inferred from the line.",
+    "Mechanism unknown is retained for the six municipal zones; study-level river context does not supply per-polygon classification.",
+    "Pure dam-failure/reservoir points are infrastructure scenarios, not pluvial observations; their exact original labels remain attached.",
+    "No source is complete citywide proof of flood absence, and no unobserved location is established safe."
+  ],
+  "revision": "8641e0276fb3d96b"
+}

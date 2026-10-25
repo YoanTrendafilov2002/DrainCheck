@@ -23,6 +23,10 @@ from .context_layers import BuildingsContext,CadastralContext,HistoricalSurveyCo
 from .rainfall import LocalRainfall
 from .rainfall_routes import create_rainfall_router
 from .cadastre_routes import create_cadastre_router
+from .flood_assessment import FloodAssessmentContext,history_mechanism_meta,history_mechanism_collection
+from .refinement import LocalReviewPriority
+from .refinement_routes import create_refinement_router
+from .rainfall_routes import representation
 
 ROOT=Path(__file__).resolve().parents[1];CACHE=ROOT/'data/cache'
 # Windows registry associations can incorrectly classify .js as text/plain.
@@ -40,11 +44,13 @@ buildings=BuildingsContext(ROOT)
 cadastre=CadastralContext(ROOT)
 history_survey=HistoricalSurveyContext(ROOT)
 rainfall=LocalRainfall(ROOT/'data/rainfall',CACHE)
+assessment=FloodAssessmentContext(ROOT)
+review_priority=LocalReviewPriority(ROOT,pluvial,cadastre,history_survey,assessment)
 CONFIG=json.loads((ROOT/'config/map_config.json').read_text(encoding='utf-8'))
 PROJECT=Transformer.from_crs(4326,3857,always_xy=True).transform
 UNPROJECT=Transformer.from_crs(3857,4326,always_xy=True)
-app=FastAPI(title='Sofia Terrain, Rainfall & Pluvial Screening',version='1.6.0')
-RENDERER_REVISION='fast-map-'+hashlib.sha256(b''.join((ROOT/'backend'/name).read_bytes() for name in ['app.py','vector.py','terrain.py','pluvial.py','open_water.py','scale.py','http_cache.py','tile_cache.py','context_layers.py','rainfall.py','rainfall_routes.py','cadastre_routes.py'])+(ROOT/'config/map_config.json').read_bytes()+((CACHE/'whole_scale.json').read_bytes() if (CACHE/'whole_scale.json').is_file() else b'')+package_version('mapbox-vector-tile').encode()).hexdigest()[:12]
+app=FastAPI(title='Sofia Terrain, Rainfall & Pluvial Screening',version='1.7.0')
+RENDERER_REVISION='fast-map-'+hashlib.sha256(b''.join((ROOT/'backend'/name).read_bytes() for name in ['app.py','vector.py','terrain.py','pluvial.py','open_water.py','scale.py','http_cache.py','tile_cache.py','context_layers.py','rainfall.py','rainfall_routes.py','cadastre_routes.py','flood_assessment.py','refinement.py','refinement_routes.py'])+(ROOT/'config/map_config.json').read_bytes()+((CACHE/'whole_scale.json').read_bytes() if (CACHE/'whole_scale.json').is_file() else b'')+package_version('mapbox-vector-tile').encode()).hexdigest()[:12]
 TILE_CACHE=get_tile_cache(str(CACHE/'rendered_tiles'))
 METRICS=PerformanceMetrics()
 app.add_middleware(RequestTiming,metrics=METRICS)
@@ -188,7 +194,14 @@ def building_tile(z:int,x:int,y:int,v:str,request:Request):
 def historical_flood_meta():
     path=CACHE/'historical_floods_meta.json'
     if not path.is_file():return {'available':False,'title':'Historical flood evidence','message':'No verified geolocated flood observations have been acquired. No flood extent is fabricated.'}
-    return read_json_cached(path)
+    result=read_json_cached(path)
+    review_path=ROOT/'data/reference/historical_floods/mechanism_review.json'
+    if review_path.is_file():
+        analysis=read_json_cached(review_path)
+        by_id={entry['source_id']:entry for entry in analysis['register_records']}
+        result={**result,'events':[{**event,'mechanism_review':by_id.get(event['id'])} for event in result.get('events',[])],
+                'mechanism_review_sources':analysis['primary_sources']}
+    return result
 
 def historical_document(key,suffix):
     meta=historical_flood_meta()
@@ -209,15 +222,16 @@ def historical_register():
     return FileResponse(path,filename=path.name,media_type='text/csv')
 
 @app.get('/api/history/zones/meta')
-def historical_zones_meta():return {**history_survey.meta(),'renderer_revision':RENDERER_REVISION}
+def historical_zones_meta():return {**history_mechanism_meta(history_survey),'renderer_revision':RENDERER_REVISION}
 
 @app.get('/api/history/zones.geojson')
-def historical_zones(v:str):
+def historical_zones(request:Request,v:str):
     data=history_survey.meta()
     if not data.get('available'):raise HTTPException(503,data.get('message','Real historical survey unavailable'))
     if v!=data['revision']:raise HTTPException(409,'Historical survey revision changed; reload the app')
-    return FileResponse(history_survey.data_path(data),media_type='application/geo+json',
-                        headers={'Cache-Control':'public,max-age=604800,immutable'})
+    try:collection=history_mechanism_collection(history_survey)
+    except ValueError as error:raise HTTPException(503,str(error))
+    return representation(request,collection,media_type='application/geo+json',immutable=True)
 
 def vector_tile(kind,z,x,y,zone,display,v,categories=None,compressed=False):
     tile_bounds(z,x,y)
@@ -378,6 +392,7 @@ def performance():
 
 app.include_router(create_rainfall_router(rainfall))
 app.include_router(create_cadastre_router(cadastre,RENDERER_REVISION,TILE_CACHE))
+app.include_router(create_refinement_router(review_priority,assessment,RENDERER_REVISION))
 
 if (ROOT/'dist').is_dir():app.mount('/',CompressedStaticFiles(directory=ROOT/'dist',html=True),name='frontend')
 else:

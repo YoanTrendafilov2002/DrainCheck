@@ -48,6 +48,8 @@ Keep the following files local and ignored. Ignoring them never deletes them:
 | Raw 5 m terrain factors, score/land-screening rasters | Large verified scientific inputs/derivatives; no substitute terrain |
 | SQLite spatial/cadastral indexes, rendered tiles and local colour fits | Rebuildable local caches |
 | AGKK original gzip batches, full cadastral GeoJSON and archival GeoJSON | Bulk acquired source/derivative data; retain exact provenance and rights limitations |
+| Full official assessment source/native/WGS84 geometry and validated analysis geometry | Preserved local inputs; restore with the source script and verified receipts, separately from the smaller browser derivative |
+| `*.private.json` acquisition receipts | Preserve original HTTP records locally; cookie/authorization values must not enter Git or public receipts |
 | Original handoff ZIPs, duplicate upload ZIPs and large source reports | Preserved local originals; referenced by receipts and source guides |
 | Decoded 53.16 MB green-area GeoJSON | Restored byte-for-byte from the permitted lossless source bundle |
 | Unlicensed research geometry | A public download alone does not establish publication rights |
@@ -95,7 +97,7 @@ for running the vector/rainfall app without terrain.
 
 The source-bundle verification is recorded separately in
 `test-artifacts/source_bundle_verification.json`; those restoration checks are
-not added to the unchanged 220-test application baseline.
+not added to application-suite totals.
 
 Restore AGKK buildings by copying the matching preserved source directory and
 metadata from the existing installation, then rebuild its independent index,
@@ -119,12 +121,72 @@ supplement files locally, including the large copies excluded from Git. Existing
 original archives remain intact on this machine. Other source guides identify
 the historical PDF/report downloads and mapped survey geometry.
 
+## Restore the v1.7 evidence review
+
+Version 1.7 adds an independently prepared categorical review layer while
+retaining all native terrain, rainfall, route/point/green, building, historical,
+water-exclusion and legacy P/C/S functions. The review layer uses the existing
+ponding categories, real historical footprints and potential AGKK footprint
+intersections; it does not alter the legacy scores or introduce fitted weights.
+Historic observation categories take display priority only on eligible land.
+Explicit mapped-water exclusions, uncertain terrain and outside coverage remain.
+
+Restore these real prerequisites before preparing the review raster:
+
+- The matching verified `data/cache/pluvial_5m.tif`, open-water mask and their
+  source metadata/receipts; the native municipal DTM remains a separate input.
+- The complete matching AGKK cadastral source/index and metadata, restored or
+  acquired as described above; 334,033 source records are not assumed to be
+  334,033 unique physical buildings.
+- The 136 validated historical survey polygons and matching metadata. Restore
+  the preserved source and, if needed, run `scripts/prepare_historical_flood_zones.py`.
+
+Then run the actual application-relative preparation entry points:
+
+```powershell
+& '.venv/Scripts/python.exe' scripts/acquire_flood_assessment.py
+& '.venv/Scripts/python.exe' scripts/prepare_review_priority.py
+```
+
+Neither script takes command-line flags. The assessment script verifies cached
+originals and restores missing public-source bodies only when they match an
+existing checksum receipt; a changed source is refused without overwriting the
+snapshot. It preserves native/WGS84 originals and creates validated analysis
+geometry plus a separate 1 m topology-preserving browser copy. Public receipts
+omit cookie/authorization values; full private receipts remain local. The review
+script reads the real prerequisites and writes a separate aligned 5 m category
+raster and provenance. It does not fabricate absent inputs. Small tracked
+metadata or browser geometry does not stand in for excluded analysis datasets.
+
+The map keeps **136 observed 2021 survey footprints** separate from **six
+official supplier-level assessment polygons** and **23 draft 2026 PFRA
+reach/identifier features**. The latter are prospective assessment context,
+including river lines and schematic city/reservoir points, not observed flood
+locations, inundation polygons or invented buffered corridors. Municipal
+high/medium/low labels remain ordinal; no numerical return period is inferred.
+The mechanism and certainty filters preserve unknown classifications, and the
+historical visual-priority switch changes styling without adding score points.
+
+Input dates are treated as compatible at the user's request for this scenario;
+source dates and spatial gaps remain visible. This does not expand rainfall
+coverage or recreate an event hyetograph. Rain stays supplemental, off by default
+and at 30% initial opacity when enabled. Sewer proximity/density does not measure
+capacity or clogging. All 64,956 nonempty green polygons form the route partition
+and are the default green display: 25.52% of supplied route length is inside
+their union, a geometric overlap rather than an infiltration or drainage metric.
+
+Source rights and limitations remain explicit in
+[the mechanism review](FLOOD_MECHANISMS_AND_REFINEMENT.md),
+[the actual-data analysis](INDEX_REFINEMENT_ANALYSIS.md), and the existing
+historical, water, rainfall and cadastral source guides. Public query/download
+availability has not been relabelled as an unrestricted reuse licence.
+
 ## Publishing a tested update
 
 1. Implement the requested work while preserving unrelated changes and originals.
 2. Run meaningful targeted checks and the required build. With the full matching
-   local data restored, the current baseline is **196 Python tests + 24 frontend
-   tests (220 total)** and a passing production build. Data-dependent checks on
+   local data restored, the current full suites pass **214 Python tests + 28 frontend
+   tests (242 total)**. Check the production build separately. Data-dependent checks on
    an incomplete clone are not equivalent to that full baseline.
 3. Review `git status --short`, `git diff`, staged paths, file sizes and the
    intended commit diff. Check that no credentials, native rasters, caches or

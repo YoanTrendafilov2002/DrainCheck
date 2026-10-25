@@ -1,0 +1,154 @@
+{
+  "verified_utc": "2026-10-25T09:16:53.144835+00:00",
+  "scope": "Separate categorical review derivative and actual source evidence; no predictive validation claim",
+  "review_revision": "853d77c47901ec54",
+  "output_sha256": "6da518c22b2dd002c153532b270aaa572ccb088dc7b0c09794ddf4d84527b64c",
+  "targeted_test_command": "python -m pytest tests/test_review_priority_data.py -q",
+  "targeted_tests": {
+    "passed": 6,
+    "runtime_seconds": 13.92
+  },
+  "source_preservation": {
+    "all_listed_sources_unchanged": true,
+    "source_hashes_checked_before_after": true
+  },
+  "whole_grid_checks": [
+    "grid/dtype/band/NoData",
+    "all112439805cells accounted",
+    "water/uncertain/outside exactly match original source policy",
+    "eligible51682623land cells unchanged",
+    "P thresholds unchanged",
+    "historical pixel-centre union equals original observed footprint on eligible land"
+  ],
+  "independent_geometry_windows": 4,
+  "native_1m_checks_file": "test-artifacts/index_refinement_native_checks.json",
+  "descriptive_analysis_file": "data/reference/index_refinement_analysis.json",
+  "classes": [
+    {
+      "code": 0,
+      "label": "Lower ponding terrain signal",
+      "colour": "#fff1c4",
+      "cell_count": 50809711,
+      "area_km2": 1270.242775,
+      "color_rgba": [
+        255,
+        241,
+        196,
+        190
+      ]
+    },
+    {
+      "code": 1,
+      "label": "Raised ponding terrain signal",
+      "colour": "#fbc66e",
+      "cell_count": 380965,
+      "area_km2": 9.524125,
+      "color_rgba": [
+        251,
+        198,
+        110,
+        190
+      ]
+    },
+    {
+      "code": 2,
+      "label": "Higher ponding terrain signal",
+      "colour": "#ed824b",
+      "cell_count": 408694,
+      "area_km2": 10.21735,
+      "color_rgba": [
+        237,
+        130,
+        75,
+        190
+      ]
+    },
+    {
+      "code": 3,
+      "label": "Higher ponding + potential building footprint",
+      "colour": "#bb3d40",
+      "cell_count": 7233,
+      "area_km2": 0.180825,
+      "color_rgba": [
+        187,
+        61,
+        64,
+        190
+      ]
+    },
+    {
+      "code": 4,
+      "label": "Historical flood footprint",
+      "colour": "#8b75c2",
+      "cell_count": 75791,
+      "area_km2": 1.894775,
+      "color_rgba": [
+        139,
+        117,
+        194,
+        190
+      ]
+    },
+    {
+      "code": 5,
+      "label": "Historical footprint + potential building footprint",
+      "colour": "#632476",
+      "cell_count": 229,
+      "area_km2": 0.005725,
+      "color_rgba": [
+        99,
+        36,
+        118,
+        190
+      ]
+    },
+    {
+      "code": 253,
+      "label": "Excluded mapped open water",
+      "colour": "#00000000",
+      "cell_count": 1519688,
+      "area_km2": 37.9922,
+      "color_rgba": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "code": 254,
+      "label": "Uncertain terrain",
+      "colour": "#80878c",
+      "cell_count": 480475,
+      "area_km2": 12.011875,
+      "color_rgba": [
+        128,
+        135,
+        140,
+        185
+      ]
+    },
+    {
+      "code": 255,
+      "label": "Outside terrain",
+      "colour": "#00000000",
+      "cell_count": 58757019,
+      "area_km2": 1468.925475,
+      "color_rgba": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "source_revisions": {
+    "terrain": "f42644a668cdc14d",
+    "cadastre": "568d80b32ddb42f2",
+    "rainfall_context": "88036868558c20ce",
+    "water": "ee06795221a5005e",
+    "history": "7fbfbcee6ee933f4",
+    "pluvial": "2a0d5f6899cd036c"
+  },
+  "spatial_temporal_caveats_preserved": true
+}

@@ -1,0 +1,4041 @@
+{
+  "schema_version": 1,
+  "analysis": "descriptive-index-refinement-evidence-v1",
+  "analysed_utc": "2026-10-25T09:08:27.047358+00:00",
+  "production_scores_changed": false,
+  "all_sources_unchanged": true,
+  "source_hashes": {
+    "outputs\\sofia_explorer_app\\data\\reference\\historical_floods\\sofiaplan_flood_zones_2021_display.geojson": {
+      "size_bytes": 246224,
+      "mtime_ns": 1792915073549689300,
+      "sha256": "215afe46b02716e72b61852cae1bd0abcdec81e81e2264fddc9e938e06e73bb5"
+    },
+    "outputs\\sofia_explorer_app\\data\\cache\\pluvial_5m.tif": {
+      "size_bytes": 892396676,
+      "mtime_ns": 1792863601405364000,
+      "sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e"
+    },
+    "outputs\\sofia_explorer_app\\data\\cache\\open_water_mask_5m.tif": {
+      "size_bytes": 303620,
+      "mtime_ns": 1792913643817910200,
+      "sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030"
+    },
+    "outputs\\sofia_explorer_app\\data\\cache\\cadastral_buildings.sqlite": {
+      "size_bytes": 419184640,
+      "mtime_ns": 1792917259165180300,
+      "sha256": "e6aa6ac4744b8899527652b7a6579ea5db1865982513a5cca78ffce5bfe92eef"
+    },
+    "outputs\\sofia_dtm_2024_1m_gee.tif": {
+      "size_bytes": 1388515396,
+      "mtime_ns": 1792848031358222200,
+      "sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3"
+    },
+    "outputs\\sofia_explorer_app\\data\\raw\\sofia_infrastructure_points.csv": {
+      "size_bytes": 7084491,
+      "mtime_ns": 1792831760793307500,
+      "sha256": "4771d2330e93d22739d45b859c107e5f986622228d496acf52872fd9765d0652"
+    },
+    "outputs\\sofia_explorer_app\\data\\rainfall\\merged_250m.tif": {
+      "size_bytes": 27206,
+      "mtime_ns": 1792915696698575600,
+      "sha256": "902b743d49cf077bf0c738042c62c4c7ed6fbf154a5f30590f6e038f82f7c66f"
+    },
+    "outputs\\sofia_explorer_app\\data\\rainfall\\radar_bias_corrected_250m.tif": {
+      "size_bytes": 25037,
+      "mtime_ns": 1792915696700597900,
+      "sha256": "d572da07990aa5dde0fc485a37f14531198d56376d3d26bd39a62e0217c3bcf6"
+    },
+    "outputs\\sofia_explorer_app\\data\\rainfall\\radar_raw_1km.tif": {
+      "size_bytes": 16553,
+      "mtime_ns": 1792915696700597900,
+      "sha256": "b925fe1aa37aa29fc7773d3345f2b358245cd46c1ad9e5424850847acb06acdb"
+    },
+    "outputs\\sofia_explorer_app\\data\\raw\\green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson": {
+      "size_bytes": 53164382,
+      "mtime_ns": 1792859600796392800,
+      "sha256": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557"
+    }
+  },
+  "historical_evidence": {
+    "source_url": "https://urbandata.sofia.bg/dataset/flooded-areas-identified-by-drone-survey-february-2021",
+    "feature_count": 136,
+    "feature_sum_area_m2": 1914939.2372467057,
+    "union_area_m2": 1909008.6609338354,
+    "overlap_area_removed_m2": 5930.576312870253,
+    "date": "2021; January/February discrepancy; no per-feature date",
+    "mechanism": "mixed river/rainfall/snowmelt context; not labelled pure pluvial",
+    "spatial_controls_status": "No known-negative survey footprint; surrounding rings are descriptive comparison areas only"
+  },
+  "method": {
+    "grid": {
+      "crs": "EPSG:7801",
+      "source_shape": [
+        10869,
+        10345
+      ],
+      "source_transform": [
+        5.0,
+        0.0,
+        299392.0,
+        0.0,
+        -5.0,
+        4753611.0
+      ],
+      "window": {
+        "col_off": 3108,
+        "row_off": 1654,
+        "width": 2292,
+        "height": 1184
+      },
+      "window_bounds_epsg7801": [
+        314932.0,
+        4739421.0,
+        326392.0,
+        4745341.0
+      ],
+      "cell_area_m2": 25,
+      "raster_membership": "cell centre; all_touched=False"
+    },
+    "rings_m": [
+      0,
+      50,
+      250,
+      500
+    ],
+    "eligibility": "known ground elevation, watermask0, boundaryflag0, valid originalP/C/S; water takes precedence over uncertainty",
+    "per_feature_ring": "feature.buffer250 minus entire historicalunion.buffer50; may overlap other comparison rings, paired summaries do not claim independent observations",
+    "scores": "unaltered original 0..100 P,C,S; existing50/70/85 exploratory classes, not calibrated probabilities",
+    "building_exposure": "positive-area intersection of actual current snapshot footprint with historical zone; not proof of damage or building existence during2021",
+    "footprint_proxy": "union cadastral footprints / exact metric zone area; building coverage only, not total imperviousness or runoff coefficient",
+    "green": "all original green polygons streamed, intersected and unioned; invalid local geometries make_valid only in temporary analysis memory; label not measured infiltration",
+    "sewer": "original full routes, metric intersection length only; no capacity model",
+    "source_preservation": "full SHA256 and stat before/after for every listed source"
+  },
+  "zone_profiles": {
+    "observed_union": {
+      "vector_area_m2": 1909008.6609338354,
+      "total_cell_centres": 76343,
+      "known_terrain_cells": 76262,
+      "water_excluded_cells": 62,
+      "uncertain_cells": 180,
+      "eligible_land_cells": 76020,
+      "eligible_land_area_m2": 1900500,
+      "factors": {
+        "mean_elevation_m": {
+          "count": 76020,
+          "mean": 510.05242803784864,
+          "min": 505.0,
+          "p05": 505.3656311035156,
+          "p25": 506.03294372558594,
+          "p50": 509.0,
+          "p75": 513.0,
+          "p95": 515.0,
+          "max": 534.6700439453125
+        },
+        "depression_fill_depth_m": {
+          "count": 76020,
+          "mean": 0.3291328448240646,
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 0.5882339477539062,
+          "p95": 1.227731323242188,
+          "max": 2.0
+        },
+        "slope_degrees": {
+          "count": 76020,
+          "mean": 0.2918188639152845,
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 0.1862504482269287,
+          "p95": 1.0689533412456527,
+          "max": 27.703266143798828
+        },
+        "contributing_area_m2": {
+          "count": 76020,
+          "mean": 34987.88542488819,
+          "min": 25.0,
+          "p05": 50.0,
+          "p25": 250.0,
+          "p50": 700.0,
+          "p75": 1675.0,
+          "p95": 4375.0,
+          "max": 12245000.0
+        }
+      },
+      "zero_fill_depth_pct": 56.08392528282031,
+      "concentration_dominates_pct": 96.00631412786109,
+      "score_classes": {
+        "ponding": {
+          "summary": {
+            "count": 76020,
+            "mean": 27.783413037965385,
+            "min": 0.0,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p50": 0.0,
+            "p75": 57.41310119628906,
+            "p95": 80.8539779663086,
+            "max": 89.25
+          },
+          "class_counts": {
+            "Lower signal": 46707,
+            "Raised": 18963,
+            "Higher signal": 10257,
+            "Strongest signal": 93
+          },
+          "at_least_70_pct": 13.61483820047356,
+          "at_least_85_pct": 0.122336227308603
+        },
+        "concentration": {
+          "summary": {
+            "count": 76020,
+            "mean": 73.67476150467658,
+            "min": 5.868110179901123,
+            "p05": 31.01415548324585,
+            "p25": 63.05190372467041,
+            "p50": 81.29220199584961,
+            "p75": 89.14734649658203,
+            "p95": 93.25926971435547,
+            "max": 97.63800811767578
+          },
+          "class_counts": {
+            "Lower signal": 10182,
+            "Raised": 14194,
+            "Higher signal": 20551,
+            "Strongest signal": 31093
+          },
+          "at_least_70_pct": 67.93475401210208,
+          "at_least_85_pct": 40.9010786635096
+        },
+        "combined": {
+          "summary": {
+            "count": 76020,
+            "mean": 74.21485551515086,
+            "min": 5.868110179901123,
+            "p05": 32.45381546020508,
+            "p25": 64.72296905517578,
+            "p50": 81.31504440307617,
+            "p75": 89.14734649658203,
+            "p95": 93.25926971435547,
+            "max": 97.63800811767578
+          },
+          "class_counts": {
+            "Lower signal": 9395,
+            "Raised": 14071,
+            "Higher signal": 21450,
+            "Strongest signal": 31104
+          },
+          "at_least_70_pct": 69.13180741910024,
+          "at_least_85_pct": 40.91554853985793
+        }
+      }
+    },
+    "surrounding_0_50m": {
+      "vector_area_m2": 2218933.623952028,
+      "total_cell_centres": 88773,
+      "known_terrain_cells": 88171,
+      "water_excluded_cells": 1194,
+      "uncertain_cells": 1424,
+      "eligible_land_cells": 85553,
+      "eligible_land_area_m2": 2138825,
+      "factors": {
+        "mean_elevation_m": {
+          "count": 85553,
+          "mean": 512.5957032487782,
+          "min": 505.0,
+          "p05": 505.9029296875,
+          "p25": 507.75701904296875,
+          "p50": 511.6336975097656,
+          "p75": 513.6903076171875,
+          "p95": 529.0,
+          "max": 536.5274658203125
+        },
+        "depression_fill_depth_m": {
+          "count": 85553,
+          "mean": 0.16746449886030992,
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 0.0,
+          "p95": 0.9636718749999984,
+          "max": 2.0506591796875
+        },
+        "slope_degrees": {
+          "count": 85553,
+          "mean": 1.6134919886705847,
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "p50": 0.24164743721485138,
+          "p75": 1.0980768203735352,
+          "p95": 9.087699890136717,
+          "max": 32.52409362792969
+        },
+        "contributing_area_m2": {
+          "count": 85553,
+          "mean": 20003.37071756689,
+          "min": 25.0,
+          "p05": 25.0,
+          "p25": 75.0,
+          "p50": 325.0,
+          "p75": 1125.0,
+          "p95": 4350.0,
+          "max": 12280825.0
+        }
+      },
+      "zero_fill_depth_pct": 75.76122403656213,
+      "concentration_dominates_pct": 97.06497726555469,
+      "score_classes": {
+        "ponding": {
+          "summary": {
+            "count": 85553,
+            "mean": 14.554659974473429,
+            "min": 0.0,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p50": 0.0,
+            "p75": 0.0,
+            "p95": 71.58277587890618,
+            "max": 91.1156997680664
+          },
+          "class_counts": {
+            "Lower signal": 68221,
+            "Raised": 12547,
+            "Higher signal": 4014,
+            "Strongest signal": 771
+          },
+          "at_least_70_pct": 5.593024207216579,
+          "at_least_85_pct": 0.9011957500029222
+        },
+        "concentration": {
+          "summary": {
+            "count": 85553,
+            "mean": 59.36529593773256,
+            "min": 3.0802273750305176,
+            "p05": 14.767207336425782,
+            "p25": 34.931121826171875,
+            "p50": 64.72296905517578,
+            "p75": 85.47012329101562,
+            "p95": 92.66175842285155,
+            "max": 97.6382064819336
+          },
+          "class_counts": {
+            "Lower signal": 31298,
+            "Raised": 16185,
+            "Higher signal": 15906,
+            "Strongest signal": 22164
+          },
+          "at_least_70_pct": 44.498731780299934,
+          "at_least_85_pct": 25.906747863897234
+        },
+        "combined": {
+          "summary": {
+            "count": 85553,
+            "mean": 59.76987390419369,
+            "min": 3.0802273750305176,
+            "p05": 14.825565528869628,
+            "p25": 36.12044906616211,
+            "p50": 64.99073791503906,
+            "p75": 85.50566864013672,
+            "p95": 92.66175842285155,
+            "max": 97.6382064819336
+          },
+          "class_counts": {
+            "Lower signal": 30530,
+            "Raised": 16430,
+            "Higher signal": 16388,
+            "Strongest signal": 22205
+          },
+          "at_least_70_pct": 45.11004874171566,
+          "at_least_85_pct": 25.954671373300762
+        }
+      }
+    },
+    "surrounding_50_250m": {
+      "vector_area_m2": 5577075.523767161,
+      "total_cell_centres": 223078,
+      "known_terrain_cells": 217396,
+      "water_excluded_cells": 3755,
+      "uncertain_cells": 2917,
+      "eligible_land_cells": 210724,
+      "eligible_land_area_m2": 5268100,
+      "factors": {
+        "mean_elevation_m": {
+          "count": 210724,
+          "mean": 512.7864957924473,
+          "min": 505.0,
+          "p05": 505.96118621826173,
+          "p25": 507.2415313720703,
+          "p50": 511.0,
+          "p75": 514.3291320800781,
+          "p95": 530.134146118164,
+          "max": 537.0
+        },
+        "depression_fill_depth_m": {
+          "count": 210724,
+          "mean": 0.1898570284571269,
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 0.0,
+          "p95": 1.0,
+          "max": 2.4095458984375
+        },
+        "slope_degrees": {
+          "count": 210724,
+          "mean": 0.8230375063914661,
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "p50": 0.16756770759820938,
+          "p75": 0.6514819860458374,
+          "p95": 3.870178270339963,
+          "max": 33.75192642211914
+        },
+        "contributing_area_m2": {
+          "count": 210724,
+          "mean": 28422.50645393975,
+          "min": 25.0,
+          "p05": 25.0,
+          "p25": 125.0,
+          "p50": 450.0,
+          "p75": 1225.0,
+          "p95": 5150.0,
+          "max": 11208000.0
+        }
+      },
+      "zero_fill_depth_pct": 76.4696949564359,
+      "concentration_dominates_pct": 94.76044494219927,
+      "score_classes": {
+        "ponding": {
+          "summary": {
+            "count": 210724,
+            "mean": 14.410721960322746,
+            "min": 0.0,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p50": 0.0,
+            "p75": 0.0,
+            "p95": 76.0,
+            "max": 92.0
+          },
+          "class_counts": {
+            "Lower signal": 172945,
+            "Raised": 24724,
+            "Higher signal": 5403,
+            "Strongest signal": 7652
+          },
+          "at_least_70_pct": 6.195307606157818,
+          "at_least_85_pct": 3.6312902184848426
+        },
+        "concentration": {
+          "summary": {
+            "count": 210724,
+            "mean": 65.27173783849813,
+            "min": 2.420499086380005,
+            "p05": 18.267428398132324,
+            "p25": 47.45756530761719,
+            "p50": 71.40509796142578,
+            "p75": 86.42047882080078,
+            "p95": 93.4729232788086,
+            "max": 97.63539123535156
+          },
+          "class_counts": {
+            "Lower signal": 56217,
+            "Raised": 44215,
+            "Higher signal": 49684,
+            "Strongest signal": 60608
+          },
+          "at_least_70_pct": 52.339553159583154,
+          "at_least_85_pct": 28.7617926766766
+        },
+        "combined": {
+          "summary": {
+            "count": 210724,
+            "mean": 65.87973078760801,
+            "min": 2.420499086380005,
+            "p05": 18.345883655548096,
+            "p25": 48.56984329223633,
+            "p50": 72.3750991821289,
+            "p75": 86.97269439697266,
+            "p95": 93.4729232788086,
+            "max": 97.63539123535156
+          },
+          "class_counts": {
+            "Lower signal": 54546,
+            "Raised": 44068,
+            "Higher signal": 48948,
+            "Strongest signal": 63162
+          },
+          "at_least_70_pct": 53.20229304682903,
+          "at_least_85_pct": 29.973804597482964
+        }
+      }
+    },
+    "surrounding_250_500m": {
+      "vector_area_m2": 7401929.017900266,
+      "total_cell_centres": 296045,
+      "known_terrain_cells": 271702,
+      "water_excluded_cells": 1125,
+      "uncertain_cells": 1619,
+      "eligible_land_cells": 268958,
+      "eligible_land_area_m2": 6723950,
+      "factors": {
+        "mean_elevation_m": {
+          "count": 268958,
+          "mean": 513.4008537253164,
+          "min": 505.0,
+          "p05": 506.0,
+          "p25": 508.5394592285156,
+          "p50": 511.20005798339844,
+          "p75": 515.0,
+          "p95": 532.3426727294922,
+          "max": 541.0
+        },
+        "depression_fill_depth_m": {
+          "count": 268958,
+          "mean": 0.15001032079579601,
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 0.0,
+          "p95": 1.0,
+          "max": 3.0
+        },
+        "slope_degrees": {
+          "count": 268958,
+          "mean": 0.9049655016914544,
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "p50": 0.29265764355659485,
+          "p75": 0.8148537129163742,
+          "p95": 4.1127793550491285,
+          "max": 31.214134216308594
+        },
+        "contributing_area_m2": {
+          "count": 268958,
+          "mean": 18614.189761970272,
+          "min": 25.0,
+          "p05": 25.0,
+          "p25": 125.0,
+          "p50": 350.0,
+          "p75": 975.0,
+          "p95": 6725.0,
+          "max": 9348725.0
+        }
+      },
+      "zero_fill_depth_pct": 82.59765465239926,
+      "concentration_dominates_pct": 94.5404115140654,
+      "score_classes": {
+        "ponding": {
+          "summary": {
+            "count": 268958,
+            "mean": 11.160948509771304,
+            "min": 0.0,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p50": 0.0,
+            "p75": 0.0,
+            "p95": 76.0,
+            "max": 93.25
+          },
+          "class_counts": {
+            "Lower signal": 233997,
+            "Raised": 17789,
+            "Higher signal": 10889,
+            "Strongest signal": 6283
+          },
+          "at_least_70_pct": 6.384639980963571,
+          "at_least_85_pct": 2.336052469158753
+        },
+        "concentration": {
+          "summary": {
+            "count": 268958,
+            "mean": 62.324355376343036,
+            "min": 4.432740688323975,
+            "p05": 18.02343463897705,
+            "p25": 44.428266525268555,
+            "p50": 66.32486343383789,
+            "p75": 83.11659240722656,
+            "p95": 92.87345123291016,
+            "max": 97.63058471679688
+          },
+          "class_counts": {
+            "Lower signal": 81574,
+            "Raised": 65659,
+            "Higher signal": 64069,
+            "Strongest signal": 57656
+          },
+          "at_least_70_pct": 45.25799567218674,
+          "at_least_85_pct": 21.436804259401097
+        },
+        "combined": {
+          "summary": {
+            "count": 268958,
+            "mean": 62.93999717560344,
+            "min": 4.432740688323975,
+            "p05": 18.13658571243286,
+            "p25": 45.35026931762695,
+            "p50": 66.72611999511719,
+            "p75": 83.60472869873047,
+            "p95": 92.87345123291016,
+            "max": 97.63058471679688
+          },
+          "class_counts": {
+            "Lower signal": 79734,
+            "Raised": 64847,
+            "Higher signal": 63754,
+            "Strongest signal": 60623
+          },
+          "at_least_70_pct": 46.24402323039285,
+          "at_least_85_pct": 22.53995047553893
+        }
+      }
+    }
+  },
+  "paired_polygon_comparison": {
+    "ponding": {
+      "pair_count": 134,
+      "median_score_inside_minus_ring": {
+        "count": 134,
+        "mean": 5.957522548846344,
+        "min": -4.540626525878906,
+        "p05": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.0,
+        "p95": 60.23511619567865,
+        "max": 82.78243255615234
+      },
+      "inside_median_greater_count": 16,
+      "equal_count": 114,
+      "inside_median_less_count": 4
+    },
+    "concentration": {
+      "pair_count": 134,
+      "median_score_inside_minus_ring": {
+        "count": 134,
+        "mean": 2.232453702101067,
+        "min": -49.244808197021484,
+        "p05": -24.964790534973144,
+        "p25": -8.174510955810547,
+        "p50": 2.051677703857422,
+        "p75": 13.207242965698242,
+        "p95": 29.116374015808102,
+        "max": 54.41889572143555
+      },
+      "inside_median_greater_count": 78,
+      "equal_count": 2,
+      "inside_median_less_count": 54
+    },
+    "combined": {
+      "pair_count": 134,
+      "median_score_inside_minus_ring": {
+        "count": 134,
+        "mean": 1.9001745252466913,
+        "min": -49.244808197021484,
+        "p05": -24.964790534973144,
+        "p25": -8.105596542358398,
+        "p50": 1.3876876831054688,
+        "p75": 12.790952682495117,
+        "p95": 29.116374015808102,
+        "max": 52.2230110168457
+      },
+      "inside_median_greater_count": 74,
+      "equal_count": 1,
+      "inside_median_less_count": 59
+    }
+  },
+  "per_polygon": [
+    {
+      "source_id": "2",
+      "vector_area_m2": 3063.700667062226,
+      "inside_eligible_cells": 122,
+      "ring_eligible_cells": 2562,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 84.60089874267578,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 62.96002197265625,
+      "concentration_ring_ge70_pct": 40.7103825136612,
+      "combined_inside_p50": 84.60089874267578,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 62.96002197265625,
+      "combined_ring_ge70_pct": 40.7103825136612
+    },
+    {
+      "source_id": "4",
+      "vector_area_m2": 2169.3292963547565,
+      "inside_eligible_cells": 87,
+      "ring_eligible_cells": 3808,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 14.443277310924369,
+      "concentration_inside_p50": 80.83895874023438,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 62.45048522949219,
+      "concentration_ring_ge70_pct": 39.364495798319325,
+      "combined_inside_p50": 80.83895874023438,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 64.72296905517578,
+      "combined_ring_ge70_pct": 44.721638655462186
+    },
+    {
+      "source_id": "44",
+      "vector_area_m2": 15302.76619414151,
+      "inside_eligible_cells": 614,
+      "ring_eligible_cells": 2396,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 54.26151657104492,
+      "concentration_inside_ge70_pct": 23.941368078175895,
+      "concentration_ring_p50": 54.960853576660156,
+      "concentration_ring_ge70_pct": 32.76293823038397,
+      "combined_inside_p50": 54.26151657104492,
+      "combined_inside_ge70_pct": 23.941368078175895,
+      "combined_ring_p50": 54.960853576660156,
+      "combined_ring_ge70_pct": 32.76293823038397
+    },
+    {
+      "source_id": "9",
+      "vector_area_m2": 1197.9008135333036,
+      "inside_eligible_cells": 48,
+      "ring_eligible_cells": 5425,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 31.612903225806452,
+      "concentration_inside_p50": 91.0732650756836,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 85.30533599853516,
+      "concentration_ring_ge70_pct": 76.46082949308756,
+      "combined_inside_p50": 91.0732650756836,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 89.68276977539062,
+      "combined_ring_ge70_pct": 85.6958525345622
+    },
+    {
+      "source_id": "11",
+      "vector_area_m2": 5033.4410810518175,
+      "inside_eligible_cells": 200,
+      "ring_eligible_cells": 7582,
+      "ponding_inside_p50": 71.71944427490234,
+      "ponding_inside_ge70_pct": 100.0,
+      "ponding_ring_p50": 56.5,
+      "ponding_ring_ge70_pct": 19.21656554998681,
+      "concentration_inside_p50": 88.54109954833984,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 74.03841400146484,
+      "concentration_ring_ge70_pct": 57.05618570298074,
+      "combined_inside_p50": 88.54109954833984,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 74.03841400146484,
+      "combined_ring_ge70_pct": 57.794777103666576
+    },
+    {
+      "source_id": "12",
+      "vector_area_m2": 1089.9433953778369,
+      "inside_eligible_cells": 40,
+      "ring_eligible_cells": 4802,
+      "ponding_inside_p50": 71.71944427490234,
+      "ponding_inside_ge70_pct": 75.0,
+      "ponding_ring_p50": 56.5,
+      "ponding_ring_ge70_pct": 19.97084548104956,
+      "concentration_inside_p50": 83.81891632080078,
+      "concentration_inside_ge70_pct": 70.0,
+      "concentration_ring_p50": 77.0486831665039,
+      "concentration_ring_ge70_pct": 66.20158267388588,
+      "combined_inside_p50": 83.81891632080078,
+      "combined_inside_ge70_pct": 77.5,
+      "combined_ring_p50": 77.0486831665039,
+      "combined_ring_ge70_pct": 66.51395251978343
+    },
+    {
+      "source_id": "13",
+      "vector_area_m2": 149.25784655422427,
+      "inside_eligible_cells": 7,
+      "ring_eligible_cells": 3801,
+      "ponding_inside_p50": 55.5661735534668,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 56.5,
+      "ponding_ring_ge70_pct": 22.704551433833203,
+      "concentration_inside_p50": 33.29806900024414,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 78.39234924316406,
+      "concentration_ring_ge70_pct": 73.770060510392,
+      "combined_inside_p50": 55.5661735534668,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 78.39234924316406,
+      "combined_ring_ge70_pct": 74.11207576953433
+    },
+    {
+      "source_id": "84",
+      "vector_area_m2": 4784.148865533283,
+      "inside_eligible_cells": 189,
+      "ring_eligible_cells": 3087,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 50.37236022949219,
+      "concentration_inside_ge70_pct": 12.16931216931217,
+      "concentration_ring_p50": 54.26151657104492,
+      "concentration_ring_ge70_pct": 23.03206997084548,
+      "combined_inside_p50": 50.37236022949219,
+      "combined_inside_ge70_pct": 12.16931216931217,
+      "combined_ring_p50": 54.26151657104492,
+      "combined_ring_ge70_pct": 23.03206997084548
+    },
+    {
+      "source_id": "14",
+      "vector_area_m2": 928.963145048618,
+      "inside_eligible_cells": 40,
+      "ring_eligible_cells": 2626,
+      "ponding_inside_p50": 72.64860534667969,
+      "ponding_inside_ge70_pct": 100.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 80.35523986816406,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 58.523677825927734,
+      "concentration_ring_ge70_pct": 30.007616146230006,
+      "combined_inside_p50": 80.35523986816406,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 58.600868225097656,
+      "combined_ring_ge70_pct": 30.007616146230006
+    },
+    {
+      "source_id": "10",
+      "vector_area_m2": 19714.903198227494,
+      "inside_eligible_cells": 795,
+      "ring_eligible_cells": 10197,
+      "ponding_inside_p50": 70.83859252929688,
+      "ponding_inside_ge70_pct": 54.465408805031444,
+      "ponding_ring_p50": 56.5,
+      "ponding_ring_ge70_pct": 11.405315288810435,
+      "concentration_inside_p50": 71.40509796142578,
+      "concentration_inside_ge70_pct": 55.59748427672956,
+      "concentration_ring_p50": 74.03841400146484,
+      "concentration_ring_ge70_pct": 59.22330097087379,
+      "combined_inside_p50": 73.26681518554688,
+      "combined_inside_ge70_pct": 68.55345911949685,
+      "combined_ring_p50": 74.03841400146484,
+      "combined_ring_ge70_pct": 59.801902520349124
+    },
+    {
+      "source_id": "1",
+      "vector_area_m2": 241539.35630335327,
+      "inside_eligible_cells": 9657,
+      "ring_eligible_cells": 15822,
+      "ponding_inside_p50": 79.66587829589844,
+      "ponding_inside_ge70_pct": 72.4034379206793,
+      "ponding_ring_p50": 40.171363830566406,
+      "ponding_ring_ge70_pct": 7.281001137656427,
+      "concentration_inside_p50": 89.73689270019531,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 71.46355438232422,
+      "concentration_ring_ge70_pct": 51.83289091138921,
+      "combined_inside_p50": 89.73689270019531,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 74.16827392578125,
+      "combined_ring_ge70_pct": 54.73391480217419
+    },
+    {
+      "source_id": "3",
+      "vector_area_m2": 2821.483908182883,
+      "inside_eligible_cells": 117,
+      "ring_eligible_cells": 3949,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 11.015446948594581,
+      "concentration_inside_p50": 60.12123107910156,
+      "concentration_inside_ge70_pct": 24.786324786324787,
+      "concentration_ring_p50": 60.12123107910156,
+      "concentration_ring_ge70_pct": 36.03443909850595,
+      "combined_inside_p50": 60.12123107910156,
+      "combined_inside_ge70_pct": 24.786324786324787,
+      "combined_ring_p50": 62.4644889831543,
+      "combined_ring_ge70_pct": 41.402886806786526
+    },
+    {
+      "source_id": "5",
+      "vector_area_m2": 1475.8526593451522,
+      "inside_eligible_cells": 58,
+      "ring_eligible_cells": 3722,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 22.2729715206878,
+      "concentration_inside_p50": 85.72521209716797,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 66.72611999511719,
+      "concentration_ring_ge70_pct": 45.862439548629766,
+      "combined_inside_p50": 85.72521209716797,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 71.40509796142578,
+      "combined_ring_ge70_pct": 52.55239118753359
+    },
+    {
+      "source_id": "6",
+      "vector_area_m2": 116.27743749432229,
+      "inside_eligible_cells": 3,
+      "ring_eligible_cells": 2370,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.3924050632911393,
+      "concentration_inside_p50": 85.72521209716797,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 65.40077209472656,
+      "concentration_ring_ge70_pct": 44.38818565400844,
+      "combined_inside_p50": 85.72521209716797,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 66.72611999511719,
+      "combined_ring_ge70_pct": 45.780590717299575
+    },
+    {
+      "source_id": "7",
+      "vector_area_m2": 1546.1865469384402,
+      "inside_eligible_cells": 59,
+      "ring_eligible_cells": 3835,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 27.45762711864407,
+      "concentration_inside_p50": 88.4735107421875,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 72.73367309570312,
+      "concentration_ring_ge70_pct": 55.59322033898305,
+      "combined_inside_p50": 88.4735107421875,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 82.45199584960938,
+      "combined_ring_ge70_pct": 62.89439374185137
+    },
+    {
+      "source_id": "8",
+      "vector_area_m2": 803.9997362070706,
+      "inside_eligible_cells": 31,
+      "ring_eligible_cells": 3982,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 33.550979407332996,
+      "concentration_inside_p50": 90.34759521484375,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 77.06060028076172,
+      "concentration_ring_ge70_pct": 61.42641888498242,
+      "combined_inside_p50": 90.34759521484375,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 85.66551208496094,
+      "combined_ring_ge70_pct": 69.6383726770467
+    },
+    {
+      "source_id": "29",
+      "vector_area_m2": 607.2332841504291,
+      "inside_eligible_cells": 21,
+      "ring_eligible_cells": 3873,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 5.034856700232378,
+      "concentration_inside_p50": 40.54256820678711,
+      "concentration_inside_ge70_pct": 23.80952380952381,
+      "concentration_ring_p50": 40.34538269042969,
+      "concentration_ring_ge70_pct": 14.123418538600568,
+      "combined_inside_p50": 40.54256820678711,
+      "combined_inside_ge70_pct": 23.80952380952381,
+      "combined_ring_p50": 42.41960144042969,
+      "combined_ring_ge70_pct": 14.923831655047767
+    },
+    {
+      "source_id": "15",
+      "vector_area_m2": 12839.980941447047,
+      "inside_eligible_cells": 509,
+      "ring_eligible_cells": 2495,
+      "ponding_inside_p50": 79.68209075927734,
+      "ponding_inside_ge70_pct": 95.67779960707269,
+      "ponding_ring_p50": 56.5,
+      "ponding_ring_ge70_pct": 3.8877755511022043,
+      "concentration_inside_p50": 90.47978210449219,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 88.45417785644531,
+      "concentration_ring_ge70_pct": 57.71543086172345,
+      "combined_inside_p50": 90.47978210449219,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 88.45417785644531,
+      "combined_ring_ge70_pct": 61.362725450901806
+    },
+    {
+      "source_id": "16",
+      "vector_area_m2": 1245.40489446441,
+      "inside_eligible_cells": 49,
+      "ring_eligible_cells": 3492,
+      "ponding_inside_p50": 67.17176055908203,
+      "ponding_inside_ge70_pct": 4.081632653061225,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 88.89739227294922,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 52.09635925292969,
+      "concentration_ring_ge70_pct": 24.57044673539519,
+      "combined_inside_p50": 88.89739227294922,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 53.341064453125,
+      "combined_ring_ge70_pct": 24.57044673539519
+    },
+    {
+      "source_id": "17",
+      "vector_area_m2": 662.9484575704461,
+      "inside_eligible_cells": 26,
+      "ring_eligible_cells": 3576,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.1185682326621924,
+      "concentration_inside_p50": 55.868255615234375,
+      "concentration_inside_ge70_pct": 11.538461538461538,
+      "concentration_ring_p50": 60.3626708984375,
+      "concentration_ring_ge70_pct": 38.47874720357942,
+      "combined_inside_p50": 55.868255615234375,
+      "combined_inside_ge70_pct": 11.538461538461538,
+      "combined_ring_p50": 61.1705207824707,
+      "combined_ring_ge70_pct": 39.59731543624161
+    },
+    {
+      "source_id": "18",
+      "vector_area_m2": 5996.771455460151,
+      "inside_eligible_cells": 236,
+      "ring_eligible_cells": 7481,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.9382435503274964,
+      "concentration_inside_p50": 60.12123107910156,
+      "concentration_inside_ge70_pct": 8.05084745762712,
+      "concentration_ring_p50": 59.42234420776367,
+      "concentration_ring_ge70_pct": 35.42307178184735,
+      "combined_inside_p50": 60.12123107910156,
+      "combined_inside_ge70_pct": 8.05084745762712,
+      "combined_ring_p50": 60.423248291015625,
+      "combined_ring_ge70_pct": 37.21427616628793
+    },
+    {
+      "source_id": "19",
+      "vector_area_m2": 8841.426354878966,
+      "inside_eligible_cells": 356,
+      "ring_eligible_cells": 3633,
+      "ponding_inside_p50": 70.65336608886719,
+      "ponding_inside_ge70_pct": 53.37078651685393,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 8.422791081750619,
+      "concentration_inside_p50": 86.4194564819336,
+      "concentration_inside_ge70_pct": 99.43820224719101,
+      "concentration_ring_p50": 45.873809814453125,
+      "concentration_ring_ge70_pct": 20.64409578860446,
+      "combined_inside_p50": 86.4194564819336,
+      "combined_inside_ge70_pct": 99.43820224719101,
+      "combined_ring_p50": 48.17803955078125,
+      "combined_ring_ge70_pct": 21.9102669969722
+    },
+    {
+      "source_id": "20",
+      "vector_area_m2": 264.91229733532606,
+      "inside_eligible_cells": 11,
+      "ring_eligible_cells": 1382,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 9.768451519536903,
+      "concentration_inside_p50": 46.497802734375,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 47.64616394042969,
+      "concentration_ring_ge70_pct": 18.45151953690304,
+      "combined_inside_p50": 46.497802734375,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 48.07372283935547,
+      "combined_ring_ge70_pct": 19.68162083936324
+    },
+    {
+      "source_id": "21",
+      "vector_area_m2": 172.34542024794774,
+      "inside_eligible_cells": 7,
+      "ring_eligible_cells": 1497,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.736806947227789,
+      "concentration_inside_p50": 45.228233337402344,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 44.68484878540039,
+      "concentration_ring_ge70_pct": 12.35804943219773,
+      "combined_inside_p50": 45.228233337402344,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 45.798648834228516,
+      "combined_ring_ge70_pct": 13.026052104208416
+    },
+    {
+      "source_id": "22",
+      "vector_area_m2": 226.19105812932014,
+      "inside_eligible_cells": 9,
+      "ring_eligible_cells": 1753,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 2.2818026240730176,
+      "concentration_inside_p50": 51.40677261352539,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 43.38499069213867,
+      "concentration_ring_ge70_pct": 12.321734169994295,
+      "combined_inside_p50": 51.40677261352539,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 44.86246871948242,
+      "combined_ring_ge70_pct": 13.063320022818026
+    },
+    {
+      "source_id": "23",
+      "vector_area_m2": 57.800620298949084,
+      "inside_eligible_cells": 2,
+      "ring_eligible_cells": 1684,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.5938242280285035,
+      "concentration_inside_p50": 46.349021911621094,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 43.20928955078125,
+      "concentration_ring_ge70_pct": 12.114014251781473,
+      "combined_inside_p50": 46.349021911621094,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 44.773216247558594,
+      "combined_ring_ge70_pct": 12.470308788598574
+    },
+    {
+      "source_id": "24",
+      "vector_area_m2": 100.88562182033783,
+      "inside_eligible_cells": 3,
+      "ring_eligible_cells": 2192,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.41058394160583944,
+      "concentration_inside_p50": 43.520633697509766,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 41.109375,
+      "concentration_ring_ge70_pct": 12.135036496350365,
+      "combined_inside_p50": 43.520633697509766,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 43.303749084472656,
+      "combined_ring_ge70_pct": 12.408759124087592
+    },
+    {
+      "source_id": "25",
+      "vector_area_m2": 253.13328571699955,
+      "inside_eligible_cells": 11,
+      "ring_eligible_cells": 2421,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.5695993391160676,
+      "concentration_inside_p50": 43.65996551513672,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 41.62464904785156,
+      "concentration_ring_ge70_pct": 12.35026848409748,
+      "combined_inside_p50": 43.65996551513672,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 43.4011344909668,
+      "combined_ring_ge70_pct": 12.804626187525816
+    },
+    {
+      "source_id": "26",
+      "vector_area_m2": 426.43763014297866,
+      "inside_eligible_cells": 18,
+      "ring_eligible_cells": 2992,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 2.640374331550802,
+      "concentration_inside_p50": 32.45381546020508,
+      "concentration_inside_ge70_pct": 5.555555555555555,
+      "concentration_ring_p50": 40.34538269042969,
+      "concentration_ring_ge70_pct": 12.332887700534759,
+      "combined_inside_p50": 32.45381546020508,
+      "combined_inside_ge70_pct": 5.555555555555555,
+      "combined_ring_p50": 41.975284576416016,
+      "combined_ring_ge70_pct": 12.934491978609625
+    },
+    {
+      "source_id": "27",
+      "vector_area_m2": 2957.1069317565734,
+      "inside_eligible_cells": 119,
+      "ring_eligible_cells": 2630,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 43.19391634980989,
+      "concentration_inside_p50": 44.207252502441406,
+      "concentration_inside_ge70_pct": 1.680672268907563,
+      "concentration_ring_p50": 57.69123458862305,
+      "concentration_ring_ge70_pct": 41.97718631178707,
+      "combined_inside_p50": 44.207252502441406,
+      "combined_inside_ge70_pct": 1.680672268907563,
+      "combined_ring_p50": 70.67871856689453,
+      "combined_ring_ge70_pct": 50.38022813688213
+    },
+    {
+      "source_id": "28",
+      "vector_area_m2": 1973.9820670658064,
+      "inside_eligible_cells": 81,
+      "ring_eligible_cells": 4711,
+      "ponding_inside_p50": 56.5,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 95.24463653564453,
+      "concentration_inside_ge70_pct": 70.37037037037037,
+      "concentration_ring_p50": 40.825740814208984,
+      "concentration_ring_ge70_pct": 16.047548291233284,
+      "combined_inside_p50": 95.24463653564453,
+      "combined_inside_ge70_pct": 70.37037037037037,
+      "combined_ring_p50": 43.02162551879883,
+      "combined_ring_ge70_pct": 16.047548291233284
+    },
+    {
+      "source_id": "30",
+      "vector_area_m2": 2555.688307072554,
+      "inside_eligible_cells": 105,
+      "ring_eligible_cells": 3786,
+      "ponding_inside_p50": 82.78243255615234,
+      "ponding_inside_ge70_pct": 100.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 86.7136459350586,
+      "concentration_inside_ge70_pct": 98.0952380952381,
+      "concentration_ring_p50": 44.909515380859375,
+      "concentration_ring_ge70_pct": 16.323296354992078,
+      "combined_inside_p50": 86.7136459350586,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 46.742515563964844,
+      "combined_ring_ge70_pct": 16.323296354992078
+    },
+    {
+      "source_id": "31",
+      "vector_area_m2": 3717.575593196657,
+      "inside_eligible_cells": 145,
+      "ring_eligible_cells": 5211,
+      "ponding_inside_p50": 70.99793243408203,
+      "ponding_inside_ge70_pct": 54.48275862068966,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 86.49333953857422,
+      "concentration_inside_ge70_pct": 95.86206896551724,
+      "concentration_ring_p50": 44.202980041503906,
+      "concentration_ring_ge70_pct": 16.90654384954903,
+      "combined_inside_p50": 86.49333953857422,
+      "combined_inside_ge70_pct": 96.55172413793103,
+      "combined_ring_p50": 45.89662170410156,
+      "combined_ring_ge70_pct": 16.90654384954903
+    },
+    {
+      "source_id": "32",
+      "vector_area_m2": 99487.75172675685,
+      "inside_eligible_cells": 3979,
+      "ring_eligible_cells": 8410,
+      "ponding_inside_p50": 56.5,
+      "ponding_inside_ge70_pct": 4.423221915054033,
+      "ponding_ring_p50": 56.5,
+      "ponding_ring_ge70_pct": 9.417360285374555,
+      "concentration_inside_p50": 90.6875991821289,
+      "concentration_inside_ge70_pct": 96.45639607941693,
+      "concentration_ring_p50": 70.59740447998047,
+      "concentration_ring_ge70_pct": 50.428061831153386,
+      "combined_inside_p50": 90.6875991821289,
+      "combined_inside_ge70_pct": 96.45639607941693,
+      "combined_ring_p50": 82.45199584960938,
+      "combined_ring_ge70_pct": 58.573127229488705
+    },
+    {
+      "source_id": "33",
+      "vector_area_m2": 76247.65838916921,
+      "inside_eligible_cells": 3048,
+      "ring_eligible_cells": 8394,
+      "ponding_inside_p50": 56.5,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 56.5,
+      "ponding_ring_ge70_pct": 4.955920895878008,
+      "concentration_inside_p50": 89.94929504394531,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 87.24749755859375,
+      "concentration_ring_ge70_pct": 91.89897545866094,
+      "combined_inside_p50": 89.94929504394531,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 87.24749755859375,
+      "combined_ring_ge70_pct": 92.01810817250417
+    },
+    {
+      "source_id": "34",
+      "vector_area_m2": 5846.4914886903825,
+      "inside_eligible_cells": 233,
+      "ring_eligible_cells": 5478,
+      "ponding_inside_p50": 56.5,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 56.5,
+      "ponding_ring_ge70_pct": 1.7524644030668126,
+      "concentration_inside_p50": 88.87842559814453,
+      "concentration_inside_ge70_pct": 82.40343347639485,
+      "concentration_ring_p50": 77.0486831665039,
+      "concentration_ring_ge70_pct": 60.27747353048558,
+      "combined_inside_p50": 88.87842559814453,
+      "combined_inside_ge70_pct": 82.40343347639485,
+      "combined_ring_p50": 77.0486831665039,
+      "combined_ring_ge70_pct": 61.92040890836071
+    },
+    {
+      "source_id": "35",
+      "vector_area_m2": 14374.315677377605,
+      "inside_eligible_cells": 575,
+      "ring_eligible_cells": 8067,
+      "ponding_inside_p50": 56.5,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 56.5,
+      "ponding_ring_ge70_pct": 14.131647452584604,
+      "concentration_inside_p50": 77.97515106201172,
+      "concentration_inside_ge70_pct": 73.56521739130434,
+      "concentration_ring_p50": 82.01486206054688,
+      "concentration_ring_ge70_pct": 81.5296888558324,
+      "combined_inside_p50": 77.97515106201172,
+      "combined_inside_ge70_pct": 73.56521739130434,
+      "combined_ring_p50": 82.01486206054688,
+      "combined_ring_ge70_pct": 81.90157431511095
+    },
+    {
+      "source_id": "36",
+      "vector_area_m2": 70000.1213475971,
+      "inside_eligible_cells": 2798,
+      "ring_eligible_cells": 11386,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 8.69488845951168,
+      "concentration_inside_p50": 84.60089874267578,
+      "concentration_inside_ge70_pct": 95.49678341672623,
+      "concentration_ring_p50": 79.35884094238281,
+      "concentration_ring_ge70_pct": 66.36219919199016,
+      "combined_inside_p50": 84.60089874267578,
+      "combined_inside_ge70_pct": 95.49678341672623,
+      "combined_ring_p50": 80.83895874023438,
+      "combined_ring_ge70_pct": 69.04971017038469
+    },
+    {
+      "source_id": "37",
+      "vector_area_m2": 1835.0886300636457,
+      "inside_eligible_cells": 72,
+      "ring_eligible_cells": 5299,
+      "ponding_inside_p50": 83.53608703613281,
+      "ponding_inside_ge70_pct": 100.0,
+      "ponding_ring_p50": 87.05117797851562,
+      "ponding_ring_ge70_pct": 75.41045480279298,
+      "concentration_inside_p50": 88.11015319824219,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 83.962646484375,
+      "concentration_ring_ge70_pct": 75.8633704472542,
+      "combined_inside_p50": 88.11015319824219,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 89.6167221069336,
+      "combined_ring_ge70_pct": 77.61841856954142
+    },
+    {
+      "source_id": "38",
+      "vector_area_m2": 2074.184241768119,
+      "inside_eligible_cells": 82,
+      "ring_eligible_cells": 7149,
+      "ponding_inside_p50": 86.5738296508789,
+      "ponding_inside_ge70_pct": 100.0,
+      "ponding_ring_p50": 91.11445617675781,
+      "ponding_ring_ge70_pct": 86.68345223108128,
+      "concentration_inside_p50": 87.8578872680664,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 87.94270324707031,
+      "concentration_ring_ge70_pct": 87.53671842215695,
+      "combined_inside_p50": 87.8578872680664,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 91.21528625488281,
+      "combined_ring_ge70_pct": 88.05427332494055
+    },
+    {
+      "source_id": "39",
+      "vector_area_m2": 2843.2392460990036,
+      "inside_eligible_cells": 113,
+      "ring_eligible_cells": 5503,
+      "ponding_inside_p50": 83.6731948852539,
+      "ponding_inside_ge70_pct": 100.0,
+      "ponding_ring_p50": 86.23490905761719,
+      "ponding_ring_ge70_pct": 77.17608577139742,
+      "concentration_inside_p50": 89.31538391113281,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 88.54469299316406,
+      "concentration_ring_ge70_pct": 77.3396329274941,
+      "combined_inside_p50": 89.31538391113281,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 90.03070831298828,
+      "combined_ring_ge70_pct": 79.7019807377794
+    },
+    {
+      "source_id": "85",
+      "vector_area_m2": 12629.002198788861,
+      "inside_eligible_cells": 505,
+      "ring_eligible_cells": 2077,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 62.4644889831543,
+      "concentration_inside_ge70_pct": 35.04950495049505,
+      "concentration_ring_p50": 67.5482177734375,
+      "concentration_ring_ge70_pct": 46.55753490611459,
+      "combined_inside_p50": 62.4644889831543,
+      "combined_inside_ge70_pct": 35.04950495049505,
+      "combined_ring_p50": 67.5482177734375,
+      "combined_ring_ge70_pct": 46.55753490611459
+    },
+    {
+      "source_id": "86",
+      "vector_area_m2": 3077.4070827692713,
+      "inside_eligible_cells": 121,
+      "ring_eligible_cells": 4657,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 60.67036819458008,
+      "concentration_inside_ge70_pct": 43.80165289256198,
+      "concentration_ring_p50": 60.12123107910156,
+      "concentration_ring_ge70_pct": 40.32639038007301,
+      "combined_inside_p50": 60.67036819458008,
+      "combined_inside_ge70_pct": 43.80165289256198,
+      "combined_ring_p50": 60.12123107910156,
+      "combined_ring_ge70_pct": 40.32639038007301
+    },
+    {
+      "source_id": "40",
+      "vector_area_m2": 103205.76400058929,
+      "inside_eligible_cells": 4133,
+      "ring_eligible_cells": 14096,
+      "ponding_inside_p50": 65.5,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 43.00784683227539,
+      "ponding_ring_ge70_pct": 0.03547105561861521,
+      "concentration_inside_p50": 82.16244506835938,
+      "concentration_inside_ge70_pct": 75.9496733607549,
+      "concentration_ring_p50": 86.69702911376953,
+      "concentration_ring_ge70_pct": 67.13251986379115,
+      "combined_inside_p50": 82.16244506835938,
+      "combined_inside_ge70_pct": 75.9496733607549,
+      "combined_ring_p50": 86.69702911376953,
+      "combined_ring_ge70_pct": 67.16799091940976
+    },
+    {
+      "source_id": "41",
+      "vector_area_m2": 243490.14416975755,
+      "inside_eligible_cells": 9731,
+      "ring_eligible_cells": 12228,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.2289826627412496,
+      "concentration_inside_p50": 76.02751159667969,
+      "concentration_inside_ge70_pct": 62.05939780084267,
+      "concentration_ring_p50": 84.98918151855469,
+      "concentration_ring_ge70_pct": 65.86522734707229,
+      "combined_inside_p50": 76.02751159667969,
+      "combined_inside_ge70_pct": 62.05939780084267,
+      "combined_ring_p50": 84.98918151855469,
+      "combined_ring_ge70_pct": 66.09421000981354
+    },
+    {
+      "source_id": "42",
+      "vector_area_m2": 47564.62735366471,
+      "inside_eligible_cells": 1906,
+      "ring_eligible_cells": 2921,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 72.73367309570312,
+      "concentration_inside_ge70_pct": 60.073452256033576,
+      "concentration_ring_p50": 71.89275360107422,
+      "concentration_ring_ge70_pct": 52.34508729887025,
+      "combined_inside_p50": 72.73367309570312,
+      "combined_inside_ge70_pct": 60.073452256033576,
+      "combined_ring_p50": 71.89275360107422,
+      "combined_ring_ge70_pct": 52.34508729887025
+    },
+    {
+      "source_id": "43",
+      "vector_area_m2": 90818.68431660008,
+      "inside_eligible_cells": 3628,
+      "ring_eligible_cells": 8988,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 81.42903137207031,
+      "concentration_inside_ge70_pct": 82.74531422271224,
+      "concentration_ring_p50": 88.06673431396484,
+      "concentration_ring_ge70_pct": 79.67289719626169,
+      "combined_inside_p50": 81.42903137207031,
+      "combined_inside_ge70_pct": 82.74531422271224,
+      "combined_ring_p50": 88.06673431396484,
+      "combined_ring_ge70_pct": 79.67289719626169
+    },
+    {
+      "source_id": "45",
+      "vector_area_m2": 10466.520329010618,
+      "inside_eligible_cells": 420,
+      "ring_eligible_cells": 2567,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 40.11418914794922,
+      "concentration_inside_ge70_pct": 20.714285714285715,
+      "concentration_ring_p50": 49.216304779052734,
+      "concentration_ring_ge70_pct": 23.996883521620568,
+      "combined_inside_p50": 40.11418914794922,
+      "combined_inside_ge70_pct": 20.714285714285715,
+      "combined_ring_p50": 49.216304779052734,
+      "combined_ring_ge70_pct": 23.996883521620568
+    },
+    {
+      "source_id": "46",
+      "vector_area_m2": 10595.663505944436,
+      "inside_eligible_cells": 424,
+      "ring_eligible_cells": 2762,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 47.772911071777344,
+      "concentration_inside_ge70_pct": 26.41509433962264,
+      "concentration_ring_p50": 51.547584533691406,
+      "concentration_ring_ge70_pct": 26.393917451122377,
+      "combined_inside_p50": 54.06147766113281,
+      "combined_inside_ge70_pct": 26.41509433962264,
+      "combined_ring_p50": 51.547584533691406,
+      "combined_ring_ge70_pct": 26.393917451122377
+    },
+    {
+      "source_id": "47",
+      "vector_area_m2": 71850.87161547584,
+      "inside_eligible_cells": 2868,
+      "ring_eligible_cells": 9617,
+      "ponding_inside_p50": 54.46926498413086,
+      "ponding_inside_ge70_pct": 4.463040446304045,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 2.4851824893417906,
+      "concentration_inside_p50": 77.97515106201172,
+      "concentration_inside_ge70_pct": 71.61785216178522,
+      "concentration_ring_p50": 76.96348571777344,
+      "concentration_ring_ge70_pct": 61.245710720598936,
+      "combined_inside_p50": 78.43356323242188,
+      "combined_inside_ge70_pct": 72.07112970711297,
+      "combined_ring_p50": 77.0486831665039,
+      "combined_ring_ge70_pct": 62.6390766351253
+    },
+    {
+      "source_id": "125",
+      "vector_area_m2": 1290.6051940153081,
+      "inside_eligible_cells": 56,
+      "ring_eligible_cells": 4096,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.09765625,
+      "concentration_inside_p50": 42.56089782714844,
+      "concentration_inside_ge70_pct": 17.857142857142858,
+      "concentration_ring_p50": 57.47499465942383,
+      "concentration_ring_ge70_pct": 33.49609375,
+      "combined_inside_p50": 42.56089782714844,
+      "combined_inside_ge70_pct": 17.857142857142858,
+      "combined_ring_p50": 57.74897003173828,
+      "combined_ring_ge70_pct": 33.59375
+    },
+    {
+      "source_id": "48",
+      "vector_area_m2": 19318.297091918008,
+      "inside_eligible_cells": 775,
+      "ring_eligible_cells": 7909,
+      "ponding_inside_p50": 49.89309310913086,
+      "ponding_inside_ge70_pct": 20.516129032258064,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 3.148312049563788,
+      "concentration_inside_p50": 57.7829475402832,
+      "concentration_inside_ge70_pct": 30.322580645161292,
+      "concentration_ring_p50": 77.97515106201172,
+      "concentration_ring_ge70_pct": 63.23176128461247,
+      "combined_inside_p50": 64.91655731201172,
+      "combined_inside_ge70_pct": 43.096774193548384,
+      "combined_ring_p50": 78.73888397216797,
+      "combined_ring_ge70_pct": 64.9260336325705
+    },
+    {
+      "source_id": "49",
+      "vector_area_m2": 31617.23531746711,
+      "inside_eligible_cells": 1267,
+      "ring_eligible_cells": 7717,
+      "ponding_inside_p50": 78.79658508300781,
+      "ponding_inside_ge70_pct": 74.4277821625888,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 65.97114562988281,
+      "concentration_inside_ge70_pct": 33.149171270718234,
+      "concentration_ring_p50": 56.393898010253906,
+      "concentration_ring_ge70_pct": 31.16496047686925,
+      "combined_inside_p50": 78.79658508300781,
+      "combined_inside_ge70_pct": 82.00473559589582,
+      "combined_ring_p50": 56.393898010253906,
+      "combined_ring_ge70_pct": 31.16496047686925
+    },
+    {
+      "source_id": "50",
+      "vector_area_m2": 2552.7012816956512,
+      "inside_eligible_cells": 103,
+      "ring_eligible_cells": 3112,
+      "ponding_inside_p50": 76.0,
+      "ponding_inside_ge70_pct": 93.20388349514563,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 69.44307708740234,
+      "concentration_inside_ge70_pct": 49.51456310679612,
+      "concentration_ring_p50": 57.33888626098633,
+      "concentration_ring_ge70_pct": 37.210796915167094,
+      "combined_inside_p50": 76.0,
+      "combined_inside_ge70_pct": 93.20388349514563,
+      "combined_ring_p50": 57.33888626098633,
+      "combined_ring_ge70_pct": 37.210796915167094
+    },
+    {
+      "source_id": "51",
+      "vector_area_m2": 25363.41974043116,
+      "inside_eligible_cells": 1019,
+      "ring_eligible_cells": 4403,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.6359300476947536,
+      "concentration_inside_p50": 50.37236022949219,
+      "concentration_inside_ge70_pct": 19.136408243375858,
+      "concentration_ring_p50": 57.47499465942383,
+      "concentration_ring_ge70_pct": 33.70429252782194,
+      "combined_inside_p50": 50.37236022949219,
+      "combined_inside_ge70_pct": 19.136408243375858,
+      "combined_ring_p50": 57.9882698059082,
+      "combined_ring_ge70_pct": 34.34022257551669
+    },
+    {
+      "source_id": "52",
+      "vector_area_m2": 7379.107866467307,
+      "inside_eligible_cells": 297,
+      "ring_eligible_cells": 8893,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.3148543798493197,
+      "concentration_inside_p50": 83.17414093017578,
+      "concentration_inside_ge70_pct": 71.71717171717172,
+      "concentration_ring_p50": 54.78029251098633,
+      "concentration_ring_ge70_pct": 27.999550208028786,
+      "combined_inside_p50": 83.17414093017578,
+      "combined_inside_ge70_pct": 71.71717171717172,
+      "combined_ring_p50": 55.2208366394043,
+      "combined_ring_ge70_pct": 28.314404587878105
+    },
+    {
+      "source_id": "53",
+      "vector_area_m2": 1330.6965275213083,
+      "inside_eligible_cells": 49,
+      "ring_eligible_cells": 3160,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.47468354430379744,
+      "concentration_inside_p50": 34.5166130065918,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 44.23858642578125,
+      "concentration_ring_ge70_pct": 16.20253164556962,
+      "combined_inside_p50": 34.5166130065918,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 44.58153533935547,
+      "combined_ring_ge70_pct": 16.67721518987342
+    },
+    {
+      "source_id": "54",
+      "vector_area_m2": 39.38680660668408,
+      "inside_eligible_cells": 0,
+      "ring_eligible_cells": 4822,
+      "ponding_inside_p50": null,
+      "ponding_inside_ge70_pct": null,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": null,
+      "concentration_inside_ge70_pct": null,
+      "concentration_ring_p50": 54.26151657104492,
+      "concentration_ring_ge70_pct": 30.04977187888843,
+      "combined_inside_p50": null,
+      "combined_inside_ge70_pct": null,
+      "combined_ring_p50": 57.187625885009766,
+      "combined_ring_ge70_pct": 30.04977187888843
+    },
+    {
+      "source_id": "65",
+      "vector_area_m2": 1727.7578223103108,
+      "inside_eligible_cells": 66,
+      "ring_eligible_cells": 4135,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 46.683563232421875,
+      "concentration_inside_ge70_pct": 40.90909090909091,
+      "concentration_ring_p50": 60.12123107910156,
+      "concentration_ring_ge70_pct": 32.26118500604595,
+      "combined_inside_p50": 46.683563232421875,
+      "combined_inside_ge70_pct": 40.90909090909091,
+      "combined_ring_p50": 60.12123107910156,
+      "combined_ring_ge70_pct": 32.26118500604595
+    },
+    {
+      "source_id": "75",
+      "vector_area_m2": 312.54440310518913,
+      "inside_eligible_cells": 13,
+      "ring_eligible_cells": 3285,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 40.34538269042969,
+      "concentration_inside_ge70_pct": 23.076923076923077,
+      "concentration_ring_p50": 77.29486083984375,
+      "concentration_ring_ge70_pct": 62.89193302891933,
+      "combined_inside_p50": 40.34538269042969,
+      "combined_inside_ge70_pct": 23.076923076923077,
+      "combined_ring_p50": 77.29486083984375,
+      "combined_ring_ge70_pct": 62.89193302891933
+    },
+    {
+      "source_id": "109",
+      "vector_area_m2": 252.20061995186305,
+      "inside_eligible_cells": 9,
+      "ring_eligible_cells": 4547,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.45150648779415,
+      "concentration_inside_p50": 80.24454498291016,
+      "concentration_inside_ge70_pct": 55.55555555555556,
+      "concentration_ring_p50": 64.72296905517578,
+      "concentration_ring_ge70_pct": 40.88409940620189,
+      "combined_inside_p50": 80.24454498291016,
+      "combined_inside_ge70_pct": 55.55555555555556,
+      "combined_ring_p50": 64.99406433105469,
+      "combined_ring_ge70_pct": 41.49989003738729
+    },
+    {
+      "source_id": "55",
+      "vector_area_m2": 6418.467319001058,
+      "inside_eligible_cells": 242,
+      "ring_eligible_cells": 4110,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.681265206812652,
+      "concentration_inside_p50": 32.258148193359375,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 54.454627990722656,
+      "concentration_ring_ge70_pct": 31.8978102189781,
+      "combined_inside_p50": 32.258148193359375,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 55.70317840576172,
+      "combined_ring_ge70_pct": 32.579075425790755
+    },
+    {
+      "source_id": "56",
+      "vector_area_m2": 31849.016541054276,
+      "inside_eligible_cells": 1267,
+      "ring_eligible_cells": 8500,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.18823529411764706,
+      "concentration_inside_p50": 65.95343017578125,
+      "concentration_inside_ge70_pct": 38.51617995264404,
+      "concentration_ring_p50": 63.15766906738281,
+      "concentration_ring_ge70_pct": 42.64705882352941,
+      "combined_inside_p50": 65.95343017578125,
+      "combined_inside_ge70_pct": 38.51617995264404,
+      "combined_ring_p50": 63.67914581298828,
+      "combined_ring_ge70_pct": 42.83529411764706
+    },
+    {
+      "source_id": "57",
+      "vector_area_m2": 3231.2655594805487,
+      "inside_eligible_cells": 126,
+      "ring_eligible_cells": 1488,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 40.10116958618164,
+      "concentration_inside_ge70_pct": 3.9682539682539684,
+      "concentration_ring_p50": 48.3699951171875,
+      "concentration_ring_ge70_pct": 22.24462365591398,
+      "combined_inside_p50": 40.10116958618164,
+      "combined_inside_ge70_pct": 3.9682539682539684,
+      "combined_ring_p50": 48.3699951171875,
+      "combined_ring_ge70_pct": 22.24462365591398
+    },
+    {
+      "source_id": "58",
+      "vector_area_m2": 6124.90025801604,
+      "inside_eligible_cells": 247,
+      "ring_eligible_cells": 4781,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 10.121457489878543,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.3346580213344489,
+      "concentration_inside_p50": 72.73367309570312,
+      "concentration_inside_ge70_pct": 62.75303643724696,
+      "concentration_ring_p50": 81.74749755859375,
+      "concentration_ring_ge70_pct": 70.90566827023635,
+      "combined_inside_p50": 75.16148376464844,
+      "combined_inside_ge70_pct": 72.8744939271255,
+      "combined_ring_p50": 81.74749755859375,
+      "combined_ring_ge70_pct": 71.2403262915708
+    },
+    {
+      "source_id": "110",
+      "vector_area_m2": 34.96694501707551,
+      "inside_eligible_cells": 2,
+      "ring_eligible_cells": 3957,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.18776851149861,
+      "concentration_inside_p50": 69.95072937011719,
+      "concentration_inside_ge70_pct": 50.0,
+      "concentration_ring_p50": 61.851318359375,
+      "concentration_ring_ge70_pct": 33.510235026535256,
+      "combined_inside_p50": 69.95072937011719,
+      "combined_inside_ge70_pct": 50.0,
+      "combined_ring_p50": 61.90892028808594,
+      "combined_ring_ge70_pct": 33.91458175385393
+    },
+    {
+      "source_id": "111",
+      "vector_area_m2": 8.496154361788463,
+      "inside_eligible_cells": 0,
+      "ring_eligible_cells": 4195,
+      "ponding_inside_p50": null,
+      "ponding_inside_ge70_pct": null,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.2634088200238378,
+      "concentration_inside_p50": null,
+      "concentration_inside_ge70_pct": null,
+      "concentration_ring_p50": 61.84934997558594,
+      "concentration_ring_ge70_pct": 33.2300357568534,
+      "combined_inside_p50": null,
+      "combined_inside_ge70_pct": null,
+      "combined_ring_p50": 61.851905822753906,
+      "combined_ring_ge70_pct": 33.70679380214541
+    },
+    {
+      "source_id": "112",
+      "vector_area_m2": 192.5103188678337,
+      "inside_eligible_cells": 8,
+      "ring_eligible_cells": 2887,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 79.86991882324219,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 57.93031311035156,
+      "concentration_ring_ge70_pct": 30.82784897817804,
+      "combined_inside_p50": 79.86991882324219,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 57.93031311035156,
+      "combined_ring_ge70_pct": 30.82784897817804
+    },
+    {
+      "source_id": "64",
+      "vector_area_m2": 7537.700525091483,
+      "inside_eligible_cells": 301,
+      "ring_eligible_cells": 3398,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 74.99285888671875,
+      "concentration_inside_ge70_pct": 71.09634551495017,
+      "concentration_ring_p50": 57.89018249511719,
+      "concentration_ring_ge70_pct": 34.8145968216598,
+      "combined_inside_p50": 74.99285888671875,
+      "combined_inside_ge70_pct": 71.09634551495017,
+      "combined_ring_p50": 57.89018249511719,
+      "combined_ring_ge70_pct": 34.8145968216598
+    },
+    {
+      "source_id": "59",
+      "vector_area_m2": 5261.995407522158,
+      "inside_eligible_cells": 210,
+      "ring_eligible_cells": 6248,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.2560819462227913,
+      "concentration_inside_p50": 55.054107666015625,
+      "concentration_inside_ge70_pct": 7.142857142857143,
+      "concentration_ring_p50": 80.07325744628906,
+      "concentration_ring_ge70_pct": 64.05249679897567,
+      "combined_inside_p50": 55.054107666015625,
+      "combined_inside_ge70_pct": 7.142857142857143,
+      "combined_ring_p50": 80.07325744628906,
+      "combined_ring_ge70_pct": 64.30857874519846
+    },
+    {
+      "source_id": "60",
+      "vector_area_m2": 3107.9527335642056,
+      "inside_eligible_cells": 121,
+      "ring_eligible_cells": 4220,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.2132701421800948,
+      "concentration_inside_p50": 57.66922378540039,
+      "concentration_inside_ge70_pct": 28.925619834710744,
+      "concentration_ring_p50": 81.07807922363281,
+      "concentration_ring_ge70_pct": 65.99526066350711,
+      "combined_inside_p50": 57.66922378540039,
+      "combined_inside_ge70_pct": 28.925619834710744,
+      "combined_ring_p50": 81.07807922363281,
+      "combined_ring_ge70_pct": 66.2085308056872
+    },
+    {
+      "source_id": "61",
+      "vector_area_m2": 6883.163964070275,
+      "inside_eligible_cells": 276,
+      "ring_eligible_cells": 2662,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 68.58670806884766,
+      "concentration_inside_ge70_pct": 39.492753623188406,
+      "concentration_ring_p50": 81.5279541015625,
+      "concentration_ring_ge70_pct": 66.60405709992487,
+      "combined_inside_p50": 68.58670806884766,
+      "combined_inside_ge70_pct": 39.492753623188406,
+      "combined_ring_p50": 81.5279541015625,
+      "combined_ring_ge70_pct": 66.60405709992487
+    },
+    {
+      "source_id": "62",
+      "vector_area_m2": 2835.2634901778824,
+      "inside_eligible_cells": 117,
+      "ring_eligible_cells": 3185,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 80.34989929199219,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 79.49528503417969,
+      "concentration_ring_ge70_pct": 60.15698587127159,
+      "combined_inside_p50": 80.34989929199219,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 79.49528503417969,
+      "combined_ring_ge70_pct": 60.15698587127159
+    },
+    {
+      "source_id": "113",
+      "vector_area_m2": 162.98241137492917,
+      "inside_eligible_cells": 6,
+      "ring_eligible_cells": 2176,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 83.17414093017578,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 54.26151657104492,
+      "concentration_ring_ge70_pct": 28.676470588235293,
+      "combined_inside_p50": 83.17414093017578,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 54.26151657104492,
+      "combined_ring_ge70_pct": 28.676470588235293
+    },
+    {
+      "source_id": "114",
+      "vector_area_m2": 1384.172076703971,
+      "inside_eligible_cells": 56,
+      "ring_eligible_cells": 2531,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 81.13399505615234,
+      "concentration_inside_ge70_pct": 51.785714285714285,
+      "concentration_ring_p50": 57.47499465942383,
+      "concentration_ring_ge70_pct": 30.225207427894112,
+      "combined_inside_p50": 81.13399505615234,
+      "combined_inside_ge70_pct": 51.785714285714285,
+      "combined_ring_p50": 57.47499465942383,
+      "combined_ring_ge70_pct": 30.225207427894112
+    },
+    {
+      "source_id": "63",
+      "vector_area_m2": 19161.10741143064,
+      "inside_eligible_cells": 764,
+      "ring_eligible_cells": 3310,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 65.8696517944336,
+      "concentration_inside_ge70_pct": 35.73298429319372,
+      "concentration_ring_p50": 63.4814338684082,
+      "concentration_ring_ge70_pct": 40.42296072507553,
+      "combined_inside_p50": 65.8696517944336,
+      "combined_inside_ge70_pct": 35.73298429319372,
+      "combined_ring_p50": 63.4814338684082,
+      "combined_ring_ge70_pct": 40.42296072507553
+    },
+    {
+      "source_id": "66",
+      "vector_area_m2": 6055.605042748868,
+      "inside_eligible_cells": 245,
+      "ring_eligible_cells": 4836,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 77.0486831665039,
+      "concentration_inside_ge70_pct": 82.85714285714286,
+      "concentration_ring_p50": 60.032005310058594,
+      "concentration_ring_ge70_pct": 34.01571546732837,
+      "combined_inside_p50": 77.0486831665039,
+      "combined_inside_ge70_pct": 82.85714285714286,
+      "combined_ring_p50": 60.032005310058594,
+      "combined_ring_ge70_pct": 34.01571546732837
+    },
+    {
+      "source_id": "67",
+      "vector_area_m2": 3869.405031295042,
+      "inside_eligible_cells": 154,
+      "ring_eligible_cells": 3347,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 70.05131530761719,
+      "concentration_inside_ge70_pct": 53.896103896103895,
+      "concentration_ring_p50": 61.83972930908203,
+      "concentration_ring_ge70_pct": 36.80908276068121,
+      "combined_inside_p50": 70.05131530761719,
+      "combined_inside_ge70_pct": 53.896103896103895,
+      "combined_ring_p50": 61.83972930908203,
+      "combined_ring_ge70_pct": 36.80908276068121
+    },
+    {
+      "source_id": "68",
+      "vector_area_m2": 1764.444000532992,
+      "inside_eligible_cells": 15,
+      "ring_eligible_cells": 1967,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 32.45381546020508,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 50.37236022949219,
+      "concentration_ring_ge70_pct": 16.980172852058974,
+      "combined_inside_p50": 32.45381546020508,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 50.37236022949219,
+      "combined_ring_ge70_pct": 16.980172852058974
+    },
+    {
+      "source_id": "69",
+      "vector_area_m2": 566.0778560731095,
+      "inside_eligible_cells": 23,
+      "ring_eligible_cells": 2257,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 80.83895874023438,
+      "concentration_inside_ge70_pct": 95.65217391304348,
+      "concentration_ring_p50": 55.72016906738281,
+      "concentration_ring_ge70_pct": 23.52680549401861,
+      "combined_inside_p50": 80.83895874023438,
+      "combined_inside_ge70_pct": 95.65217391304348,
+      "combined_ring_p50": 55.72016906738281,
+      "combined_ring_ge70_pct": 23.52680549401861
+    },
+    {
+      "source_id": "70",
+      "vector_area_m2": 24180.980555041253,
+      "inside_eligible_cells": 969,
+      "ring_eligible_cells": 4554,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 40.34538269042969,
+      "concentration_inside_ge70_pct": 16.71826625386997,
+      "concentration_ring_p50": 49.92639923095703,
+      "concentration_ring_ge70_pct": 15.2832674571805,
+      "combined_inside_p50": 40.34538269042969,
+      "combined_inside_ge70_pct": 16.71826625386997,
+      "combined_ring_p50": 49.92639923095703,
+      "combined_ring_ge70_pct": 15.2832674571805
+    },
+    {
+      "source_id": "71",
+      "vector_area_m2": 9272.21528893549,
+      "inside_eligible_cells": 374,
+      "ring_eligible_cells": 2874,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 57.47499465942383,
+      "concentration_inside_ge70_pct": 27.272727272727273,
+      "concentration_ring_p50": 53.62889862060547,
+      "concentration_ring_ge70_pct": 22.025052192066806,
+      "combined_inside_p50": 57.47499465942383,
+      "combined_inside_ge70_pct": 27.272727272727273,
+      "combined_ring_p50": 53.62889862060547,
+      "combined_ring_ge70_pct": 22.025052192066806
+    },
+    {
+      "source_id": "115",
+      "vector_area_m2": 180.78482498612706,
+      "inside_eligible_cells": 6,
+      "ring_eligible_cells": 1556,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 89.61599731445312,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 60.12123107910156,
+      "concentration_ring_ge70_pct": 38.56041131105398,
+      "combined_inside_p50": 89.61599731445312,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 60.12123107910156,
+      "combined_ring_ge70_pct": 38.56041131105398
+    },
+    {
+      "source_id": "72",
+      "vector_area_m2": 5320.032077871938,
+      "inside_eligible_cells": 210,
+      "ring_eligible_cells": 5965,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 47.41363525390625,
+      "concentration_inside_ge70_pct": 10.0,
+      "concentration_ring_p50": 50.472450256347656,
+      "concentration_ring_ge70_pct": 22.766135792120703,
+      "combined_inside_p50": 47.41363525390625,
+      "combined_inside_ge70_pct": 10.0,
+      "combined_ring_p50": 50.472450256347656,
+      "combined_ring_ge70_pct": 22.766135792120703
+    },
+    {
+      "source_id": "73",
+      "vector_area_m2": 117.09081236686151,
+      "inside_eligible_cells": 6,
+      "ring_eligible_cells": 2940,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 62.4644889831543,
+      "concentration_inside_ge70_pct": 33.333333333333336,
+      "concentration_ring_p50": 84.60089874267578,
+      "concentration_ring_ge70_pct": 78.70748299319727,
+      "combined_inside_p50": 62.4644889831543,
+      "combined_inside_ge70_pct": 33.333333333333336,
+      "combined_ring_p50": 84.60089874267578,
+      "combined_ring_ge70_pct": 78.70748299319727
+    },
+    {
+      "source_id": "74",
+      "vector_area_m2": 18.908325955355345,
+      "inside_eligible_cells": 1,
+      "ring_eligible_cells": 3146,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 57.47499465942383,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 82.01486206054688,
+      "concentration_ring_ge70_pct": 72.85441830896376,
+      "combined_inside_p50": 57.47499465942383,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 82.01486206054688,
+      "combined_ring_ge70_pct": 72.85441830896376
+    },
+    {
+      "source_id": "76",
+      "vector_area_m2": 1566.3863635214552,
+      "inside_eligible_cells": 64,
+      "ring_eligible_cells": 3989,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 37.98524475097656,
+      "concentration_inside_ge70_pct": 1.5625,
+      "concentration_ring_p50": 71.40509796142578,
+      "concentration_ring_ge70_pct": 52.46929054900978,
+      "combined_inside_p50": 37.98524475097656,
+      "combined_inside_ge70_pct": 1.5625,
+      "combined_ring_p50": 71.40509796142578,
+      "combined_ring_ge70_pct": 52.46929054900978
+    },
+    {
+      "source_id": "77",
+      "vector_area_m2": 874.6951287453866,
+      "inside_eligible_cells": 32,
+      "ring_eligible_cells": 5278,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 66.65554809570312,
+      "concentration_inside_ge70_pct": 46.875,
+      "concentration_ring_p50": 64.58750915527344,
+      "concentration_ring_ge70_pct": 43.425539977264116,
+      "combined_inside_p50": 66.65554809570312,
+      "combined_inside_ge70_pct": 46.875,
+      "combined_ring_p50": 64.58750915527344,
+      "combined_ring_ge70_pct": 43.425539977264116
+    },
+    {
+      "source_id": "78",
+      "vector_area_m2": 80.89485495179491,
+      "inside_eligible_cells": 2,
+      "ring_eligible_cells": 4576,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 82.00654602050781,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 65.06248474121094,
+      "concentration_ring_ge70_pct": 44.47115384615385,
+      "combined_inside_p50": 82.00654602050781,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 65.06248474121094,
+      "combined_ring_ge70_pct": 44.47115384615385
+    },
+    {
+      "source_id": "79",
+      "vector_area_m2": 1243.771238609175,
+      "inside_eligible_cells": 52,
+      "ring_eligible_cells": 4195,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 44.044647216796875,
+      "concentration_inside_ge70_pct": 13.461538461538462,
+      "concentration_ring_p50": 50.37236022949219,
+      "concentration_ring_ge70_pct": 15.37544696066746,
+      "combined_inside_p50": 44.044647216796875,
+      "combined_inside_ge70_pct": 13.461538461538462,
+      "combined_ring_p50": 50.37236022949219,
+      "combined_ring_ge70_pct": 15.37544696066746
+    },
+    {
+      "source_id": "80",
+      "vector_area_m2": 2192.2978492790985,
+      "inside_eligible_cells": 87,
+      "ring_eligible_cells": 4565,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 69.98771667480469,
+      "concentration_inside_ge70_pct": 49.42528735632184,
+      "concentration_ring_p50": 53.772647857666016,
+      "concentration_ring_ge70_pct": 17.940854326396494,
+      "combined_inside_p50": 69.98771667480469,
+      "combined_inside_ge70_pct": 49.42528735632184,
+      "combined_ring_p50": 53.772647857666016,
+      "combined_ring_ge70_pct": 17.940854326396494
+    },
+    {
+      "source_id": "81",
+      "vector_area_m2": 2652.366785009935,
+      "inside_eligible_cells": 107,
+      "ring_eligible_cells": 5079,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 40.87070846557617,
+      "concentration_inside_ge70_pct": 28.97196261682243,
+      "concentration_ring_p50": 59.57813262939453,
+      "concentration_ring_ge70_pct": 27.97794841504233,
+      "combined_inside_p50": 40.87070846557617,
+      "combined_inside_ge70_pct": 28.97196261682243,
+      "combined_ring_p50": 59.57813262939453,
+      "combined_ring_ge70_pct": 27.97794841504233
+    },
+    {
+      "source_id": "82",
+      "vector_area_m2": 7299.960163009356,
+      "inside_eligible_cells": 290,
+      "ring_eligible_cells": 3946,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 32.45381546020508,
+      "concentration_inside_ge70_pct": 1.3793103448275863,
+      "concentration_ring_p50": 53.707557678222656,
+      "concentration_ring_ge70_pct": 15.990876837303599,
+      "combined_inside_p50": 32.45381546020508,
+      "combined_inside_ge70_pct": 1.3793103448275863,
+      "combined_ring_p50": 53.707557678222656,
+      "combined_ring_ge70_pct": 15.990876837303599
+    },
+    {
+      "source_id": "83",
+      "vector_area_m2": 207955.78920280942,
+      "inside_eligible_cells": 8319,
+      "ring_eligible_cells": 12364,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 83.00912475585938,
+      "concentration_inside_ge70_pct": 72.06394999398967,
+      "concentration_ring_p50": 80.83895874023438,
+      "concentration_ring_ge70_pct": 63.668715626011,
+      "combined_inside_p50": 83.00912475585938,
+      "combined_inside_ge70_pct": 72.06394999398967,
+      "combined_ring_p50": 80.83895874023438,
+      "combined_ring_ge70_pct": 63.668715626011
+    },
+    {
+      "source_id": "87",
+      "vector_area_m2": 12429.73305762706,
+      "inside_eligible_cells": 502,
+      "ring_eligible_cells": 7852,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 53.85820770263672,
+      "concentration_inside_ge70_pct": 28.48605577689243,
+      "concentration_ring_p50": 74.03841400146484,
+      "concentration_ring_ge70_pct": 57.05552725420275,
+      "combined_inside_p50": 53.85820770263672,
+      "combined_inside_ge70_pct": 28.48605577689243,
+      "combined_ring_p50": 74.03841400146484,
+      "combined_ring_ge70_pct": 57.05552725420275
+    },
+    {
+      "source_id": "88",
+      "vector_area_m2": 9991.586438407041,
+      "inside_eligible_cells": 398,
+      "ring_eligible_cells": 2154,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 43.821598052978516,
+      "concentration_inside_ge70_pct": 14.57286432160804,
+      "concentration_ring_p50": 65.41926574707031,
+      "concentration_ring_ge70_pct": 41.92200557103064,
+      "combined_inside_p50": 43.821598052978516,
+      "combined_inside_ge70_pct": 14.57286432160804,
+      "combined_ring_p50": 65.41926574707031,
+      "combined_ring_ge70_pct": 41.92200557103064
+    },
+    {
+      "source_id": "89",
+      "vector_area_m2": 10385.322834647737,
+      "inside_eligible_cells": 415,
+      "ring_eligible_cells": 2162,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 62.4644889831543,
+      "concentration_inside_ge70_pct": 32.53012048192771,
+      "concentration_ring_p50": 71.24070739746094,
+      "concentration_ring_ge70_pct": 53.70027752081406,
+      "combined_inside_p50": 62.4644889831543,
+      "combined_inside_ge70_pct": 32.53012048192771,
+      "combined_ring_p50": 71.24070739746094,
+      "combined_ring_ge70_pct": 53.70027752081406
+    },
+    {
+      "source_id": "90",
+      "vector_area_m2": 13233.799835228434,
+      "inside_eligible_cells": 532,
+      "ring_eligible_cells": 3495,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 64.66177368164062,
+      "concentration_inside_ge70_pct": 41.54135338345865,
+      "concentration_ring_p50": 69.14425659179688,
+      "concentration_ring_ge70_pct": 49.27038626609442,
+      "combined_inside_p50": 64.66177368164062,
+      "combined_inside_ge70_pct": 41.54135338345865,
+      "combined_ring_p50": 69.14425659179688,
+      "combined_ring_ge70_pct": 49.27038626609442
+    },
+    {
+      "source_id": "91",
+      "vector_area_m2": 2255.8499617422654,
+      "inside_eligible_cells": 96,
+      "ring_eligible_cells": 4345,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 90.28131103515625,
+      "concentration_inside_ge70_pct": 94.79166666666667,
+      "concentration_ring_p50": 70.27032470703125,
+      "concentration_ring_ge70_pct": 51.346375143843495,
+      "combined_inside_p50": 90.28131103515625,
+      "combined_inside_ge70_pct": 94.79166666666667,
+      "combined_ring_p50": 70.27032470703125,
+      "combined_ring_ge70_pct": 51.346375143843495
+    },
+    {
+      "source_id": "92",
+      "vector_area_m2": 8357.410212764386,
+      "inside_eligible_cells": 334,
+      "ring_eligible_cells": 3593,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 84.0331039428711,
+      "concentration_inside_ge70_pct": 71.8562874251497,
+      "concentration_ring_p50": 57.47499465942383,
+      "concentration_ring_ge70_pct": 36.59894238797662,
+      "combined_inside_p50": 84.0331039428711,
+      "combined_inside_ge70_pct": 71.8562874251497,
+      "combined_ring_p50": 57.47499465942383,
+      "combined_ring_ge70_pct": 36.59894238797662
+    },
+    {
+      "source_id": "93",
+      "vector_area_m2": 36322.950348560684,
+      "inside_eligible_cells": 1445,
+      "ring_eligible_cells": 6480,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 60.12123107910156,
+      "concentration_inside_ge70_pct": 21.868512110726645,
+      "concentration_ring_p50": 81.26278686523438,
+      "concentration_ring_ge70_pct": 67.20679012345678,
+      "combined_inside_p50": 60.12123107910156,
+      "combined_inside_ge70_pct": 21.868512110726645,
+      "combined_ring_p50": 81.26278686523438,
+      "combined_ring_ge70_pct": 67.20679012345678
+    },
+    {
+      "source_id": "94",
+      "vector_area_m2": 25359.313410633356,
+      "inside_eligible_cells": 1019,
+      "ring_eligible_cells": 6896,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 64.57608795166016,
+      "concentration_inside_ge70_pct": 33.7585868498528,
+      "concentration_ring_p50": 77.06173706054688,
+      "concentration_ring_ge70_pct": 60.498839907192576,
+      "combined_inside_p50": 64.57608795166016,
+      "combined_inside_ge70_pct": 33.7585868498528,
+      "combined_ring_p50": 77.06173706054688,
+      "combined_ring_ge70_pct": 60.498839907192576
+    },
+    {
+      "source_id": "95",
+      "vector_area_m2": 1321.066939910865,
+      "inside_eligible_cells": 54,
+      "ring_eligible_cells": 6096,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 79.56529235839844,
+      "concentration_inside_ge70_pct": 68.51851851851852,
+      "concentration_ring_p50": 66.59730529785156,
+      "concentration_ring_ge70_pct": 46.11220472440945,
+      "combined_inside_p50": 79.56529235839844,
+      "combined_inside_ge70_pct": 68.51851851851852,
+      "combined_ring_p50": 66.59730529785156,
+      "combined_ring_ge70_pct": 46.11220472440945
+    },
+    {
+      "source_id": "96",
+      "vector_area_m2": 964.5775819491146,
+      "inside_eligible_cells": 40,
+      "ring_eligible_cells": 5585,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 51.414459228515625,
+      "concentration_inside_ge70_pct": 27.5,
+      "concentration_ring_p50": 65.46199035644531,
+      "concentration_ring_ge70_pct": 45.049239033124444,
+      "combined_inside_p50": 51.414459228515625,
+      "combined_inside_ge70_pct": 27.5,
+      "combined_ring_p50": 65.46199035644531,
+      "combined_ring_ge70_pct": 45.049239033124444
+    },
+    {
+      "source_id": "97",
+      "vector_area_m2": 10646.029267865602,
+      "inside_eligible_cells": 428,
+      "ring_eligible_cells": 6834,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.038923031899327,
+      "concentration_inside_p50": 77.0486831665039,
+      "concentration_inside_ge70_pct": 68.69158878504673,
+      "concentration_ring_p50": 64.72296905517578,
+      "concentration_ring_ge70_pct": 41.20573602575359,
+      "combined_inside_p50": 77.0486831665039,
+      "combined_inside_ge70_pct": 68.69158878504673,
+      "combined_ring_p50": 64.79739379882812,
+      "combined_ring_ge70_pct": 41.644717588527946
+    },
+    {
+      "source_id": "98",
+      "vector_area_m2": 31684.676240383415,
+      "inside_eligible_cells": 1265,
+      "ring_eligible_cells": 10112,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.9098101265822784,
+      "concentration_inside_p50": 89.94929504394531,
+      "concentration_inside_ge70_pct": 94.30830039525692,
+      "concentration_ring_p50": 80.83895874023438,
+      "concentration_ring_ge70_pct": 65.7238924050633,
+      "combined_inside_p50": 89.94929504394531,
+      "combined_inside_ge70_pct": 94.30830039525692,
+      "combined_ring_p50": 80.83895874023438,
+      "combined_ring_ge70_pct": 66.11946202531645
+    },
+    {
+      "source_id": "99",
+      "vector_area_m2": 6683.652241378949,
+      "inside_eligible_cells": 269,
+      "ring_eligible_cells": 7918,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 66.0007095336914,
+      "concentration_inside_ge70_pct": 44.237918215613384,
+      "concentration_ring_p50": 55.979549407958984,
+      "concentration_ring_ge70_pct": 22.85930790603688,
+      "combined_inside_p50": 66.0007095336914,
+      "combined_inside_ge70_pct": 44.237918215613384,
+      "combined_ring_p50": 55.979549407958984,
+      "combined_ring_ge70_pct": 22.85930790603688
+    },
+    {
+      "source_id": "100",
+      "vector_area_m2": 934.0489704007817,
+      "inside_eligible_cells": 39,
+      "ring_eligible_cells": 1066,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 50.37236022949219,
+      "concentration_inside_ge70_pct": 10.256410256410257,
+      "concentration_ring_p50": 50.37236022949219,
+      "concentration_ring_ge70_pct": 29.455909943714822,
+      "combined_inside_p50": 50.37236022949219,
+      "combined_inside_ge70_pct": 10.256410256410257,
+      "combined_ring_p50": 50.37236022949219,
+      "combined_ring_ge70_pct": 29.455909943714822
+    },
+    {
+      "source_id": "101",
+      "vector_area_m2": 23.650310447039953,
+      "inside_eligible_cells": 1,
+      "ring_eligible_cells": 2068,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 82.01486206054688,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 70.74475860595703,
+      "concentration_ring_ge70_pct": 52.12765957446808,
+      "combined_inside_p50": 82.01486206054688,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 70.74475860595703,
+      "combined_ring_ge70_pct": 52.12765957446808
+    },
+    {
+      "source_id": "102",
+      "vector_area_m2": 69.35502096629219,
+      "inside_eligible_cells": 3,
+      "ring_eligible_cells": 2644,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 85.82331848144531,
+      "concentration_inside_ge70_pct": 66.66666666666667,
+      "concentration_ring_p50": 54.26151657104492,
+      "concentration_ring_ge70_pct": 34.72012102874433,
+      "combined_inside_p50": 85.82331848144531,
+      "combined_inside_ge70_pct": 66.66666666666667,
+      "combined_ring_p50": 54.26151657104492,
+      "combined_ring_ge70_pct": 34.72012102874433
+    },
+    {
+      "source_id": "103",
+      "vector_area_m2": 300.430717115715,
+      "inside_eligible_cells": 13,
+      "ring_eligible_cells": 2474,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 57.154239654541016,
+      "concentration_inside_ge70_pct": 30.76923076923077,
+      "concentration_ring_p50": 54.26151657104492,
+      "concentration_ring_ge70_pct": 34.96362166531932,
+      "combined_inside_p50": 57.154239654541016,
+      "combined_inside_ge70_pct": 30.76923076923077,
+      "combined_ring_p50": 54.26151657104492,
+      "combined_ring_ge70_pct": 34.96362166531932
+    },
+    {
+      "source_id": "104",
+      "vector_area_m2": 190.74773831087438,
+      "inside_eligible_cells": 8,
+      "ring_eligible_cells": 375,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 70.55305480957031,
+      "concentration_inside_ge70_pct": 50.0,
+      "concentration_ring_p50": 76.01612854003906,
+      "concentration_ring_ge70_pct": 66.93333333333334,
+      "combined_inside_p50": 70.55305480957031,
+      "combined_inside_ge70_pct": 50.0,
+      "combined_ring_p50": 76.01612854003906,
+      "combined_ring_ge70_pct": 66.93333333333334
+    },
+    {
+      "source_id": "105",
+      "vector_area_m2": 70.28253968352098,
+      "inside_eligible_cells": 4,
+      "ring_eligible_cells": 3566,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 2.075154234436343,
+      "concentration_inside_p50": 77.51191711425781,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 69.13143920898438,
+      "concentration_ring_ge70_pct": 48.878295008412785,
+      "combined_inside_p50": 77.51191711425781,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 69.66845703125,
+      "combined_ring_ge70_pct": 49.74761637689288
+    },
+    {
+      "source_id": "106",
+      "vector_area_m2": 66.99937961657042,
+      "inside_eligible_cells": 2,
+      "ring_eligible_cells": 3545,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 2.002820874471086,
+      "concentration_inside_p50": 90.46100616455078,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 67.26963806152344,
+      "concentration_ring_ge70_pct": 45.61354019746121,
+      "combined_inside_p50": 90.46100616455078,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 68.13177490234375,
+      "combined_ring_ge70_pct": 46.459802538787024
+    },
+    {
+      "source_id": "107",
+      "vector_area_m2": 118.6085585647415,
+      "inside_eligible_cells": 3,
+      "ring_eligible_cells": 3838,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.5633142261594581,
+      "concentration_inside_p50": 83.60472869873047,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 62.07139587402344,
+      "concentration_ring_ge70_pct": 34.835852006253255,
+      "combined_inside_p50": 83.60472869873047,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 62.4644889831543,
+      "combined_ring_ge70_pct": 35.4872329338197
+    },
+    {
+      "source_id": "108",
+      "vector_area_m2": 335.78509732767117,
+      "inside_eligible_cells": 15,
+      "ring_eligible_cells": 4175,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.748502994011976,
+      "concentration_inside_p50": 86.97269439697266,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 64.46280670166016,
+      "concentration_ring_ge70_pct": 39.5688622754491,
+      "combined_inside_p50": 86.97269439697266,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 64.72296905517578,
+      "combined_ring_ge70_pct": 40.31137724550898
+    },
+    {
+      "source_id": "116",
+      "vector_area_m2": 596.5688346535347,
+      "inside_eligible_cells": 25,
+      "ring_eligible_cells": 4227,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 38.5496940612793,
+      "concentration_inside_ge70_pct": 12.0,
+      "concentration_ring_p50": 87.79450225830078,
+      "concentration_ring_ge70_pct": 68.5119470073338,
+      "combined_inside_p50": 38.5496940612793,
+      "combined_inside_ge70_pct": 12.0,
+      "combined_ring_p50": 87.79450225830078,
+      "combined_ring_ge70_pct": 68.5119470073338
+    },
+    {
+      "source_id": "117",
+      "vector_area_m2": 1178.6476704732897,
+      "inside_eligible_cells": 47,
+      "ring_eligible_cells": 2832,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 1.694915254237288,
+      "concentration_inside_p50": 90.0822525024414,
+      "concentration_inside_ge70_pct": 100.0,
+      "concentration_ring_p50": 84.0331039428711,
+      "concentration_ring_ge70_pct": 68.36158192090396,
+      "combined_inside_p50": 90.0822525024414,
+      "combined_inside_ge70_pct": 100.0,
+      "combined_ring_p50": 84.0331039428711,
+      "combined_ring_ge70_pct": 68.96186440677967
+    },
+    {
+      "source_id": "118",
+      "vector_area_m2": 1713.2390601752024,
+      "inside_eligible_cells": 57,
+      "ring_eligible_cells": 5789,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 68.69344329833984,
+      "concentration_inside_ge70_pct": 49.12280701754386,
+      "concentration_ring_p50": 56.43359375,
+      "concentration_ring_ge70_pct": 29.227845914665746,
+      "combined_inside_p50": 68.69344329833984,
+      "combined_inside_ge70_pct": 49.12280701754386,
+      "combined_ring_p50": 56.43359375,
+      "combined_ring_ge70_pct": 29.227845914665746
+    },
+    {
+      "source_id": "119",
+      "vector_area_m2": 2665.61378015397,
+      "inside_eligible_cells": 99,
+      "ring_eligible_cells": 6221,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 62.590980529785156,
+      "concentration_inside_ge70_pct": 31.31313131313131,
+      "concentration_ring_p50": 57.47499465942383,
+      "concentration_ring_ge70_pct": 30.155923484970263,
+      "combined_inside_p50": 62.590980529785156,
+      "combined_inside_ge70_pct": 31.31313131313131,
+      "combined_ring_p50": 57.47499465942383,
+      "combined_ring_ge70_pct": 30.155923484970263
+    },
+    {
+      "source_id": "120",
+      "vector_area_m2": 148.08037180000778,
+      "inside_eligible_cells": 7,
+      "ring_eligible_cells": 5491,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 32.23554992675781,
+      "concentration_inside_ge70_pct": 28.571428571428573,
+      "concentration_ring_p50": 57.17107009887695,
+      "concentration_ring_ge70_pct": 29.575669276998724,
+      "combined_inside_p50": 32.23554992675781,
+      "combined_inside_ge70_pct": 28.571428571428573,
+      "combined_ring_p50": 57.17107009887695,
+      "combined_ring_ge70_pct": 29.575669276998724
+    },
+    {
+      "source_id": "121",
+      "vector_area_m2": 4226.365207682426,
+      "inside_eligible_cells": 168,
+      "ring_eligible_cells": 3970,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 53.850914001464844,
+      "concentration_inside_ge70_pct": 32.142857142857146,
+      "concentration_ring_p50": 50.50959014892578,
+      "concentration_ring_ge70_pct": 21.435768261964736,
+      "combined_inside_p50": 53.850914001464844,
+      "combined_inside_ge70_pct": 32.142857142857146,
+      "combined_ring_p50": 50.50959014892578,
+      "combined_ring_ge70_pct": 21.435768261964736
+    },
+    {
+      "source_id": "122",
+      "vector_area_m2": 3160.4336796330595,
+      "inside_eligible_cells": 123,
+      "ring_eligible_cells": 4179,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 53.058929443359375,
+      "concentration_inside_ge70_pct": 34.146341463414636,
+      "concentration_ring_p50": 54.035400390625,
+      "concentration_ring_ge70_pct": 22.541277817659726,
+      "combined_inside_p50": 53.058929443359375,
+      "combined_inside_ge70_pct": 34.146341463414636,
+      "combined_ring_p50": 54.035400390625,
+      "combined_ring_ge70_pct": 22.541277817659726
+    },
+    {
+      "source_id": "123",
+      "vector_area_m2": 680.1111792915013,
+      "inside_eligible_cells": 25,
+      "ring_eligible_cells": 2621,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 46.03084182739258,
+      "concentration_inside_ge70_pct": 28.0,
+      "concentration_ring_p50": 59.78813934326172,
+      "concentration_ring_ge70_pct": 29.607020221289584,
+      "combined_inside_p50": 46.03084182739258,
+      "combined_inside_ge70_pct": 28.0,
+      "combined_ring_p50": 59.78813934326172,
+      "combined_ring_ge70_pct": 29.607020221289584
+    },
+    {
+      "source_id": "124",
+      "vector_area_m2": 10603.930488008644,
+      "inside_eligible_cells": 426,
+      "ring_eligible_cells": 5279,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0757719265012313,
+      "concentration_inside_p50": 62.12324905395508,
+      "concentration_inside_ge70_pct": 26.056338028169016,
+      "concentration_ring_p50": 53.90127182006836,
+      "concentration_ring_ge70_pct": 24.474332259897707,
+      "combined_inside_p50": 62.12324905395508,
+      "combined_inside_ge70_pct": 26.056338028169016,
+      "combined_ring_p50": 54.26151657104492,
+      "combined_ring_ge70_pct": 24.55010418639894
+    },
+    {
+      "source_id": "126",
+      "vector_area_m2": 677.0436646681806,
+      "inside_eligible_cells": 21,
+      "ring_eligible_cells": 4029,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.09928021841648052,
+      "concentration_inside_p50": 64.02381896972656,
+      "concentration_inside_ge70_pct": 9.523809523809524,
+      "concentration_ring_p50": 57.47499465942383,
+      "concentration_ring_ge70_pct": 33.82973442541574,
+      "combined_inside_p50": 64.02381896972656,
+      "combined_inside_ge70_pct": 9.523809523809524,
+      "combined_ring_p50": 57.98711013793945,
+      "combined_ring_ge70_pct": 33.92901464383222
+    },
+    {
+      "source_id": "127",
+      "vector_area_m2": 2641.9631589647224,
+      "inside_eligible_cells": 108,
+      "ring_eligible_cells": 5014,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.07977662544874352,
+      "concentration_inside_p50": 50.42588806152344,
+      "concentration_inside_ge70_pct": 27.77777777777778,
+      "concentration_ring_p50": 57.47499465942383,
+      "concentration_ring_ge70_pct": 31.99042680494615,
+      "combined_inside_p50": 50.42588806152344,
+      "combined_inside_ge70_pct": 27.77777777777778,
+      "combined_ring_p50": 57.73836898803711,
+      "combined_ring_ge70_pct": 32.0702034303949
+    },
+    {
+      "source_id": "128",
+      "vector_area_m2": 182.2921878842402,
+      "inside_eligible_cells": 8,
+      "ring_eligible_cells": 4387,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.09117848187827672,
+      "concentration_inside_p50": 25.70138168334961,
+      "concentration_inside_ge70_pct": 37.5,
+      "concentration_ring_p50": 57.35597610473633,
+      "concentration_ring_ge70_pct": 27.513106906770002,
+      "combined_inside_p50": 25.70138168334961,
+      "combined_inside_ge70_pct": 37.5,
+      "combined_ring_p50": 57.47499465942383,
+      "combined_ring_ge70_pct": 27.60428538864828
+    },
+    {
+      "source_id": "129",
+      "vector_area_m2": 1880.960929280397,
+      "inside_eligible_cells": 74,
+      "ring_eligible_cells": 4296,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.06983240223463687,
+      "concentration_inside_p50": 49.82891082763672,
+      "concentration_inside_ge70_pct": 5.405405405405405,
+      "concentration_ring_p50": 55.75653839111328,
+      "concentration_ring_ge70_pct": 24.394785847299815,
+      "combined_inside_p50": 49.82891082763672,
+      "combined_inside_ge70_pct": 5.405405405405405,
+      "combined_ring_p50": 55.99073791503906,
+      "combined_ring_ge70_pct": 24.46461824953445
+    },
+    {
+      "source_id": "130",
+      "vector_area_m2": 240.23248154474166,
+      "inside_eligible_cells": 10,
+      "ring_eligible_cells": 4110,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 32.45381546020508,
+      "concentration_inside_ge70_pct": 0.0,
+      "concentration_ring_p50": 57.47499465942383,
+      "concentration_ring_ge70_pct": 26.228710462287104,
+      "combined_inside_p50": 32.45381546020508,
+      "combined_inside_ge70_pct": 0.0,
+      "combined_ring_p50": 57.47499465942383,
+      "combined_ring_ge70_pct": 26.228710462287104
+    },
+    {
+      "source_id": "131",
+      "vector_area_m2": 21099.091053073374,
+      "inside_eligible_cells": 782,
+      "ring_eligible_cells": 8142,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 64.01849365234375,
+      "concentration_inside_ge70_pct": 41.81585677749361,
+      "concentration_ring_p50": 52.83687973022461,
+      "concentration_ring_ge70_pct": 21.346106607713093,
+      "combined_inside_p50": 64.01849365234375,
+      "combined_inside_ge70_pct": 41.81585677749361,
+      "combined_ring_p50": 52.83687973022461,
+      "combined_ring_ge70_pct": 21.346106607713093
+    },
+    {
+      "source_id": "132",
+      "vector_area_m2": 613.635702617451,
+      "inside_eligible_cells": 25,
+      "ring_eligible_cells": 4418,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 71.33097839355469,
+      "concentration_inside_ge70_pct": 52.0,
+      "concentration_ring_p50": 50.51544189453125,
+      "concentration_ring_ge70_pct": 21.865097329108195,
+      "combined_inside_p50": 71.33097839355469,
+      "combined_inside_ge70_pct": 52.0,
+      "combined_ring_p50": 50.51544189453125,
+      "combined_ring_ge70_pct": 21.865097329108195
+    },
+    {
+      "source_id": "133",
+      "vector_area_m2": 87.95379607899193,
+      "inside_eligible_cells": 2,
+      "ring_eligible_cells": 3539,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 58.34422302246094,
+      "concentration_inside_ge70_pct": 50.0,
+      "concentration_ring_p50": 50.37236022949219,
+      "concentration_ring_ge70_pct": 22.690025430912687,
+      "combined_inside_p50": 58.34422302246094,
+      "combined_inside_ge70_pct": 50.0,
+      "combined_ring_p50": 50.37236022949219,
+      "combined_ring_ge70_pct": 22.690025430912687
+    },
+    {
+      "source_id": "134",
+      "vector_area_m2": 11589.334982877626,
+      "inside_eligible_cells": 457,
+      "ring_eligible_cells": 5117,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 48.38283920288086,
+      "concentration_inside_ge70_pct": 24.070021881838073,
+      "concentration_ring_p50": 58.79965591430664,
+      "concentration_ring_ge70_pct": 31.346492085206176,
+      "combined_inside_p50": 48.38283920288086,
+      "combined_inside_ge70_pct": 24.070021881838073,
+      "combined_ring_p50": 58.83599090576172,
+      "combined_ring_ge70_pct": 31.346492085206176
+    },
+    {
+      "source_id": "135",
+      "vector_area_m2": 7293.962338773174,
+      "inside_eligible_cells": 128,
+      "ring_eligible_cells": 6652,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 46.038055419921875,
+      "concentration_inside_ge70_pct": 18.75,
+      "concentration_ring_p50": 45.504913330078125,
+      "concentration_ring_ge70_pct": 14.296452194828623,
+      "combined_inside_p50": 46.038055419921875,
+      "combined_inside_ge70_pct": 18.75,
+      "combined_ring_p50": 45.504913330078125,
+      "combined_ring_ge70_pct": 14.296452194828623
+    },
+    {
+      "source_id": "136",
+      "vector_area_m2": 279.4101512886249,
+      "inside_eligible_cells": 11,
+      "ring_eligible_cells": 4675,
+      "ponding_inside_p50": 0.0,
+      "ponding_inside_ge70_pct": 0.0,
+      "ponding_ring_p50": 0.0,
+      "ponding_ring_ge70_pct": 0.0,
+      "concentration_inside_p50": 62.87860107421875,
+      "concentration_inside_ge70_pct": 27.272727272727273,
+      "concentration_ring_p50": 49.358428955078125,
+      "concentration_ring_ge70_pct": 22.053475935828878,
+      "combined_inside_p50": 62.87860107421875,
+      "combined_inside_ge70_pct": 27.272727272727273,
+      "combined_ring_p50": 49.358428955078125,
+      "combined_ring_ge70_pct": 22.053475935828878
+    }
+  ],
+  "buildings": {
+    "index_total_records": 334033,
+    "candidate_bbox_record_count": 17440,
+    "by_zone": {
+      "observed_union": {
+        "record_count": 60,
+        "distinct_cadastral_id_count": 60,
+        "summed_record_footprint_overlap_area_m2": 1941.287905029306,
+        "union_footprint_overlap_area_m2": 1941.2879050293056,
+        "zone_footprint_area_fraction": 0.001016908903954202
+      },
+      "surrounding_0_50m": {
+        "record_count": 433,
+        "distinct_cadastral_id_count": 433,
+        "summed_record_footprint_overlap_area_m2": 24753.01389609932,
+        "union_footprint_overlap_area_m2": 24753.01389609932,
+        "zone_footprint_area_fraction": 0.011155364734170375
+      },
+      "surrounding_50_250m": {
+        "record_count": 2655,
+        "distinct_cadastral_id_count": 2655,
+        "summed_record_footprint_overlap_area_m2": 148853.7040757454,
+        "union_footprint_overlap_area_m2": 148853.70407574537,
+        "zone_footprint_area_fraction": 0.026690279419992288
+      },
+      "surrounding_250_500m": {
+        "record_count": 3607,
+        "distinct_cadastral_id_count": 3601,
+        "summed_record_footprint_overlap_area_m2": 231686.97760028596,
+        "union_footprint_overlap_area_m2": 231481.25250380608,
+        "zone_footprint_area_fraction": 0.03127309812671931
+      }
+    },
+    "per_historical_polygon": {
+      "2": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "4": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "44": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "9": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "11": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "12": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "13": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "84": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "14": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "10": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "1": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "3": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "5": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "6": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "7": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "8": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "29": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "15": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "16": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "17": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "18": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "19": {
+        "intersecting_record_count": 1,
+        "positive_area_record_count": 1,
+        "footprint_overlap_area_sum_m2": 46.17596787421039
+      },
+      "20": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "21": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "22": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "23": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "24": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "25": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "26": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "27": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "28": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "30": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "31": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "32": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "33": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "34": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "35": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "36": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "37": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "38": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "39": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "85": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "86": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "40": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "41": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "42": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "43": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "45": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "46": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "47": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "125": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "48": {
+        "intersecting_record_count": 47,
+        "positive_area_record_count": 47,
+        "footprint_overlap_area_sum_m2": 1774.2061104298643
+      },
+      "49": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "50": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "51": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "52": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "53": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "54": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "65": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "75": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "109": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "55": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "56": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "57": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "58": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "110": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "111": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "112": {
+        "intersecting_record_count": 1,
+        "positive_area_record_count": 1,
+        "footprint_overlap_area_sum_m2": 0.053154921550058826
+      },
+      "64": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "59": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "60": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "61": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "62": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "113": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "114": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "63": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "66": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "67": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "68": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "69": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "70": {
+        "intersecting_record_count": 1,
+        "positive_area_record_count": 1,
+        "footprint_overlap_area_sum_m2": 0.6322166817951014
+      },
+      "71": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "115": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "72": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "73": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "74": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "76": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "77": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "78": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "79": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "80": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "81": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "82": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "83": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "87": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "88": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "89": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "90": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "91": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "92": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "93": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "94": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "95": {
+        "intersecting_record_count": 7,
+        "positive_area_record_count": 7,
+        "footprint_overlap_area_sum_m2": 62.301297444047805
+      },
+      "96": {
+        "intersecting_record_count": 2,
+        "positive_area_record_count": 2,
+        "footprint_overlap_area_sum_m2": 50.04236809182157
+      },
+      "97": {
+        "intersecting_record_count": 1,
+        "positive_area_record_count": 1,
+        "footprint_overlap_area_sum_m2": 7.87678958601667
+      },
+      "98": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "99": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "100": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "101": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "102": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "103": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "104": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "105": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "106": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "107": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "108": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "116": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "117": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "118": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "119": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "120": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "121": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "122": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "123": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "124": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "126": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "127": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "128": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "129": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "130": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "131": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "132": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "133": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "134": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "135": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      },
+      "136": {
+        "intersecting_record_count": 0,
+        "positive_area_record_count": 0,
+        "footprint_overlap_area_sum_m2": 0.0
+      }
+    }
+  },
+  "green": {
+    "source_features_streamed": 64962,
+    "regional_features": 313,
+    "temporary_geometry_repairs": 0,
+    "by_zone": {
+      "observed_union": {
+        "overlap_area_m2": 40738.086341183734,
+        "zone_area_fraction": 0.02133991698144301
+      },
+      "surrounding_0_50m": {
+        "overlap_area_m2": 53022.471154885985,
+        "zone_area_fraction": 0.023895474196497325
+      },
+      "surrounding_50_250m": {
+        "overlap_area_m2": 85327.93453206719,
+        "zone_area_fraction": 0.015299763140813721
+      },
+      "surrounding_250_500m": {
+        "overlap_area_m2": 79929.41673052342,
+        "zone_area_fraction": 0.010798457609797142
+      }
+    }
+  },
+  "sewer": {
+    "source_route_count": 717,
+    "by_zone": {
+      "observed_union": {
+        "intersecting_source_route_count": 2,
+        "length_inside_m": 586.8773615495402
+      },
+      "surrounding_0_50m": {
+        "intersecting_source_route_count": 6,
+        "length_inside_m": 1181.510880864795
+      },
+      "surrounding_50_250m": {
+        "intersecting_source_route_count": 8,
+        "length_inside_m": 3407.5528076614173
+      },
+      "surrounding_250_500m": {
+        "intersecting_source_route_count": 10,
+        "length_inside_m": 5535.5675245330585
+      }
+    }
+  },
+  "infrastructure_points": {
+    "source_records": 322025,
+    "regional_records": 1185,
+    "by_zone_type": {
+      "observed_union": {
+        "3": 5,
+        "5": 1,
+        "2": 2
+      },
+      "surrounding_0_50m": {
+        "2": 60,
+        "3": 18,
+        "6": 12,
+        "5": 26
+      },
+      "surrounding_50_250m": {
+        "2": 178,
+        "6": 109,
+        "3": 112,
+        "5": 32,
+        "": 8
+      },
+      "surrounding_250_500m": {
+        "3": 158,
+        "2": 158,
+        "5": 114,
+        "6": 149,
+        "": 43
+      }
+    }
+  },
+  "rainfall": {
+    "period": {
+      "local_date": "2025-06-27",
+      "timezone": "Europe/Sofia",
+      "start_utc": "2025-06-26T21:00:00Z",
+      "end_utc": "2025-06-27T21:00:00Z",
+      "utc_start_inclusive": "2025-06-26T21:00:00Z",
+      "utc_end_exclusive": "2025-06-27T21:00:00Z",
+      "aggregation_window_verified_from_upstream_code": false
+    },
+    "products": {
+      "merged_250m": {
+        "bbox": [
+          23.18,
+          42.600549766439094,
+          23.49770455163993,
+          42.76
+        ],
+        "native_shape": [
+          71,
+          104
+        ],
+        "native_cell_centres_in_historical_union": 0,
+        "valid_cell_centres_in_union": 0,
+        "native_values_in_union_mm": {
+          "count": 0
+        },
+        "historical_vector_area_inside_product_bounds_m2": 0.0,
+        "temporal_join_valid": false,
+        "reason": "27 June2025 daily product is not the January/February2021 surveyed flood event"
+      },
+      "radar_bias_corrected_250m": {
+        "bbox": [
+          23.18,
+          42.600549766439094,
+          23.49770455163993,
+          42.76
+        ],
+        "native_shape": [
+          71,
+          104
+        ],
+        "native_cell_centres_in_historical_union": 0,
+        "valid_cell_centres_in_union": 0,
+        "native_values_in_union_mm": {
+          "count": 0
+        },
+        "historical_vector_area_inside_product_bounds_m2": 0.0,
+        "temporal_join_valid": false,
+        "reason": "27 June2025 daily product is not the January/February2021 surveyed flood event"
+      },
+      "radar_raw_1km": {
+        "bbox": [
+          22.831742360561023,
+          42.3396652283702,
+          23.85076023188007,
+          43.05713699491116
+        ],
+        "native_shape": [
+          69,
+          98
+        ],
+        "native_cell_centres_in_historical_union": 3,
+        "valid_cell_centres_in_union": 3,
+        "native_values_in_union_mm": {
+          "count": 3,
+          "mean": 20.990902264912922,
+          "min": 15.093214988708496,
+          "p05": 15.742346668243409,
+          "p25": 18.338873386383057,
+          "p50": 21.584531784057617,
+          "p75": 23.939745903015137,
+          "p95": 25.823917198181153,
+          "max": 26.294960021972656
+        },
+        "historical_vector_area_inside_product_bounds_m2": 1909008.6609334967,
+        "temporal_join_valid": false,
+        "reason": "27 June2025 daily product is not the January/February2021 surveyed flood event"
+      }
+    }
+  },
+  "historical_register": {
+    "source_rows": 19,
+    "unique_event_ids": 15,
+    "period": "2020–2024",
+    "spatial_support": "text descriptions; not geocoded or joined as point labels"
+  },
+  "runtime_seconds": 38.577,
+  "script_file": "scripts/analyze_index_refinement.py",
+  "logical_dependency_audit": {
+    "terrain_score_inputs": [
+      "depression_fill_depth_m",
+      "slope_degrees",
+      "D8_contributing_area_m2",
+      "upstream_boundary_flag"
+    ],
+    "context_or_exposure_not_score_inputs": [
+      "green_polygons",
+      "sewer_routes_and_point_density",
+      "buildings",
+      "rainfall",
+      "historical_polygons"
+    ],
+    "global_green_source_records": 64962,
+    "nonempty_green_source_records": 64956,
+    "former_display_subset": 2175,
+    "all_green_used_in_existing_route_partition": true,
+    "source_route_records": 717,
+    "route_status_counts": {
+      "existing": 464,
+      "open": 3,
+      "planned": 250
+    },
+    "zone_feature_counts": {
+      "all": 717,
+      "inside": 543,
+      "outside": 670
+    },
+    "routes_in_both_green_parts": 496,
+    "zone_length_geodesic_m": {
+      "all": 540163.0135031902,
+      "inside": 137858.69885054993,
+      "outside": 402304.31468007684
+    },
+    "inside_length_pct": 25.521684270175548,
+    "partition_error_m": 2.7436530217528343e-05,
+    "clogging_probability_available": false,
+    "missing": [
+      "verified connected pipe graph",
+      "pipe diameters",
+      "invert and outfall levels",
+      "inlet condition",
+      "maintenance/inspection observations",
+      "subhourly rainfall hyetograph"
+    ]
+  },
+  "compatible_time_scenario_assumption": "At the user’s request, the available datasets are treated as compatible for a combined review scenario. Actual source dates, spatial gaps and unknown currency remain recorded. This does not establish that the 2025 rainfall caused the 2021 mapped flooding or calibrate forecast skill.",
+  "review_priority_product": {
+    "revision": "853d77c47901ec54",
+    "metadata_file": "data/cache/review_priority_meta.json",
+    "raster_file": "data/derived/review_priority_5m.tif",
+    "native_values_unchanged": true
+  }
+}

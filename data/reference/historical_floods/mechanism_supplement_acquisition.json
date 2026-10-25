@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "file": "12_PFRA_BG1_APP12_APSFR_kmz.zip",
+      "url": "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN%202028-2033/aktual_PORN/12_PFRA_BG1_APP12_APSFR_kmz.zip",
+      "size_bytes": 1957944,
+      "sha256": "6a9cab7d6ba08072442fb87534eb095ab0166da9513e09a74e67967f8d74f29e",
+      "retrieved_utc": "2026-10-25T09:07:21.330945+00:00",
+      "status": "downloaded"
+    },
+    {
+      "file": "CriticalPointsBDDR.xlsx",
+      "url": "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN%202028-2033/aktual_PORN/CriticalPointsBDDR.xlsx",
+      "size_bytes": 13853,
+      "sha256": "ff91a8b131c0fc95f8a2b37965363dd12562a91b7e04b3ad02dc55837750dd4b",
+      "retrieved_utc": "2026-10-25T09:07:21.375947+00:00",
+      "status": "downloaded"
+    }
+  ]
+}

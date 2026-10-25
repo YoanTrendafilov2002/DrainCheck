@@ -1,0 +1,17 @@
+{
+  "verified_utc": "2026-10-25T09:18:47.457550+00:00",
+  "source_revision": "8641e0276fb3d96b",
+  "original_source_sha_checks": 13,
+  "full_zone_features": 6,
+  "valid_browser_zone_features": 6,
+  "valid_context_features": 23,
+  "source_props_exact_between_full_and_browser": true,
+  "acquisition_control_checks": [
+    "new_download_public_headers_redacted_private_original_preserved",
+    "cached_original_hash_verified",
+    "changed_download_with_preserved_receipt_refused_without_overwrite"
+  ],
+  "app_preparation_script_syntax_valid": true,
+  "mechanism_review_input_hashes_valid": true,
+  "backend_or_frontend_files_changed": false
+}

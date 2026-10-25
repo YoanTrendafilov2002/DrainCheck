@@ -21,7 +21,7 @@ class PerformanceMetrics:
     def snapshot(self):
         with self._lock:return dict(self.counts)
     def count(self,path):
-        family=next((name for name,prefix in [('raster','/api/raster/'),('hillshade','/api/hillshade/'),('vector','/api/vector/'),('buildings','/api/buildings/tiles/'),('cadastre','/api/cadastre/tiles/'),('history_survey','/api/history/zones.geojson'),('rainfall_tile','/api/rainfall/tiles/'),('rain_stations','/api/rainfall/stations'),('exposure','/api/pluvial/exposure'),('pluvial_tile','/api/pluvial/')] if path.startswith(prefix)),None)
+        family=next((name for name,prefix in [('raster','/api/raster/'),('hillshade','/api/hillshade/'),('vector','/api/vector/'),('buildings','/api/buildings/tiles/'),('cadastre','/api/cadastre/tiles/'),('review_tile','/api/refinement/tiles/'),('assessment','/api/flood-assessment/geojson'),('history_survey','/api/history/zones.geojson'),('rainfall_tile','/api/rainfall/tiles/'),('rain_stations','/api/rainfall/stations'),('exposure','/api/pluvial/exposure'),('pluvial_tile','/api/pluvial/')] if path.startswith(prefix)),None)
         if family=='pluvial_tile' and not path.endswith('.png'):return
         if family:
             with self._lock:self.counts[family]+=1

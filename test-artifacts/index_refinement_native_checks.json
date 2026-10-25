@@ -1,0 +1,125 @@
+{
+  "interpretation": "Source-grid diagnostics only; no proof of TIN/contour lineage, measurement date or vertical accuracy",
+  "patches": [
+    {
+      "name": "central_Sofia_near_stadium",
+      "longitude": 23.3352531692,
+      "latitude": 42.6875642953,
+      "five_m_window": [
+        4582,
+        4601,
+        128,
+        128
+      ],
+      "one_m_window": [
+        22910,
+        23005,
+        640,
+        640
+      ],
+      "bounds_epsg7801": [
+        322302.0,
+        4729966.0,
+        322942.0,
+        4730606.0
+      ],
+      "native_valid_cells": 409600,
+      "native_unique_height_count": 164105,
+      "native_equal_east_pairs_pct": 23.00176056338028,
+      "native_equal_north_pairs_pct": 22.011443661971832,
+      "five_m_mean_minus_native_5x5_mean_m": {
+        "count": 16384,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "maximum_absolute_mean_difference_m": 0.0,
+      "low_local_slope_variability_definition": "7x7 slope SD<0.01deg, centre slope0.1\u20132deg; descriptive only, not error mask",
+      "low_local_slope_variability_cells": 215,
+      "concentration_scores_on_subset": {
+        "count": 215,
+        "min": 36.72124481201172,
+        "p50": 66.43383026123047,
+        "p95": 80.4736328125,
+        "max": 90.45748138427734
+      },
+      "depression_fill_depth_m": {
+        "count": 16384,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "max": 3.9766845703125
+      },
+      "score_data_unchanged": true
+    },
+    {
+      "name": "historical_polygon_interior",
+      "longitude": 23.361694114303877,
+      "latitude": 42.81236256982956,
+      "five_m_window": [
+        5085,
+        1841,
+        128,
+        128
+      ],
+      "one_m_window": [
+        25425,
+        9205,
+        640,
+        640
+      ],
+      "bounds_epsg7801": [
+        324817.0,
+        4743766.0,
+        325457.0,
+        4744406.0
+      ],
+      "native_valid_cells": 409600,
+      "native_unique_height_count": 95665,
+      "native_equal_east_pairs_pct": 4.867224178403756,
+      "native_equal_north_pairs_pct": 4.370109546165884,
+      "five_m_mean_minus_native_5x5_mean_m": {
+        "count": 16384,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "maximum_absolute_mean_difference_m": 0.0,
+      "low_local_slope_variability_definition": "7x7 slope SD<0.01deg, centre slope0.1\u20132deg; descriptive only, not error mask",
+      "low_local_slope_variability_cells": 8050,
+      "concentration_scores_on_subset": {
+        "count": 8050,
+        "min": 46.55255126953125,
+        "p50": 90.08577728271484,
+        "p95": 90.91693115234375,
+        "max": 94.27745056152344
+      },
+      "depression_fill_depth_m": {
+        "count": 16384,
+        "min": 0.0,
+        "p50": 0.93743896484375,
+        "p95": 1.4773406982421875,
+        "max": 1.57196044921875
+      },
+      "score_data_unchanged": true
+    }
+  ],
+  "native": {
+    "crs": "EPSG:7801",
+    "shape": [
+      54343,
+      51722
+    ],
+    "transform": [
+      1.0,
+      0.0,
+      299392.0,
+      0.0,
+      -1.0,
+      4753611.0
+    ],
+    "nodata": -9999.0
+  }
+}

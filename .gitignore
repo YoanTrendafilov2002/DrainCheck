@@ -27,6 +27,7 @@ test-results*.xml
 *.key
 *.p12
 *.pfx
+**/*.private.json
 id_rsa*
 id_ed25519*
 
@@ -97,6 +98,12 @@ id_ed25519*
 # receipts. Small historical tabular data and survey geometry remain available.
 /data/reference/historical_floods/*.pdf
 /data/reference/historical_floods/*.xlsx
+
+# Preserve full official assessment inputs locally; reproduce them with
+# acquire_flood_assessment.py. The separate browser geometry is versioned.
+/data/reference/flood_assessment/originals/
+/data/reference/flood_assessment/assessment_zones.geojson
+/data/reference/flood_assessment/assessment_zones_display.geojson
 
 # The complete original supplement remains intact locally. Avoid duplicating
 # its large raw/prepared vectors and upload archives in the Git source tree.

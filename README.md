@@ -2,8 +2,10 @@
 
 A working local React + TypeScript + MapLibre application with a Python spatial
 API. It uses real supplied geometries, the real municipal 1 m DTM, and all
-322,025 infrastructure point records. Version 1.6 adds independently controlled
-AGKK cadastral building context. It retains the supplied 27 June 2025 daily
+322,025 infrastructure point records. Version 1.7 adds a separate categorical
+evidence-review map, historical mechanism/certainty filters and official
+assessment context while retaining AGKK cadastral buildings and every legacy
+P/C/S mode. It retains the supplied 27 June 2025 daily
 rainfall products and stations and the complete original Earth Engine whole-area
 colour reference. Imperviousness is absent from the map.
 
@@ -114,9 +116,10 @@ pnpm dev
   values remain unchanged. Native readouts are 1 m; whole-area colour statistics
   are 60 m, local statistics normally 10 m (coarser if the pixel cap requires it).
 - **Layers** provides elevation opacity, hillshade, green display selection,
-  all infrastructure categories (initially off), and basemap choice. Choosing
-  all green polygons displays the complete indexed source. It does not change
-  the already computed route partition. Attribution remains on the map.
+  all infrastructure categories (initially off), and basemap choice. Green
+  display starts at **All green areas**, showing the complete indexed source.
+  It does not change the already computed route partition. Attribution remains
+  on the map.
 - Point data loads only when enabled, through viewport vector tiles. No route
   connectivity or capacity is inferred from those points.
 - **Share view** copies the URL with map position, zone, statuses, layers,
@@ -149,6 +152,9 @@ still incur their first-render cost.
 | Daily rainfall | Three supplied numeric native COGs | 27 June 2025 local day; final/corrected nominal 250 m products and nominal 1 km raw radar; distinct EPSG:4326 grids/masks |
 | Rain stations | Complete supplied station GeoJSON | 55 original station records; 43 accepted / 12 rejected; original QC retained |
 | Cadastral building context | National AGKK INSPIRE source snapshot | 334,033 source records / 334,018 distinct non-null cadastral IDs intersecting the study rectangle; source geometry and attributes preserved; no inferred heights |
+| Historical observations | Sofiaplan 2021 drone survey | 136 actual mapped northern flood-zone polygons; individual flood mechanisms unknown; incomplete survey coverage |
+| Official assessment context | Municipal atlas and draft PFRA sources | Six supplier high/medium/low assessment polygons, plus 23 draft 2026 reach/identifier features; separate from observed inundation |
+| Evidence review | Separate aligned 5 m categorical derivative | Existing ponding signal, actual historical footprints and potential cadastral footprint intersections; original P/C/S and native heights unchanged |
 
 The first handoff ZIP was truncated; its original extraction receipt remains in
 `test-artifacts/verification.json`. The later complete supplement resolves the
@@ -225,12 +231,12 @@ pnpm test
 pnpm build
 ```
 
-The current production build passes **196 Python tests and 24 frontend tests
-(220 total)**, and the production frontend build passes. The earlier 159-test
+The current v1.7 full suites pass **214 Python tests and 28 frontend tests
+(242 total)**. The production build is checked separately. The earlier 159-test
 result remains historical. The three supplied validation flows also pass,
 including all rainfall pixels/masks, the 15 supplied point checks and five
 original elevation-scale tests; these are separate checks, not added again to
-the 220-test total. Current integration results are recorded in
+the application-suite total. Current integration results are recorded in
 `test-results.xml`, the frontend test output and
 `test-artifacts/rainfall_handoff_validation.json`. Older performance
 timing receipts retain their original measurement scope; see
@@ -253,9 +259,14 @@ Baseline route checks:
 | Outside green | 670 | 402.3043147 km |
 
 Counts overlap across zones; lengths partition within numerical tolerance.
-The Pluvial tab adds a transparent analyst-defined terrain screening index and
-infrastructure overlap. Daily rainfall is a separate observed-product context
-layer; it does not calibrate or alter P/C/S scores. There is no validated event
+This partition uses the union of all 64,956 nonempty green-source polygons;
+**25.52%** of total source-route length lies geometrically inside them. It is
+not a measure of green-area drainage, infiltration, sewer capacity or clogging.
+The former 2,175-polygon display subset is not the partition mask.
+The Pluvial tab offers categorical evidence review alongside the original
+analyst-defined terrain screening and infrastructure overlap. Daily rainfall is
+a separate observed-product context layer; it does not calibrate or alter P/C/S
+scores. There is no validated event
 flood model, pipe invert, capacity or connectivity.
 The source dates do not establish current field conditions. Native 1 m spacing
 does not establish centimetre vertical accuracy.
@@ -269,10 +280,72 @@ loopback; the optional public basemap/font
 assets are fetched by the browser. Choose **No external basemap** for a map
 without that external tile dependency.
 
-## Pluvial flood screening
+## Evidence review and legacy pluvial screening
 
-Open **Pluvial**, enable **Show terrain screening**, and start with the default
-depression-storage layer. Compare the experimental combined and
+Open **Pluvial**, choose **Refined evidence review · categorical** and enable
+**Show evidence review**. This is the default selected mode; the overlay itself
+starts off. The separate 5 m review raster combines the existing ponding P
+categories with actual historical footprints and potential cadastral footprint
+intersections. On eligible land, historical evidence takes category priority;
+building intersections distinguish potential exposure. Water, uncertain terrain
+and outside-coverage states remain explicit. These are inspection categories,
+not a numerical flood-risk scale, predicted damage or calibrated probability.
+The original P/C/S raster, native 1 m heights, terrain colours and exports remain
+unchanged. **Legacy depression storage potential**, **Legacy combined terrain**
+and **Legacy runoff concentration** remain independently selectable.
+
+**Past flooding** shows the 136 observed 2021 survey polygons, with mechanism and
+certainty filters and **Prioritise historical evidence visually**. Observation
+is documented; all individual polygon mechanisms currently remain unknown.
+Filtering does not invent a classification, and stronger historical styling does
+not add points to P/C/S or change the stored review raster. Saved filters that
+have no matching classification report that state rather than substituting data.
+The separate **Official assessment areas / reaches** overlay contains six
+municipal high/medium/low polygons and 23 draft PFRA context features published
+in 2026: 19 river-assessment lines and four schematic city/reservoir identifiers.
+Supplier levels remain ordinal labels. These prospective assessment features
+are not the 136 observed flood footprints, event locations or buffered flood
+extents, and do not silently become numeric scores.
+
+At the user's request, input dates are treated as compatible for this combined
+review scenario. Source dates, unknown currency and spatial gaps remain visible.
+This assumption does not expand rainfall coverage: final/corrected fine products
+end at latitude 42.760000, south of the 2021 survey polygons, while the wider raw
+radar has its own valid footprint and coarser grid. Rainfall remains supplemental,
+off by default and at 30% opacity when enabled. A daily total does not provide
+short-duration intensity or prove that the 2025 rain caused 2021 flooding.
+
+Sewer proximity, line overlap and point density identify mapped inventory to
+inspect; they establish neither operating capacity nor current clogging. The
+official register separately reports sewer surcharge/garage entry and
+river-outfall backwater at textual locations. Generic restriction codes can
+refer to rivers or sewers; no precise incident geometry or blockage probability
+is inferred. Green polygons supply geometric context, without an assumed
+infiltration benefit. See [actual-data refinement findings](docs/INDEX_REFINEMENT_ANALYSIS.md)
+and [mechanism/source review](docs/FLOOD_MECHANISMS_AND_REFINEMENT.md).
+
+After restoring the verified terrain-score raster, water mask, complete AGKK
+index and the 136 validated historical polygons with matching metadata, run:
+
+```text
+python scripts/acquire_flood_assessment.py
+python scripts/prepare_review_priority.py
+```
+
+Both commands use application-relative paths and take no command-line flags.
+The first verifies/reuses preserved public-source downloads or restores the
+matching assessment snapshot, retaining raw/native geometry, a validated
+full-precision copy and a separate 1 m simplified browser copy. It refuses a
+changed download when a preserved checksum receipt exists. The second reads the
+real terrain/water/history/cadastral prerequisites and creates only the separate
+categorical derivative and provenance. A fresh Git checkout needs these excluded
+local data restored first; metadata alone does not supply them. Source licensing
+and publication limits remain in the source guides.
+
+## Legacy terrain screening
+
+Open **Pluvial**, select **Legacy depression storage potential** and enable
+**Show terrain screening**. Compare the experimental combined and
 runoff-concentration layers. Click a location for its real native
 1 m height, 5 m factor values and relative scores. The index stays fixed when
 elevation colours are fitted to a view. Grey means uncertain terrain; transparent
@@ -364,8 +437,9 @@ The real city-window contributing-area raster contains pronounced diagonal and
 parallel bands. The experimental concentration rule amplifies those D8/faceted
 terrain patterns; in the inspected window, over 97% of combined scores >=85
 occur at cells with zero depression depth. These are not verified physical
-pluvial flood hotspots. The app therefore defaults to geometric depression
-potential and marks both flow-based modes experimental, with a visible warning.
+pluvial flood hotspots. The categorical review uses the ponding pathway as its
+terrain ingredient; both legacy flow-based modes remain experimental, with a
+visible warning.
 See `docs/PLUVIAL_ROUTING_LIMITATIONS.md` and its reproducible diagnostic receipt.
 The original raster has not been blurred or altered to hide the patterns.
 Alternative flow-routing methods and independent survey/event observations are
@@ -391,8 +465,10 @@ Compact display tiles retain a provenance link to the original source batch;
 inspection restores all original attributes and verifies the batch checksum and
 identifier join. Downloads retain full-precision geometry. There are no measured
 above-ground heights in the app contract, so floor counts are preserved without
-invented extrusion heights. These outlines are visual context and do not alter
-terrain, rainfall, water exclusions, pluvial scores or exposure calculations.
+invented extrusion heights. These outlines leave terrain, rainfall, water
+exclusions, legacy P/C/S and legacy exposure calculations unchanged. Their actual
+footprints also identify potential cell overlap in the new review categories;
+this does not establish building damage, thresholds or hydraulic barriers.
 
 The service's survey date and synchronization with operational KAIS are not
 established. Complete retrieval of its queried object IDs does not prove current
@@ -482,7 +558,9 @@ The source does not classify flood mechanism per polygon, and the associated
 report discusses river-associated rainfall flooding. These are not verified
 purely pluvial footprints or complete citywide coverage. Clicking a polygon shows
 its source ID and archive context alongside the unchanged native elevation and
-terrain scores. Displaying the survey does not recalibrate the model or change
-terrain, open-water exclusions or exposure calculations.
+terrain scores. Displaying or filtering the survey does not recalibrate the
+model or change terrain, open-water exclusions or legacy exposure calculations.
+Its actual footprint also contributes to the separately prepared categorical
+review layer described above.
 
 

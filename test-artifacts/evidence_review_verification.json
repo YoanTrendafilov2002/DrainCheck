@@ -1,0 +1,355 @@
+{
+  "verified_utc": "2026-10-25T09:34:23.152045+00:00",
+  "status": "PASS",
+  "application_version": "1.7.0",
+  "scope": "v1.7 actual-data categorical review, source-based mechanism evidence, official assessment overlays, all-green display and drainage context",
+  "automated_tests": {
+    "python": 214,
+    "javascript": 28,
+    "total": 242,
+    "failed": 0,
+    "python_full_suite": "214 passed in72.93s; two existing warnings; test-results.xml",
+    "post_text_fix_targeted_suite": "12 refinement API tests passed in6.26s, including canonical scenario-tag text identity",
+    "javascript_run": "28 passed; includes actual MapLibre style validation and filter-expression evaluation"
+  },
+  "production_build": "PASS: TypeScript, Vite and static gzip; 1749 modules; original1949852bytes, gzip531715bytes",
+  "remaining_build_notice": "Main MapLibre-related JavaScript chunk exceeds500kB; compression does not remove parse cost",
+  "scenario_assumption": "At the user’s request, the available datasets are treated as compatible for a combined review scenario. Actual source dates, spatial gaps and unknown currency remain recorded. This does not establish that the 2025 rainfall caused the 2021 mapped flooding or calibrate forecast skill.",
+  "review_raster": {
+    "revision": "853d77c47901ec54",
+    "output_file": "data/derived/review_priority_5m.tif",
+    "output_sha256": "6da518c22b2dd002c153532b270aaa572ccb088dc7b0c09794ddf4d84527b64c",
+    "grid": {
+      "crs": "EPSG:7801",
+      "shape": [
+        10869,
+        10345
+      ],
+      "transform": [
+        5,
+        0,
+        299392,
+        0,
+        -5,
+        4753611
+      ],
+      "nodata": 255
+    },
+    "counts": {
+      "all_cells": 112439805,
+      "eligible_land_cells": 51682623,
+      "known_terrain_cells": 53682786,
+      "mapped_water_cells": 1519688,
+      "uncertain_cells": 480475,
+      "outside_cells": 58757019,
+      "potential_footprint_cells_known_terrain": 2677243,
+      "potential_footprint_cells_eligible_land": 2675795,
+      "historical_union_cell_centres": 76343,
+      "historical_union_known_terrain_cells": 76262,
+      "queried_distinct_cadastral_source_records": 274633,
+      "query_rows_including_repeated_window_candidates": 290395
+    },
+    "source_revisions": {
+      "terrain": "f42644a668cdc14d",
+      "cadastre": "568d80b32ddb42f2",
+      "rainfall_context": "88036868558c20ce",
+      "water": "ee06795221a5005e",
+      "history": "7fbfbcee6ee933f4",
+      "pluvial": "2a0d5f6899cd036c"
+    },
+    "formula_details": {
+      "ordered_rules": [
+        "Outside known DTM =>255",
+        "Mapped qualifying water on known terrain=>253",
+        "Known nonwater terrain with boundary influence or invalid required P/C/S factor=>254",
+        "Eligible historical footprint plus potential cadastral footprint=>5",
+        "Eligible historical footprint=>4",
+        "Eligible P>=70 plus potential cadastral footprint=>3",
+        "Eligible P>=70=>2",
+        "Eligible50<=P<70=>1",
+        "Other eligible land=>0"
+      ],
+      "historical": "Union of actual136 display polygons; no overlap double-count; pixel centres",
+      "building": "Actual AGKK geometry queried via read-only RTree, reprojected into existing EPSG7801 cells; all_touched=True; source record != unique physical building",
+      "thresholds": "Existing exploratory P thresholds50 and70 reused; no fitted weights or predictive validation",
+      "unchanged": "Original P/C/S raster, ground heights and source values remain unchanged; historical evidence changes this separate display class only"
+    }
+  },
+  "source_integrity": "Full-grid tests and SHA checks preserve original P/C/S, DTM, water, history, cadastre and rainfall; descriptive-text corrections leave derived raster bytes/revision unchanged",
+  "official_assessment": {
+    "revision": "8641e0276fb3d96b",
+    "zones": 6,
+    "context": 23,
+    "validation_receipt": "flood_assessment_source_validation.json",
+    "browser_geometry": "Separate1m display-only simplification; full-precision source geometry used for containment"
+  },
+  "historical_evidence": {
+    "observed_polygons": 136,
+    "individual_mechanisms": "unknown; observation documented",
+    "register_rows": 19,
+    "unique_event_ids": 15,
+    "generic_restricted_conveyance_rows": 9,
+    "classification_rule": "Authority-reported source type retained; generic restriction does not establish sewer clogging; unlocated register rows never become invented incident points"
+  },
+  "green_route_logic": {
+    "nonempty_green_polygons": 64956,
+    "raw_green_records": 64962,
+    "default_display": "all",
+    "original_optional_route_subset": 2175,
+    "unique_routes": 717,
+    "inside_route_count": 543,
+    "outside_route_count": 670,
+    "routes_in_both": 496,
+    "inside_length_m": 137858.698851,
+    "outside_length_m": 402304.31468,
+    "whole_length_m": 540163.013503,
+    "inside_length_percent": 25.5217,
+    "interpretation": "Full-union geometric partition; counts overlap, lengths partition; not permeability, capacity or protection"
+  },
+  "browser_checks": {
+    "main_server": "http://127.0.0.1:8040",
+    "current_user_camera_preserved": true,
+    "main_view_green_all_and_review_enabled": true,
+    "rainfall_remains_off_at_30_percent": true,
+    "legacy_modes_selectable": true,
+    "source_route_counts_unchanged": true,
+    "historical_unknown_filters_and_priority": true,
+    "assessment_independently_switchable": true,
+    "actual_building_history_cell": {
+      "longitude": 23.365737476220897,
+      "latitude": 42.81349991924831,
+      "status": "ok",
+      "revision": "853d77c47901ec54",
+      "analysis_resolution_m": 5,
+      "row": 1881,
+      "column": 5216,
+      "review_class": 5,
+      "review_label": "Historical footprint + potential building footprint",
+      "legacy_ponding_score": 79.60526275634766,
+      "history_intersection": true,
+      "historical_polygon_ids": [
+        "19"
+      ],
+      "history_location_basis": "5 m analysis cell centre",
+      "potential_building_intersection": true,
+      "drainage_context": {
+        "available": true,
+        "search_radius_m": 100,
+        "route_counts": {
+          "existing": 0,
+          "planned": 0,
+          "open": 0
+        },
+        "route_length_m_in_radius": {
+          "existing": 0.0,
+          "planned": 0.0,
+          "open": 0.0
+        },
+        "point_counts": {
+          "sewerage": 0,
+          "collectors": 0
+        },
+        "mapped_green_cover_at_point": false,
+        "potential_building_intersection": true,
+        "cadastral_source_ids_in_cell": [
+          "2894415"
+        ],
+        "clogging_status": "not_assessed",
+        "review_flags": [],
+        "summary": "Within 100 m: 0 existing, 0 planned and 0 open-channel source routes; 0 sewerage and 0 collector points. Capacity and clogging are not assessed.",
+        "interpretation": "Counts and lengths are source geometry within 100 m, not connected pipe capacity or blockage. Planned routes remain separate. Green cover is a mapped polygon, not infiltration."
+      },
+      "official_assessment": {
+        "available": true,
+        "zones": [
+          {
+            "objectid": 2,
+            "st_area(shape)": 25279082.685180556,
+            "st_length(shape)": 603417.6779496627,
+            "source_id": "sofiaplan-306-2",
+            "evidence_kind": "official_assessment",
+            "source_label": "Sofiaplan / Sofia Municipality — official flood-likelihood assessment zones",
+            "source_url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/306",
+            "source_layer": 306,
+            "source_feature_id": "2",
+            "assessment_level": "high",
+            "assessment_level_original": "Зони с висока вероятност за наводнения",
+            "mechanism": "unknown",
+            "mechanism_confidence": "unknown",
+            "mechanism_basis": "The source geometry fields supply no flood-source or event mechanism; the companion map is river-associated context.",
+            "geometry_role": "assessment_zone",
+            "date_label": "Municipal atlas assessment; underlying model/reference date not supplied; shown with the 2021 survey in the municipal study",
+            "observed_extent": false,
+            "scenario_temporal_assumption": "time-compatible",
+            "geometry_repaired": true,
+            "geometry_repair_method": "GEOS make_valid in source WGS84; all polygon components retained; no simplification/buffer"
+          },
+          {
+            "objectid": 1,
+            "st_area(shape)": 33822689.24928437,
+            "st_length(shape)": 625367.5474612252,
+            "source_id": "sofiaplan-307-1",
+            "evidence_kind": "official_assessment",
+            "source_label": "Sofiaplan / Sofia Municipality — official flood-likelihood assessment zones",
+            "source_url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/307",
+            "source_layer": 307,
+            "source_feature_id": "1",
+            "assessment_level": "medium",
+            "assessment_level_original": "Зони със средна вероятност за наводнения",
+            "mechanism": "unknown",
+            "mechanism_confidence": "unknown",
+            "mechanism_basis": "The source geometry fields supply no flood-source or event mechanism; the companion map is river-associated context.",
+            "geometry_role": "assessment_zone",
+            "date_label": "Municipal atlas assessment; underlying model/reference date not supplied; shown with the 2021 survey in the municipal study",
+            "observed_extent": false,
+            "scenario_temporal_assumption": "time-compatible",
+            "geometry_repaired": true,
+            "geometry_repair_method": "GEOS make_valid in source WGS84; all polygon components retained; no simplification/buffer"
+          },
+          {
+            "objectid": 2,
+            "st_area(shape)": 57145217.55923012,
+            "st_length(shape)": 772006.2119781732,
+            "source_id": "sofiaplan-308-2",
+            "evidence_kind": "official_assessment",
+            "source_label": "Sofiaplan / Sofia Municipality — official flood-likelihood assessment zones",
+            "source_url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/308",
+            "source_layer": 308,
+            "source_feature_id": "2",
+            "assessment_level": "low",
+            "assessment_level_original": "Зони с ниска вероятност за наводнения",
+            "mechanism": "unknown",
+            "mechanism_confidence": "unknown",
+            "mechanism_basis": "The source geometry fields supply no flood-source or event mechanism; the companion map is river-associated context.",
+            "geometry_role": "assessment_zone",
+            "date_label": "Municipal atlas assessment; underlying model/reference date not supplied; shown with the 2021 survey in the municipal study",
+            "observed_extent": false,
+            "scenario_temporal_assumption": "time-compatible",
+            "geometry_repaired": true,
+            "geometry_repair_method": "GEOS make_valid in source WGS84; all polygon components retained; no simplification/buffer"
+          }
+        ],
+        "interpretation": "Exact full-precision assessment-zone containment. Reaches and schematic identifiers have no invented buffer or flood extent."
+      },
+      "source_dates": {
+        "terrain": "Source filename2024; measurement date/vertical accuracy unverified",
+        "historical": "2021; January/February discrepancy; no per-feature timestamp",
+        "cadastre": "Source date unknown; snapshot retrieved25Oct2026",
+        "rainfall": "27June2025 Europe/Sofia daily totals",
+        "green": "Supplied municipal2020-labelled source",
+        "sewer": "Supplied municipal2009-labelled route source; some planned routes"
+      },
+      "scenario_assumption": "At the user’s request, the available datasets are treated as compatible for a combined review scenario. Actual source dates, spatial gaps and unknown currency remain recorded. This does not establish that the 2025 rainfall caused the 2021 mapped flooding or calibrate forecast skill.",
+      "interpretation": "Rule-based review category. Class numbers are identifiers, not probabilities, flood depths or damage scores."
+    },
+    "actual_drainage_context_cell": {
+      "longitude": 23.267111,
+      "latitude": 42.684845,
+      "status": "ok",
+      "revision": "853d77c47901ec54",
+      "analysis_resolution_m": 5,
+      "row": 4697,
+      "column": 3528,
+      "review_class": 0,
+      "review_label": "Lower ponding terrain signal",
+      "legacy_ponding_score": 0.0,
+      "history_intersection": false,
+      "historical_polygon_ids": [],
+      "history_location_basis": "5 m analysis cell centre",
+      "potential_building_intersection": false,
+      "drainage_context": {
+        "available": true,
+        "search_radius_m": 100,
+        "route_counts": {
+          "existing": 1,
+          "planned": 0,
+          "open": 0
+        },
+        "route_length_m_in_radius": {
+          "existing": 128.7136915942318,
+          "planned": 0.0,
+          "open": 0.0
+        },
+        "point_counts": {
+          "sewerage": 26,
+          "collectors": 40
+        },
+        "mapped_green_cover_at_point": true,
+        "potential_building_intersection": false,
+        "cadastral_source_ids_in_cell": [],
+        "clogging_status": "not_assessed",
+        "review_flags": [],
+        "summary": "Within 100 m: 1 existing, 0 planned and 0 open-channel source routes; 26 sewerage and 40 collector points. Capacity and clogging are not assessed.",
+        "interpretation": "Counts and lengths are source geometry within 100 m, not connected pipe capacity or blockage. Planned routes remain separate. Green cover is a mapped polygon, not infiltration."
+      },
+      "official_assessment": {
+        "available": true,
+        "zones": [],
+        "interpretation": "Exact full-precision assessment-zone containment. Reaches and schematic identifiers have no invented buffer or flood extent."
+      },
+      "source_dates": {
+        "terrain": "Source filename2024; measurement date/vertical accuracy unverified",
+        "historical": "2021; January/February discrepancy; no per-feature timestamp",
+        "cadastre": "Source date unknown; snapshot retrieved25Oct2026",
+        "rainfall": "27June2025 Europe/Sofia daily totals",
+        "green": "Supplied municipal2020-labelled source",
+        "sewer": "Supplied municipal2009-labelled route source; some planned routes"
+      },
+      "scenario_assumption": "At the user’s request, the available datasets are treated as compatible for a combined review scenario. Actual source dates, spatial gaps and unknown currency remain recorded. This does not establish that the 2025 rainfall caused the 2021 mapped flooding or calibrate forecast skill.",
+      "interpretation": "Rule-based review category. Class numbers are identifiers, not probabilities, flood depths or damage scores."
+    },
+    "final_build_console_errors": [],
+    "fixed_browser_failure": "Initial historical all/all layers omit undefined filter; checked by actual MapLibre validator and final browser rendering",
+    "screenshots": [
+      "evidence-review.png",
+      "flood-assessment.png",
+      "all-green-drainage.png"
+    ],
+    "screenshot_method": "Actual browser compositor capture; not synthetic imagery"
+  },
+  "clogging_analysis": {
+    "available": false,
+    "status": "Not assessed",
+    "reason": "Historical reports describe restricted conveyance in some events, but no current, asset-located blockage inspections, pipe connectivity, diameters, inverts or maintenance history are supplied. Proximity flags identify field-review candidates, not measured clogging."
+  },
+  "logical_links": [
+    {
+      "data": "5 m terrain",
+      "use": "Ponding signal at existing P=50/70 display cutoffs; C remains an experimental diagnostic."
+    },
+    {
+      "data": "Mapped historical flooding",
+      "use": "Prior-observation review category at cell centres, regardless of overlay visibility; unknown flood mechanism remains unknown."
+    },
+    {
+      "data": "Cadastral buildings",
+      "use": "Potential 5 m cell–footprint intersection; exposure context, no measured vulnerability or whole-cell imperviousness."
+    },
+    {
+      "data": "Rainfall",
+      "use": "Time-compatible scenario context by user assumption; native daily totals and coverage retained. No storm intensity or drainage load is invented."
+    },
+    {
+      "data": "Sewer routes and points",
+      "use": "Actual mapped proximity/exposure only. Planned routes do not imply functioning drainage. No capacity, flow or clogging calculation."
+    },
+    {
+      "data": "All mapped green areas",
+      "use": "All 64,956 nonempty polygons partition routes. Display choice is independent; polygons do not measure permeability."
+    },
+    {
+      "data": "Official assessment geometry",
+      "use": "Independent supplier-level overlay and full-precision containment; not an invented pixel flood probability."
+    }
+  ],
+  "limitations": [
+    "Categorical inspection priority; no calibrated flood probability, depth, return period or damage.",
+    "Historical footprint absence does not prove no flooding; individual survey mechanisms remain unknown.",
+    "Temporal compatibility is a scenario assumption; spatial coverage and native rainfall totals remain real.",
+    "Daily totals do not establish short-duration intensity or sewer capacity exceedance.",
+    "Cadastral cell intersection is potential exposure, not whole-cell imperviousness or exposed building area.",
+    "No current, asset-located blockage survey or hydraulic pipe network is available.",
+    "Experimental concentration retains D8/facet limitations and is not added to the new priority rule."
+  ],
+  "previous_receipts": "Earlier source, rainfall, cadastral and UI receipts retain their original version/test scope."
+}
