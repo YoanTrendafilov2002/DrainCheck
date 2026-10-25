@@ -24,6 +24,17 @@ through a new temporary HTTPS link, use **Run_Cloudflare_Demo.cmd**.
 See the [installation guide](docs/INSTALLATION.md) for another computer and the
 [demo guide](docs/CLOUDFLARE_TUNNEL_DEMO.md) for sharing and stopping the tunnel.
 
+## How DrainCheck works
+
+Follow the terrain-screening, flood-evidence review and rainfall/pipe-blockage
+scenario paths in the diagram.
+
+![How DrainCheck works: input data, terrain screening, evidence review and rainfall/pipe-blockage scenarios](docs/DrainCheck_System_Schematic.png)
+
+Open the [full-size image](docs/DrainCheck_System_Schematic.png),
+[PDF](docs/DrainCheck_System_Schematic.pdf) or
+[editable SVG](docs/DrainCheck_System_Schematic.svg).
+
 ## Start with the map
 
 1. Open **Layers** and choose **Flood focus** to show the ponding heatmap over
@@ -199,5 +210,3 @@ not establish safety.
 For equations, data definitions, worked examples and model limits, read the
 **[risk calculation guide](docs/RISK_CALCULATION_GUIDE.md)** or its
 **[PDF edition](docs/DrainCheck_Risk_Calculation_Guide.pdf)**.
-The **[system schematic](docs/DrainCheck_System_Schematic.png)** provides a
-one-page overview of the terrain, evidence-review and rainfall-scenario paths.
