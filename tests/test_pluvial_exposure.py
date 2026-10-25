@@ -55,7 +55,7 @@ def test_mode_choice_changes_actual_overlap_without_changing_the_population():
         assert sum(c['cells'] for c in terrain['classes'][:4])==terrain['eligible_cells']<53187833
         assert terrain['uncertain_cells']<=494953
         assert terrain['water_excluded_cells']>0
-        assert terrain['eligible_cells']+terrain['uncertain_cells']+terrain['no_terrain_data_cells']+terrain['water_excluded_cells']==terrain['terrain_cells']
+        assert terrain['eligible_cells']+terrain['uncertain_cells']+terrain['no_terrain_data_cells']+terrain['water_excluded_cells']+terrain['screening_policy_excluded_cells']==terrain['terrain_cells']
         assert sum(c['area_km2'] for c in terrain['classes'])==pytest.approx(terrain['terrain_cells']*25/1e6)
 
 def test_sampled_exposure_export_matches_real_base_grid_and_source_rows():

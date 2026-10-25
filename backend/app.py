@@ -63,7 +63,7 @@ CONFIG=json.loads((ROOT/'config/map_config.json').read_text(encoding='utf-8'))
 PROJECT=Transformer.from_crs(4326,3857,always_xy=True).transform
 UNPROJECT=Transformer.from_crs(3857,4326,always_xy=True)
 app=FastAPI(title='Sofia Terrain, Rainfall & Pluvial Screening',version='1.9.1')
-RENDERER_REVISION='fast-map-'+hashlib.sha256(b''.join((ROOT/'backend'/name).read_bytes() for name in ['app.py','vector.py','terrain.py','pluvial.py','open_water.py','scale.py','http_cache.py','tile_cache.py','context_layers.py','rainfall.py','rainfall_routes.py','cadastre_routes.py','flood_assessment.py','refinement.py','refinement_routes.py','green_absorption.py','river_context.py','clogging.py','clogging_routes.py','cloud_state.py'])+(ROOT/'config/map_config.json').read_bytes()+((CACHE/'whole_scale.json').read_bytes() if (CACHE/'whole_scale.json').is_file() else b'')+package_version('mapbox-vector-tile').encode()).hexdigest()[:12]
+RENDERER_REVISION='fast-map-'+hashlib.sha256(b''.join((ROOT/'backend'/name).read_bytes() for name in ['app.py','vector.py','terrain.py','pluvial.py','open_water.py','screening_exclusions.py','scale.py','http_cache.py','tile_cache.py','context_layers.py','rainfall.py','rainfall_routes.py','cadastre_routes.py','flood_assessment.py','refinement.py','refinement_routes.py','green_absorption.py','river_context.py','clogging.py','clogging_routes.py','cloud_state.py'])+(ROOT/'config/map_config.json').read_bytes()+((CACHE/'whole_scale.json').read_bytes() if (CACHE/'whole_scale.json').is_file() else b'')+package_version('mapbox-vector-tile').encode()).hexdigest()[:12]
 TILE_CACHE=get_tile_cache(str(CACHE/'rendered_tiles'))
 METRICS=PerformanceMetrics()
 app.add_middleware(RequestTiming,metrics=METRICS)
@@ -336,7 +336,7 @@ def pluvial_meta():
         result['method'].update(description='Relative terrain screening on a 5 m grid. Analyst-defined ranking, unvalidated against Sofia flood observations. Reference covers the whole available municipal DTM, including mountains, rather than only urban Sofia.',
             formula='P = 100 × rank of positive depression fill depth (zero where no depression); C = 100 × sqrt(rank(contributing area) × [1 − rank(slope)]); S = max(P, C). Ranks are fractions interpolated from 201 quantiles of a fixed 20 m systematic sample of 5 m cells.',
             limits=['Fill depth is geometric storage to spill, not event water depth. A deeper depression can store more water before spilling; its rank does not prove higher flood likelihood.',
-                    'Mapped open-water footprints are excluded automatically. Unmapped channels and riverbank land may still score strongly; this does not distinguish all pluvial and fluvial flooding.',
+                    'Mapped open water, river-channel footprints and stadium footprints are excluded automatically. River/stadium exclusions are a user-defined screening policy, not proof of safety; unmapped channels and adjacent land may still score strongly.',
                     'No rainfall, infiltration, building barriers, drainage capacity or independently validated flood probability is included.'])
     return result
 
@@ -363,7 +363,8 @@ def pluvial_sample(lon:float=Query(ge=-180,le=180),lat:float=Query(ge=-85,le=85)
     known=factors.get('mean_ground_elevation_m') is not None
     water_excluded=result['status']=='excluded_open_water'
     green_excluded=result['status']=='excluded_green_absorption'
-    uncertain=not (water_excluded or green_excluded) and (result['status']=='boundary-excluded' or (known and result.get('score') is None))
+    policy_excluded=result['status']=='excluded_user_screening'
+    uncertain=not (water_excluded or green_excluded or policy_excluded) and (result['status']=='boundary-excluded' or (known and result.get('score') is None))
     return {**result,'river_context':river_context.sample(lon,lat,river_proximity_m),'status':'uncertain' if uncertain else result['status'],
             'class_label':result.get('class'),
             'ponding_score':factors.get('depression_percentile'),
@@ -372,7 +373,10 @@ def pluvial_sample(lon:float=Query(ge=-180,le=180),lat:float=Query(ge=-85,le=85)
             'slope_degrees':factors.get('slope_degrees'),
             'contributing_area_m2':factors.get('upstream_contributing_area_m2'),
             'boundary_influence':factors.get('possible_missing_upstream_terrain')==1,
-            'interpretation':'Mapped green area is assumed to absorb all rainfall and excluded for this scenario.' if green_excluded else 'Existing mapped water is excluded from land pluvial screening; river flooding is not assessed.' if water_excluded else 'Relative terrain signal, not flood probability or event flood depth.'}
+            'interpretation':result.get('message','Mapped river/stadium footprint is excluded by user policy.') if policy_excluded else 'Mapped green area is assumed to absorb all rainfall and excluded for this scenario.' if green_excluded else 'Existing mapped water is excluded from land pluvial screening; river flooding is not assessed.' if water_excluded else 'Relative terrain signal, not flood probability or event flood depth.'}
+
+@app.get('/api/pluvial/screening-exclusions/meta')
+def screening_exclusions_meta():return pluvial.exclusions.meta()
 
 @app.get('/api/pluvial/exposure')
 def pluvial_exposure(mode:Literal['ponding','combined','concentration']='ponding'):

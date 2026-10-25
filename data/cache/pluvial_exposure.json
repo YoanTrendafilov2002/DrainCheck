@@ -1,8 +1,157 @@
 {
   "dataset_revision": "af34c6d53d5b26fd",
-  "pluvial_revision": "2a0d5f6899cd036c",
+  "pluvial_revision": "0a7a8ca315510679",
   "terrain_revision": "f42644a668cdc14d",
   "open_water_revision": "ee06795221a5005e",
+  "screening_exclusions_revision": "bfdf087d674d5c81",
+  "screening_exclusions": {
+    "available": true,
+    "enabled": true,
+    "method": "user-requested-mapped-channel-stadium-suppression-v1",
+    "revision": "bfdf087d674d5c81",
+    "sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd",
+    "file": "data/cache/screening_exclusions_5m.tif",
+    "exclusions_are_policy": true,
+    "retrieved": "2026-10-25T12:50:19.871616+00:00",
+    "grid": {
+      "crs": "EPSG:7801",
+      "width": 10345,
+      "height": 10869,
+      "shape": [
+        10869,
+        10345
+      ],
+      "transform": [
+        5.0,
+        0.0,
+        299392.0,
+        0.0,
+        -5.0,
+        4753611.0
+      ],
+      "dtype": "uint8",
+      "count": 1,
+      "nodata": null,
+      "values": {
+        "0": "not suppressed",
+        "1": "mapped channel",
+        "2": "stadium",
+        "3": "both"
+      }
+    },
+    "counts": {
+      "river_channel_cells": 55770,
+      "stadium_cells": 20291,
+      "union_cells": 76061,
+      "overlap_cells": 0,
+      "channel_polygons": 52,
+      "stadium_polygons": 40,
+      "outside_valid_terrain_removed": 20890
+    },
+    "source": {
+      "provider": "OpenStreetMap contributors",
+      "license": "ODbL1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "license_url": "https://www.openstreetmap.org/copyright",
+      "water_acquisition": {
+        "endpoint": "https://overpass-api.de/api/interpreter",
+        "download_utc": "2026-10-25T07:31:52.542206+00:00",
+        "raw_file": "osm_open_water_20261025T073109Z.json",
+        "query_file": "osm_open_water_20261025T073109Z.overpass",
+        "bbox": [
+          23.033601825086354,
+          42.392740683952645,
+          23.700971220841907,
+          42.913568431160385
+        ],
+        "elements": 586,
+        "osm_base_timestamp": "2026-10-25T07:30:02Z",
+        "attempts": [],
+        "raw_sha256": "fac32b04617a843356983496bc772970f7a62462a0a8526ecaeb9cf803a126c6",
+        "query_sha256": "2073985b485bdf675e6d21df0640de901089b2bc4e8ce818060ffce870297d75"
+      },
+      "stadium_acquisition": {
+        "endpoint": "https://overpass-api.de/api/interpreter",
+        "download_utc": "2026-10-25T12:50:19.871616+00:00",
+        "raw_file": "screening_exclusions_stadium_20261025T124953596329Z.json",
+        "raw_sha256": "e77659f52886ba58b72b83f6bf0532b133bccbe1aa83f1459a8e2a8fb3ade18c",
+        "query_file": "screening_exclusions_stadium_20261025T124953596329Z.overpass",
+        "query_sha256": "f20ecbecfe7e31707d0e0fa0f720e06299702340f79a56a22f9ecdf14a5dbcf2",
+        "bbox": [
+          23.033601825086354,
+          42.392740683952645,
+          23.700971220841907,
+          42.913568431160385
+        ],
+        "elements": 40,
+        "osm_base_timestamp": "2026-10-25T12:49:03Z",
+        "attempts": []
+      },
+      "geojson_file": "data/reference/screening_exclusions.geojson",
+      "geojson_sha256": "3a0d7bbd116d8dcf4c72276b41cda96b78c9ec4f1bd507039bb0b3704189c249"
+    },
+    "policy": "Suppress mapped channel and whole stadium footprints in derived risk screening and scenario displays. Includes mapped intermittent channels. Original terrain and historical observations are retained.",
+    "limitations": [
+      "This is a user-requested screening exclusion, not evidence of safety or absence of flood hazard.",
+      "OSM community geometry may be incomplete, outdated or misclassified. Whole stadium footprint is used, not only the pitch.",
+      "Channels use explicit water/riverbank polygons, including intermittent natural-water polygons without a water subtype. No river-line buffer or inferred floodplain exclusion is applied.",
+      "Every 5 m cell intersecting an actual footprint is suppressed (all_touched=True), including partial edge cells. This is grid-cell coverage, not a river/floodplain buffer.",
+      "Missing stadium tags or river polygons remain gaps. River flooding is not simulated by suppressing channel pixels."
+    ],
+    "control_points": [
+      {
+        "name": "Mapped Perlovska channel",
+        "osm_id": "way/1234109017",
+        "longitude": 23.3382061331869,
+        "latitude": 42.68704393583841,
+        "row": 4678,
+        "column": 4694,
+        "mask_value": 1,
+        "expected": 1,
+        "point_is_actual_pixel_center_inside_source_polygon": true
+      },
+      {
+        "name": "Mapped Perlovska channel",
+        "osm_id": "way/1341771831",
+        "longitude": 23.346808322775054,
+        "latitude": 42.69598629654243,
+        "row": 4483,
+        "column": 4840,
+        "mask_value": 1,
+        "expected": 1,
+        "point_is_actual_pixel_center_inside_source_polygon": true
+      },
+      {
+        "name": "Whole Vasil Levski stadium",
+        "osm_id": "way/341968882",
+        "longitude": 23.335406718412337,
+        "latitude": 42.68856704752101,
+        "row": 4643,
+        "column": 4649,
+        "mask_value": 2,
+        "expected": 2,
+        "point_is_actual_pixel_center_inside_source_polygon": true
+      },
+      {
+        "name": "Confirmed Vasil Levski pitch centroid",
+        "longitude": 23.3352531692,
+        "latitude": 42.6875642953,
+        "row": 4665,
+        "column": 4646,
+        "mask_value": 2,
+        "expected": 2
+      }
+    ],
+    "rejected_geometry": [],
+    "verification": {
+      "exact_grid_type_nodata_and_pixels_checked": true,
+      "mandatory_real_controls_passed": true,
+      "original_water_source_sha256_unchanged": true,
+      "pluvial_source_read_only": true,
+      "elapsed_seconds": 3.31
+    },
+    "interpretation": "Mapped river channels and stadium footprints are omitted from screening and scenarios at the user\u2019s request. Exclusion does not mean safe from flooding; original terrain and historical observations remain unchanged."
+  },
   "water_exclusion": {
     "enabled": true,
     "available": true,
@@ -23,10 +172,12 @@
     "sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030"
   },
   "land_raster_export": {
-    "pluvial_revision": "2a0d5f6899cd036c",
+    "pluvial_revision": "0a7a8ca315510679",
     "terrain_revision": "f42644a668cdc14d",
     "open_water_revision": "ee06795221a5005e",
-    "output_sha256": "7d26ce0684b5d447e936d1082ba3bf83e069dc3c0ad875d19d914cd6ad3a7d23",
+    "output_sha256": "4b5254e53b45b07929f8ace6f39d323c95eed87e81a4334fa93a0056f9303a2e",
+    "screening_exclusions_revision": "bfdf087d674d5c81",
+    "screening_exclusions_sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd",
     "source_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
     "open_water_sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030",
     "grid": {
@@ -49,13 +200,15 @@
       "ponding_score_0_100",
       "concentration_score_0_100",
       "combined_score_0_100",
-      "open_water_excluded"
+      "open_water_excluded",
+      "user_screening_exclusion_flags"
     ],
     "nodata": -9999,
-    "policy": "Score bands equal original scores on non-water cells and NoData over mapped open water. Water flag is NoData outside known terrain; zero means not mapped open water, not verified safe/dry land.",
+    "policy": "Score bands equal original scores outside all exclusions and NoData over mapped water, channels and stadiums. Flags are NoData outside known terrain; zero is not a safety conclusion. Policy flags:1=river,2=stadium,3=both.",
     "verification": {
-      "all_land_score_pixels_identical": true,
+      "all_nonexcluded_land_score_pixels_identical": true,
       "all_water_score_pixels_nodata": true,
+      "all_policy_score_pixels_nodata": true,
       "all_flag_pixels_match": true
     }
   },
@@ -68,7 +221,8 @@
     "Strongest signal",
     "Uncertain terrain",
     "No terrain data",
-    "Excluded open water"
+    "Excluded open water",
+    "Excluded river channel / stadium"
   ],
   "thresholds": [
     50,
@@ -81,32 +235,36 @@
       "mode": "ponding",
       "by_class": {
         "Lower signal": {
-          "point_count": 320328,
-          "route_length_m": 523478.5976647383
+          "point_count": 319938,
+          "route_length_m": 520268.6910356627
         },
         "Raised": {
-          "point_count": 728,
-          "route_length_m": 6666.984062811483
+          "point_count": 715,
+          "route_length_m": 6588.4864422493865
         },
         "Higher signal": {
-          "point_count": 622,
-          "route_length_m": 6337.712234226786
+          "point_count": 601,
+          "route_length_m": 6256.553175992542
         },
         "Strongest signal": {
-          "point_count": 270,
-          "route_length_m": 2489.6537483373295
+          "point_count": 255,
+          "route_length_m": 2467.5334307340618
         },
         "Uncertain terrain": {
-          "point_count": 62,
-          "route_length_m": 510.3623370671934
+          "point_count": 46,
+          "route_length_m": 328.2190073055609
         },
         "No terrain data": {
           "point_count": 0,
           "route_length_m": 0.0
         },
         "Excluded open water": {
-          "point_count": 15,
-          "route_length_m": 679.703456033095
+          "point_count": 12,
+          "route_length_m": 409.73548358824934
+        },
+        "Excluded river channel / stadium": {
+          "point_count": 458,
+          "route_length_m": 3843.794927681647
         }
       },
       "categories": [
@@ -115,13 +273,14 @@
           "label": "Water supply",
           "count": 40994,
           "classes": {
-            "Lower signal": 40800,
+            "Lower signal": 40781,
             "Raised": 61,
             "Higher signal": 103,
             "Strongest signal": 22,
             "Uncertain terrain": 5,
             "No terrain data": 0,
-            "Excluded open water": 3
+            "Excluded open water": 3,
+            "Excluded river channel / stadium": 19
           }
         },
         {
@@ -129,13 +288,14 @@
           "label": "Sewerage",
           "count": 70790,
           "classes": {
-            "Lower signal": 70279,
+            "Lower signal": 70207,
             "Raised": 203,
-            "Higher signal": 165,
-            "Strongest signal": 115,
+            "Higher signal": 163,
+            "Strongest signal": 114,
             "Uncertain terrain": 20,
             "No terrain data": 0,
-            "Excluded open water": 8
+            "Excluded open water": 7,
+            "Excluded river channel / stadium": 76
           }
         },
         {
@@ -149,7 +309,8 @@
             "Strongest signal": 0,
             "Uncertain terrain": 0,
             "No terrain data": 0,
-            "Excluded open water": 0
+            "Excluded open water": 0,
+            "Excluded river channel / stadium": 0
           }
         },
         {
@@ -157,13 +318,14 @@
           "label": "Power network",
           "count": 116844,
           "classes": {
-            "Lower signal": 116194,
-            "Raised": 283,
-            "Higher signal": 245,
-            "Strongest signal": 99,
-            "Uncertain terrain": 22,
+            "Lower signal": 116005,
+            "Raised": 275,
+            "Higher signal": 233,
+            "Strongest signal": 89,
+            "Uncertain terrain": 12,
             "No terrain data": 0,
-            "Excluded open water": 1
+            "Excluded open water": 1,
+            "Excluded river channel / stadium": 229
           }
         },
         {
@@ -171,13 +333,14 @@
           "label": "Low-current network",
           "count": 81336,
           "classes": {
-            "Lower signal": 81032,
-            "Raised": 159,
-            "Higher signal": 93,
-            "Strongest signal": 34,
-            "Uncertain terrain": 15,
+            "Lower signal": 80926,
+            "Raised": 154,
+            "Higher signal": 86,
+            "Strongest signal": 30,
+            "Uncertain terrain": 9,
             "No terrain data": 0,
-            "Excluded open water": 3
+            "Excluded open water": 1,
+            "Excluded river channel / stadium": 130
           }
         },
         {
@@ -185,13 +348,14 @@
           "label": "District heating / steam",
           "count": 10928,
           "classes": {
-            "Lower signal": 10901,
+            "Lower signal": 10897,
             "Raised": 18,
             "Higher signal": 9,
             "Strongest signal": 0,
             "Uncertain terrain": 0,
             "No terrain data": 0,
-            "Excluded open water": 0
+            "Excluded open water": 0,
+            "Excluded river channel / stadium": 4
           }
         },
         {
@@ -205,7 +369,8 @@
             "Strongest signal": 0,
             "Uncertain terrain": 0,
             "No terrain data": 0,
-            "Excluded open water": 0
+            "Excluded open water": 0,
+            "Excluded river channel / stadium": 0
           }
         }
       ],
@@ -215,31 +380,34 @@
         "length_m": 540163.0135032141,
         "by_status": {
           "existing": {
-            "Lower signal": 312663.27601258195,
-            "Raised": 2876.4026482118284,
-            "Higher signal": 1831.3325146961574,
-            "Strongest signal": 539.8953554529428,
-            "Uncertain terrain": 241.80115449439685,
+            "Lower signal": 309714.40188165475,
+            "Raised": 2797.9050276497323,
+            "Higher signal": 1750.173456461913,
+            "Strongest signal": 517.7750378496754,
+            "Uncertain terrain": 120.9207526353093,
             "No terrain data": 0.0,
-            "Excluded open water": 155.79693053442688
+            "Excluded open water": 9.891072371457987,
+            "Excluded river channel / stadium": 3397.4373873489217
           },
           "planned": {
-            "Lower signal": 209186.00005348327,
+            "Lower signal": 208934.78101827478,
             "Raised": 3790.5814145996555,
             "Higher signal": 4506.379719530629,
             "Strongest signal": 1949.7583928843865,
-            "Uncertain terrain": 268.5611825727966,
+            "Uncertain terrain": 207.29825467025162,
             "No terrain data": 0.0,
-            "Excluded open water": 518.9997940287424
+            "Excluded open water": 399.84441121679134,
+            "Excluded river channel / stadium": 431.6373459229484
           },
           "open": {
-            "Lower signal": 1629.3215986730509,
+            "Lower signal": 1619.5081357331992,
             "Raised": 0.0,
             "Higher signal": 0.0,
             "Strongest signal": 0.0,
             "Uncertain terrain": 0.0,
             "No terrain data": 0.0,
-            "Excluded open water": 4.906731469925721
+            "Excluded open water": 0.0,
+            "Excluded river channel / stadium": 14.720194409777163
           }
         },
         "method": "Original WGS84 segment geodesic lengths, assigned using midpoint samples at <=2.5 projected metres. Approximate at 5m cell boundaries; traversal multiplicity retained."
@@ -247,18 +415,18 @@
       "sensitivity": [
         {
           "threshold": 70,
-          "point_records_at_or_above": 892,
-          "route_length_m_at_or_above": 8827.365982564115
+          "point_records_at_or_above": 856,
+          "route_length_m_at_or_above": 8724.086606726603
         },
         {
           "threshold": 80,
-          "point_records_at_or_above": 442,
-          "route_length_m_at_or_above": 4148.364810822397
+          "point_records_at_or_above": 414,
+          "route_length_m_at_or_above": 4096.826177729952
         },
         {
           "threshold": 90,
-          "point_records_at_or_above": 175,
-          "route_length_m_at_or_above": 1207.7379896344478
+          "point_records_at_or_above": 167,
+          "route_length_m_at_or_above": 1195.3942042995336
         }
       ]
     },
@@ -266,32 +434,36 @@
       "mode": "concentration",
       "by_class": {
         "Lower signal": {
-          "point_count": 148054,
-          "route_length_m": 261749.1446363888
+          "point_count": 147732,
+          "route_length_m": 259091.90296479833
         },
         "Raised": {
-          "point_count": 93024,
-          "route_length_m": 137379.43363667687
+          "point_count": 92960,
+          "route_length_m": 136908.1707123385
         },
         "Higher signal": {
-          "point_count": 60127,
-          "route_length_m": 96243.83434916282
+          "point_count": 60092,
+          "route_length_m": 96017.81364657758
         },
         "Strongest signal": {
-          "point_count": 20743,
-          "route_length_m": 43600.53508788532
+          "point_count": 20725,
+          "route_length_m": 43563.37676092429
         },
         "Uncertain terrain": {
-          "point_count": 62,
-          "route_length_m": 510.3623370671934
+          "point_count": 46,
+          "route_length_m": 328.2190073055609
         },
         "No terrain data": {
           "point_count": 0,
           "route_length_m": 0.0
         },
         "Excluded open water": {
-          "point_count": 15,
-          "route_length_m": 679.703456033095
+          "point_count": 12,
+          "route_length_m": 409.73548358824934
+        },
+        "Excluded river channel / stadium": {
+          "point_count": 458,
+          "route_length_m": 3843.794927681647
         }
       },
       "categories": [
@@ -300,13 +472,14 @@
           "label": "Water supply",
           "count": 40994,
           "classes": {
-            "Lower signal": 19249,
-            "Raised": 12151,
-            "Higher signal": 7334,
+            "Lower signal": 19237,
+            "Raised": 12147,
+            "Higher signal": 7331,
             "Strongest signal": 2252,
             "Uncertain terrain": 5,
             "No terrain data": 0,
-            "Excluded open water": 3
+            "Excluded open water": 3,
+            "Excluded river channel / stadium": 19
           }
         },
         {
@@ -314,13 +487,14 @@
           "label": "Sewerage",
           "count": 70790,
           "classes": {
-            "Lower signal": 32469,
-            "Raised": 20093,
-            "Higher signal": 13381,
-            "Strongest signal": 4819,
+            "Lower signal": 32427,
+            "Raised": 20083,
+            "Higher signal": 13368,
+            "Strongest signal": 4809,
             "Uncertain terrain": 20,
             "No terrain data": 0,
-            "Excluded open water": 8
+            "Excluded open water": 7,
+            "Excluded river channel / stadium": 76
           }
         },
         {
@@ -334,7 +508,8 @@
             "Strongest signal": 87,
             "Uncertain terrain": 0,
             "No terrain data": 0,
-            "Excluded open water": 0
+            "Excluded open water": 0,
+            "Excluded river channel / stadium": 0
           }
         },
         {
@@ -342,13 +517,14 @@
           "label": "Power network",
           "count": 116844,
           "classes": {
-            "Lower signal": 54642,
-            "Raised": 33207,
-            "Higher signal": 21544,
-            "Strongest signal": 7428,
-            "Uncertain terrain": 22,
+            "Lower signal": 54472,
+            "Raised": 33172,
+            "Higher signal": 21535,
+            "Strongest signal": 7423,
+            "Uncertain terrain": 12,
             "No terrain data": 0,
-            "Excluded open water": 1
+            "Excluded open water": 1,
+            "Excluded river channel / stadium": 229
           }
         },
         {
@@ -356,13 +532,14 @@
           "label": "Low-current network",
           "count": 81336,
           "classes": {
-            "Lower signal": 36343,
-            "Raised": 24050,
-            "Higher signal": 15511,
-            "Strongest signal": 5414,
-            "Uncertain terrain": 15,
+            "Lower signal": 36248,
+            "Raised": 24036,
+            "Higher signal": 15501,
+            "Strongest signal": 5411,
+            "Uncertain terrain": 9,
             "No terrain data": 0,
-            "Excluded open water": 3
+            "Excluded open water": 1,
+            "Excluded river channel / stadium": 130
           }
         },
         {
@@ -370,13 +547,14 @@
           "label": "District heating / steam",
           "count": 10928,
           "classes": {
-            "Lower signal": 4808,
-            "Raised": 3223,
+            "Lower signal": 4805,
+            "Raised": 3222,
             "Higher signal": 2161,
             "Strongest signal": 736,
             "Uncertain terrain": 0,
             "No terrain data": 0,
-            "Excluded open water": 0
+            "Excluded open water": 0,
+            "Excluded river channel / stadium": 4
           }
         },
         {
@@ -390,7 +568,8 @@
             "Strongest signal": 7,
             "Uncertain terrain": 0,
             "No terrain data": 0,
-            "Excluded open water": 0
+            "Excluded open water": 0,
+            "Excluded river channel / stadium": 0
           }
         }
       ],
@@ -400,31 +579,34 @@
         "length_m": 540163.0135032141,
         "by_status": {
           "existing": {
-            "Lower signal": 151864.54275395998,
-            "Raised": 82252.0630806798,
-            "Higher signal": 56627.81978576467,
-            "Strongest signal": 27166.480910538456,
-            "Uncertain terrain": 241.80115449439685,
+            "Lower signal": 149420.97482846284,
+            "Raised": 81800.71159540227,
+            "Higher signal": 56424.25452712057,
+            "Strongest signal": 27134.314452630344,
+            "Uncertain terrain": 120.9207526353093,
             "No terrain data": 0.0,
-            "Excluded open water": 155.79693053442688
+            "Excluded open water": 9.891072371457987,
+            "Excluded river channel / stadium": 3397.4373873489217
           },
           "planned": {
-            "Lower signal": 108496.20847657701,
-            "Raised": 55028.08638417758,
-            "Higher signal": 39491.778838514685,
-            "Strongest signal": 16416.645881228636,
-            "Uncertain terrain": 268.5611825727966,
+            "Lower signal": 108292.34819342352,
+            "Raised": 55008.17494511671,
+            "Higher signal": 39469.32339457353,
+            "Strongest signal": 16411.654012175706,
+            "Uncertain terrain": 207.29825467025162,
             "No terrain data": 0.0,
-            "Excluded open water": 518.9997940287424
+            "Excluded open water": 399.84441121679134,
+            "Excluded river channel / stadium": 431.6373459229484
           },
           "open": {
-            "Lower signal": 1388.3934058518198,
+            "Lower signal": 1378.5799429119684,
             "Raised": 99.28417181952008,
             "Higher signal": 124.2357248834748,
             "Strongest signal": 17.408296118235732,
             "Uncertain terrain": 0.0,
             "No terrain data": 0.0,
-            "Excluded open water": 4.906731469925721
+            "Excluded open water": 0.0,
+            "Excluded river channel / stadium": 14.720194409777163
           }
         },
         "method": "Original WGS84 segment geodesic lengths, assigned using midpoint samples at <=2.5 projected metres. Approximate at 5m cell boundaries; traversal multiplicity retained."
@@ -432,18 +614,18 @@
       "sensitivity": [
         {
           "threshold": 70,
-          "point_records_at_or_above": 80870,
-          "route_length_m_at_or_above": 139844.36943704815
+          "point_records_at_or_above": 80817,
+          "route_length_m_at_or_above": 139581.19040750185
         },
         {
           "threshold": 80,
-          "point_records_at_or_above": 38565,
-          "route_length_m_at_or_above": 73526.48679627574
+          "point_records_at_or_above": 38538,
+          "route_length_m_at_or_above": 73415.40463966975
         },
         {
           "threshold": 90,
-          "point_records_at_or_above": 8437,
-          "route_length_m_at_or_above": 19603.758520910502
+          "point_records_at_or_above": 8425,
+          "route_length_m_at_or_above": 19579.0103790788
         }
       ]
     },
@@ -451,32 +633,36 @@
       "mode": "combined",
       "by_class": {
         "Lower signal": {
-          "point_count": 147637,
-          "route_length_m": 259504.4171790039
+          "point_count": 147341,
+          "route_length_m": 256931.02897287256
         },
         "Raised": {
-          "point_count": 92942,
-          "route_length_m": 136877.57579405315
+          "point_count": 92881,
+          "route_length_m": 136415.98448213292
         },
         "Higher signal": {
-          "point_count": 60369,
-          "route_length_m": 97036.53834559911
+          "point_count": 60320,
+          "route_length_m": 96739.11288273982
         },
         "Strongest signal": {
-          "point_count": 21000,
-          "route_length_m": 45554.41639145769
+          "point_count": 20967,
+          "route_length_m": 45495.13774689339
         },
         "Uncertain terrain": {
-          "point_count": 62,
-          "route_length_m": 510.3623370671934
+          "point_count": 46,
+          "route_length_m": 328.2190073055609
         },
         "No terrain data": {
           "point_count": 0,
           "route_length_m": 0.0
         },
         "Excluded open water": {
-          "point_count": 15,
-          "route_length_m": 679.703456033095
+          "point_count": 12,
+          "route_length_m": 409.73548358824934
+        },
+        "Excluded river channel / stadium": {
+          "point_count": 458,
+          "route_length_m": 3843.794927681647
         }
       },
       "categories": [
@@ -485,13 +671,14 @@
           "label": "Water supply",
           "count": 40994,
           "classes": {
-            "Lower signal": 19211,
-            "Raised": 12150,
-            "Higher signal": 7353,
+            "Lower signal": 19199,
+            "Raised": 12146,
+            "Higher signal": 7350,
             "Strongest signal": 2272,
             "Uncertain terrain": 5,
             "No terrain data": 0,
-            "Excluded open water": 3
+            "Excluded open water": 3,
+            "Excluded river channel / stadium": 19
           }
         },
         {
@@ -499,13 +686,14 @@
           "label": "Sewerage",
           "count": 70790,
           "classes": {
-            "Lower signal": 32348,
-            "Raised": 20051,
-            "Higher signal": 13438,
-            "Strongest signal": 4925,
+            "Lower signal": 32307,
+            "Raised": 20041,
+            "Higher signal": 13425,
+            "Strongest signal": 4914,
             "Uncertain terrain": 20,
             "No terrain data": 0,
-            "Excluded open water": 8
+            "Excluded open water": 7,
+            "Excluded river channel / stadium": 76
           }
         },
         {
@@ -519,7 +707,8 @@
             "Strongest signal": 87,
             "Uncertain terrain": 0,
             "No terrain data": 0,
-            "Excluded open water": 0
+            "Excluded open water": 0,
+            "Excluded river channel / stadium": 0
           }
         },
         {
@@ -527,13 +716,14 @@
           "label": "Power network",
           "count": 116844,
           "classes": {
-            "Lower signal": 54464,
-            "Raised": 33165,
-            "Higher signal": 21666,
-            "Strongest signal": 7526,
-            "Uncertain terrain": 22,
+            "Lower signal": 54309,
+            "Raised": 33134,
+            "Higher signal": 21648,
+            "Strongest signal": 7511,
+            "Uncertain terrain": 12,
             "No terrain data": 0,
-            "Excluded open water": 1
+            "Excluded open water": 1,
+            "Excluded river channel / stadium": 229
           }
         },
         {
@@ -541,13 +731,14 @@
           "label": "Low-current network",
           "count": 81336,
           "classes": {
-            "Lower signal": 36273,
-            "Raised": 24054,
-            "Higher signal": 15544,
-            "Strongest signal": 5447,
-            "Uncertain terrain": 15,
+            "Lower signal": 36188,
+            "Raised": 24039,
+            "Higher signal": 15529,
+            "Strongest signal": 5440,
+            "Uncertain terrain": 9,
             "No terrain data": 0,
-            "Excluded open water": 3
+            "Excluded open water": 1,
+            "Excluded river channel / stadium": 130
           }
         },
         {
@@ -555,13 +746,14 @@
           "label": "District heating / steam",
           "count": 10928,
           "classes": {
-            "Lower signal": 4805,
-            "Raised": 3222,
+            "Lower signal": 4802,
+            "Raised": 3221,
             "Higher signal": 2165,
             "Strongest signal": 736,
             "Uncertain terrain": 0,
             "No terrain data": 0,
-            "Excluded open water": 0
+            "Excluded open water": 0,
+            "Excluded river channel / stadium": 4
           }
         },
         {
@@ -575,7 +767,8 @@
             "Strongest signal": 7,
             "Uncertain terrain": 0,
             "No terrain data": 0,
-            "Excluded open water": 0
+            "Excluded open water": 0,
+            "Excluded river channel / stadium": 0
           }
         }
       ],
@@ -585,31 +778,34 @@
         "length_m": 540163.0135032141,
         "by_status": {
           "existing": {
-            "Lower signal": 150450.08834190684,
-            "Raised": 82178.72530884725,
-            "Higher signal": 57603.0218594475,
-            "Strongest signal": 27679.07102074128,
-            "Uncertain terrain": 241.80115449439685,
+            "Lower signal": 148090.37388186884,
+            "Raised": 81737.04543598791,
+            "Higher signal": 57328.05184052937,
+            "Strongest signal": 27624.784245229905,
+            "Uncertain terrain": 120.9207526353093,
             "No terrain data": 0.0,
-            "Excluded open water": 155.79693053442688
+            "Excluded open water": 9.891072371457987,
+            "Excluded river channel / stadium": 3397.4373873489217
           },
           "planned": {
-            "Lower signal": 107665.93543124525,
-            "Raised": 54599.56631338637,
-            "Higher signal": 39309.280761268135,
-            "Strongest signal": 17857.93707459818,
-            "Uncertain terrain": 268.5611825727966,
+            "Lower signal": 107462.07514809174,
+            "Raised": 54579.654874325504,
+            "Higher signal": 39286.82531732698,
+            "Strongest signal": 17852.94520554525,
+            "Uncertain terrain": 207.29825467025162,
             "No terrain data": 0.0,
-            "Excluded open water": 518.9997940287424
+            "Excluded open water": 399.84441121679134,
+            "Excluded river channel / stadium": 431.6373459229484
           },
           "open": {
-            "Lower signal": 1388.3934058518198,
+            "Lower signal": 1378.5799429119684,
             "Raised": 99.28417181952008,
             "Higher signal": 124.2357248834748,
             "Strongest signal": 17.408296118235732,
             "Uncertain terrain": 0.0,
             "No terrain data": 0.0,
-            "Excluded open water": 4.906731469925721
+            "Excluded open water": 0.0,
+            "Excluded river channel / stadium": 14.720194409777163
           }
         },
         "method": "Original WGS84 segment geodesic lengths, assigned using midpoint samples at <=2.5 projected metres. Approximate at 5m cell boundaries; traversal multiplicity retained."
@@ -617,18 +813,18 @@
       "sensitivity": [
         {
           "threshold": 70,
-          "point_records_at_or_above": 81369,
-          "route_length_m_at_or_above": 142590.9547370568
+          "point_records_at_or_above": 81287,
+          "route_length_m_at_or_above": 142234.2506296332
         },
         {
           "threshold": 80,
-          "point_records_at_or_above": 38920,
-          "route_length_m_at_or_above": 76062.26179379666
+          "point_records_at_or_above": 38870,
+          "route_length_m_at_or_above": 75904.51602888004
         },
         {
           "threshold": 90,
-          "point_records_at_or_above": 8611,
-          "route_length_m_at_or_above": 20749.080936890743
+          "point_records_at_or_above": 8591,
+          "route_length_m_at_or_above": 20711.989009724133
         }
       ]
     }
@@ -636,35 +832,36 @@
   "terrain_by_mode": {
     "ponding": {
       "terrain_cells": 53682786,
-      "eligible_cells": 51682623,
-      "uncertain_cells": 480475,
+      "eligible_cells": 51635834,
+      "uncertain_cells": 477855,
       "no_terrain_data_cells": 0,
-      "water_excluded_cells": 1519688,
+      "water_excluded_cells": 1493036,
+      "screening_policy_excluded_cells": 76061,
       "classes": [
         {
           "label": "Lower signal",
-          "cells": 50856418,
-          "area_km2": 1271.41045
+          "cells": 50814963,
+          "area_km2": 1270.374075
         },
         {
           "label": "Raised",
-          "cells": 399928,
-          "area_km2": 9.9982
+          "cells": 398938,
+          "area_km2": 9.97345
         },
         {
           "label": "Higher signal",
-          "cells": 250157,
-          "area_km2": 6.253925
+          "cells": 249353,
+          "area_km2": 6.233825
         },
         {
           "label": "Strongest signal",
-          "cells": 176120,
-          "area_km2": 4.403
+          "cells": 172580,
+          "area_km2": 4.3145
         },
         {
           "label": "Uncertain terrain",
-          "cells": 480475,
-          "area_km2": 12.011875
+          "cells": 477855,
+          "area_km2": 11.946375
         },
         {
           "label": "No terrain data",
@@ -673,62 +870,68 @@
         },
         {
           "label": "Excluded open water",
-          "cells": 1519688,
-          "area_km2": 37.9922
+          "cells": 1493036,
+          "area_km2": 37.3259
+        },
+        {
+          "label": "Excluded river channel / stadium",
+          "cells": 76061,
+          "area_km2": 1.901525
         }
       ],
       "sensitivity": [
         {
           "threshold": 70,
-          "cells": 426277,
-          "area_km2": 10.656925,
-          "percent_eligible": 0.8247975339796512
+          "cells": 421933,
+          "area_km2": 10.548325,
+          "percent_eligible": 0.8171321489646124
         },
         {
           "threshold": 80,
-          "cells": 264512,
-          "area_km2": 6.6128,
-          "percent_eligible": 0.5118006491272705
+          "cells": 260449,
+          "area_km2": 6.511225,
+          "percent_eligible": 0.5043958426235549
         },
         {
           "threshold": 90,
-          "cells": 115946,
-          "area_km2": 2.89865,
-          "percent_eligible": 0.22434232875525686
+          "cells": 113062,
+          "area_km2": 2.82655,
+          "percent_eligible": 0.21896034447705442
         }
       ]
     },
     "concentration": {
       "terrain_cells": 53682786,
-      "eligible_cells": 51682623,
-      "uncertain_cells": 480475,
+      "eligible_cells": 51635834,
+      "uncertain_cells": 477855,
       "no_terrain_data_cells": 0,
-      "water_excluded_cells": 1519688,
+      "water_excluded_cells": 1493036,
+      "screening_policy_excluded_cells": 76061,
       "classes": [
         {
           "label": "Lower signal",
-          "cells": 32478910,
-          "area_km2": 811.97275
+          "cells": 32450742,
+          "area_km2": 811.26855
         },
         {
           "label": "Raised",
-          "cells": 11305900,
-          "area_km2": 282.6475
+          "cells": 11296171,
+          "area_km2": 282.404275
         },
         {
           "label": "Higher signal",
-          "cells": 5423507,
-          "area_km2": 135.587675
+          "cells": 5417520,
+          "area_km2": 135.438
         },
         {
           "label": "Strongest signal",
-          "cells": 2474306,
-          "area_km2": 61.85765
+          "cells": 2471401,
+          "area_km2": 61.785025
         },
         {
           "label": "Uncertain terrain",
-          "cells": 480475,
-          "area_km2": 12.011875
+          "cells": 477855,
+          "area_km2": 11.946375
         },
         {
           "label": "No terrain data",
@@ -737,62 +940,68 @@
         },
         {
           "label": "Excluded open water",
-          "cells": 1519688,
-          "area_km2": 37.9922
+          "cells": 1493036,
+          "area_km2": 37.3259
+        },
+        {
+          "label": "Excluded river channel / stadium",
+          "cells": 76061,
+          "area_km2": 1.901525
         }
       ],
       "sensitivity": [
         {
           "threshold": 70,
-          "cells": 7897813,
-          "area_km2": 197.445325,
-          "percent_eligible": 15.281370297324113
+          "cells": 7888921,
+          "area_km2": 197.223025,
+          "percent_eligible": 15.277996671846145
         },
         {
           "threshold": 80,
-          "cells": 3980621,
-          "area_km2": 99.515525,
-          "percent_eligible": 7.702049100719985
+          "cells": 3976164,
+          "area_km2": 99.4041,
+          "percent_eligible": 7.700396588926985
         },
         {
           "threshold": 90,
-          "cells": 1138451,
-          "area_km2": 28.461275,
-          "percent_eligible": 2.2027732609469144
+          "cells": 1136791,
+          "area_km2": 28.419775,
+          "percent_eligible": 2.2015544476341757
         }
       ]
     },
     "combined": {
       "terrain_cells": 53682786,
-      "eligible_cells": 51682623,
-      "uncertain_cells": 480475,
+      "eligible_cells": 51635834,
+      "uncertain_cells": 477855,
       "no_terrain_data_cells": 0,
-      "water_excluded_cells": 1519688,
+      "water_excluded_cells": 1493036,
+      "screening_policy_excluded_cells": 76061,
       "classes": [
         {
           "label": "Lower signal",
-          "cells": 32356341,
-          "area_km2": 808.908525
+          "cells": 32330794,
+          "area_km2": 808.26985
         },
         {
           "label": "Raised",
-          "cells": 11257055,
-          "area_km2": 281.426375
+          "cells": 11248193,
+          "area_km2": 281.204825
         },
         {
           "label": "Higher signal",
-          "cells": 5455103,
-          "area_km2": 136.377575
+          "cells": 5449074,
+          "area_km2": 136.22685
         },
         {
           "label": "Strongest signal",
-          "cells": 2614124,
-          "area_km2": 65.3531
+          "cells": 2607773,
+          "area_km2": 65.194325
         },
         {
           "label": "Uncertain terrain",
-          "cells": 480475,
-          "area_km2": 12.011875
+          "cells": 477855,
+          "area_km2": 11.946375
         },
         {
           "label": "No terrain data",
@@ -801,60 +1010,69 @@
         },
         {
           "label": "Excluded open water",
-          "cells": 1519688,
-          "area_km2": 37.9922
+          "cells": 1493036,
+          "area_km2": 37.3259
+        },
+        {
+          "label": "Excluded river channel / stadium",
+          "cells": 76061,
+          "area_km2": 1.901525
         }
       ],
       "sensitivity": [
         {
           "threshold": 70,
-          "cells": 8069227,
-          "area_km2": 201.730675,
-          "percent_eligible": 15.613036900236274
+          "cells": 8056847,
+          "area_km2": 201.421175,
+          "percent_eligible": 15.603208810377692
         },
         {
           "threshold": 80,
-          "cells": 4150616,
-          "area_km2": 103.7654,
-          "percent_eligible": 8.030970099950228
+          "cells": 4142336,
+          "area_km2": 103.5584,
+          "percent_eligible": 8.02221186163082
         },
         {
           "threshold": 90,
-          "cells": 1249505,
-          "area_km2": 31.237625,
-          "percent_eligible": 2.4176501258459737
+          "cells": 1245009,
+          "area_km2": 31.125225,
+          "percent_eligible": 2.4111337099735817
         }
       ]
     }
   },
   "by_class": {
     "Lower signal": {
-      "point_count": 147637,
-      "route_length_m": 259504.4171790039
+      "point_count": 147341,
+      "route_length_m": 256931.02897287256
     },
     "Raised": {
-      "point_count": 92942,
-      "route_length_m": 136877.57579405315
+      "point_count": 92881,
+      "route_length_m": 136415.98448213292
     },
     "Higher signal": {
-      "point_count": 60369,
-      "route_length_m": 97036.53834559911
+      "point_count": 60320,
+      "route_length_m": 96739.11288273982
     },
     "Strongest signal": {
-      "point_count": 21000,
-      "route_length_m": 45554.41639145769
+      "point_count": 20967,
+      "route_length_m": 45495.13774689339
     },
     "Uncertain terrain": {
-      "point_count": 62,
-      "route_length_m": 510.3623370671934
+      "point_count": 46,
+      "route_length_m": 328.2190073055609
     },
     "No terrain data": {
       "point_count": 0,
       "route_length_m": 0.0
     },
     "Excluded open water": {
-      "point_count": 15,
-      "route_length_m": 679.703456033095
+      "point_count": 12,
+      "route_length_m": 409.73548358824934
+    },
+    "Excluded river channel / stadium": {
+      "point_count": 458,
+      "route_length_m": 3843.794927681647
     }
   },
   "categories": [
@@ -863,13 +1081,14 @@
       "label": "Water supply",
       "count": 40994,
       "classes": {
-        "Lower signal": 19211,
-        "Raised": 12150,
-        "Higher signal": 7353,
+        "Lower signal": 19199,
+        "Raised": 12146,
+        "Higher signal": 7350,
         "Strongest signal": 2272,
         "Uncertain terrain": 5,
         "No terrain data": 0,
-        "Excluded open water": 3
+        "Excluded open water": 3,
+        "Excluded river channel / stadium": 19
       }
     },
     {
@@ -877,13 +1096,14 @@
       "label": "Sewerage",
       "count": 70790,
       "classes": {
-        "Lower signal": 32348,
-        "Raised": 20051,
-        "Higher signal": 13438,
-        "Strongest signal": 4925,
+        "Lower signal": 32307,
+        "Raised": 20041,
+        "Higher signal": 13425,
+        "Strongest signal": 4914,
         "Uncertain terrain": 20,
         "No terrain data": 0,
-        "Excluded open water": 8
+        "Excluded open water": 7,
+        "Excluded river channel / stadium": 76
       }
     },
     {
@@ -897,7 +1117,8 @@
         "Strongest signal": 87,
         "Uncertain terrain": 0,
         "No terrain data": 0,
-        "Excluded open water": 0
+        "Excluded open water": 0,
+        "Excluded river channel / stadium": 0
       }
     },
     {
@@ -905,13 +1126,14 @@
       "label": "Power network",
       "count": 116844,
       "classes": {
-        "Lower signal": 54464,
-        "Raised": 33165,
-        "Higher signal": 21666,
-        "Strongest signal": 7526,
-        "Uncertain terrain": 22,
+        "Lower signal": 54309,
+        "Raised": 33134,
+        "Higher signal": 21648,
+        "Strongest signal": 7511,
+        "Uncertain terrain": 12,
         "No terrain data": 0,
-        "Excluded open water": 1
+        "Excluded open water": 1,
+        "Excluded river channel / stadium": 229
       }
     },
     {
@@ -919,13 +1141,14 @@
       "label": "Low-current network",
       "count": 81336,
       "classes": {
-        "Lower signal": 36273,
-        "Raised": 24054,
-        "Higher signal": 15544,
-        "Strongest signal": 5447,
-        "Uncertain terrain": 15,
+        "Lower signal": 36188,
+        "Raised": 24039,
+        "Higher signal": 15529,
+        "Strongest signal": 5440,
+        "Uncertain terrain": 9,
         "No terrain data": 0,
-        "Excluded open water": 3
+        "Excluded open water": 1,
+        "Excluded river channel / stadium": 130
       }
     },
     {
@@ -933,13 +1156,14 @@
       "label": "District heating / steam",
       "count": 10928,
       "classes": {
-        "Lower signal": 4805,
-        "Raised": 3222,
+        "Lower signal": 4802,
+        "Raised": 3221,
         "Higher signal": 2165,
         "Strongest signal": 736,
         "Uncertain terrain": 0,
         "No terrain data": 0,
-        "Excluded open water": 0
+        "Excluded open water": 0,
+        "Excluded river channel / stadium": 4
       }
     },
     {
@@ -953,7 +1177,8 @@
         "Strongest signal": 7,
         "Uncertain terrain": 0,
         "No terrain data": 0,
-        "Excluded open water": 0
+        "Excluded open water": 0,
+        "Excluded river channel / stadium": 0
       }
     }
   ],
@@ -963,31 +1188,34 @@
     "length_m": 540163.0135032141,
     "by_status": {
       "existing": {
-        "Lower signal": 150450.08834190684,
-        "Raised": 82178.72530884725,
-        "Higher signal": 57603.0218594475,
-        "Strongest signal": 27679.07102074128,
-        "Uncertain terrain": 241.80115449439685,
+        "Lower signal": 148090.37388186884,
+        "Raised": 81737.04543598791,
+        "Higher signal": 57328.05184052937,
+        "Strongest signal": 27624.784245229905,
+        "Uncertain terrain": 120.9207526353093,
         "No terrain data": 0.0,
-        "Excluded open water": 155.79693053442688
+        "Excluded open water": 9.891072371457987,
+        "Excluded river channel / stadium": 3397.4373873489217
       },
       "planned": {
-        "Lower signal": 107665.93543124525,
-        "Raised": 54599.56631338637,
-        "Higher signal": 39309.280761268135,
-        "Strongest signal": 17857.93707459818,
-        "Uncertain terrain": 268.5611825727966,
+        "Lower signal": 107462.07514809174,
+        "Raised": 54579.654874325504,
+        "Higher signal": 39286.82531732698,
+        "Strongest signal": 17852.94520554525,
+        "Uncertain terrain": 207.29825467025162,
         "No terrain data": 0.0,
-        "Excluded open water": 518.9997940287424
+        "Excluded open water": 399.84441121679134,
+        "Excluded river channel / stadium": 431.6373459229484
       },
       "open": {
-        "Lower signal": 1388.3934058518198,
+        "Lower signal": 1378.5799429119684,
         "Raised": 99.28417181952008,
         "Higher signal": 124.2357248834748,
         "Strongest signal": 17.408296118235732,
         "Uncertain terrain": 0.0,
         "No terrain data": 0.0,
-        "Excluded open water": 4.906731469925721
+        "Excluded open water": 0.0,
+        "Excluded river channel / stadium": 14.720194409777163
       }
     },
     "method": "Original WGS84 segment geodesic lengths, assigned using midpoint samples at <=2.5 projected metres. Approximate at 5m cell boundaries; traversal multiplicity retained."
@@ -995,24 +1223,25 @@
   "sensitivity": [
     {
       "threshold": 70,
-      "point_records_at_or_above": 81369,
-      "route_length_m_at_or_above": 142590.9547370568
+      "point_records_at_or_above": 81287,
+      "route_length_m_at_or_above": 142234.2506296332
     },
     {
       "threshold": 80,
-      "point_records_at_or_above": 38920,
-      "route_length_m_at_or_above": 76062.26179379666
+      "point_records_at_or_above": 38870,
+      "route_length_m_at_or_above": 75904.51602888004
     },
     {
       "threshold": 90,
-      "point_records_at_or_above": 8611,
-      "route_length_m_at_or_above": 20749.080936890743
+      "point_records_at_or_above": 8591,
+      "route_length_m_at_or_above": 20711.989009724133
     }
   ],
   "sources": {
     "points_sha256": "4771d2330e93d22739d45b859c107e5f986622228d496acf52872fd9765d0652",
     "raster_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
     "open_water_sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030",
+    "screening_exclusions_sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd",
     "original_screening_sha256_unchanged_before_after": true
   },
   "limitations": [
@@ -1021,6 +1250,7 @@
     "Green area geometry is contextual; no infiltration credit or protection factor was assumed.",
     "Uncertain terrain and NoData are retained as separate classes and never counted as lower signal.",
     "Mapped existing open water is a separate excluded inventory bucket; it is not assigned a low or safe score. Unmapped waterways may remain; no line buffers or upstream terrain changes are inferred.",
+    "Mapped river channels and stadium footprints are a separate, higher-precedence user-policy exclusion bucket; exclusion does not establish safety and original terrain remains unchanged.",
     "D8 concentration and combined scores contain strong grid/facet routing artefacts. Exposure overlaps for those experimental modes are especially sensitive to the routing method; they are not verified flood priorities."
   ]
 }

@@ -15,6 +15,7 @@ from shapely.geometry import Point, box, shape
 from .terrain import XY, RASTER_SLOTS, tile_bounds, png
 from .context_layers import sha256
 from .tile_cache import file_signature, read_json_cached
+from .screening_exclusions import REASONS
 
 TO_GEO = Transformer.from_crs(7801, 4326, always_xy=True)
 TO_METRIC = Transformer.from_crs(4326, 7801, always_xy=True)
@@ -59,6 +60,7 @@ class LocalReviewPriority:
             sources = data['source_revisions']
             current = {'pluvial': self.pluvial.meta().get('revision'),
                        'water': self.pluvial.water.meta().get('revision'),
+                       'screening_exclusions': self.pluvial.exclusions.meta().get('revision'),
                        'cadastre': self.cadastre.meta().get('revision'),
                        'history': self.history.meta().get('revision')}
             if any(sources.get(key) != value or value is None for key, value in current.items()):
@@ -85,6 +87,7 @@ class LocalReviewPriority:
     def logic_links():
         return [
             {'data': '5 m terrain', 'use': 'Ponding signal at existing P=50/70 display cutoffs; C remains an experimental diagnostic.'},
+            {'data': 'Mapped river channels and stadiums', 'use': 'User-requested exclusion from screening and scenario outputs; not evidence that these places cannot flood.'},
             {'data': 'Mapped historical flooding', 'use': 'Prior-observation review category at cell centres, regardless of overlay visibility; unknown flood mechanism remains unknown.'},
             {'data': 'Cadastral buildings', 'use': 'Potential 5 m cell–footprint intersection; exposure context, no measured vulnerability or whole-cell imperviousness.'},
             {'data': 'Rainfall', 'use': 'Time-compatible scenario context by user assumption; native daily totals and coverage retained. No storm intensity or drainage load is invented.'},
@@ -104,8 +107,9 @@ class LocalReviewPriority:
             row, col = src.index(x, y)
             code = int(src.read(1, window=Window(col, row, 1, 1))[0, 0]) if 0 <= row < src.height and 0 <= col < src.width else 255
             centre = src.xy(row, col)
-        status = 'excluded_open_water' if code == 253 else 'uncertain' if code == 254 else 'nodata' if code == 255 else 'ok'
+        status = 'excluded_user_screening' if code == 252 else 'excluded_open_water' if code == 253 else 'uncertain' if code == 254 else 'nodata' if code == 255 else 'ok'
         legacy = self.pluvial.sample(lon, lat)
+        if legacy['status']=='excluded_user_screening':status='excluded_user_screening'
         if status == 'ok' and (code not in range(6) or legacy['status'] != 'ok'):
             raise ValueError('Review and original terrain eligibility disagree')
         history_ids = self.history_ids(*TO_GEO.transform(*centre)) if code != 255 else []
@@ -113,7 +117,7 @@ class LocalReviewPriority:
         result = {'longitude': lon, 'latitude': lat, 'status': status, 'revision': meta['revision'],
                 'analysis_resolution_m': 5, 'row': row, 'column': col,
                 'review_class': code if status == 'ok' else None,
-                'review_label': LABELS[code] if status == 'ok' else {'uncertain': 'Uncertain terrain', 'excluded_open_water': 'Excluded mapped open water', 'nodata': 'Outside terrain'}[status],
+                'review_label': LABELS[code] if status == 'ok' else {'excluded_user_screening': 'Excluded mapped river channel / stadium', 'uncertain': 'Uncertain terrain', 'excluded_open_water': 'Excluded mapped open water', 'nodata': 'Outside terrain'}[status],
                 'legacy_ponding_score': legacy.get('ponding_score'),
                 'history_intersection': bool(history_ids) if code != 255 else None,
                 'historical_polygon_ids': history_ids, 'history_location_basis': '5 m analysis cell centre',
@@ -121,10 +125,15 @@ class LocalReviewPriority:
                 'drainage_context': context, 'official_assessment': self.assessment.intersections(lon, lat),
                 'source_dates': meta.get('source_dates'), 'scenario_assumption': meta.get('scenario_assumption'),
                 'interpretation': 'Rule-based review category. Class numbers are identifiers, not probabilities, flood depths or damage scores.'}
+        if status=='excluded_user_screening':
+            result.update(screening_excluded=True,screening_exclusion_reason=legacy.get('screening_exclusion_reason'),
+                          exclusion_reason=legacy.get('exclusion_reason'),legacy_ponding_score=None,
+                          original_terrain=legacy.get('unmasked_scores'),
+                          interpretation='Mapped river channel or stadium is omitted at the user’s request; historical observations remain separately available and exclusion is not a safety finding.')
         if green_absorption:
             if self.green is None or not self.green.available:
                 raise ValueError('Full-green absorption mask unavailable')
-            if code not in (253,255) and self.green.sample_cell(row,col):
+            if status not in ('excluded_user_screening','excluded_open_water','nodata') and self.green.sample_cell(row,col):
                 result.update(original_terrain={'review_class':result['review_class'],'review_label':result['review_label'],'ponding_score':result['legacy_ponding_score']},
                               status='excluded_green_absorption',review_class=None,review_label='Assumed absorbing green area',
                               legacy_ponding_score=None,green_absorption_assumption=True,
@@ -191,7 +200,7 @@ class LocalReviewPriority:
         tile_bounds(z, x, y)
         if green_absorption and (self.green is None or not self.green.available):
             raise ValueError('Full-green absorption mask unavailable')
-        key = ['review-categorical-v1', meta['revision'], renderer, z,x,y, file_signature(self.path), file_signature(self.receipt), file_signature(__file__)]
+        key = ['review-categorical-v2-policy-exclusions', meta['revision'], renderer, z,x,y, file_signature(self.path), file_signature(self.receipt), file_signature(__file__),file_signature(self.pluvial.exclusions.path),file_signature(self.pluvial.exclusions.receipt)]
         key.extend([green_absorption,*( [file_signature(self.green.path),file_signature(self.green.receipt)] if green_absorption else [])])
         def render():
             west, south, east, north = tile_bounds(z,x,y); spacing = (east-west)/256
@@ -201,6 +210,7 @@ class LocalReviewPriority:
                           src_nodata=255, dst_transform=Affine(spacing,0,west,0,-spacing,north),
                           dst_crs='EPSG:3857', dst_nodata=255, resampling=Resampling.nearest, num_threads=1, warp_mem_limit=64)
             colours=rgba(dest, meta['classes'])
+            colours[self.pluvial.exclusions.tile_mask(z,x,y),3]=0
             if green_absorption:colours[self.green.tile_mask(z,x,y),3]=0
             return png(colours)
         return self.tiles.get_or_render(key, render)

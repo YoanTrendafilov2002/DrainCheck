@@ -16,8 +16,9 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from backend.pluvial import LocalPluvial
 from backend.open_water import OpenWaterMask
+from backend.screening_exclusions import ScreeningExclusions
 CACHE=ROOT/'data/cache'
-LABELS=['Lower signal','Raised','Higher signal','Strongest signal','Uncertain terrain','No terrain data','Excluded open water']
+LABELS=['Lower signal','Raised','Higher signal','Strongest signal','Uncertain terrain','No terrain data','Excluded open water','Excluded river channel / stadium']
 MODES={'ponding':6,'concentration':7,'combined':8}
 XY=Transformer.from_crs(4326,7801,always_xy=True)
 GEOD=Geod(ellps='WGS84')
@@ -35,14 +36,19 @@ def classes(scores,flags):
     code[missing]=5
     code[flags>0]=4
     code[(flags&4)>0]=6
+    code[(flags&8)>0]=7
     return code
 
-def sample_grid_modes(src,lon,lat,water_src=None):
+def sample_grid_modes(src,lon,lat,water_src=None,exclusion_src=None):
     """Read actual base-resolution cells in grouped blocks; never interpolate scores."""
     if water_src is None:
         water=OpenWaterMask(CACHE)
         if not water.available:raise ValueError(water.error)
-        with rasterio.open(water.path) as mask:return sample_grid_modes(src,lon,lat,mask)
+        with rasterio.open(water.path) as mask:return sample_grid_modes(src,lon,lat,mask,exclusion_src)
+    if exclusion_src is None:
+        exclusions=ScreeningExclusions(CACHE)
+        if not exclusions.available:raise ValueError(exclusions.error)
+        with rasterio.open(exclusions.path) as mask:return sample_grid_modes(src,lon,lat,water_src,mask)
     x,y=XY.transform(np.asarray(lon),np.asarray(lat))
     col=np.floor((x-src.transform.c)/src.transform.a).astype('int64')
     row=np.floor((y-src.transform.f)/src.transform.e).astype('int64')
@@ -59,11 +65,13 @@ def sample_grid_modes(src,lon,lat,water_src=None):
         terrain=a[0,row[part]-r0,col[part]-c0]
         flag=a[1,row[part]-r0,col[part]-c0]
         water=water_src.read(1,window=Window(c0,r0,min(512,src.width-c0),min(512,src.height-r0)))[row[part]-r0,col[part]-c0]
+        policy=exclusion_src.read(1,window=Window(c0,r0,min(512,src.width-c0),min(512,src.height-r0)))[row[part]-r0,col[part]-c0]
         for i,mode in enumerate(MODES):
             scores=a[i+2,row[part]-r0,col[part]-c0]
             flags[mode][part]=(flag==1).astype('uint8')
             flags[mode][part[(terrain!=-9999)&np.isfinite(terrain)&((scores<0)|~np.isfinite(scores))&(flag!=1)]]=2
             flags[mode][part[water==1]]|=4
+            flags[mode][part[policy>0]]|=8
             results[mode][part]=scores
     return results,flags
 
@@ -73,8 +81,12 @@ def sample_grid(src,lon,lat,mode='combined'):
     results,flags=sample_grid_modes(src,lon,lat)
     return results[mode],flags[mode]
 
-def terrain_summaries(src,water_src):
+def terrain_summaries(src,water_src,exclusion_src=None):
     """Full base-resolution cell counts per mode; outside coverage is not lower signal."""
+    if exclusion_src is None:
+        exclusions=ScreeningExclusions(CACHE)
+        if not exclusions.available:raise ValueError(exclusions.error)
+        with rasterio.open(exclusions.path) as mask:return terrain_summaries(src,water_src,mask)
     counts={mode:np.zeros(len(LABELS),dtype='int64') for mode in MODES}
     sensitivity={mode:np.zeros(3,dtype='int64') for mode in MODES}
     terrain_count=0
@@ -83,11 +95,13 @@ def terrain_summaries(src,water_src):
             a=src.read([1,5,6,7,8],window=Window(c0,r0,min(512,src.width-c0),min(512,src.height-r0)))
             known=np.isfinite(a[0])&(a[0]!=-9999)
             water=water_src.read(1,window=Window(c0,r0,min(512,src.width-c0),min(512,src.height-r0)))
+            policy=exclusion_src.read(1,window=Window(c0,r0,min(512,src.width-c0),min(512,src.height-r0)))
             terrain_count+=int(known.sum())
             for i,mode in enumerate(MODES):
                 score=a[i+2];flag=(a[1]==1).astype('uint8')
                 flag[known&((score<0)|~np.isfinite(score))&(a[1]!=1)]=2
                 flag[water==1]|=4
+                flag[policy>0]|=8
                 code=classes(score,flag)
                 counts[mode]+=np.bincount(code[known],minlength=len(LABELS))
                 for j,t in enumerate([70,80,90]):
@@ -98,42 +112,53 @@ def terrain_summaries(src,water_src):
         result[mode]={'terrain_cells':terrain_count,'eligible_cells':eligible,
             'uncertain_cells':int(counts[mode][4]),'no_terrain_data_cells':int(counts[mode][5]),
             'water_excluded_cells':int(counts[mode][6]),
+            'screening_policy_excluded_cells':int(counts[mode][7]),
             'classes':[{'label':label,'cells':int(counts[mode][i]),'area_km2':float(counts[mode][i]*25/1e6)} for i,label in enumerate(LABELS)],
             'sensitivity':[{'threshold':t,'cells':int(sensitivity[mode][j]),'area_km2':float(sensitivity[mode][j]*25/1e6),
                             'percent_eligible':float(sensitivity[mode][j]/eligible*100) if eligible else None} for j,t in enumerate([70,80,90])]}
     return result
 
-def export_land_raster(src,water_src,meta):
+def export_land_raster(src,water_src,meta,exclusion_src=None):
     """Separate download product; original factors/scores are never overwritten."""
+    if exclusion_src is None:
+        exclusions=ScreeningExclusions(CACHE)
+        if not exclusions.available:raise ValueError(exclusions.error)
+        with rasterio.open(exclusions.path) as mask:return export_land_raster(src,water_src,meta,mask)
     output=ROOT/'data/derived/pluvial_land_screening_5m.tif';pending=output.with_suffix('.pending.tif')
-    profile=src.profile.copy();profile.update(count=4,compress='DEFLATE',predictor=3,interleave='band',tiled=True,
+    profile=src.profile.copy();profile.update(count=5,compress='DEFLATE',predictor=3,interleave='band',tiled=True,
         blockxsize=512,blockysize=512,bigtiff='IF_SAFER',nodata=-9999)
-    names=['ponding_score_0_100','concentration_score_0_100','combined_score_0_100','open_water_excluded']
+    names=['ponding_score_0_100','concentration_score_0_100','combined_score_0_100','open_water_excluded','user_screening_exclusion_flags']
     with rasterio.open(pending,'w',**profile) as dst:
         for i,name in enumerate(names,1):dst.set_band_description(i,name)
         dst.update_tags(SCREENING_REVISION=meta['revision'],TERRAIN_REVISION=meta['terrain_revision'],
             OPEN_WATER_REVISION=meta['water_exclusion']['revision'],VERTICAL_DATUM='Baltic 1982',
-            POLICY='Mapped existing open water is NoData in score bands, never zero or safe; no hydrology recomputed.')
+            SCREENING_EXCLUSIONS_REVISION=meta['screening_exclusions']['revision'],
+            POLICY='Mapped water, river channels and stadiums are NoData in score bands, never zero or safe; no hydrology recomputed. User flags:1=river,2=stadium,3=both.')
         for _,window in src.block_windows(1):
             a=src.read([1,6,7,8],window=window);water=water_src.read(1,window=window)
-            known=np.isfinite(a[0])&(a[0]!=-9999);scores=a[1:].copy();scores[:,water==1]=-9999
+            policy=exclusion_src.read(1,window=window)
+            known=np.isfinite(a[0])&(a[0]!=-9999);scores=a[1:].copy();scores[:,(water==1)|(policy>0)]=-9999
             flag=np.where(known,water.astype('float32'),np.float32(-9999))
-            dst.write(np.concatenate((scores,flag[None,:,:])),window=window)
+            policy_flag=np.where(known,policy.astype('float32'),np.float32(-9999))
+            dst.write(np.concatenate((scores,flag[None,:,:],policy_flag[None,:,:])),window=window)
     # Full verification proves land scores are unchanged and water scores excluded.
     with rasterio.open(pending) as exported:
         for _,window in src.block_windows(1):
             a=src.read([1,6,7,8],window=window);water=water_src.read(1,window=window);out=exported.read(window=window)
-            if not np.array_equal(out[:3,water==0],a[1:,water==0],equal_nan=True):raise AssertionError('Land scores changed in export')
-            if np.any(out[:3,water==1]!=-9999):raise AssertionError('Mapped water retains a score in export')
+            policy=exclusion_src.read(1,window=window);excluded=(water==1)|(policy>0)
+            if not np.array_equal(out[:3,~excluded],a[1:,~excluded],equal_nan=True):raise AssertionError('Nonexcluded land scores changed in export')
+            if np.any(out[:3,excluded]!=-9999):raise AssertionError('Excluded footprint retains a score in export')
             known=np.isfinite(a[0])&(a[0]!=-9999)
             if not np.array_equal(out[3],np.where(known,water.astype('float32'),np.float32(-9999))):raise AssertionError('Export water flag differs from source mask')
+            if not np.array_equal(out[4],np.where(known,policy.astype('float32'),np.float32(-9999))):raise AssertionError('Export policy flag differs from source mask')
     pending.replace(output)
     receipt={'pluvial_revision':meta['revision'],'terrain_revision':meta['terrain_revision'],
         'open_water_revision':meta['water_exclusion']['revision'],'output_sha256':digest(output),
+        'screening_exclusions_revision':meta['screening_exclusions']['revision'],'screening_exclusions_sha256':meta['screening_exclusions']['sha256'],
         'source_sha256':meta['verification']['output_sha256'],'open_water_sha256':meta['water_exclusion']['sha256'],
         'grid':meta['grid'],'bands':names,'nodata':-9999,
-        'policy':'Score bands equal original scores on non-water cells and NoData over mapped open water. Water flag is NoData outside known terrain; zero means not mapped open water, not verified safe/dry land.',
-        'verification':{'all_land_score_pixels_identical':True,'all_water_score_pixels_nodata':True,'all_flag_pixels_match':True}}
+        'policy':'Score bands equal original scores outside all exclusions and NoData over mapped water, channels and stadiums. Flags are NoData outside known terrain; zero is not a safety conclusion. Policy flags:1=river,2=stadium,3=both.',
+        'verification':{'all_nonexcluded_land_score_pixels_identical':True,'all_water_score_pixels_nodata':True,'all_policy_score_pixels_nodata':True,'all_flag_pixels_match':True}}
     output.with_suffix('.json').write_text(json.dumps(receipt,indent=2),encoding='utf-8')
     return receipt
 
@@ -176,7 +201,7 @@ def main():
         labels={str(c['code']) if c['code'] is not None else 'missing':c['label'] for c in config['infrastructure']['categories']}
         out=ROOT/'data/derived/infrastructure_terrain_screening.csv'
         with out.open('w',encoding='utf-8',newline='') as f:
-            writer=csv.writer(f);writer.writerow(['source_record_id','longitude','latitude','category','terrain_score_0_100','terrain_signal_class','boundary_influence','open_water_excluded',
+            writer=csv.writer(f);writer.writerow(['source_record_id','longitude','latitude','category','terrain_score_0_100','terrain_signal_class','boundary_influence','open_water_excluded','screening_policy_excluded',
                 'ponding_score_0_100','ponding_signal_class','concentration_score_0_100','concentration_signal_class',
                 'combined_score_0_100','combined_signal_class','interpretation'])
             for i,r in enumerate(records):
@@ -187,7 +212,7 @@ def main():
                     values.extend([float(scores[mode][i]) if codes[mode][i]<4 else '',LABELS[codes[mode][i]]])
                 combined_code=codes['combined'][i]
                 writer.writerow([i+1,r['longitude'],r['latitude'],category,float(scores['combined'][i]) if combined_code<4 else '',
-                    LABELS[combined_code],int((flags['combined'][i]&1)>0),int((flags['combined'][i]&4)>0),*values,
+                    LABELS[combined_code],int((flags['combined'][i]&1)>0),int((flags['combined'][i]&4)>0),int((flags['combined'][i]&8)>0),*values,
                     'Spatial overlap only; not confirmed damage or flood probability'])
         print(json.dumps({'stage':'points_joined','records':len(records),'classes':{mode:dict(zip(LABELS,np.bincount(codes[mode],minlength=len(LABELS)).tolist())) for mode in MODES}}),flush=True)
         db=sqlite3.connect('file:'+(CACHE/'spatial.sqlite').as_posix()+'?mode=ro',uri=True)
@@ -228,8 +253,10 @@ def main():
                             'route_length_m_at_or_above':float(lengths[(rscores[mode]>=t)&(rcodes[mode]<4)].sum())} for t in [70,80,90]]}
     if digest(raster)!=source_sha256:raise AssertionError('Original screening source changed during water-exclusion preparation')
     if digest(pluvial.water.path)!=meta['water_exclusion']['sha256']:raise AssertionError('Water mask changed during preparation')
+    if digest(pluvial.exclusions.path)!=meta['screening_exclusions']['sha256']:raise AssertionError('Screening-exclusion mask changed during preparation')
     result={'dataset_revision':(CACHE/'revision.txt').read_text().strip(),'pluvial_revision':meta['revision'],
             'terrain_revision':meta['terrain_revision'],'open_water_revision':meta['water_exclusion']['revision'],
+            'screening_exclusions_revision':meta['screening_exclusions']['revision'],'screening_exclusions':meta['screening_exclusions'],
             'water_exclusion':meta['water_exclusion'],'land_raster_export':export_receipt,
             'interpretation':'Potential exposure by geometric overlap with an unvalidated terrain index; no loss, probability, vulnerability or drainage-capacity calculation.',
             'scope':'All 322,025 source point records and all 717 full source routes. Independent of current map layer, route-zone and status filters.',
@@ -237,13 +264,14 @@ def main():
             'modes':modes,'terrain_by_mode':terrain_by_mode,
             # Keep explicit combined compatibility fields for older downloaded clients.
             **{key:modes['combined'][key] for key in ['by_class','categories','routes','sensitivity']},
-            'sources':{'points_sha256':digest(source),'raster_sha256':source_sha256,'open_water_sha256':meta['water_exclusion']['sha256'],
+            'sources':{'points_sha256':digest(source),'raster_sha256':source_sha256,'open_water_sha256':meta['water_exclusion']['sha256'],'screening_exclusions_sha256':meta['screening_exclusions']['sha256'],
                        'original_screening_sha256_unchanged_before_after':True},
             'limitations':['Point records may contain repeated coordinates or multiple records per asset; counts are not unique buildings, residents or damaged assets.',
                           '2009 sewer routes do not establish current connectivity, capacity, drain inlets or condition.',
                           'Green area geometry is contextual; no infiltration credit or protection factor was assumed.',
                           'Uncertain terrain and NoData are retained as separate classes and never counted as lower signal.',
                           'Mapped existing open water is a separate excluded inventory bucket; it is not assigned a low or safe score. Unmapped waterways may remain; no line buffers or upstream terrain changes are inferred.',
+                          'Mapped river channels and stadium footprints are a separate, higher-precedence user-policy exclusion bucket; exclusion does not establish safety and original terrain remains unchanged.',
                           'D8 concentration and combined scores contain strong grid/facet routing artefacts. Exposure overlaps for those experimental modes are especially sensitive to the routing method; they are not verified flood priorities.']}
     for mode in MODES:
         assert sum(v['point_count'] for v in modes[mode]['by_class'].values())==322025

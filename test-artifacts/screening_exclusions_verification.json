@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "verified_utc": "2026-10-25T12:59:13.051112+00:00",
+  "public_demo": "https://willing-platinum-tries-their.trycloudflare.com",
+  "policy_revision": "bfdf087d674d5c81",
+  "pluvial_revision": "0a7a8ca315510679",
+  "review_revision": "973703f7b5f64d0b",
+  "policy_sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd",
+  "source_counts": {
+    "river_channel_cells": 55770,
+    "stadium_cells": 20291,
+    "union_cells": 76061,
+    "overlap_cells": 0,
+    "channel_polygons": 52,
+    "stadium_polygons": 40,
+    "outside_valid_terrain_removed": 20890
+  },
+  "public_samples": {
+    "Vasil Levski stadium": {
+      "status": "excluded_user_screening",
+      "score": null,
+      "ponding_score": null,
+      "screening_exclusion_reason": "stadium"
+    },
+    "Perlovska channel": {
+      "status": "excluded_user_screening",
+      "score": null,
+      "ponding_score": null,
+      "screening_exclusion_reason": "river"
+    },
+    "Nearby eligible land": {
+      "status": "ok",
+      "score": 92.94451141357422,
+      "ponding_score": 92.94451141357422,
+      "screening_exclusion_reason": null
+    }
+  },
+  "public_risk_tile_checks": [
+    {
+      "location": "Vasil Levski stadium",
+      "mode": "heatmap",
+      "alpha": 0,
+      "revision": "0a7a8ca315510679"
+    },
+    {
+      "location": "Vasil Levski stadium",
+      "mode": "ponding",
+      "alpha": 0,
+      "revision": "0a7a8ca315510679"
+    },
+    {
+      "location": "Vasil Levski stadium",
+      "mode": "combined",
+      "alpha": 0,
+      "revision": "0a7a8ca315510679"
+    },
+    {
+      "location": "Vasil Levski stadium",
+      "mode": "concentration",
+      "alpha": 0,
+      "revision": "0a7a8ca315510679"
+    },
+    {
+      "location": "Vasil Levski stadium",
+      "mode": "review",
+      "alpha": 0,
+      "revision": "973703f7b5f64d0b"
+    },
+    {
+      "location": "Perlovska channel",
+      "mode": "heatmap",
+      "alpha": 0,
+      "revision": "0a7a8ca315510679"
+    },
+    {
+      "location": "Perlovska channel",
+      "mode": "ponding",
+      "alpha": 0,
+      "revision": "0a7a8ca315510679"
+    },
+    {
+      "location": "Perlovska channel",
+      "mode": "combined",
+      "alpha": 0,
+      "revision": "0a7a8ca315510679"
+    },
+    {
+      "location": "Perlovska channel",
+      "mode": "concentration",
+      "alpha": 0,
+      "revision": "0a7a8ca315510679"
+    },
+    {
+      "location": "Perlovska channel",
+      "mode": "review",
+      "alpha": 0,
+      "revision": "973703f7b5f64d0b"
+    }
+  ],
+  "automated_checks": {
+    "python": 303,
+    "javascript": 36,
+    "python_scope": "Full suite:300 passed;three superseded policy assertions corrected and targeted rerun passed. Backend and data unchanged between runs.",
+    "real_exclusion_regressions": 14,
+    "production_build": "PASS"
+  },
+  "scope": "Mapped river-channel and stadium footprints excluded from risk layers, review categories, exposure summaries and all six runoff/depth scenario bands.",
+  "preservation": "Original eight-band scores and open-water mask SHA256 unchanged; native DTM and source observations retained.",
+  "browser_check": "Public Vasil Levski inspector shows excluded by user choice, with no risk score/category; surrounding land remains scored.",
+  "screenshot": "test-artifacts/river_stadium_exclusions.jpg"
+}

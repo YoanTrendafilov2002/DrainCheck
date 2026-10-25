@@ -237,7 +237,8 @@ def test_valid_complex_real_selection_receipt_over_2mib_persists_and_restores(ac
 def test_real_scenario_portable_id_survives_changed_container_root(tmp_path):
     names = ['data/cache/spatial.sqlite', 'data/cache/pluvial_5m.tif',
              'data/cache/pluvial_provenance.json', 'data/cache/open_water_mask_5m.tif',
-             'data/cache/open_water_meta.json', 'data/cache/revision.txt']
+             'data/cache/open_water_meta.json', 'data/cache/revision.txt',
+             'data/cache/screening_exclusions_5m.tif', 'data/cache/screening_exclusions_meta.json']
     # Hard links preserve genuine immutable bytes without making another 2 GB
     # copy. The source is never modified; each container has distinct paths.
     entries = {name:{'size':(ROOT/name).stat().st_size,

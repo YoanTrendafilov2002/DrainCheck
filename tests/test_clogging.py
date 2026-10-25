@@ -50,7 +50,7 @@ def test_real_selection_sources_grid_green_and_volume(real_scenario):
     stats = result['statistics']
     assert math.isclose(stats['selection_area_m2'],160000,abs_tol=.001)
     assert stats['green_excluded_area_m2'] > 0
-    assert stats['rasterized_selection_area_m2'] == sum(stats[key] for key in ['eligible_nongreen_land_area_m2','green_excluded_area_m2','mapped_water_excluded_area_m2','uncertain_or_missing_terrain_area_m2'])
+    assert stats['rasterized_selection_area_m2'] == sum(stats[key] for key in ['eligible_nongreen_land_area_m2','green_excluded_area_m2','mapped_water_excluded_area_m2','screening_policy_excluded_area_m2','uncertain_or_missing_terrain_area_m2'])
     assert stats['affected_eligible_area_m2'] > 0
     assert result['route_counts']['existing'] >= 1
     assert result['selected_route_counts']['existing'] == result['route_counts']['existing']

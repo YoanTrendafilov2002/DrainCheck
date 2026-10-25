@@ -19,13 +19,37 @@ def test_complete_supplement_and_three_reference_scripts_remain_original_bytes()
             assert digest(ROOT/name)==record['sha256'],name
     assert digest(ROOT/'handoff/Sofia_App_Codex_Handoff.rainfall.original.zip')==receipt['supplement_zip_sha256']
 
-def test_supplement_does_not_modify_existing_raw_data_screening_water_mask_or_spatial_index():
+def test_supplement_preserves_originals_and_policy_derivatives_keep_source_identity():
     baseline=json.loads((ROOT/'handoff/pre_rainfall_app_manifest.json').read_text())
     required={'data/cache/spatial.sqlite','data/cache/pluvial_5m.tif','data/cache/open_water_mask_5m.tif',
               'data/derived/pluvial_land_screening_5m.tif'}
+    # These four derivatives intentionally acquire the requested river/stadium
+    # exclusion. Every original and every unrelated derivative retains its hash.
+    recut={'data/derived/pluvial_land_screening_5m.tif',
+           'data/derived/pluvial_land_screening_5m.json',
+           'data/derived/infrastructure_terrain_screening.csv',
+           'data/derived/sewer_route_terrain_screening.csv'}
     for name,record in baseline.items():
         if name.startswith(('data/raw/','data/derived/')) or name in required:
+            if name in recut:continue
             assert digest(ROOT/name)==record['sha256'],name
+    exposure=json.loads((ROOT/'data/cache/pluvial_exposure.json').read_text())
+    policy=json.loads((ROOT/'data/cache/screening_exclusions_meta.json').read_text())
+    export=json.loads((ROOT/'data/derived/pluvial_land_screening_5m.json').read_text())
+    assert policy['exclusions_are_policy'] is True
+    assert policy['sha256']==digest(ROOT/policy['file'])
+    assert exposure['screening_exclusions_revision']==policy['revision']
+    assert exposure['sources']['screening_exclusions_sha256']==policy['sha256']
+    assert exposure['sources']['raster_sha256']==baseline['data/cache/pluvial_5m.tif']['sha256']
+    assert exposure['sources']['open_water_sha256']==baseline['data/cache/open_water_mask_5m.tif']['sha256']
+    assert export==exposure['land_raster_export']
+    assert export['source_sha256']==exposure['sources']['raster_sha256']
+    assert export['screening_exclusions_sha256']==policy['sha256']
+    assert export['output_sha256']==digest(ROOT/'data/derived/pluvial_land_screening_5m.tif')
+    assert export['verification']['all_nonexcluded_land_score_pixels_identical'] is True
+    assert export['verification']['all_policy_score_pixels_nodata'] is True
+    # Full source-record preservation and actual per-cell CSV classes/scores
+    # remain independently checked in test_pluvial_exposure.py.
 
 def test_rainfall_and_restored_display_curve_do_not_invalidate_existing_scales_or_exposure():
     before=(ROOT/'data/cache/revision.txt').read_text().strip()

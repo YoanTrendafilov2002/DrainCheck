@@ -53,7 +53,7 @@ S = max(P, C)
 
 P describes relative topographic depression. C combines contributing-area rank with low-slope rank. S retains the stronger pathway. The reference scope includes the available municipal terrain, including mountains; a percentile is not a rainfall return period. The 50/70/85 cutoffs are analyst-selected display classes, not validated flood thresholds.
 
-Cells require finite, valid terrain factors, slope between 0 and 90 degrees, contributing area at least 25 m2, and no upstream-boundary flag. Mapped open water is separately excluded. Known terrain lacking an eligible score is distinguishable from outside-coverage NoData. The source raster, scores and rank reference remain unchanged by building visibility, rainfall overlays, area selection or scenario calculations.
+Cells require finite, valid terrain factors, slope between 0 and 90 degrees, contributing area at least 25 m2, and no upstream-boundary flag. Mapped open water is separately excluded. A mandatory, separate user-requested mask also excludes mapped river channels (including mapped intermittent channels) and stadium footprints from every displayed risk mode, review category and blockage scenario. These locations are unscored, not assigned zero risk. Known terrain lacking an eligible score is distinguishable from outside-coverage NoData. The source raster, scores and rank reference remain unchanged by these exclusions, building visibility, rainfall overlays, area selection or scenario calculations. See [the exclusion sources and grid policy](SCREENING_EXCLUSIONS.md).
 
 Depression-fill depth is the difference against a filled topographic surface; it is not forecast floodwater depth. D8 routing in the source contributing area shows facet/stripe artefacts, including high C on some near-uniform slopes. P is therefore the normal heatmap pathway; C and S remain accessible experimental diagnostics. Buildings, kerbs, culverts, inlets and underground pipes are not inserted as verified hydraulic barriers or connections.
 
@@ -123,9 +123,9 @@ clogged excess E1  = E0                           outside influence
 additional excess = E1 - E0
 ```
 
-Eligible cells lie inside the AOI, have genuine valid terrain scores and no upstream-boundary flag, are not mapped water, and are not mapped green. For reconciliation, exclusion counts give water first, uncertain/missing terrain next, then green on otherwise eligible land. Remaining cells form eligible nongreen land. All these disjoint areas sum to the rasterized AOI area. Exact vector area can differ slightly from the cell-centre area at boundaries.
+Eligible cells lie inside the AOI, have genuine valid terrain scores and no upstream-boundary flag, and are neither mapped water, mapped river-channel/stadium exclusions nor mapped green. Scenario statistics report the disjoint exclusions and their precedence so that these areas plus eligible nongreen land reconcile with the rasterized AOI. Exact vector area can differ slightly from the cell-based area at boundaries.
 
-Every eligible cell receives the baseline calculation. Only eligible cells within the selected existing-route influence receive the clogged calculation. Green cells, water and uncertain/outside cells are NoData in all three scenario bands, rather than zero-valued evidence of safety. The original P/C/S values are not recalculated. The additional statistic for affected area with P at least 70 is a terrain-overlap measure, not a fused probability or a routing weight.
+Every eligible cell receives the baseline calculation. Only eligible cells within the selected existing-route influence receive the clogged calculation. Green cells, water, user-excluded river/stadium cells and uncertain/outside cells are NoData in runoff and depth scenario bands, rather than zero-valued evidence of safety. The original P/C/S values are not recalculated. The additional statistic for affected area with P at least 70 is a terrain-overlap measure, not a fused probability or a routing weight.
 
 ## 9. Estimating local ponding depth from terrain
 

@@ -68,8 +68,7 @@ def test_receipt_revision_cannot_stay_stale_after_a_source_change(tmp_path):
 
 
 @pytest.mark.parametrize('name,lon,lat',[
-    ('Ariana real island',23.336833150705026,42.68967465294718),
-    ('Vasil Levski real pitch',23.3352531692,42.6875642953)])
+    ('Ariana real island',23.336833150705026,42.68967465294718)])
 @pytest.mark.parametrize('mode,score_key',[
     ('depressions','ponding_score'),('concentration','concentration_score'),('screening','score')])
 def test_high_zoom_valid_land_is_visible_with_its_actual_class(name,lon,lat,mode,score_key):

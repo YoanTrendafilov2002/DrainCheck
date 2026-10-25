@@ -17,12 +17,14 @@ client = TestClient(api.app)
 
 def test_review_metadata_explains_rules_source_roles_and_unknown_clogging():
     meta = client.get('/api/refinement/meta').json()
-    assert meta['available'] and meta['revision'] == '853d77c47901ec54'
+    assert meta['available'] and meta['revision']
+    assert meta['screening_exclusions']['enabled']
+    assert meta['screening_exclusions']['revision'] == api.pluvial.meta()['screening_exclusions']['revision']
     assert [c['value'] for c in meta['classes']] == list(range(6))
     assert isinstance(meta['formula'], str) and 'P>=70' in meta['formula']
     assert meta['source_revisions']['pluvial'] == api.pluvial.meta()['revision']
     assert meta['clogging_analysis']['available'] is False
-    assert len(meta['logic_links']) == 7
+    assert len(meta['logic_links']) == 8
     assert 'user' in meta['scenario_assumption'].lower()
     with rasterio.open(ROOT/'data/derived/review_priority_5m.tif') as source:
         assert meta['scenario_assumption'] == source.tags()['SCENARIO_ASSUMPTION']

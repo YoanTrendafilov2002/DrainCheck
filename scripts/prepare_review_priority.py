@@ -5,7 +5,7 @@ The original terrain, P/C/S, rainfall, cadastre and historical data are read-onl
 Run: python scripts/prepare_review_priority.py
 """
 from pathlib import Path
-import hashlib, json, os, sqlite3, time
+import hashlib, json, os, sqlite3, time, sys
 from datetime import datetime, timezone
 import numpy as np
 import rasterio
@@ -21,9 +21,10 @@ APP=Path(__file__).resolve().parents[1]
 LABELS={0:'Lower ponding terrain signal',1:'Raised ponding terrain signal',
         2:'Higher ponding terrain signal',3:'Higher ponding + potential building footprint',
         4:'Historical flood footprint',5:'Historical footprint + potential building footprint',
+        252:'Excluded mapped river channel / stadium',
         253:'Excluded mapped open water',254:'Uncertain terrain',255:'Outside terrain'}
 PALETTE={0:'#fff1c4',1:'#fbc66e',2:'#ed824b',3:'#bb3d40',4:'#8b75c2',5:'#632476',
-         253:'#00000000',254:'#80878c',255:'#00000000'}
+         252:'#00000000',253:'#00000000',254:'#80878c',255:'#00000000'}
 METHOD='evidence-review-priority-v1'
 SCENARIO=('At the user’s request, the available datasets are treated as compatible '
           'for a combined review scenario. Actual source dates, spatial gaps and '
@@ -36,7 +37,7 @@ def sha(path):
     with Path(path).open('rb') as f:
         for b in iter(lambda:f.read(4*1024*1024),b''):h.update(b)
     return h.hexdigest()
-def classify(p,known,water,uncertain,history,buildings):
+def classify(p,known,water,uncertain,history,buildings,screening_exclusions=None):
     """Ordered review rules; no numerical averaging or alteration of P."""
     result=np.full(p.shape,255,dtype='uint8')
     eligible=known&~water&~uncertain
@@ -48,12 +49,95 @@ def classify(p,known,water,uncertain,history,buildings):
     result[eligible&history&buildings]=5
     result[known&uncertain&~water]=254
     result[known&water]=253
+    if screening_exclusions is not None:result[known & screening_exclusions]=252
     return result
+
+def mask_existing(app=APP):
+    """Recut a checksum-verified prior review; do not rerun unchanged joins.
+
+    Only the explicit policy mask is added. Its cells become code252; every
+    other category remains identical. Raw historical/cadastral inputs and original
+    terrain remain read-only and are hash-checked against the old receipt.
+    """
+    app=Path(app);sys.path.insert(0,str(app))
+    from backend.pluvial import LocalPluvial
+    from backend.refinement import LocalReviewPriority
+    cache=app/'data/cache';out=app/'data/derived/review_priority_5m.tif'
+    receipt=cache/'review_priority_meta.json';data=load(receipt)
+    pluvial=LocalPluvial(cache);meta=pluvial.meta()
+    if not meta.get('available'):raise ValueError(meta.get('message','Screening inputs unavailable'))
+    revisions=data['source_revisions']
+    old_revision=hashlib.sha256(('mapped-water-v1:'+meta['terrain_revision']+':'+meta['water_exclusion']['revision']).encode()).hexdigest()[:16]
+    if (revisions.get('terrain')!=meta['terrain_revision'] or revisions.get('water')!=meta['water_exclusion']['revision']
+        or revisions.get('pluvial') not in (old_revision,meta['revision'])):
+        raise ValueError('Existing review terrain/water identity changed; run the complete preparation')
+    if revisions.get('screening_exclusions') and revisions['screening_exclusions']!=meta['screening_exclusions']['revision']:
+        raise ValueError('A prior policy mask cannot be reversed by recutting; run complete preparation')
+    for key,record in data['source_files'].items():
+        if key.startswith('screening_exclusions'):continue
+        path=app/record['file']
+        if path.stat().st_size!=record['size_bytes'] or sha(path)!=record['sha256']:
+            raise ValueError('Existing review source changed: '+key+'; run complete preparation')
+    for key,name in [('cadastre','cadastral_buildings_meta.json'),('history','historical_flood_zones_meta.json')]:
+        if load(cache/name)['revision']!=revisions[key]:raise ValueError('Existing review '+key+' revision changed')
+    LocalReviewPriority.validate((str(out.resolve()),out.stat().st_size,out.stat().st_mtime_ns),data['output_sha256'])
+    partial=out.with_suffix('.policy.partial.tif');counts=np.zeros(256,dtype='int64');changed=0
+    original_sha=data['output_sha256']
+    try:
+        with rasterio.open(out) as src,rasterio.open(pluvial.exclusions.path) as mask:
+            with rasterio.open(partial,'w',**src.profile) as dst:
+                dst.set_band_description(1,'evidence_based_review_priority')
+                dst.update_tags(**{**src.tags(),'SCREENING_EXCLUSIONS_REVISION':meta['screening_exclusions']['revision'],
+                                   'METHOD':'evidence-review-priority-policy-v2'})
+                for _,window in src.block_windows(1):
+                    original=src.read(1,window=window);excluded=mask.read(1,window=window)>0
+                    code=original.copy();code[excluded&(original!=255)]=252
+                    changed+=int(np.count_nonzero(code!=original));counts+=np.bincount(code.ravel(),minlength=256)
+                    dst.write(code,1,window=window)
+        with rasterio.open(out) as src,rasterio.open(partial) as dst,rasterio.open(pluvial.exclusions.path) as mask:
+            for _,window in src.block_windows(1):
+                original=src.read(1,window=window);excluded=mask.read(1,window=window)>0;code=dst.read(1,window=window)
+                if not np.array_equal(code[~excluded],original[~excluded]):raise AssertionError('Nonexcluded review cells changed')
+                if np.any(code[excluded&(original!=255)]!=252):raise AssertionError('Excluded review cell retained a category')
+        if sha(out)!=original_sha:raise ValueError('Existing derivative changed during recut')
+        output_sha=sha(partial)
+        data['unmasked_review_counts']=data.get('unmasked_review_counts',data['counts'])
+        data['classes']=[{'code':k,'label':v,'colour':PALETTE[k],
+            'color_rgba':[int(PALETTE[k][i:i+2],16) for i in [1,3,5]]+([0] if k in [252,253,255] else [185] if k==254 else [190]),
+            'cell_count':int(counts[k]),'area_km2':int(counts[k])*25/1e6} for k,v in LABELS.items()]
+        data['counts']={**data['counts'],'all_cells':int(counts.sum()),'eligible_land_cells':int(counts[:6].sum()),
+            'known_terrain_cells':int(counts[:255].sum()),'screening_policy_excluded_cells':int(counts[252]),
+            'mapped_water_cells':int(counts[253]),'uncertain_cells':int(counts[254]),'outside_cells':int(counts[255])}
+        # Lower-signal footprint membership cannot be reconstructed from classes.
+        # Keep its earlier value only in the explicitly unmasked receipt above.
+        data['counts'].pop('potential_footprint_cells_eligible_land',None)
+        for key,path in [('screening_exclusions',pluvial.exclusions.path),('screening_exclusions_receipt',pluvial.exclusions.receipt)]:
+            stat=path.stat();data['source_files'][key]={'file':path.relative_to(app).as_posix(),'size_bytes':stat.st_size,'mtime_ns':stat.st_mtime_ns,'sha256':sha(path)}
+        data['source_revisions'].update(pluvial=meta['revision'],screening_exclusions=meta['screening_exclusions']['revision'])
+        data['output_sha256']=output_sha;data['method']='evidence-review-priority-policy-v2'
+        data['revision']=hashlib.sha256(('review-policy-v2:'+output_sha+':'+meta['revision']).encode()).hexdigest()[:16]
+        data['screening_exclusions']=meta['screening_exclusions']
+        rules=data['formula']['ordered_rules']
+        data['formula']['ordered_rules']=[rules[0],'Mapped river-channel or stadium footprint on known terrain=>252 (user exclusion policy)']+[rule for rule in rules[1:] if '=>252' not in rule]
+        data['verification'].update(nonexcluded_review_pixels_identical=True,all_policy_cells_excluded=True,
+            policy_changed_cells=changed,previous_review_sha256=original_sha,all_original_sources_unchanged=True)
+        data['created_utc']=datetime.now(timezone.utc).isoformat();data['reproduce']='python scripts/prepare_review_priority.py --mask-only (requires matching original review); or full preparation'
+        os.replace(partial,out)
+        pending=receipt.with_suffix('.policy.partial.json');pending.write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8');os.replace(pending,receipt)
+        print(json.dumps({'revision':data['revision'],'counts':data['counts'],'changed_cells':changed},indent=2),flush=True)
+        return data
+    finally:
+        if partial.exists():partial.unlink()
 
 def prepare(app=APP):
     app=Path(app);start=time.time();xy=Transformer.from_crs(4326,7801,always_xy=True)
+    sys.path.insert(0,str(app))
+    from backend.pluvial import LocalPluvial
     cache=app/'data/cache';out=app/'data/derived/review_priority_5m.tif';partial=out.with_suffix('.partial.tif')
+    pluvial=LocalPluvial(cache);screening_meta=pluvial.meta()
+    if not screening_meta.get('available'):raise ValueError(screening_meta.get('message','Screening exclusions unavailable'))
     sources={'terrain_scores':cache/'pluvial_5m.tif','water_mask':cache/'open_water_mask_5m.tif',
+             'screening_exclusions':pluvial.exclusions.path,'screening_exclusions_receipt':pluvial.exclusions.receipt,
              'historical_polygons':app/'data/reference/historical_floods/sofiaplan_flood_zones_2021_display.geojson',
              'cadastre_index':cache/'cadastral_buildings.sqlite'}
     before={key:{'file':p.relative_to(app).as_posix(),'size_bytes':p.stat().st_size,'mtime_ns':p.stat().st_mtime_ns,'sha256':sha(p)} for key,p in sources.items()}
@@ -70,7 +154,7 @@ def prepare(app=APP):
     history_cells=0;history_known_cells=0;query_rows=0;query_ids=set();processed=0
     # The derivative carries categorical codes only. Original Float32 factors stay intact.
     try:
-        with rasterio.open(sources['terrain_scores']) as src,rasterio.open(sources['water_mask']) as water:
+        with rasterio.open(sources['terrain_scores']) as src,rasterio.open(sources['water_mask']) as water,rasterio.open(pluvial.exclusions.path) as exclusions:
             if (src.crs.to_epsg()!=7801 or src.count!=8 or src.shape!=(10869,10345)
                 or list(src.transform)[:6]!=[5,0,299392,0,-5,4753611]
                 or water.shape!=src.shape or water.transform!=src.transform or water.crs!=src.crs):
@@ -86,7 +170,8 @@ def prepare(app=APP):
                     a=src.read([1,5,6,7,8],window=window)
                     known=np.isfinite(a[0])&(a[0]!=src.nodata)
                     water_mask=water.read(1,window=window)==1
-                    eligible=known&~water_mask&(a[1]==0)&np.all(np.isfinite(a[2:])&(a[2:]>=0),axis=0)
+                    policy_excluded=exclusions.read(1,window=window)>0
+                    eligible=known&~water_mask&~policy_excluded&(a[1]==0)&np.all(np.isfinite(a[2:])&(a[2:]>=0),axis=0)
                     uncertain=known&~eligible&~water_mask
                     tr=window_transform(window,src.transform);bounds=window_bounds(window,src.transform)
                     history=np.zeros(known.shape,dtype='uint8');footprint=np.zeros(known.shape,dtype='uint8')
@@ -101,7 +186,7 @@ def prepare(app=APP):
                             geom=transform_coordinates(from_wkb(wkb),xy.transform,interleaved=False)
                             if geom.intersects(tile_box):shapes.append((mapping(geom.intersection(tile_box)),1))
                         if shapes:rasterize(shapes,out=footprint,transform=tr,all_touched=True)
-                    code=classify(a[2],known,water_mask,uncertain,history.astype(bool),footprint.astype(bool))
+                    code=classify(a[2],known,water_mask,uncertain,history.astype(bool),footprint.astype(bool),policy_excluded)
                     counts+=np.bincount(code.ravel(),minlength=256)
                     all_footprint_cells+=int((known&(footprint==1)).sum())
                     eligible_footprint_cells+=int((eligible&(footprint==1)).sum())
@@ -128,14 +213,14 @@ def prepare(app=APP):
       'scenario_assumption':SCENARIO,'output_file':out.relative_to(app).as_posix(),'output_sha256':output_sha,
       'grid':{'crs':'EPSG:7801','shape':[10869,10345],'transform':[5,0,299392,0,-5,4753611],'nodata':255},
       'band':'evidence_based_review_priority','classes':[{'code':k,'label':v,'colour':PALETTE[k],
-                'color_rgba':[int(PALETTE[k][i:i+2],16) for i in [1,3,5]]+([0] if k in [253,255] else [185] if k==254 else [190]),
+                'color_rgba':[int(PALETTE[k][i:i+2],16) for i in [1,3,5]]+([0] if k in [252,253,255] else [185] if k==254 else [190]),
                 'cell_count':int(counts[k]),'area_km2':int(counts[k])*25/1e6} for k,v in LABELS.items()],
       'counts':{'all_cells':int(counts.sum()),'eligible_land_cells':int(counts[:6].sum()),'known_terrain_cells':int(counts[:255].sum()),
-                'mapped_water_cells':int(counts[253]),'uncertain_cells':int(counts[254]),'outside_cells':int(counts[255]),
+                'mapped_water_cells':int(counts[253]),'screening_policy_excluded_cells':int(counts[252]),'uncertain_cells':int(counts[254]),'outside_cells':int(counts[255]),
                 'potential_footprint_cells_known_terrain':all_footprint_cells,'potential_footprint_cells_eligible_land':eligible_footprint_cells,
                 'historical_union_cell_centres':history_cells,'historical_union_known_terrain_cells':history_known_cells,
                 'queried_distinct_cadastral_source_records':len(query_ids),'query_rows_including_repeated_window_candidates':query_rows},
-      'formula':{'ordered_rules':['Outside known DTM =>255','Mapped qualifying water on known terrain=>253',
+      'formula':{'ordered_rules':['Outside known DTM =>255','Mapped river-channel or stadium footprint on known terrain=>252 (user exclusion policy)','Mapped qualifying water on known terrain=>253',
                     'Known nonwater terrain with boundary influence or invalid required P/C/S factor=>254',
                     'Eligible historical footprint plus potential cadastral footprint=>5','Eligible historical footprint=>4',
                     'Eligible P>=70 plus potential cadastral footprint=>3','Eligible P>=70=>2','Eligible50<=P<70=>1','Other eligible land=>0'],
@@ -143,13 +228,14 @@ def prepare(app=APP):
                  'building':'Actual AGKK geometry queried via read-only RTree, reprojected into existing EPSG7801 cells; all_touched=True; source record != unique physical building',
                  'thresholds':'Existing exploratory P thresholds50 and70 reused; no fitted weights or predictive validation',
                  'unchanged':'Original P/C/S raster, ground heights and source values remain unchanged; historical evidence changes this separate display class only'},
-      'source_revisions':{'pluvial':hashlib.sha256(('mapped-water-v1:'+terrain_meta['revision']+':'+water_meta['revision']).encode()).hexdigest()[:16],
+      'source_revisions':{'pluvial':screening_meta['revision'],'screening_exclusions':screening_meta['screening_exclusions']['revision'],
                           'terrain':terrain_meta['revision'],'water':water_meta['revision'],'cadastre':cad_meta['revision'],'history':hist_meta['revision'],
                           'rainfall_context':load(cache/'rainfall_meta.json')['revision']},
       'source_dates':{'terrain':'Source filename2024; measurement date/vertical accuracy unverified','historical':'2021; January/February discrepancy; no per-feature timestamp',
                       'cadastre':'Source date unknown; snapshot retrieved25Oct2026','rainfall':'27June2025 Europe/Sofia daily totals','green':'Supplied municipal2020-labelled source',
                       'sewer':'Supplied municipal2009-labelled route source; some planned routes'},
       'source_files':before,'source_counts':{'historical_features':len(historical['features']),'cadastre_source_records':cad_meta['feature_count']},
+      'screening_exclusions':screening_meta['screening_exclusions'],
       'source_urls':{'historical':hist_meta['source_url'],'cadastre':cad_meta['source_url'],
                      'open_water':'https://www.openstreetmap.org','terrain':'https://api.sofiaplan.bg/datasets/656'},
       'context_not_numerical_hazard_inputs':['2025 daily rainfall','green-area labels','sewer route/point density or status','reported clogging or drainage narratives without spatially resolved hydraulic inputs'],
@@ -170,4 +256,6 @@ def prepare(app=APP):
     print(json.dumps({'revision':revision,'output':str(out),'size_bytes':out.stat().st_size,'counts':result['counts'],'classes':result['classes'],'runtime_seconds':result['runtime_seconds']},ensure_ascii=False,indent=2))
     return result
 
-if __name__=='__main__':prepare()
+if __name__=='__main__':
+    if '--mask-only' in sys.argv:mask_existing()
+    else:prepare()

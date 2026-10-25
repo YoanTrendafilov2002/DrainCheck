@@ -1,5 +1,11 @@
 # Vasil Levski stadium: what actually drives the map colour
 
+**Current display policy:** mapped stadium footprints are now explicitly excluded
+from every risk layer and blockage scenario at the user's request. The original
+terrain values and the diagnostic measurements below remain unchanged. An
+excluded stadium is unscored, rather than assigned a low or zero flood risk.
+See [the screening exclusion policy](SCREENING_EXCLUSIONS.md).
+
 **The verified raster contains no depression-fill depth anywhere in the mapped pitch or whole Vasil Levski stadium footprint.** Its higher combined score comes entirely from the experimental concentration calculation: a very shallow slope and D8 contributing-area ranking. The raster does not support explaining this stadium as a filled topographic bowl.
 
 The [actual-data four-panel check](../test-artifacts/vasil-levski-terrain-check.png) shows elevation, geometric fill depth, D8 contributing area and concentration score, with the actual OpenStreetMap stadium/pitch outlines. [The JSON receipt](../test-artifacts/stadium_screening_check.json) records geometry sources, exact coordinates, raster identity, native-pixel checks, percentile references and zonal distributions. No map values or stadium masks were changed.

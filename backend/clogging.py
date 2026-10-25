@@ -56,7 +56,7 @@ ASSUMPTIONS = [
     'Only selected existing source routes create the assumed influence buffer. Planned and open-channel source routes are reported separately and do not imply functioning pipes.',
     'The influence distance is a user-defined neighbourhood, not a catchment or connected pipe service area. Water is not routed between cells.',
     'Excess runoff is potential locally unremoved runoff in mm; it is not predicted flood depth, water level, damage or calibrated flood probability.',
-    'Mapped open water, uncertain terrain and cells outside the genuine terrain coverage are excluded. Green and area membership use 5 m cell centres.',
+    'Mapped open water, mapped river channels, stadium footprints, uncertain terrain and cells outside the genuine terrain coverage are excluded. River/stadium exclusion is a user policy, not evidence of safety. Green and area membership use 5 m cell centres.',
     'The unchanged terrain ponding indicator supplies context. No arbitrary combined flood probability is fitted.'
     , 'Estimated ponding depth allocates only locally generated potential excess runoff within each 8-connected positive-depression component. Its actual mean terrain elevations and minimum recorded fill-surface elevation define a capped storage curve; this is not a routed inundation forecast.'
     , 'Runoff on zero-fill land is unallocated. Runoff exceeding a component storage capacity is reported as overflow, without inventing its downstream destination. Components near the selection or excluded-land boundary are potentially truncated.'
@@ -231,18 +231,21 @@ class CloggingScenarios:
     def source_state(self):
         meta = self.pluvial.meta()
         if not meta.get('available') or not self.database.is_file():
-            raise RuntimeError('Real terrain, mapped-water exclusion and full vector index are required for a blockage scenario')
+            raise RuntimeError('Real terrain, verified water/river/stadium exclusions and full vector index are required for a blockage scenario')
         paths = [self.database, self.pluvial.path, self.pluvial.receipt,
-                 self.pluvial.water.path, self.pluvial.water.receipt]
+                 self.pluvial.water.path, self.pluvial.water.receipt,
+                 self.pluvial.exclusions.path, self.pluvial.exclusions.receipt]
         revision_path = self.root/'data/cache/revision.txt'
         if revision_path.is_file():
             paths.append(revision_path)
         river_meta = self.river_context.meta() if self.river_context is not None else {}
         state = {'implementation_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                'screening_exclusion_implementation_sha256': hashlib.sha256(Path(__file__).with_name('screening_exclusions.py').read_bytes()).hexdigest(),
                 'river_implementation_sha256': hashlib.sha256(Path(__file__).with_name('river_context.py').read_bytes()).hexdigest() if self.river_context is not None else None,
                 'pluvial_revision': meta['revision'],
                 'river_revision': river_meta.get('revision') if river_meta.get('available') else None,
                 'water_revision': meta['water_exclusion']['revision'],
+                'screening_exclusions_revision': meta['screening_exclusions']['revision'],
                 'spatial_revision': revision_path.read_text(encoding='ascii').strip() if revision_path.is_file() else None,
                 'files': [list(file_signature(path)) for path in paths]}
         if self.snapshot is not None:
@@ -371,12 +374,14 @@ class CloggingScenarios:
             green = burn(greens) & area
             influence_geometry = union_all(active).buffer(params['influence_distance_m']).intersection(metric) if active else None
             influence = burn([influence_geometry] if influence_geometry is not None and not influence_geometry.is_empty else []) & area
-            with rasterio.open(self.pluvial.path) as src, rasterio.open(self.pluvial.water.path) as water_src:
+            with rasterio.open(self.pluvial.path) as src, rasterio.open(self.pluvial.water.path) as water_src, rasterio.open(self.pluvial.exclusions.path) as exclusion_src:
                 terrain = src.read([1,2,5,6,8], window=window)
                 water = water_src.read(1, window=window) == 1
+                policy_flags = exclusion_src.read(1, window=window)
+                policy_excluded = policy_flags > 0
             finite_terrain = np.all(np.isfinite(terrain) & (terrain != NODATA), axis=0)
             valid = finite_terrain & (terrain[1] >= 0) & (terrain[2] == 0) & (terrain[3] >= 0) & (terrain[3] <= 100) & (terrain[4] >= 0) & (terrain[4] <= 100)
-            eligible = area & valid & ~water & ~green
+            eligible = area & valid & ~water & ~green & ~policy_excluded
             impacted = eligible & influence
             effective, baseline_mm, clogged_mm = runoff_values(**{k: v for k,v in params.items() if k not in ['influence_distance_m','river_proximity_m']})
             baseline = np.full(shape_hw, NODATA, dtype='float32')
@@ -433,11 +438,14 @@ class CloggingScenarios:
                       'influence_geometry': mapping(transform(influence_geometry, TO_GEO.transform, interleaved=False)) if influence_geometry is not None and not influence_geometry.is_empty else None,
                       'grid': {'crs':'EPSG:7801','transform':list(grid)[:6], 'width':width,'height':height,'resolution_m':5,'cell_area_m2':cell_area,'row_offset':row0,'column_offset':col0},
                       'statistics': {'selection_area_m2':float(metric.area),'rasterized_selection_area_m2':area_m2(area),
-                                     'eligible_nongreen_land_area_m2':area_m2(eligible), 'green_excluded_area_m2':area_m2(area & green & valid & ~water),
+                                     'eligible_nongreen_land_area_m2':area_m2(eligible), 'green_excluded_area_m2':area_m2(area & green & valid & ~water & ~policy_excluded),
                                      'mapped_green_area_in_selection_m2':area_m2(green),
                                      'green_within_selected_influence_area_m2':area_m2(green & influence),
-                                     'mapped_water_excluded_area_m2':area_m2(area & water), 'uncertain_or_missing_terrain_area_m2':area_m2(area & ~valid & ~water),
-                                     'exclusion_partition':'Water first, then uncertain/missing terrain, then mapped green on otherwise eligible land; these exclusions plus eligible land partition the rasterized selection.',
+                                     'screening_policy_excluded_area_m2':area_m2(area & policy_excluded),
+                                     'river_channel_excluded_area_m2':area_m2(area & ((policy_flags & 1)>0)),
+                                     'stadium_excluded_area_m2':area_m2(area & ((policy_flags & 2)>0)),
+                                     'mapped_water_excluded_area_m2':area_m2(area & water & ~policy_excluded), 'uncertain_or_missing_terrain_area_m2':area_m2(area & ~valid & ~water & ~policy_excluded),
+                                     'exclusion_partition':'River/stadium policy first (river and stadium subcounts may overlap), then other mapped water, then uncertain/missing terrain, then mapped green; policy total plus other exclusions and eligible land partition the rasterized selection.',
                                      'affected_eligible_area_m2':area_m2(impacted), 'higher_ponding_affected_area_m2':area_m2(impacted & (terrain[3]>=70)),
                                      'eligible_cell_count':count(eligible),'affected_cell_count':count(impacted),
                                      'effective_rainfall_mm':effective,'baseline_excess_runoff_mm':baseline_mm,
@@ -457,7 +465,8 @@ class CloggingScenarios:
                       'bands': ['baseline_excess_runoff_mm','clogged_excess_runoff_mm','additional_excess_runoff_mm',
                                 'estimated_baseline_local_ponding_depth_m','estimated_clogged_local_ponding_depth_m','estimated_additional_local_ponding_depth_m'],
                       'raster_nodata':NODATA,
-                      'interpretation':'Hypothetical drainage loss and estimated local depression storage on eligible non-green land. Values are not predicted flood depths, probabilities or measured pipe clogging.',
+                      'screening_exclusions':self.pluvial.exclusions.meta(),
+                      'interpretation':'Hypothetical drainage loss and estimated local depression storage on eligible non-green land, excluding mapped river channels and stadiums by user policy. Values are not predicted flood depths, probabilities or measured pipe clogging.',
                       'tiles_url':{mode:f'/api/clogging/scenarios/{identity}/tiles/{mode}/{{z}}/{{x}}/{{y}}.png' for mode in MODES},
                       'download_url':f'/api/clogging/scenarios/{identity}/download'}
             with tempfile.TemporaryDirectory(prefix='scenario-',dir=self.directory) as scratch:
@@ -566,5 +575,7 @@ class CloggingScenarios:
                                   resampling=Resampling.nearest,num_threads=1,warp_mem_limit=64)
                     dest[river != (1 if river_filter == 'river_adjacent' else 2)] = NODATA
             scale = result['depth_legend']['maximum_m'] if mode.startswith('depth_') else result['legend']['maximum_mm']
-            return png(scenario_rgba(dest,scale))
+            colours=scenario_rgba(dest,scale)
+            colours[self.pluvial.exclusions.tile_mask(z,x,y),3]=0
+            return png(colours)
         return self.tiles.get_or_render(key,render)

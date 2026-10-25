@@ -19,6 +19,7 @@ from rasterio.enums import Resampling
 from .terrain import XY, RASTER_SLOTS, tile_bounds, png
 from .tile_cache import file_signature,read_json_cached,get_tile_cache
 from .open_water import OpenWaterMask
+from .screening_exclusions import ScreeningExclusions, REASONS
 
 METHOD_VERSION = 'terrain-relative-screen-v1'
 NODATA = -9999.0
@@ -123,11 +124,12 @@ class LocalPluvial:
         self.receipt = self.cache/'pluvial_provenance.json'
         self.tiles=get_tile_cache(str((self.cache/'rendered_tiles').resolve()))
         self.water=OpenWaterMask(self.cache)
+        self.exclusions=ScreeningExclusions(self.cache)
         self.green=None
 
     @property
     def available(self):
-        return self.source_available and self.water.available
+        return self.source_available and self.water.available and self.exclusions.available
 
     @property
     def source_available(self):
@@ -154,11 +156,14 @@ class LocalPluvial:
         water=self.water.meta()
         if not water.get('available'):
             return {'available':False,'terrain_available':True,'water_exclusion':water,'message':water.get('message','Mapped-water exclusion unavailable; screening cannot be rendered.')}
+        exclusions=self.exclusions.meta()
+        if not exclusions.get('available'):
+            return {'available':False,'terrain_available':True,'water_exclusion':water,'screening_exclusions':exclusions,'message':exclusions['message']}
         result=read_json_cached(self.receipt);terrain_revision=result['revision']
         result['source_screening']={k:result.get(k) for k in ['classes','counts','sensitivity','revision']}
         result['terrain_revision']=terrain_revision
-        result['revision']=hashlib.sha256(('mapped-water-v1:'+terrain_revision+':'+water['revision']).encode()).hexdigest()[:16]
-        return {'available':True,**result,'water_exclusion':water}
+        result['revision']=hashlib.sha256(('screening-exclusions-v1:'+terrain_revision+':'+water['revision']+':'+exclusions['revision']).encode()).hexdigest()[:16]
+        return {'available':True,**result,'water_exclusion':water,'screening_exclusions':exclusions}
 
     def sample(self, lon, lat, green_absorption=False):
         if not self.available:
@@ -186,7 +191,17 @@ class LocalPluvial:
                           contributing_area_m2=factors['upstream_contributing_area_m2'],
                           boundary_influence=factors['possible_missing_upstream_terrain'] == 1,
                           class_label=None)
-            if self.water.sample_cell(row,col):
+            policy_flags=self.exclusions.sample_cell(row,col)
+            if policy_flags:
+                original={name:factors[name] for name in BAND_NAMES[5:]}
+                for name in BAND_NAMES[5:]:factors[name]=None
+                reason=REASONS[policy_flags]
+                result.update(status='excluded_user_screening',screening_excluded=True,
+                              screening_exclusion_reason=reason,score=None,class_label=None,
+                              ponding_score=None,concentration_score=None,unmasked_scores=original,
+                              original_terrain=original,exclusion_reason='user-requested-'+reason,
+                              message='Mapped river channel or stadium footprint is excluded from screening and scenarios at the user’s request; this is not evidence of no flood risk.')
+            elif self.water.sample_cell(row,col):
                 original={name:factors[name] for name in BAND_NAMES[5:]}
                 for name in BAND_NAMES[5:]:factors[name]=None
                 result.update(status='excluded_open_water',water_excluded=True,score=None,class_label=None,
@@ -224,6 +239,7 @@ class LocalPluvial:
         key=['pluvial-mapped-water-png-v2-zero-valid',rasterio.__version__,Image.__version__,mode,z,x,y,revision,
              file_signature(self.path),file_signature(self.receipt),file_signature(self.water.path),
              file_signature(self.water.receipt),file_signature(__file__),file_signature(Path(__file__).with_name('open_water.py'))]
+        key.extend([file_signature(self.exclusions.path),file_signature(self.exclusions.receipt),file_signature(Path(__file__).with_name('screening_exclusions.py'))])
         key.extend([green_absorption,*( [file_signature(self.green.path),file_signature(self.green.receipt),file_signature(Path(__file__).with_name('green_absorption.py'))] if green_absorption else [])])
         return self.tiles.get_or_render(key,lambda:self._render_tile(mode,z,x,y,green_absorption))
 
@@ -257,5 +273,6 @@ class LocalPluvial:
         if mode != 'boundary':
             rgba[np.isfinite(terrain) & ~np.isfinite(dst)] = [120, 127, 136, 155]
         rgba[water==1,3]=0
+        rgba[self.exclusions.tile_mask(z,x,y),3]=0
         if green_absorption:rgba[self.green.tile_mask(z,x,y),3]=0
         return png(rgba)

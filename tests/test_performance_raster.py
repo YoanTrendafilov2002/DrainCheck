@@ -147,9 +147,10 @@ def test_native_tiles_exact_and_pluvial_changes_only_at_mapped_water(record,tmp_
         reference,water=unmasked_reference(pluvial,mode,z,x,y)
         assert hashlib.sha256(png(reference)).hexdigest()==record['sha256']
         rendered=np.asarray(Image.open(io.BytesIO(actual)))
-        np.testing.assert_array_equal(rendered[water!=1],reference[water!=1])
+        excluded=(water==1)|pluvial.exclusions.tile_mask(z,x,y)
+        np.testing.assert_array_equal(rendered[~excluded],reference[~excluded])
         np.testing.assert_array_equal(rendered[:,:,:3],reference[:,:,:3])
-        assert not np.any(rendered[water==1,3])
+        assert not np.any(rendered[excluded,3])
     # New memory-cache instance forces the persistent-cache read path.
     terrain.tiles=pluvial.tiles=ByteTileCache(tmp_path)
     assert call()==actual
@@ -162,5 +163,8 @@ def test_native_and_terrain_factor_samples_unchanged():
     pluvial=LocalPluvial(ROOT/'data/cache')
     assert terrain.sample(lon,lat)==BASELINE['samples']['native']
     result=pluvial.sample(lon,lat)
-    for key,value in BASELINE['samples']['pluvial'].items():assert result[key]==value
+    assert result['status']=='excluded_user_screening'
+    for key,value in BASELINE['samples']['pluvial']['factors'].items():
+        if key in result['unmasked_scores']:assert result['unmasked_scores'][key]==value
+        else:assert result['factors'][key]==value
     assert result['water_excluded'] is False

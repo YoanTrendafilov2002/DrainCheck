@@ -28,7 +28,8 @@ def meta():
 
 def test_actual_product_identity_and_source_hashes(meta):
     assert sha(APP/meta['output_file'])==meta['output_sha256']
-    assert meta['source_revisions']=={'pluvial':'2a0d5f6899cd036c','terrain':'f42644a668cdc14d',
+    from backend.app import pluvial
+    assert meta['source_revisions']=={'pluvial':pluvial.meta()['revision'],'screening_exclusions':pluvial.exclusions.meta()['revision'],'terrain':'f42644a668cdc14d',
         'water':'ee06795221a5005e','cadastre':'568d80b32ddb42f2','history':'7fbfbcee6ee933f4','rainfall_context':'88036868558c20ce'}
     for source in meta['source_files'].values():assert sha(APP/source['file'])==source['sha256']
     with rasterio.open(APP/meta['output_file']) as r:
@@ -38,23 +39,30 @@ def test_actual_product_identity_and_source_hashes(meta):
 
 def test_full_grid_accounting_and_original_terrain_rules(meta):
     counts=np.zeros(256,dtype='int64')
-    with rasterio.open(APP/meta['output_file']) as dst,rasterio.open(APP/'data/cache/pluvial_5m.tif') as src,rasterio.open(APP/'data/cache/open_water_mask_5m.tif') as water:
+    with rasterio.open(APP/meta['output_file']) as dst,rasterio.open(APP/'data/cache/pluvial_5m.tif') as src,rasterio.open(APP/'data/cache/open_water_mask_5m.tif') as water,rasterio.open(APP/'data/cache/screening_exclusions_5m.tif') as policy:
         for _,w in dst.block_windows(1):
             out=dst.read(1,window=w);a=src.read([1,5,6,7,8],window=w)
-            known=np.isfinite(a[0])&(a[0]!=src.nodata);wet=known&(water.read(1,window=w)==1)
-            good=known&~wet&(a[1]==0)&np.all(np.isfinite(a[2:])&(a[2:]>=0),axis=0)
+            known=np.isfinite(a[0])&(a[0]!=src.nodata);excluded=known&(policy.read(1,window=w)>0);wet=known&~excluded&(water.read(1,window=w)==1)
+            good=known&~wet&~excluded&(a[1]==0)&np.all(np.isfinite(a[2:])&(a[2:]>=0),axis=0)
             assert np.array_equal(out==255,~known)
+            assert np.array_equal(out==252,excluded)
             assert np.array_equal(out==253,wet)
-            assert np.array_equal(out==254,known&~wet&~good)
+            assert np.array_equal(out==254,known&~wet&~excluded&~good)
             assert np.array_equal(out<6,good)
             assert np.all(a[2][out==0]<50)
             assert np.all((a[2][out==1]>=50)&(a[2][out==1]<70))
             assert np.all(a[2][np.isin(out,[2,3])]>=70)
             counts+=np.bincount(out.ravel(),minlength=256)
     assert counts.sum()==10869*10345
-    assert set(np.flatnonzero(counts))=={0,1,2,3,4,5,253,254,255}
+    assert set(np.flatnonzero(counts))=={0,1,2,3,4,5,252,253,254,255}
     assert {c['code']:c['cell_count'] for c in meta['classes']}=={int(i):int(counts[i]) for i in np.flatnonzero(counts)}
-    assert counts[:6].sum()==51682623 and counts[253]==1519688 and counts[254]==480475
+    assert counts[:6].sum()==meta['counts']['eligible_land_cells']
+    assert counts[252]==meta['counts']['screening_policy_excluded_cells']>0
+    assert counts[253]==meta['counts']['mapped_water_cells']
+    assert counts[254]==meta['counts']['uncertain_cells']
+    assert meta['unmasked_review_counts']['eligible_land_cells']==51682623
+    assert meta['unmasked_review_counts']['mapped_water_cells']==1519688
+    assert meta['verification']['nonexcluded_review_pixels_identical']
 
 def test_actual_historical_union_membership_and_exclusions(meta):
     source=load(APP/'data/reference/historical_floods/sofiaplan_flood_zones_2021_display.geojson')
@@ -67,7 +75,7 @@ def test_actual_historical_union_membership_and_exclusions(meta):
             hist=rasterize([(mapping(union),1)],out_shape=out.shape,transform=window_transform(w,r.transform),all_touched=False,dtype='uint8')==1
             assert np.array_equal(np.isin(out,[4,5]),hist&(out<6))
             inside+=int(hist.sum());eligible+=int((hist&(out<6)).sum())
-    assert inside==76343 and eligible==76020
+    assert inside==76343 and 0<eligible<=76020
     assert sum(c['cell_count'] for c in meta['classes'] if c['code'] in [4,5])==eligible
 
 def test_potential_building_overlap_matches_real_geometry_in_independent_windows(meta):
@@ -115,4 +123,4 @@ def test_documented_context_and_area_semantics_are_explicit(meta):
     assert 'not exposed building area' in ' '.join(meta['limitations'])
     assert set(meta['context_not_numerical_hazard_inputs'])=={'2025 daily rainfall','green-area labels',
         'sewer route/point density or status','reported clogging or drainage narratives without spatially resolved hydraulic inputs'}
-    assert all(c['color_rgba'][3]==0 for c in meta['classes'] if c['code'] in [253,255])
+    assert all(c['color_rgba'][3]==0 for c in meta['classes'] if c['code'] in [252,253,255])

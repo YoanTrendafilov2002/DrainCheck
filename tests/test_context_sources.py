@@ -128,4 +128,8 @@ def test_new_context_preserves_spatial_and_screening_revisions():
     assert client.get('/api/meta').json()['revision']=='af34c6d53d5b26fd'
     meta=client.get('/api/pluvial/meta').json()
     assert meta['terrain_revision']=='f42644a668cdc14d'
-    assert meta['revision']=='2a0d5f6899cd036c'
+    policy=client.get('/api/pluvial/screening-exclusions/meta').json()
+    assert policy['available'] and policy['exclusions_are_policy']
+    assert meta['screening_exclusions']['revision']==policy['revision']
+    expected=hashlib.sha256(('screening-exclusions-v1:'+meta['terrain_revision']+':'+meta['water_exclusion']['revision']+':'+policy['revision']).encode()).hexdigest()[:16]
+    assert meta['revision']==expected and meta['revision']!='2a0d5f6899cd036c'

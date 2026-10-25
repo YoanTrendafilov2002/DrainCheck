@@ -1,12 +1,12 @@
 {
   "available": true,
-  "revision": "853d77c47901ec54",
-  "method": "evidence-review-priority-v1",
+  "revision": "973703f7b5f64d0b",
+  "method": "evidence-review-priority-policy-v2",
   "title": "Evidence-informed review priority",
   "interpretation": "Rule-based inspection categories; no calibrated flood likelihood, intensity, depth, vulnerability or damage",
   "scenario_assumption": "At the user’s request, the available datasets are treated as compatible for a combined review scenario. Actual source dates, spatial gaps and unknown currency remain recorded. This does not establish that the 2025 rainfall caused the 2021 mapped flooding or calibrate forecast skill.",
   "output_file": "data/derived/review_priority_5m.tif",
-  "output_sha256": "6da518c22b2dd002c153532b270aaa572ccb088dc7b0c09794ddf4d84527b64c",
+  "output_sha256": "6fa92adb3696ed3bc9c36dc5aeb38ab1811fab79d189ececc377a451a2605132",
   "grid": {
     "crs": "EPSG:7801",
     "shape": [
@@ -29,137 +29,151 @@
       "code": 0,
       "label": "Lower ponding terrain signal",
       "colour": "#fff1c4",
-      "cell_count": 50809711,
-      "area_km2": 1270.242775,
       "color_rgba": [
         255,
         241,
         196,
         190
-      ]
+      ],
+      "cell_count": 50768572,
+      "area_km2": 1269.2143
     },
     {
       "code": 1,
       "label": "Raised ponding terrain signal",
       "colour": "#fbc66e",
-      "cell_count": 380965,
-      "area_km2": 9.524125,
       "color_rgba": [
         251,
         198,
         110,
         190
-      ]
+      ],
+      "cell_count": 379975,
+      "area_km2": 9.499375
     },
     {
       "code": 2,
       "label": "Higher ponding terrain signal",
       "colour": "#ed824b",
-      "cell_count": 408694,
-      "area_km2": 10.21735,
       "color_rgba": [
         237,
         130,
         75,
         190
-      ]
+      ],
+      "cell_count": 404370,
+      "area_km2": 10.10925
     },
     {
       "code": 3,
       "label": "Higher ponding + potential building footprint",
       "colour": "#bb3d40",
-      "cell_count": 7233,
-      "area_km2": 0.180825,
       "color_rgba": [
         187,
         61,
         64,
         190
-      ]
+      ],
+      "cell_count": 7213,
+      "area_km2": 0.180325
     },
     {
       "code": 4,
       "label": "Historical flood footprint",
       "colour": "#8b75c2",
-      "cell_count": 75791,
-      "area_km2": 1.894775,
       "color_rgba": [
         139,
         117,
         194,
         190
-      ]
+      ],
+      "cell_count": 75475,
+      "area_km2": 1.886875
     },
     {
       "code": 5,
       "label": "Historical footprint + potential building footprint",
       "colour": "#632476",
-      "cell_count": 229,
-      "area_km2": 0.005725,
       "color_rgba": [
         99,
         36,
         118,
         190
-      ]
+      ],
+      "cell_count": 229,
+      "area_km2": 0.005725
+    },
+    {
+      "code": 252,
+      "label": "Excluded mapped river channel / stadium",
+      "colour": "#00000000",
+      "color_rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "cell_count": 76061,
+      "area_km2": 1.901525
     },
     {
       "code": 253,
       "label": "Excluded mapped open water",
       "colour": "#00000000",
-      "cell_count": 1519688,
-      "area_km2": 37.9922,
       "color_rgba": [
         0,
         0,
         0,
         0
-      ]
+      ],
+      "cell_count": 1493036,
+      "area_km2": 37.3259
     },
     {
       "code": 254,
       "label": "Uncertain terrain",
       "colour": "#80878c",
-      "cell_count": 480475,
-      "area_km2": 12.011875,
       "color_rgba": [
         128,
         135,
         140,
         185
-      ]
+      ],
+      "cell_count": 477855,
+      "area_km2": 11.946375
     },
     {
       "code": 255,
       "label": "Outside terrain",
       "colour": "#00000000",
-      "cell_count": 58757019,
-      "area_km2": 1468.925475,
       "color_rgba": [
         0,
         0,
         0,
         0
-      ]
+      ],
+      "cell_count": 58757019,
+      "area_km2": 1468.925475
     }
   ],
   "counts": {
     "all_cells": 112439805,
-    "eligible_land_cells": 51682623,
+    "eligible_land_cells": 51635834,
     "known_terrain_cells": 53682786,
-    "mapped_water_cells": 1519688,
-    "uncertain_cells": 480475,
+    "mapped_water_cells": 1493036,
+    "uncertain_cells": 477855,
     "outside_cells": 58757019,
     "potential_footprint_cells_known_terrain": 2677243,
-    "potential_footprint_cells_eligible_land": 2675795,
     "historical_union_cell_centres": 76343,
     "historical_union_known_terrain_cells": 76262,
     "queried_distinct_cadastral_source_records": 274633,
-    "query_rows_including_repeated_window_candidates": 290395
+    "query_rows_including_repeated_window_candidates": 290395,
+    "screening_policy_excluded_cells": 76061
   },
   "formula": {
     "ordered_rules": [
       "Outside known DTM =>255",
+      "Mapped river-channel or stadium footprint on known terrain=>252 (user exclusion policy)",
       "Mapped qualifying water on known terrain=>253",
       "Known nonwater terrain with boundary influence or invalid required P/C/S factor=>254",
       "Eligible historical footprint plus potential cadastral footprint=>5",
@@ -180,7 +194,8 @@
     "rainfall_context": "88036868558c20ce",
     "water": "ee06795221a5005e",
     "history": "7fbfbcee6ee933f4",
-    "pluvial": "2a0d5f6899cd036c"
+    "pluvial": "0a7a8ca315510679",
+    "screening_exclusions": "bfdf087d674d5c81"
   },
   "source_dates": {
     "terrain": "Source filename2024; measurement date/vertical accuracy unverified",
@@ -214,6 +229,18 @@
       "size_bytes": 419184640,
       "mtime_ns": 1792917259165180300,
       "sha256": "e6aa6ac4744b8899527652b7a6579ea5db1865982513a5cca78ffce5bfe92eef"
+    },
+    "screening_exclusions": {
+      "file": "data/cache/screening_exclusions_5m.tif",
+      "size_bytes": 229104,
+      "mtime_ns": 1792932636659814800,
+      "sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd"
+    },
+    "screening_exclusions_receipt": {
+      "file": "data/cache/screening_exclusions_meta.json",
+      "size_bytes": 5343,
+      "mtime_ns": 1792932637315390900,
+      "sha256": "afd98b9266ddd5cd76099d87e68b10f37e5efdc639ee630b46f4ded6509cf0cd"
     }
   },
   "source_counts": {
@@ -239,15 +266,182 @@
   ],
   "verification": {
     "all_listed_sources_unchanged": true,
-    "source_hashes_checked_before_after": true
+    "source_hashes_checked_before_after": true,
+    "nonexcluded_review_pixels_identical": true,
+    "all_policy_cells_excluded": true,
+    "policy_changed_cells": 76061,
+    "previous_review_sha256": "6da518c22b2dd002c153532b270aaa572ccb088dc7b0c09794ddf4d84527b64c",
+    "all_original_sources_unchanged": true
   },
-  "created_utc": "2026-10-25T09:12:39.130461+00:00",
+  "created_utc": "2026-10-25T12:51:57.042864+00:00",
   "runtime_seconds": 69.457,
-  "reproduce": "python scripts/prepare_review_priority.py",
+  "reproduce": "python scripts/prepare_review_priority.py --mask-only (requires matching original review); or full preparation",
   "source_urls": {
     "historical": "https://urbandata.sofia.bg/dataset/flooded-areas-identified-by-drone-survey-february-2021",
     "cadastre": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
     "open_water": "https://www.openstreetmap.org",
     "terrain": "https://api.sofiaplan.bg/datasets/656"
+  },
+  "unmasked_review_counts": {
+    "all_cells": 112439805,
+    "eligible_land_cells": 51682623,
+    "known_terrain_cells": 53682786,
+    "mapped_water_cells": 1519688,
+    "uncertain_cells": 480475,
+    "outside_cells": 58757019,
+    "potential_footprint_cells_known_terrain": 2677243,
+    "potential_footprint_cells_eligible_land": 2675795,
+    "historical_union_cell_centres": 76343,
+    "historical_union_known_terrain_cells": 76262,
+    "queried_distinct_cadastral_source_records": 274633,
+    "query_rows_including_repeated_window_candidates": 290395
+  },
+  "screening_exclusions": {
+    "available": true,
+    "enabled": true,
+    "method": "user-requested-mapped-channel-stadium-suppression-v1",
+    "revision": "bfdf087d674d5c81",
+    "sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd",
+    "file": "data/cache/screening_exclusions_5m.tif",
+    "exclusions_are_policy": true,
+    "retrieved": "2026-10-25T12:50:19.871616+00:00",
+    "grid": {
+      "crs": "EPSG:7801",
+      "width": 10345,
+      "height": 10869,
+      "shape": [
+        10869,
+        10345
+      ],
+      "transform": [
+        5.0,
+        0.0,
+        299392.0,
+        0.0,
+        -5.0,
+        4753611.0
+      ],
+      "dtype": "uint8",
+      "count": 1,
+      "nodata": null,
+      "values": {
+        "0": "not suppressed",
+        "1": "mapped channel",
+        "2": "stadium",
+        "3": "both"
+      }
+    },
+    "counts": {
+      "river_channel_cells": 55770,
+      "stadium_cells": 20291,
+      "union_cells": 76061,
+      "overlap_cells": 0,
+      "channel_polygons": 52,
+      "stadium_polygons": 40,
+      "outside_valid_terrain_removed": 20890
+    },
+    "source": {
+      "provider": "OpenStreetMap contributors",
+      "license": "ODbL1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "license_url": "https://www.openstreetmap.org/copyright",
+      "water_acquisition": {
+        "endpoint": "https://overpass-api.de/api/interpreter",
+        "download_utc": "2026-10-25T07:31:52.542206+00:00",
+        "raw_file": "osm_open_water_20261025T073109Z.json",
+        "query_file": "osm_open_water_20261025T073109Z.overpass",
+        "bbox": [
+          23.033601825086354,
+          42.392740683952645,
+          23.700971220841907,
+          42.913568431160385
+        ],
+        "elements": 586,
+        "osm_base_timestamp": "2026-10-25T07:30:02Z",
+        "attempts": [],
+        "raw_sha256": "fac32b04617a843356983496bc772970f7a62462a0a8526ecaeb9cf803a126c6",
+        "query_sha256": "2073985b485bdf675e6d21df0640de901089b2bc4e8ce818060ffce870297d75"
+      },
+      "stadium_acquisition": {
+        "endpoint": "https://overpass-api.de/api/interpreter",
+        "download_utc": "2026-10-25T12:50:19.871616+00:00",
+        "raw_file": "screening_exclusions_stadium_20261025T124953596329Z.json",
+        "raw_sha256": "e77659f52886ba58b72b83f6bf0532b133bccbe1aa83f1459a8e2a8fb3ade18c",
+        "query_file": "screening_exclusions_stadium_20261025T124953596329Z.overpass",
+        "query_sha256": "f20ecbecfe7e31707d0e0fa0f720e06299702340f79a56a22f9ecdf14a5dbcf2",
+        "bbox": [
+          23.033601825086354,
+          42.392740683952645,
+          23.700971220841907,
+          42.913568431160385
+        ],
+        "elements": 40,
+        "osm_base_timestamp": "2026-10-25T12:49:03Z",
+        "attempts": []
+      },
+      "geojson_file": "data/reference/screening_exclusions.geojson",
+      "geojson_sha256": "3a0d7bbd116d8dcf4c72276b41cda96b78c9ec4f1bd507039bb0b3704189c249"
+    },
+    "policy": "Suppress mapped channel and whole stadium footprints in derived risk screening and scenario displays. Includes mapped intermittent channels. Original terrain and historical observations are retained.",
+    "limitations": [
+      "This is a user-requested screening exclusion, not evidence of safety or absence of flood hazard.",
+      "OSM community geometry may be incomplete, outdated or misclassified. Whole stadium footprint is used, not only the pitch.",
+      "Channels use explicit water/riverbank polygons, including intermittent natural-water polygons without a water subtype. No river-line buffer or inferred floodplain exclusion is applied.",
+      "Every 5 m cell intersecting an actual footprint is suppressed (all_touched=True), including partial edge cells. This is grid-cell coverage, not a river/floodplain buffer.",
+      "Missing stadium tags or river polygons remain gaps. River flooding is not simulated by suppressing channel pixels."
+    ],
+    "control_points": [
+      {
+        "name": "Mapped Perlovska channel",
+        "osm_id": "way/1234109017",
+        "longitude": 23.3382061331869,
+        "latitude": 42.68704393583841,
+        "row": 4678,
+        "column": 4694,
+        "mask_value": 1,
+        "expected": 1,
+        "point_is_actual_pixel_center_inside_source_polygon": true
+      },
+      {
+        "name": "Mapped Perlovska channel",
+        "osm_id": "way/1341771831",
+        "longitude": 23.346808322775054,
+        "latitude": 42.69598629654243,
+        "row": 4483,
+        "column": 4840,
+        "mask_value": 1,
+        "expected": 1,
+        "point_is_actual_pixel_center_inside_source_polygon": true
+      },
+      {
+        "name": "Whole Vasil Levski stadium",
+        "osm_id": "way/341968882",
+        "longitude": 23.335406718412337,
+        "latitude": 42.68856704752101,
+        "row": 4643,
+        "column": 4649,
+        "mask_value": 2,
+        "expected": 2,
+        "point_is_actual_pixel_center_inside_source_polygon": true
+      },
+      {
+        "name": "Confirmed Vasil Levski pitch centroid",
+        "longitude": 23.3352531692,
+        "latitude": 42.6875642953,
+        "row": 4665,
+        "column": 4646,
+        "mask_value": 2,
+        "expected": 2
+      }
+    ],
+    "rejected_geometry": [],
+    "verification": {
+      "exact_grid_type_nodata_and_pixels_checked": true,
+      "mandatory_real_controls_passed": true,
+      "original_water_source_sha256_unchanged": true,
+      "pluvial_source_read_only": true,
+      "elapsed_seconds": 3.31
+    },
+    "interpretation": "Mapped river channels and stadium footprints are omitted from screening and scenarios at the user’s request. Exclusion does not mean safe from flooding; original terrain and historical observations remain unchanged."
   }
 }

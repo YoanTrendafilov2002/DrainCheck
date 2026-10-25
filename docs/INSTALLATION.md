@@ -61,7 +61,11 @@ Python environment. Without it, vector/rainfall browsing can run, with elevation
 reported unavailable. See [terrain acquisition](ACQUISITION.txt).
 
 Flood screening and scenarios additionally need the matching 5 m terrain
-factors/scores, water mask, full vector index and green-absorption mask.
+factors/scores, water mask, river/stadium screening-exclusion mask, full vector
+index and green-absorption mask. Restore both `screening_exclusions_5m.tif` and
+`screening_exclusions_meta.json` together, or run
+`scripts/prepare_screening_exclusions.py` using its preserved real source
+geometry. See [the screening-exclusion sources](SCREENING_EXCLUSIONS.md).
 Evidence review also needs the real historical polygons and full cadastral
 source/index. Restore these before running their preparation scripts:
 [pluvial inputs](PLUVIAL_EVIDENCE.md), [water mask](OPEN_WATER_SOURCES.md),

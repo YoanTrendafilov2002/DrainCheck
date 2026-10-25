@@ -78,7 +78,7 @@ The city-scale building layer contains cadastral footprints. The separate
 Digital Twin building source is currently unavailable; no building height is
 inferred from floor counts or ground elevation.
 
-### Green areas, water and missing data
+### Green areas, rivers, stadiums and missing data
 
 **Assume green areas absorb all water** starts enabled. It excludes mapped
 green areas from the displayed screening/evidence layer even when the green
@@ -89,8 +89,15 @@ geometry remain independently visible.
 Pipe-blockage scenarios always apply full absorption to mapped green areas.
 This is an assumption, not a measurement of infiltration capacity.
 
-Existing mapped water is automatically excluded from land screening. Nearby
-banks remain eligible. A transparent cell can mean a low signal, an excluded
+Existing mapped water, mapped river-channel footprints and mapped stadium
+footprints are automatically excluded from every risk view and blockage
+scenario. River/stadium exclusion is a user-requested screening rule, not a
+claim that these places cannot flood. The inspector identifies the exclusion;
+turning off green absorption does not turn it off. Original terrain values and
+independent historical observations remain available.
+See [the exclusion sources and method](docs/SCREENING_EXCLUSIONS.md).
+
+Nearby banks remain eligible. A transparent cell can mean a low signal, an excluded
 area or missing coverage; use the inspector to distinguish these states.
 Grey screening cells indicate uncertain terrain, not a low-risk class.
 

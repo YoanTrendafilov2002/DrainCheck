@@ -1,0 +1,147 @@
+{
+  "available": true,
+  "enabled": true,
+  "method": "user-requested-mapped-channel-stadium-suppression-v1",
+  "revision": "bfdf087d674d5c81",
+  "sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd",
+  "file": "data/cache/screening_exclusions_5m.tif",
+  "exclusions_are_policy": true,
+  "retrieved": "2026-10-25T12:50:19.871616+00:00",
+  "grid": {
+    "crs": "EPSG:7801",
+    "width": 10345,
+    "height": 10869,
+    "shape": [
+      10869,
+      10345
+    ],
+    "transform": [
+      5.0,
+      0.0,
+      299392.0,
+      0.0,
+      -5.0,
+      4753611.0
+    ],
+    "dtype": "uint8",
+    "count": 1,
+    "nodata": null,
+    "values": {
+      "0": "not suppressed",
+      "1": "mapped channel",
+      "2": "stadium",
+      "3": "both"
+    }
+  },
+  "counts": {
+    "river_channel_cells": 55770,
+    "stadium_cells": 20291,
+    "union_cells": 76061,
+    "overlap_cells": 0,
+    "channel_polygons": 52,
+    "stadium_polygons": 40,
+    "outside_valid_terrain_removed": 20890
+  },
+  "source": {
+    "provider": "OpenStreetMap contributors",
+    "license": "ODbL1.0",
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "license_url": "https://www.openstreetmap.org/copyright",
+    "water_acquisition": {
+      "endpoint": "https://overpass-api.de/api/interpreter",
+      "download_utc": "2026-10-25T07:31:52.542206+00:00",
+      "raw_file": "osm_open_water_20261025T073109Z.json",
+      "query_file": "osm_open_water_20261025T073109Z.overpass",
+      "bbox": [
+        23.033601825086354,
+        42.392740683952645,
+        23.700971220841907,
+        42.913568431160385
+      ],
+      "elements": 586,
+      "osm_base_timestamp": "2026-10-25T07:30:02Z",
+      "attempts": [],
+      "raw_sha256": "fac32b04617a843356983496bc772970f7a62462a0a8526ecaeb9cf803a126c6",
+      "query_sha256": "2073985b485bdf675e6d21df0640de901089b2bc4e8ce818060ffce870297d75"
+    },
+    "stadium_acquisition": {
+      "endpoint": "https://overpass-api.de/api/interpreter",
+      "download_utc": "2026-10-25T12:50:19.871616+00:00",
+      "raw_file": "screening_exclusions_stadium_20261025T124953596329Z.json",
+      "raw_sha256": "e77659f52886ba58b72b83f6bf0532b133bccbe1aa83f1459a8e2a8fb3ade18c",
+      "query_file": "screening_exclusions_stadium_20261025T124953596329Z.overpass",
+      "query_sha256": "f20ecbecfe7e31707d0e0fa0f720e06299702340f79a56a22f9ecdf14a5dbcf2",
+      "bbox": [
+        23.033601825086354,
+        42.392740683952645,
+        23.700971220841907,
+        42.913568431160385
+      ],
+      "elements": 40,
+      "osm_base_timestamp": "2026-10-25T12:49:03Z",
+      "attempts": []
+    },
+    "geojson_file": "data/reference/screening_exclusions.geojson",
+    "geojson_sha256": "3a0d7bbd116d8dcf4c72276b41cda96b78c9ec4f1bd507039bb0b3704189c249"
+  },
+  "policy": "Suppress mapped channel and whole stadium footprints in derived risk screening and scenario displays. Includes mapped intermittent channels. Original terrain and historical observations are retained.",
+  "limitations": [
+    "This is a user-requested screening exclusion, not evidence of safety or absence of flood hazard.",
+    "OSM community geometry may be incomplete, outdated or misclassified. Whole stadium footprint is used, not only the pitch.",
+    "Channels use explicit water/riverbank polygons, including intermittent natural-water polygons without a water subtype. No river-line buffer or inferred floodplain exclusion is applied.",
+    "Every 5 m cell intersecting an actual footprint is suppressed (all_touched=True), including partial edge cells. This is grid-cell coverage, not a river/floodplain buffer.",
+    "Missing stadium tags or river polygons remain gaps. River flooding is not simulated by suppressing channel pixels."
+  ],
+  "control_points": [
+    {
+      "name": "Mapped Perlovska channel",
+      "osm_id": "way/1234109017",
+      "longitude": 23.3382061331869,
+      "latitude": 42.68704393583841,
+      "row": 4678,
+      "column": 4694,
+      "mask_value": 1,
+      "expected": 1,
+      "point_is_actual_pixel_center_inside_source_polygon": true
+    },
+    {
+      "name": "Mapped Perlovska channel",
+      "osm_id": "way/1341771831",
+      "longitude": 23.346808322775054,
+      "latitude": 42.69598629654243,
+      "row": 4483,
+      "column": 4840,
+      "mask_value": 1,
+      "expected": 1,
+      "point_is_actual_pixel_center_inside_source_polygon": true
+    },
+    {
+      "name": "Whole Vasil Levski stadium",
+      "osm_id": "way/341968882",
+      "longitude": 23.335406718412337,
+      "latitude": 42.68856704752101,
+      "row": 4643,
+      "column": 4649,
+      "mask_value": 2,
+      "expected": 2,
+      "point_is_actual_pixel_center_inside_source_polygon": true
+    },
+    {
+      "name": "Confirmed Vasil Levski pitch centroid",
+      "longitude": 23.3352531692,
+      "latitude": 42.6875642953,
+      "row": 4665,
+      "column": 4646,
+      "mask_value": 2,
+      "expected": 2
+    }
+  ],
+  "rejected_geometry": [],
+  "verification": {
+    "exact_grid_type_nodata_and_pixels_checked": true,
+    "mandatory_real_controls_passed": true,
+    "original_water_source_sha256_unchanged": true,
+    "pluvial_source_read_only": true,
+    "elapsed_seconds": 3.31
+  }
+}

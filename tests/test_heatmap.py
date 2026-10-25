@@ -59,14 +59,14 @@ def test_continuous_colours_preserve_numeric_domain_and_missing_states():
 
 def test_real_land_pixels_use_native_ponding_not_combined_or_interpolated_scores():
     with rasterio.open(api.pluvial.path, OVERVIEW_LEVEL='NONE') as source:
-        for location in (ISLAND, STADIUM, POSITIVE_P):
+        for location in (ISLAND, POSITIVE_P):
             sample = api.pluvial.sample(*location)
             assert sample['status'] == 'ok' and not sample['water_excluded']
             native = source.read([6, 8], window=Window(sample['column'], sample['row'], 1, 1))[:, 0, 0]
             assert sample['ponding_score'] == float(native[0])
             image, row, column, _ = tile_at(*location)
             np.testing.assert_array_equal(image[row, column], heatmap_rgba(np.array([native[0]]))[0])
-            if location in (ISLAND, STADIUM):
+            if location == ISLAND:
                 assert native[0] == 0 and native[1] > 70
                 assert image[row, column, 3] == 0, 'Combined-score hotspots must not leak into P heatmap'
             else:
@@ -76,7 +76,8 @@ def test_real_land_pixels_use_native_ponding_not_combined_or_interpolated_scores
 def test_mapped_water_outside_coverage_and_uncertainty_keep_their_exclusions():
     for location in (LAKE, RIVER):
         sample = api.pluvial.sample(*location)
-        assert sample['status'] == 'excluded_open_water' and sample['ponding_score'] is None
+        assert sample['status'] == ('excluded_user_screening' if location == RIVER else 'excluded_open_water')
+        assert sample['ponding_score'] is None
         image, row, column, _ = tile_at(*location)
         assert image[row, column, 3] == 0
     outside, _, _, _ = tile_at(22.4, 42.7)

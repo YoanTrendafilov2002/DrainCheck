@@ -1,5 +1,11 @@
 # Mapped open-water exclusion: source and method
 
+**Current display policy:** a separate user-requested screening mask also removes
+mapped river-channel footprints, including the intermittent central Perlovska
+channels, and mapped stadiums. The permanent-water mask documented here remains
+unchanged. Both masks apply to risk displays and scenarios; neither marks the
+surrounding floodplain safe. See [screening exclusions](SCREENING_EXCLUSIONS.md).
+
 The hidden exclusion mask removes qualifying mapped water interiors from the pluvial screening display and related exposure summaries. It does not remove native terrain or change upstream routing, the underlying eight-band terrain raster, source infrastructure or any original datasets. It is a water-context mask, not a river-flood risk or safety boundary.
 
 This is a post-calculation exclusion. Existing percentile reference curves remain
