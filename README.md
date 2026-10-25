@@ -203,6 +203,18 @@ provenance, every equation and unit, a hand-worked example, a genuine local
 example, sensitivity, masking rules and reproduction. The guide distinguishes
 the scenario's entered event rain from the independent daily rainfall overlay.
 
+The [system schematic](docs/DrainCheck_System_Schematic.png) presents the three
+analytical paths on one 16:9 page. It is also available as a
+[vector PDF](docs/DrainCheck_System_Schematic.pdf) and an
+[editable SVG](docs/DrainCheck_System_Schematic.svg).
+
+![How DrainCheck works](docs/DrainCheck_System_Schematic.png)
+
+To regenerate the diagram, run `python scripts/build_system_schematic.py`.
+This optional documentation builder requires `reportlab`, `pypdf`,
+`pypdfium2`, and the Windows Segoe UI fonts. It does not modify source data or
+application calculations; the SVG can also be edited directly.
+
 ## Performance
 
 Hidden layers stop requesting tiles, point tiles contain the selected categories,

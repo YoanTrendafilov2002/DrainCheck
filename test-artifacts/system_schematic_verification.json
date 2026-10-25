@@ -1,0 +1,33 @@
+{
+  "title": "How DrainCheck works",
+  "canvas": [
+    1920,
+    1080
+  ],
+  "png_pixels": [
+    3840,
+    2160
+  ],
+  "one_page_pdf": true,
+  "source_guide": "docs/RISK_CALCULATION_GUIDE.md",
+  "version": "1.9",
+  "source_guide_sha256": "c8f1793f8a04ecf35bf7d8ca045e9b6d0d3ee5fd2597bff856c0ff7f4747e308",
+  "files": {
+    "DrainCheck_System_Schematic.svg": {
+      "bytes": 16751,
+      "sha256": "1213a7be426d5c057c7b0d91441f079d17bfe8130b54240183e976737761a063"
+    },
+    "DrainCheck_System_Schematic.pdf": {
+      "bytes": 64731,
+      "sha256": "80b4478973b649c02cf1776d6300323f3d51075ed13544e8fa4d2f9c35f27842"
+    },
+    "DrainCheck_System_Schematic.png": {
+      "bytes": 771189,
+      "sha256": "57c3b433e6c4a9466da60cec6ed0cd044cc3d91a9c6352d26169ae434c036064"
+    }
+  },
+  "semantic_checks": "PASS: separate P, categorical review and hypothetical storm paths; explicit assumptions, units and independent river/archive context",
+  "visual_qa": "PASS: final PDF rendered to 1920x1080 preview and 3840x2160 PNG; all labels, arrows, units and boundaries inspected. Independent semantic review completed; overflow and routing wording corrected.",
+  "documentation_only": true,
+  "application_calculations_changed": false
+}
