@@ -1,0 +1,578 @@
+{
+  "scope": "Read-only diagnosis of one actual central Sofia2.56km square, not citywide flood validation",
+  "raster_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+  "pluvial_revision": "f42644a668cdc14d",
+  "window": {
+    "row_offset": 4178,
+    "column_offset": 4177,
+    "height": 512,
+    "width": 512,
+    "resolution_m": 5,
+    "bounds_epsg7801": [
+      320277.0,
+      4730161.0,
+      322837.0,
+      4732721.0
+    ],
+    "bounds_wgs84": [
+      23.305849389065116,
+      42.68592650645664,
+      23.337888607924803,
+      42.70955916761655
+    ],
+    "bounds_order": "west,south,east,north"
+  },
+  "methods": {
+    "selection": "Window centered on base-grid row4434/column4433 nearlongitude23.3219,latitude42.6977. All512x512base pixels read, no raster resampling.",
+    "validity": "Combined score>=0; boundary/NoDataexcluded.",
+    "quantiles": [
+      0,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.95,
+      0.99,
+      1
+    ],
+    "facet_test": "7x7pixel local slope standard deviation<0.01degrees, slope>0.1and<2degrees; reflects visually uniform facets, not a validated artefact mask.",
+    "adjacency": "Immediate E,N,SE,NE pairs restricted to both eligible facet cells. Absolute score differences, not physical flood gradients.",
+    "image": "Each actual-data grayscale panel independently stretched between2ndand98th window quantiles solely to inspect spatial patterns. Area panel useslog10(m2). No terrain values changed."
+  },
+  "valid_cells": 261627,
+  "positive_depth_cells": 2475,
+  "zero_depth_cells": 259152,
+  "depression_dominant_cells": 1157,
+  "concentration_dominant_cells": 260470,
+  "high85_cells": 20215,
+  "high85_concentration_cells": 20031,
+  "high85_zero_depth_cells": 19737,
+  "high85_area_quantiles_m2": [
+    25.0,
+    1325.0,
+    4450.0,
+    75840.00000000006,
+    45466576.0
+  ],
+  "high85_slope_quantiles_deg": [
+    0.0,
+    0.0,
+    0.326068639755249,
+    0.746711385250092,
+    35.20539093017578
+  ],
+  "area_cumulative_counts": {
+    "25": 30178,
+    "50": 54150,
+    "75": 73965,
+    "100": 90508,
+    "125": 104522,
+    "250": 151545,
+    "500": 193898,
+    "1000": 220176,
+    "10000": 252163
+  },
+  "band_statistics": {
+    "1": {
+      "name": "mean_ground_elevation_m",
+      "quantiles": [
+        527.0,
+        534.1228149414062,
+        539.0,
+        543.8492431640625,
+        550.1885681152344,
+        556.0268920898437,
+        559.3284912109375,
+        563.9909301757813,
+        567.0
+      ],
+      "unique_values": 170114,
+      "most_common": [
+        {
+          "value": 542.0,
+          "count": 3779
+        },
+        {
+          "value": 531.0,
+          "count": 2995
+        },
+        {
+          "value": 539.0,
+          "count": 2887
+        },
+        {
+          "value": 552.0,
+          "count": 2821
+        },
+        {
+          "value": 546.0,
+          "count": 2431
+        },
+        {
+          "value": 543.0,
+          "count": 2322
+        },
+        {
+          "value": 540.0,
+          "count": 2293
+        },
+        {
+          "value": 537.0,
+          "count": 2106
+        },
+        {
+          "value": 538.0,
+          "count": 2010
+        },
+        {
+          "value": 547.0,
+          "count": 1967
+        }
+      ]
+    },
+    "2": {
+      "name": "depression_fill_depth_m",
+      "quantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.0
+      ],
+      "unique_values": 1855,
+      "most_common": [
+        {
+          "value": 0.0,
+          "count": 259152
+        },
+        {
+          "value": 1.0,
+          "count": 173
+        },
+        {
+          "value": 0.88067626953125,
+          "count": 133
+        },
+        {
+          "value": 0.072509765625,
+          "count": 64
+        },
+        {
+          "value": 0.00018310546875,
+          "count": 45
+        },
+        {
+          "value": 0.691650390625,
+          "count": 34
+        },
+        {
+          "value": 0.05419921875,
+          "count": 30
+        },
+        {
+          "value": 3.9766845703125,
+          "count": 15
+        },
+        {
+          "value": 0.19085693359375,
+          "count": 12
+        },
+        {
+          "value": 2.0,
+          "count": 11
+        }
+      ]
+    },
+    "3": {
+      "name": "slope_degrees",
+      "quantiles": [
+        0.0,
+        0.0,
+        0.4611824005842209,
+        0.8141520619392395,
+        1.4390769004821777,
+        2.735180759429931,
+        4.680026769638061,
+        13.103250045776349,
+        37.309383392333984
+      ],
+      "unique_values": 193958,
+      "most_common": [
+        {
+          "value": 0.0,
+          "count": 31393
+        },
+        {
+          "value": 0.32574278116226196,
+          "count": 281
+        },
+        {
+          "value": 0.31179338693618774,
+          "count": 224
+        },
+        {
+          "value": 0.5367835164070129,
+          "count": 189
+        },
+        {
+          "value": 0.00034970566048286855,
+          "count": 185
+        },
+        {
+          "value": 0.3596494793891907,
+          "count": 181
+        },
+        {
+          "value": 0.0006994113209657371,
+          "count": 172
+        },
+        {
+          "value": 0.3883028030395508,
+          "count": 165
+        },
+        {
+          "value": 0.5645466446876526,
+          "count": 162
+        },
+        {
+          "value": 0.36624571681022644,
+          "count": 160
+        }
+      ]
+    },
+    "4": {
+      "name": "upstream_contributing_area_m2",
+      "quantiles": [
+        25.0,
+        25.0,
+        75.0,
+        200.0,
+        525.0,
+        2050.0,
+        5725.0,
+        71018.49999999977,
+        45466752.0
+      ],
+      "unique_values": 4877,
+      "most_common": [
+        {
+          "value": 25.0,
+          "count": 30178
+        },
+        {
+          "value": 50.0,
+          "count": 23972
+        },
+        {
+          "value": 75.0,
+          "count": 19815
+        },
+        {
+          "value": 100.0,
+          "count": 16543
+        },
+        {
+          "value": 125.0,
+          "count": 14014
+        },
+        {
+          "value": 150.0,
+          "count": 12106
+        },
+        {
+          "value": 175.0,
+          "count": 10480
+        },
+        {
+          "value": 200.0,
+          "count": 9203
+        },
+        {
+          "value": 225.0,
+          "count": 8029
+        },
+        {
+          "value": 250.0,
+          "count": 7205
+        }
+      ]
+    },
+    "6": {
+      "name": "depression_percentile",
+      "quantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        96.1345443725586
+      ],
+      "unique_values": 1855,
+      "most_common": [
+        {
+          "value": 0.0,
+          "count": 259152
+        },
+        {
+          "value": 76.0,
+          "count": 173
+        },
+        {
+          "value": 68.94796752929688,
+          "count": 133
+        },
+        {
+          "value": 36.4058837890625,
+          "count": 64
+        },
+        {
+          "value": 0.06756757199764252,
+          "count": 45
+        },
+        {
+          "value": 62.49734115600586,
+          "count": 34
+        },
+        {
+          "value": 35.512046813964844,
+          "count": 30
+        },
+        {
+          "value": 95.04264831542969,
+          "count": 15
+        },
+        {
+          "value": 42.81094741821289,
+          "count": 12
+        },
+        {
+          "value": 89.25,
+          "count": 11
+        }
+      ]
+    },
+    "7": {
+      "name": "concentration_flatness_score",
+      "quantiles": [
+        2.2428040504455566,
+        18.948945999145508,
+        34.75372505187988,
+        52.34059524536133,
+        70.25422286987305,
+        82.9292221069336,
+        87.57260894775388,
+        94.30860702514644,
+        97.61053466796875
+      ],
+      "unique_values": 217030,
+      "most_common": [
+        {
+          "value": 18.948945999145508,
+          "count": 7207
+        },
+        {
+          "value": 32.45381546020508,
+          "count": 3426
+        },
+        {
+          "value": 40.34538269042969,
+          "count": 2331
+        },
+        {
+          "value": 45.89662170410156,
+          "count": 1660
+        },
+        {
+          "value": 50.37236022949219,
+          "count": 1290
+        },
+        {
+          "value": 54.26151657104492,
+          "count": 933
+        },
+        {
+          "value": 57.47499465942383,
+          "count": 815
+        },
+        {
+          "value": 60.12123107910156,
+          "count": 673
+        },
+        {
+          "value": 62.4644889831543,
+          "count": 623
+        },
+        {
+          "value": 64.72296905517578,
+          "count": 567
+        }
+      ]
+    },
+    "8": {
+      "name": "relative_screening_score",
+      "quantiles": [
+        2.747133255004883,
+        18.948945999145508,
+        34.88726043701172,
+        52.48249816894531,
+        70.39596557617188,
+        82.99976196289063,
+        87.65019607543944,
+        94.35754272460937,
+        97.61053466796875
+      ],
+      "unique_values": 216842,
+      "most_common": [
+        {
+          "value": 18.948945999145508,
+          "count": 7207
+        },
+        {
+          "value": 32.45381546020508,
+          "count": 3417
+        },
+        {
+          "value": 40.34538269042969,
+          "count": 2323
+        },
+        {
+          "value": 45.89662170410156,
+          "count": 1646
+        },
+        {
+          "value": 50.37236022949219,
+          "count": 1274
+        },
+        {
+          "value": 54.26151657104492,
+          "count": 925
+        },
+        {
+          "value": 57.47499465942383,
+          "count": 806
+        },
+        {
+          "value": 60.12123107910156,
+          "count": 667
+        },
+        {
+          "value": 62.4644889831543,
+          "count": 617
+        },
+        {
+          "value": 64.72296905517578,
+          "count": 563
+        }
+      ]
+    }
+  },
+  "rank_amplification_at_0_3degree_slope": [
+    {
+      "area_m2": 25,
+      "municipal_area_percentile": 3.75,
+      "concentration_score": 17.962473012868266
+    },
+    {
+      "area_m2": 50,
+      "municipal_area_percentile": 10.999999999999996,
+      "concentration_score": 30.764285805105146
+    },
+    {
+      "area_m2": 75,
+      "municipal_area_percentile": 17.0,
+      "concentration_score": 38.245025557306505
+    },
+    {
+      "area_m2": 100,
+      "municipal_area_percentile": 22.000000000000004,
+      "concentration_score": 43.507270222301806
+    },
+    {
+      "area_m2": 250,
+      "municipal_area_percentile": 43.75,
+      "concentration_score": 61.3535255325797
+    },
+    {
+      "area_m2": 500,
+      "municipal_area_percentile": 63.500000000000014,
+      "concentration_score": 73.91581289163021
+    },
+    {
+      "area_m2": 1000,
+      "municipal_area_percentile": 80.0,
+      "concentration_score": 82.96510903432706
+    },
+    {
+      "area_m2": 2000,
+      "municipal_area_percentile": 89.5,
+      "concentration_score": 87.75300805944354
+    },
+    {
+      "area_m2": 5000,
+      "municipal_area_percentile": 94.92338709676943,
+      "concentration_score": 90.37266888231915
+    },
+    {
+      "area_m2": 10000,
+      "municipal_area_percentile": 96.93125,
+      "concentration_score": 91.32346926694113
+    }
+  ],
+  "facet_diagnostic": {
+    "cells": 8919,
+    "score_quantiles_0_10_50_90_100": [
+      16.661062240600586,
+      49.367103576660156,
+      67.09998321533203,
+      86.35616760253906,
+      92.0977554321289
+    ],
+    "adjacency": {
+      "E": {
+        "pairs": 7385,
+        "mean_absolute_score_difference": 10.073772430419922,
+        "at_least20point_difference_pairs": 1432
+      },
+      "N": {
+        "pairs": 7453,
+        "mean_absolute_score_difference": 9.800495147705078,
+        "at_least20point_difference_pairs": 1451
+      },
+      "SE": {
+        "pairs": 6771,
+        "mean_absolute_score_difference": 8.541271209716797,
+        "at_least20point_difference_pairs": 980
+      },
+      "NE": {
+        "pairs": 6982,
+        "mean_absolute_score_difference": 5.340041637420654,
+        "at_least20point_difference_pairs": 547
+      }
+    }
+  },
+  "conclusion": "Raw contributing area contains the same parallel/diagonal structure as concentration and combined scores. D8routing and faceted/flat terrain are plausible contributors; this does not establish surveyed microtopography, physical drainage paths, or observed flood hotspots. De-emphasize concentration/combined results as experimental routing diagnostics.",
+  "unknowns": [
+    "Exact municipal DTM survey method, survey date and vertical error are not established by the1mgrid. Visually faceted surfaces are consistent with interpolation but do not prove a specific TIN/contour lineage.",
+    "No independent urban runoff, sewer-capacity, drainage-inlet, building/kerb or flood-observation data were available for this diagnosis.",
+    "A city-window diagnosis does not prove every high-flow corridor is artefactual. Rivers and actual convergent terrain can also produce strong signals.",
+    "The ponding pathway is an alternative topographic descriptor, not a validated replacement flood-risk model; zero depth does not establish safety."
+  ],
+  "references": [
+    {
+      "title": "Tarboton1997: flow directions and contributing area;D8gridbias andD-infinity alternatives",
+      "url": "https://digitalcommons.usu.edu/cee_facpub/2507/"
+    },
+    {
+      "title": "GRASSGISr.watershed officialmanual: multiple and single flow directions, convergence and known underestimates",
+      "url": "https://grass.osgeo.org/grass85/manuals/r.watershed.html"
+    }
+  ]
+}

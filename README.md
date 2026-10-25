@@ -57,6 +57,7 @@ and COGs. The already verified local input is a tiled GeoTIFF. A preview PNG,
 another DEM, or a raster with a different grid is rejected.
 
 ```powershell
+& '.venv/Scripts/python.exe' 'scripts/restore_source_bundles.py'
 & '.venv/Scripts/python.exe' 'scripts/prepare_data.py'
 & '.venv/Scripts/python.exe' 'scripts/prepare_rainfall_cache.py'
 & '.venv/Scripts/python.exe' 'scripts/restore_reference_scale.py'
@@ -71,6 +72,13 @@ The Git repository keeps permitted source inputs and small metadata but excludes
 generated indexes, native terrain, bulk cadastral geometry and archives. See the
 GitHub workflow for its separate checkout/bootstrap steps. Run the curve restorer
 only after the actual native DTM is present.
+
+The original 53.16 MB green-area GeoJSON is stored in Git as a **14.1 MB lossless
+gzip bundle**. `restore_source_bundles.py` verifies compressed and decoded hashes
+and sizes, then restores its exact original bytes before data preparation. It
+leaves an existing matching original untouched and refuses to overwrite a
+different file. The local original and all geometry remain unchanged; only the
+Git storage representation is compressed.
 
 ## Development
 

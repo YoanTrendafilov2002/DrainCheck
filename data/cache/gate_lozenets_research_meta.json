@@ -1,0 +1,81 @@
+{
+  "available": true,
+  "revision": "bafb3bb653388cd3",
+  "title": "Lozenets research roof outlines (1,800; 2D)",
+  "source_label": "Campoverde et al. (2024), author-published GATE/RMSI research dataset",
+  "source_url": "https://www.mdpi.com/2072-4292/16/8/1386",
+  "download_url": "https://drive.google.com/drive/folders/1CMWM6KCaSC2fqyw7sDZ_ZFRZiqtD5MmN",
+  "license": "No explicit dataset reuse licence found in downloaded files or linked author repository; paper licence is separate",
+  "coverage_label": "Partial Lozenets research subset; not the requested current full-city Sofia Digital Twin",
+  "coverage_bbox_wgs84": [
+    23.310369175845867,
+    42.63339072768455,
+    23.338904238208997,
+    42.68570217352425
+  ],
+  "feature_count": 1800,
+  "source_date": null,
+  "source_file_modified_at": "2023-04-26T13:17:04Z",
+  "retrieved_at": "2026-10-25T07:53:17.102Z",
+  "publication_date": "2024-04-14",
+  "minzoom": 13,
+  "height": {
+    "available": false,
+    "field": null,
+    "semantics": "unavailable",
+    "count": 0
+  },
+  "geometry_semantics": "2d_roof_outlines",
+  "source_crs": "EPSG:7801",
+  "output_crs": "EPSG:4326",
+  "lod": "2D roof outlines; no CityGML LoD or above-ground height supplied",
+  "requested_full_city_twin": false,
+  "promoted_to_main_building_layer": false,
+  "limitations": [
+    "The source is a finite research subset and does not establish coverage or geometry of the current full-city twin.",
+    "Roof outlines were manually adjusted in the published research; they are not guaranteed cadastral ground footprints.",
+    "The only original attribute is Area. No building name, cadastral ID, Z coordinate, height or roof mesh is provided.",
+    "Record-order IDs are stable for the preserved source hash; no original feature-ID field exists.",
+    "The 2023 file modification time is not a verified survey date; source acquisition date is unknown.",
+    "These display-only outlines do not change the DTM, water mask, drainage routing or flood scores."
+  ],
+  "source_files": [
+    {
+      "file": "Outlines_Roof_Planes_1800.shp",
+      "source_url": "https://drive.google.com/file/d/1VPsO0cpR4GlE-aquSzAtfu37bVYzDvJ_/view",
+      "drive_id": "1VPsO0cpR4GlE-aquSzAtfu37bVYzDvJ_",
+      "modified_time": "2023-04-26T13:17:04.000Z",
+      "bytes": 819320,
+      "sha256": "9505573c14f1ce127734aa97a17b3f2b6dcec555d58fb51c9623bb8ab7675198"
+    },
+    {
+      "file": "Outlines_Roof_Planes_1800.dbf",
+      "source_url": "https://drive.google.com/file/d/1U21o53_P_rmF976aMtVQttlmjMY_oCu7/view",
+      "drive_id": "1U21o53_P_rmF976aMtVQttlmjMY_oCu7",
+      "modified_time": "2023-04-26T13:17:04.000Z",
+      "bytes": 25266,
+      "sha256": "aeaba8e08c59b277247d661fb4855b7e78e7e4e7664cb9813fcee2d37b64e2ed"
+    },
+    {
+      "file": "Outlines_Roof_Planes_1800.shx",
+      "source_url": "https://drive.google.com/file/d/16HmNSxxL_sqt12U-9whTB18DbAzj9JsY/view",
+      "drive_id": "16HmNSxxL_sqt12U-9whTB18DbAzj9JsY",
+      "modified_time": "2023-04-26T13:17:04.000Z",
+      "bytes": 14500,
+      "sha256": "e2e192f545b582c179b631d34214279b90edc2c177e0d160cd6b889ddf8c7523"
+    },
+    {
+      "file": "Outlines_Roof_Planes_1800.prj",
+      "source_url": "https://drive.google.com/file/d/1jEIXllLCIa52KZQtk02pN7j54vx7zgvf/view",
+      "drive_id": "1jEIXllLCIa52KZQtk02pN7j54vx7zgvf",
+      "modified_time": "2023-04-26T13:17:04.000Z",
+      "bytes": 492,
+      "sha256": "f5343f00c9d6db9d26f66e849410888ad3639231d40b1a3ca93a66222ff5a7d1"
+    }
+  ],
+  "geojson_sha256": "a4c99f9fd3e942cb2a1b17aa04383038aaba710823c9986f1639ec0ef3cda266",
+  "preprocessing": {
+    "method": "Exact polygon coordinates transformed from declared EPSG:7801 to WGS84; no buffer, simplification, repair, height inference or extrusion",
+    "script": "scripts/prepare_gate_research_buildings.py"
+  }
+}

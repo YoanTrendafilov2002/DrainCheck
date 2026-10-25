@@ -1,0 +1,9 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+import {createScale,normalize,inverse,legend} from '../shared/elevation_scale.mjs';
+const whole=JSON.parse(fs.readFileSync(new URL('../data/cache/whole_scale.json',import.meta.url),'utf8'));
+test('real 201-point curve is used, not five rounded legend labels',()=>{assert.equal(whole.quantiles.length,201);assert.deepEqual(createScale(whole.quantiles).heights,whole.heights);createScale(whole.quantiles).levels.forEach((v,i)=>assert.ok(Math.abs(v-whole.levels[i])<1e-12));assert.ok(whole.heights.length>150);});
+test('legend metre ticks invert the nonlinear transform',()=>{for(const tick of legend(whole)){assert.ok(Math.abs(normalize(tick.elevation_m,whole)-tick.level)<1e-12);assert.ok(Math.abs(tick.elevation_m-whole.legend.find(t=>t.level===tick.level).elevation_m)<1e-8);}assert.ok(Math.abs(inverse(.5,whole)-(whole.heights[0]+whole.heights.at(-1))/2)>100);});
+test('small elevation changes retain continuous colour detail',()=>{assert.ok(normalize(575.1,whole)>normalize(575,whole));assert.ok(normalize(575.1,whole)<normalize(576,whole));});
+test('duplicates keep first increasing knot, with endpoint levels forced',()=>{const q=Array.from({length:201},(_,i)=>Math.floor(i/3));const s=createScale(q);assert.ok(s.heights.every((v,i)=>i===0||v>s.heights[i-1]));assert.equal(s.levels[0],0);assert.equal(s.levels.at(-1),1);});
+test('flat terrain maps to midpoint while preserving physical heights',()=>{const s=createScale(Array(201).fill(523));assert.equal(normalize(523,s),.5);assert.equal(inverse(.1,s),523);assert.equal(inverse(.9,s),523);});
+test('nonfinite values are missing; finite out-of-scale heights clamp',()=>{assert.equal(normalize(NaN,whole),null);assert.equal(normalize(1,whole),0);assert.equal(normalize(9000,whole),1);});

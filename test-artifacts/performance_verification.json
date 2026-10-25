@@ -1,0 +1,309 @@
+{
+  "prepared_on": "2026-10-25",
+  "status": "PASS",
+  "renderer_revision": "fast-map-3d66372f29f7",
+  "automated_checks": {
+    "python": 110,
+    "javascript": 15,
+    "total": 125,
+    "failed": 0
+  },
+  "production_build": "TypeScript + Vite + deterministic static gzip: PASS",
+  "browser_checks": {
+    "all_expensive_layers_off": "Observed no raster, hillshade or vector requests in fresh QA tab",
+    "hillshade_only": {
+      "renderer_revision": "fast-map-3d66372f29f7",
+      "requests": {
+        "hillshade": 40
+      },
+      "tile_cache": {
+        "memory_hits": 0,
+        "disk_hits": 0,
+        "renders": 40,
+        "coalesced": 0,
+        "corrupt": 0,
+        "write_failures": 0,
+        "inflight": 0,
+        "memory_entries": 40,
+        "disk_entries": 54
+      },
+      "note": "Local implementation diagnostics; no source values or analysis scores are changed by caching."
+    },
+    "hide_hillshade_then_navigate_with_sewerage_only": {
+      "renderer_revision": "fast-map-3d66372f29f7",
+      "requests": {
+        "hillshade": 40,
+        "vector": 12
+      },
+      "tile_cache": {
+        "memory_hits": 0,
+        "disk_hits": 0,
+        "renders": 64,
+        "coalesced": 0,
+        "corrupt": 0,
+        "write_failures": 0,
+        "inflight": 0,
+        "memory_entries": 64,
+        "disk_entries": 78
+      },
+      "note": "Local implementation diagnostics; no source values or analysis scores are changed by caching."
+    },
+    "exposure_first_visit": {
+      "renderer_revision": "fast-map-3d66372f29f7",
+      "requests": {
+        "hillshade": 40,
+        "vector": 12,
+        "exposure": 1
+      },
+      "tile_cache": {
+        "memory_hits": 0,
+        "disk_hits": 0,
+        "renders": 64,
+        "coalesced": 0,
+        "corrupt": 0,
+        "write_failures": 0,
+        "inflight": 0,
+        "memory_entries": 64,
+        "disk_entries": 78
+      },
+      "note": "Local implementation diagnostics; no source values or analysis scores are changed by caching."
+    },
+    "exposure_revisit": {
+      "renderer_revision": "fast-map-3d66372f29f7",
+      "requests": {
+        "hillshade": 40,
+        "vector": 12,
+        "exposure": 1
+      },
+      "tile_cache": {
+        "memory_hits": 0,
+        "disk_hits": 0,
+        "renders": 64,
+        "coalesced": 0,
+        "corrupt": 0,
+        "write_failures": 0,
+        "inflight": 0,
+        "memory_entries": 64,
+        "disk_entries": 78
+      },
+      "note": "Local implementation diagnostics; no source values or analysis scores are changed by caching."
+    },
+    "original_user_view": "Reloaded port8040; preserved camera, all717 routes/540.16km, selected categories, terrain and hillshade. Existing local scale loaded; enabled auto-fit then recomputed it normally."
+  },
+  "static_transfer": {
+    "files": 4,
+    "identity_bytes": 1870800,
+    "gzip_bytes": 513622,
+    "reduction_percent": 72.55,
+    "limitation": "Bytes on the wire; not equivalent to load-time or JavaScript parsing reduction"
+  },
+  "vector_benchmark": {
+    "status": "passed",
+    "started_utc": "2026-10-25T07:27:14.805967+00:00",
+    "method": "Same-process direct uncached scalar/batch rendering; identical actual SQLite input; no HTTP timing or profiler overhead.",
+    "timing_limitations": "OS filesystem cache is not cleared. Small cases alternate renderer order; the default city case has one legacy-then-batch pair. Background machine load may affect wall time.",
+    "comparison": "Decoded MVT features compared by unique ID, including every geometry and property; feature/dictionary ordering may change encoded bytes.",
+    "database": {
+      "file": "C:\\Users\\Yoan\\Documents\\Codex\\2026-10-24\\hp\\outputs\\sofia_explorer_app\\data\\cache\\spatial.sqlite",
+      "sha256_before": "abc582c3335b82974f97088472762689d7f8273031387179f72554bf85834c66",
+      "indexes": [
+        "feature_lookup",
+        "green_display_lookup",
+        "route_lookup"
+      ],
+      "feature_counts": {
+        "green": 64956,
+        "points": 322025,
+        "routes": 1930
+      },
+      "sha256_after": "abc582c3335b82974f97088472762689d7f8273031387179f72554bf85834c66",
+      "unchanged_before_after": true
+    },
+    "versions": {
+      "numpy": "2.5.4",
+      "shapely": "2.2.0",
+      "pyproj": "3.8.0",
+      "mapbox-vector-tile": "2.2.0"
+    },
+    "python": "3.12.14",
+    "vector_version": "batch-mvt-v1",
+    "source_sha256": {
+      "benchmark": "4844ada2a1903d53343ed4f83fded8a41e428a58e6c74283d9775348f41a78ea",
+      "vector_renderer": "a89f15b0a90aa0d0c8e904e79c8bed0afb8489c3b947581a73d11c151a95b09e"
+    },
+    "records": [
+      {
+        "name": "points-street",
+        "kind": "points",
+        "z": 15,
+        "x": 18506,
+        "y": 12077,
+        "display": "all",
+        "repetitions_per_renderer": 2,
+        "timings_seconds": {
+          "legacy": [
+            0.66248440000345,
+            0.4972446000028867
+          ],
+          "batch": [
+            0.12607379999826662,
+            0.11242859999765642
+          ]
+        },
+        "median_legacy_seconds": 0.5798645000031684,
+        "median_batch_seconds": 0.11925119999796152,
+        "speedup_median": 4.862546456665263,
+        "old_features": 4301,
+        "new_features": 4301,
+        "same_id_set": true,
+        "same_decoded_geometry_properties": true,
+        "mismatch_ids": [],
+        "legacy_pbf_bytes": 230411,
+        "batch_pbf_bytes": 230411,
+        "batch_gzip_level3_bytes": 115099,
+        "legacy_pbf_sha256": "5d2e4426126fb102b1f26c9036cd481ad8359b2d3d598a6c2e34c07d2246ba4b",
+        "batch_pbf_sha256": "5d2e4426126fb102b1f26c9036cd481ad8359b2d3d598a6c2e34c07d2246ba4b",
+        "selected_categories": {
+          "categories": [
+            "3",
+            "4"
+          ],
+          "features": 476,
+          "same_id_geometry_properties_as_legacy_subset": true,
+          "direct_render_seconds": 0.02518009999766946,
+          "pbf_bytes": 27322,
+          "gzip_level3_bytes": 14481,
+          "interpretation": "Different requested payload: exact selected-category subset, not a like-for-like all-points timing."
+        }
+      },
+      {
+        "name": "green-subset-central",
+        "kind": "green",
+        "z": 13,
+        "x": 4626,
+        "y": 3019,
+        "display": "subset",
+        "repetitions_per_renderer": 2,
+        "timings_seconds": {
+          "legacy": [
+            0.15826589999778662,
+            0.15270210000744555
+          ],
+          "batch": [
+            0.05038629999035038,
+            0.04709100000036415
+          ]
+        },
+        "median_legacy_seconds": 0.15548400000261609,
+        "median_batch_seconds": 0.048738649995357264,
+        "speedup_median": 3.1901581192221604,
+        "old_features": 163,
+        "new_features": 163,
+        "same_id_set": true,
+        "same_decoded_geometry_properties": true,
+        "mismatch_ids": [],
+        "legacy_pbf_bytes": 20192,
+        "batch_pbf_bytes": 20223,
+        "batch_gzip_level3_bytes": 13795,
+        "legacy_pbf_sha256": "4519736ea632b5a2592ca46f9aacabdea5ec2f4006b4a089c9b909dd6c081627",
+        "batch_pbf_sha256": "9cc6be89bbf19a162eaf93501a596c81f9ee3cbe65b8a86d866236e41003fe1e"
+      },
+      {
+        "name": "routes-inside-central",
+        "kind": "routes",
+        "z": 13,
+        "x": 4626,
+        "y": 3019,
+        "display": "all",
+        "repetitions_per_renderer": 2,
+        "timings_seconds": {
+          "legacy": [
+            0.1138657000119565,
+            0.11520220000238623
+          ],
+          "batch": [
+            0.01181440000073053,
+            0.011862799990922213
+          ]
+        },
+        "median_legacy_seconds": 0.11453395000717137,
+        "median_batch_seconds": 0.011838599995826371,
+        "speedup_median": 9.674619469155951,
+        "old_features": 65,
+        "new_features": 65,
+        "same_id_set": true,
+        "same_decoded_geometry_properties": true,
+        "mismatch_ids": [],
+        "legacy_pbf_bytes": 8677,
+        "batch_pbf_bytes": 8682,
+        "batch_gzip_level3_bytes": 5858,
+        "legacy_pbf_sha256": "fa26550a9511480994fe9559fb32a69c7f467c098ed9405dad5724e5a74ea672",
+        "batch_pbf_sha256": "84e146dd49c5b05ae0ae6be5ef63892362e24761ba2228c704b38aa5762bf7b7"
+      },
+      {
+        "name": "points-city",
+        "kind": "points",
+        "z": 12,
+        "x": 2313,
+        "y": 1509,
+        "display": "all",
+        "repetitions_per_renderer": 1,
+        "timings_seconds": {
+          "legacy": [
+            13.14783630000602
+          ],
+          "batch": [
+            3.3323643000039738
+          ]
+        },
+        "median_legacy_seconds": 13.14783630000602,
+        "median_batch_seconds": 3.3323643000039738,
+        "speedup_median": 3.9454978856874505,
+        "old_features": 98511,
+        "new_features": 98511,
+        "same_id_set": true,
+        "same_decoded_geometry_properties": true,
+        "mismatch_ids": [],
+        "legacy_pbf_bytes": 4916351,
+        "batch_pbf_bytes": 4916351,
+        "batch_gzip_level3_bytes": 2336113,
+        "legacy_pbf_sha256": "6037b8fec851ce9b3de6ede8e28adea6df05a70cdd3da4ec946c114b7a689d5b",
+        "batch_pbf_sha256": "6037b8fec851ce9b3de6ede8e28adea6df05a70cdd3da4ec946c114b7a689d5b",
+        "selected_categories": {
+          "categories": [
+            "3",
+            "4"
+          ],
+          "features": 19117,
+          "same_id_geometry_properties_as_legacy_subset": true,
+          "direct_render_seconds": 1.0515462000039406,
+          "pbf_bytes": 1089047,
+          "gzip_level3_bytes": 533773,
+          "interpretation": "Different requested payload: exact selected-category subset, not a like-for-like all-points timing."
+        }
+      }
+    ],
+    "finished_utc": "2026-10-25T07:27:38.462063+00:00"
+  },
+  "raster_equivalence": {
+    "real_png_tiles": 24,
+    "all_bytes_equal": true,
+    "native_and_factor_samples_equal": true,
+    "fresh_cache_instance_disk_hits": 24,
+    "fresh_cache_instance_renders": 0,
+    "detail": "raster_performance_after.json"
+  },
+  "data_invariants": {
+    "spatial_revision": "af34c6d53d5b26fd",
+    "pluvial_revision": "f42644a668cdc14d",
+    "native_dtm_grid_m": 1,
+    "hydrology_grid_m": 5,
+    "source_feature_rows_and_length_totals_unchanged_after_display_index": true
+  },
+  "limitations": [
+    "First render of a new raster tile still performs real raster reads and reprojection.",
+    "Dense visible citywide point layers still require geometry encoding and browser drawing.",
+    "Timings are local samples, not a universal whole-app speedup.",
+    "Original live HTTP server became CPU-queued; its request times were not used for paired vector speedups."
+  ]
+}

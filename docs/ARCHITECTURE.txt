@@ -1,0 +1,62 @@
+SOFIA EXPLORER ARCHITECTURE
+
+Frontend: React 19, TypeScript, Vite, MapLibre GL JS. MapLibre's separate worker
+decodes vector tiles. Large GeoJSON strings and the native terrain are not
+bundled into client JavaScript. The map has collapsible responsive controls,
+continuous colour legend, click inspector and shareable URL state.
+
+API: FastAPI/ASGI. The built dist/ is served by the same process/origin. Windows
+JavaScript MIME types are explicitly corrected because local registry values
+can otherwise serve module scripts as text/plain. No Google credentials or
+private keys are exposed to the client.
+
+Spatial index: SQLite + RTree, generated separately by scripts/prepare_data.py.
+It retains full geometry and properties for all three mutually selected route
+zones, all 64,956 nonempty green polygons, and every infrastructure point.
+Prepared route geometry comes from the real handoff. Independent tests recompute
+route intersections against candidates from the complete mask, preserving
+repeated traversal lengths. The 2,175 display subset is not the analysis mask.
+Index queries select only tile-intersecting features. Display geometries are
+clipped/quantized/simplified for MVT; route details/exports use the full stored
+geometry, never the quantized tile geometry.
+
+Terrain: backend/terrain.py reads local GeoTIFF/COG through Rasterio/GDAL.
+The deployed input here is the existing verified tiled native GeoTIFF. Its
+dimensions, count, Float32 type, CRS, affine grid and NoData are validated.
+Non-raster previews and other grids are rejected. Native samples open the base
+resolution explicitly and return one actual pixel with its row/column/centre.
+NoData remains null, request errors remain HTTP errors, and coverage-free tiles
+are transparent. The source is never opened for writing.
+
+Display-only data: a separately generated 8 m averaged GeoTIFF plus overviews
+serves lower zooms. Higher raster-tile zooms read the native source; scientific
+pixel readouts always read native 1 m. Web reprojection/averaging does not replace
+the scientific source. Hillshade uses 315-degree azimuth, 45-degree illumination,
+with a halo and latitude-adjusted ground spacing. Coverage masks are retained.
+
+Normalizations: whole-area 201 quantiles were recomputed from actual 60 m native
+area averages because the archived curve was in the truncated ZIP tail. This
+provenance is visible in the app. Local statistics use real source windows,
+the geographic view mask and normally 10 m averages, capped at 2 million output
+samples. The continuous mapping is 80% percentile + 20% linear height; duplicate
+knots follow the recovered configuration. Legend metre values invert this exact
+mapping. A true provided full curve can be imported without editing the source.
+
+Caching: immutable original inputs are fingerprinted, and changed hashes force
+derived index/statistics regeneration. Data revision includes input fingerprints,
+native hash, whole-scale definition, config and renderer version. Tiles use the
+revision and scale ID in their cache keys/URLs. Local definitions persist with
+their revision. Stale revisions are rejected instead of silently mixing scales.
+Auto-fit is opt-in, debounced; aborted/out-of-order responses cannot replace a
+newer result. Native reads are bounded to two concurrent raster operations.
+
+URL state: camera, bearing/pitch, zone, enabled statuses/layers, opacity, colour
+scope, auto-fit and basemap. Missing stored local scopes produce an explicit
+error and offer Fit/Reset. No unknown scope is silently relabelled whole-area.
+
+Current limitation: original saved Script1/Script2, supplied scale module/tests,
+manifest and acquisition guide could not be recovered from the truncated ZIP.
+Their original bytes are not claimed in this application. Optional acquisition
+utilities were authored independently; no authenticated EE request/export was
+executed during this build because the real local inputs already satisfied the
+app's data needs.

@@ -1,0 +1,379 @@
+{
+  "status": "PASS: implementation, source provenance, masking and rendering checks; not flood validation",
+  "verified_at_utc": "2026-10-25T07:45:48.557794+00:00",
+  "local_url": "http://127.0.0.1:8040/",
+  "pluvial_revision": "2a0d5f6899cd036c",
+  "terrain_revision": "f42644a668cdc14d",
+  "renderer_revision": "fast-map-90204fd3aa65",
+  "open_water_revision": "ee06795221a5005e",
+  "automated_checks": {
+    "python_passed": 130,
+    "frontend_passed": 15,
+    "total_passed": 145,
+    "failed": 0
+  },
+  "source": {
+    "provider": "OpenStreetMap contributors via Overpass API",
+    "url": "https://www.openstreetmap.org",
+    "license": "ODbL1.0",
+    "license_url": "https://www.openstreetmap.org/copyright",
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "download_utc": "2026-10-25T07:31:52.542206+00:00",
+    "osm_base_timestamp": "2026-10-25T07:30:02Z",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "raw_file": "osm_open_water_20261025T073109Z.json",
+    "raw_sha256": "fac32b04617a843356983496bc772970f7a62462a0a8526ecaeb9cf803a126c6",
+    "query_file": "osm_open_water_20261025T073109Z.overpass",
+    "query_sha256": "2073985b485bdf675e6d21df0640de901089b2bc4e8ce818060ffce870297d75",
+    "geojson_file": "data\\reference\\open_water_polygons.geojson",
+    "geojson_sha256": "c7d63f4d8dcea916f11372aa4911988e483a50901f94a4beda72da33b43ab509"
+  },
+  "mask_counts": {
+    "water_cells": 1519688,
+    "water_area_km2": 37.9922,
+    "accepted_source_polygons": 537,
+    "accepted_river_polygons": 18,
+    "rejected_source_objects": 49,
+    "water_pixels_outside_valid_terrain_removed": 203925
+  },
+  "grid": {
+    "crs": "EPSG:7801",
+    "shape": [
+      10869,
+      10345
+    ],
+    "transform": [
+      5.0,
+      0.0,
+      299392.0,
+      0.0,
+      -5.0,
+      4753611.0
+    ],
+    "dtype": "uint8",
+    "nodata": null,
+    "values": {
+      "0": "not mapped qualifying water; also outside valid terrain",
+      "1": "mapped qualifying water exclusion"
+    }
+  },
+  "controls": {
+    "Ariana lake water": {
+      "longitude": 23.337247642167377,
+      "latitude": 42.690042699335194,
+      "status": "excluded_open_water",
+      "score": null,
+      "water_excluded": true
+    },
+    "Pancharevo lake water": {
+      "longitude": 23.40675247166021,
+      "latitude": 42.60506180530598,
+      "status": "excluded_open_water",
+      "score": null,
+      "water_excluded": true
+    },
+    "Lily lake water": {
+      "longitude": 23.34235504018018,
+      "latitude": 42.68532104373126,
+      "status": "excluded_open_water",
+      "score": null,
+      "water_excluded": true
+    },
+    "Mapped river footprint; OSM water=river": {
+      "longitude": 23.359073637791244,
+      "latitude": 42.66766873740193,
+      "status": "excluded_open_water",
+      "score": null,
+      "water_excluded": true
+    },
+    "Ariana island hole is not masked": {
+      "longitude": 23.336833150705026,
+      "latitude": 42.68967465294718,
+      "status": "ok",
+      "score": 97.11591339111328,
+      "water_excluded": false
+    },
+    "VasilLevski playing field remains unmasked": {
+      "longitude": 23.3352531692,
+      "latitude": 42.6875642953,
+      "status": "ok",
+      "score": 75.79025268554688,
+      "water_excluded": false
+    }
+  },
+  "mode_accounting": {
+    "ponding": {
+      "excluded": {
+        "point_count": 15,
+        "route_length_m": 679.703456033095
+      },
+      "terrain": {
+        "terrain_cells": 53682786,
+        "eligible_cells": 51682623,
+        "uncertain_cells": 480475,
+        "no_terrain_data_cells": 0,
+        "water_excluded_cells": 1519688,
+        "classes": [
+          {
+            "label": "Lower signal",
+            "cells": 50856418,
+            "area_km2": 1271.41045
+          },
+          {
+            "label": "Raised",
+            "cells": 399928,
+            "area_km2": 9.9982
+          },
+          {
+            "label": "Higher signal",
+            "cells": 250157,
+            "area_km2": 6.253925
+          },
+          {
+            "label": "Strongest signal",
+            "cells": 176120,
+            "area_km2": 4.403
+          },
+          {
+            "label": "Uncertain terrain",
+            "cells": 480475,
+            "area_km2": 12.011875
+          },
+          {
+            "label": "No terrain data",
+            "cells": 0,
+            "area_km2": 0.0
+          },
+          {
+            "label": "Excluded open water",
+            "cells": 1519688,
+            "area_km2": 37.9922
+          }
+        ],
+        "sensitivity": [
+          {
+            "threshold": 70,
+            "cells": 426277,
+            "area_km2": 10.656925,
+            "percent_eligible": 0.8247975339796512
+          },
+          {
+            "threshold": 80,
+            "cells": 264512,
+            "area_km2": 6.6128,
+            "percent_eligible": 0.5118006491272705
+          },
+          {
+            "threshold": 90,
+            "cells": 115946,
+            "area_km2": 2.89865,
+            "percent_eligible": 0.22434232875525686
+          }
+        ]
+      }
+    },
+    "concentration": {
+      "excluded": {
+        "point_count": 15,
+        "route_length_m": 679.703456033095
+      },
+      "terrain": {
+        "terrain_cells": 53682786,
+        "eligible_cells": 51682623,
+        "uncertain_cells": 480475,
+        "no_terrain_data_cells": 0,
+        "water_excluded_cells": 1519688,
+        "classes": [
+          {
+            "label": "Lower signal",
+            "cells": 32478910,
+            "area_km2": 811.97275
+          },
+          {
+            "label": "Raised",
+            "cells": 11305900,
+            "area_km2": 282.6475
+          },
+          {
+            "label": "Higher signal",
+            "cells": 5423507,
+            "area_km2": 135.587675
+          },
+          {
+            "label": "Strongest signal",
+            "cells": 2474306,
+            "area_km2": 61.85765
+          },
+          {
+            "label": "Uncertain terrain",
+            "cells": 480475,
+            "area_km2": 12.011875
+          },
+          {
+            "label": "No terrain data",
+            "cells": 0,
+            "area_km2": 0.0
+          },
+          {
+            "label": "Excluded open water",
+            "cells": 1519688,
+            "area_km2": 37.9922
+          }
+        ],
+        "sensitivity": [
+          {
+            "threshold": 70,
+            "cells": 7897813,
+            "area_km2": 197.445325,
+            "percent_eligible": 15.281370297324113
+          },
+          {
+            "threshold": 80,
+            "cells": 3980621,
+            "area_km2": 99.515525,
+            "percent_eligible": 7.702049100719985
+          },
+          {
+            "threshold": 90,
+            "cells": 1138451,
+            "area_km2": 28.461275,
+            "percent_eligible": 2.2027732609469144
+          }
+        ]
+      }
+    },
+    "combined": {
+      "excluded": {
+        "point_count": 15,
+        "route_length_m": 679.703456033095
+      },
+      "terrain": {
+        "terrain_cells": 53682786,
+        "eligible_cells": 51682623,
+        "uncertain_cells": 480475,
+        "no_terrain_data_cells": 0,
+        "water_excluded_cells": 1519688,
+        "classes": [
+          {
+            "label": "Lower signal",
+            "cells": 32356341,
+            "area_km2": 808.908525
+          },
+          {
+            "label": "Raised",
+            "cells": 11257055,
+            "area_km2": 281.426375
+          },
+          {
+            "label": "Higher signal",
+            "cells": 5455103,
+            "area_km2": 136.377575
+          },
+          {
+            "label": "Strongest signal",
+            "cells": 2614124,
+            "area_km2": 65.3531
+          },
+          {
+            "label": "Uncertain terrain",
+            "cells": 480475,
+            "area_km2": 12.011875
+          },
+          {
+            "label": "No terrain data",
+            "cells": 0,
+            "area_km2": 0.0
+          },
+          {
+            "label": "Excluded open water",
+            "cells": 1519688,
+            "area_km2": 37.9922
+          }
+        ],
+        "sensitivity": [
+          {
+            "threshold": 70,
+            "cells": 8069227,
+            "area_km2": 201.730675,
+            "percent_eligible": 15.613036900236274
+          },
+          {
+            "threshold": 80,
+            "cells": 4150616,
+            "area_km2": 103.7654,
+            "percent_eligible": 8.030970099950228
+          },
+          {
+            "threshold": 90,
+            "cells": 1249505,
+            "area_km2": 31.237625,
+            "percent_eligible": 2.4176501258459737
+          }
+        ]
+      }
+    }
+  },
+  "land_raster_export": {
+    "pluvial_revision": "2a0d5f6899cd036c",
+    "terrain_revision": "f42644a668cdc14d",
+    "open_water_revision": "ee06795221a5005e",
+    "output_sha256": "7d26ce0684b5d447e936d1082ba3bf83e069dc3c0ad875d19d914cd6ad3a7d23",
+    "source_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+    "open_water_sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030",
+    "grid": {
+      "crs": "EPSG:7801",
+      "shape": [
+        10869,
+        10345
+      ],
+      "transform": [
+        5,
+        0,
+        299392,
+        0,
+        -5,
+        4753611
+      ],
+      "nodata": -9999.0
+    },
+    "bands": [
+      "ponding_score_0_100",
+      "concentration_score_0_100",
+      "combined_score_0_100",
+      "open_water_excluded"
+    ],
+    "nodata": -9999,
+    "policy": "Score bands equal original scores on non-water cells and NoData over mapped open water. Water flag is NoData outside known terrain; zero means not mapped open water, not verified safe/dry land.",
+    "verification": {
+      "all_land_score_pixels_identical": true,
+      "all_water_score_pixels_nodata": true,
+      "all_flag_pixels_match": true
+    }
+  },
+  "browser_checks": [
+    "Actual mapped lake click reports Existing mapped water \u2014 excluded from pluvial screening.",
+    "Native elevation is still537.00m at the actual Ariana control.",
+    "Automatic hidden-mask notice and separate water-area/inventory category are visible.",
+    "No visible mask overlay or layer switch was added.",
+    "Original user camera, bearing, pitch and layer selections survive the update."
+  ],
+  "rendering_regression": "A zero-valid mask is reprojected without treating0 as NoData. Independent float-mask reference and positive land alpha checks prevent water expansion into land.",
+  "preserved": [
+    "Original native1m DTM",
+    "Original8band5m terrain factors and scores",
+    "Raw infrastructure and vectors",
+    "Original downloaded OSM response/query"
+  ],
+  "limitations": [
+    "OSM is community mapping, not a current surveyed water or flood boundary; missing/untagged narrow rivers remain unmasked.",
+    "0 means no qualifying mapped water, not verified land or absence of flood risk. No riverbank or floodplain safety exclusion is inferred.",
+    "Unmarked seasonality, source misclassification, bridge decks and changing water levels may affect mapped footprints.",
+    "Central Perlovska/canal polygons by VasilLevski are tagged intermittent=yes and deliberately remain unexcluded under this conservative rule.",
+    "At5m pixel-centre resolution narrow water slivers may contain no pixel centres. No arbitrary widening is applied."
+  ],
+  "reviewed_remaining_point": "water_point_23418488_review.json: a previously inspected high-score cell lies40.7m outside the nearest mapped water polygon; current shoreline state remains unverified.",
+  "screenshots": [
+    "open-water-excluded.jpg",
+    "open-water-user-view.jpg"
+  ]
+}

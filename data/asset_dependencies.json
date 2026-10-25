@@ -1,0 +1,38 @@
+{
+  "snapshot_date": "2026-10-24",
+  "project": "rivertracker-512606",
+  "missing_inputs": [
+    {
+      "name": "Municipal native DTM",
+      "asset_id": "projects/rivertracker-512606/assets/sofia_dtm_2024_1m_gee",
+      "type": "Earth Engine Image",
+      "full_bytes_in_package": false,
+      "observed_in_authorized_prototype": true,
+      "expected_band": "b1",
+      "expected_crs": "EPSG:7801",
+      "expected_transform": [
+        1,
+        0,
+        299392,
+        0,
+        -1,
+        4753611
+      ],
+      "acquisition": "scripts/export_ee_assets.py export-dem or authorized backend adapter"
+    },
+    {
+      "name": "Infrastructure points",
+      "asset_id": "projects/rivertracker-512606/assets/sofia_infrastructure_pps",
+      "type": "Earth Engine FeatureCollection",
+      "full_bytes_in_package": false,
+      "observed_in_authorized_prototype": true,
+      "expected_count": 322025,
+      "acquisition": "scripts/export_ee_assets.py export-points or authorized backend adapter"
+    }
+  ],
+  "excluded_active_layer": "Imperviousness, per user instruction; existing external original files were not deleted.",
+  "credentials_in_package": false,
+  "cloud_exports_started_during_handoff": false,
+  "bundled_live_metadata": "data/reference/earth_engine_live_metadata.json",
+  "bundled_whole_area_quantiles": "data/reference/elevation_quantiles_whole_area.json"
+}

@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-10-24",
+  "purpose": "Codex standalone Sofia terrain, sewer and daily rainfall app handoff",
+  "full_dem_bytes_included": false,
+  "infrastructure_point_bytes_included": false,
+  "full_whole_area_quantiles_included": true,
+  "original_hashes": {
+    "vik_kanal_26_sofpr_20090000(1).geojson": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3",
+    "green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557",
+    "vik_kanal_26_sofpr_20090000.geojson": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3"
+  },
+  "files": [
+    {
+      "path": "CODEX_PROMPT.md",
+      "bytes": 12177,
+      "sha256": "e179c342c76747f7826a046eb0fe9219d951e6da965f9cbab2cf324f6c65732b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6624,
+      "sha256": "9855e8f0c07aed05dc3342cb2782fe090b40a325e8995bfd180bff7028bb8a27"
+    },
+    {
+      "path": "archive/encode_inline.py",
+      "bytes": 3541,
+      "sha256": "f646609275b4650e0ca74fab7acf26602883380271a5f7fe4a9f445b13e1f379"
+    },
+    {
+      "path": "archive/pack_vectors.py",
+      "bytes": 637,
+      "sha256": "dcee212139214b6c4fd10c09e27892a2cfea4c9e9ae6985c2d3d1e4971642a22"
+    },
+    {
+      "path": "archive/prepare_vectors.py",
+      "bytes": 3450,
+      "sha256": "6607eea9bf27cd03e5c9f62c2b04006bbcd98a4f56943123a289238a411a071c"
+    },
+    {
+      "path": "archive/unpack_vectors.js",
+      "bytes": 3557,
+      "sha256": "15c60345ed2c06142689bae1ae59d4afefd37186384d06bbe84874e3d15b7d77"
+    },
+    {
+      "path": "config/map_config.json",
+      "bytes": 8217,
+      "sha256": "bb33f29d76a233fc4116f8c4b3889ca0d32be452e7b22d699d98e2007e0a5ceb"
+    },
+    {
+      "path": "data/asset_dependencies.json",
+      "bytes": 1972,
+      "sha256": "c3d1edce62b437235dd184155998def81816e9b51e9015fe5a3ea3ede6ac5515"
+    },
+    {
+      "path": "data/derived/green_intersecting_routes.geojson",
+      "bytes": 3585198,
+      "sha256": "e17c54e5f9fb85ae8dbc56b93b1bc2adf6bf096ecee3ff75665ebffa457432d2"
+    },
+    {
+      "path": "data/derived/sewer_routes_all.geojson",
+      "bytes": 489489,
+      "sha256": "ec1b1685242e30c6dc5d95d248f0461ad836b228e4f0f3821d29d139ce69ba2c"
+    },
+    {
+      "path": "data/derived/sewer_routes_inside.geojson",
+      "bytes": 498732,
+      "sha256": "f912c1ce8b5213fcef9a49a19a8de3fec4b23509c29133240b3520ef9ecbe7e5"
+    },
+    {
+      "path": "data/derived/sewer_routes_outside.geojson",
+      "bytes": 633614,
+      "sha256": "a57a0dd50793cd83b5bc58d8017fb3736425b126d416708443c8f9438524529c"
+    },
+    {
+      "path": "data/derived/summary.json",
+      "bytes": 1995,
+      "sha256": "26fa8f4b9bad8dc0a140503a7da38bb6b5ff81a56a9db3d87e0a193de9dd7160"
+    },
+    {
+      "path": "data/rainfall/earth_engine_metadata.json",
+      "bytes": 8755,
+      "sha256": "bfb66137a2123233eae244a753ff052fa5d89fc6147d6820a69cf7a8c04359ed"
+    },
+    {
+      "path": "data/rainfall/merged_250m.tif",
+      "bytes": 27206,
+      "sha256": "902b743d49cf077bf0c738042c62c4c7ed6fbf154a5f30590f6e038f82f7c66f"
+    },
+    {
+      "path": "data/rainfall/native_arrays/merged_250m.json",
+      "bytes": 152933,
+      "sha256": "747641e2d7c4441653c8ff47434b96ec092612436d123010a22527728bd711a7"
+    },
+    {
+      "path": "data/rainfall/native_arrays/radar_bias_corrected_250m.json",
+      "bytes": 153602,
+      "sha256": "a13794629fd3cc916c33486fbf33fdb1b2441068ae6fa5c268d10a5fc13497f3"
+    },
+    {
+      "path": "data/rainfall/native_arrays/radar_raw_1km.json",
+      "bytes": 118066,
+      "sha256": "d6a078e2e1450938489e92e0c407e6b599a0368a4eeac87234dd83e7201c140c"
+    },
+    {
+      "path": "data/rainfall/native_point_checks.json",
+      "bytes": 1311,
+      "sha256": "6e6178188e8b813dc81af394eef3f9e5e795cf2d942ec051eae492a60ce0b0d7"
+    },
+    {
+      "path": "data/rainfall/radar_bias_corrected_250m.tif",
+      "bytes": 25037,
+      "sha256": "d572da07990aa5dde0fc485a37f14531198d56376d3d26bd39a62e0217c3bcf6"
+    },
+    {
+      "path": "data/rainfall/radar_raw_1km.tif",
+      "bytes": 16553,
+      "sha256": "b925fe1aa37aa29fc7773d3345f2b358245cd46c1ad9e5424850847acb06acdb"
+    },
+    {
+      "path": "data/rainfall/summary.json",
+      "bytes": 2856,
+      "sha256": "28d3bd0154c679f0c1d449a926ae5185c2b39066441bc9f207c1a8d5789ae00b"
+    },
+    {
+      "path": "data/rainfall/wu_stations.geojson",
+      "bytes": 19046,
+      "sha256": "067e6e63078cd2945c2a14098fa77224eee964711f95cdc1a1da62bbc61c955b"
+    },
+    {
+      "path": "data/raw/green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson",
+      "bytes": 53164382,
+      "sha256": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557"
+    },
+    {
+      "path": "data/raw/vik_kanal_26_sofpr_20090000(1).geojson",
+      "bytes": 366359,
+      "sha256": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3"
+    },
+    {
+      "path": "data/raw/vik_kanal_26_sofpr_20090000.geojson",
+      "bytes": 366359,
+      "sha256": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3"
+    },
+    {
+      "path": "data/reference/earth_engine_live_metadata.json",
+      "bytes": 8600,
+      "sha256": "120b10452ae93182d58cb8968197996305a5964a5bdbbc04ed49efade91b7771"
+    },
+    {
+      "path": "data/reference/elevation_quantiles_whole_area.json",
+      "bytes": 7004,
+      "sha256": "58f9145e4bc1ab41e26cf49e735e21b24ebbc89157f839510e3f8f7552bff916"
+    },
+    {
+      "path": "data/reference/sofia_dtm_2024_preview.png",
+      "bytes": 922889,
+      "sha256": "864ee7585cc8769bc1bfbb5fc7562b4af500adc366d40e94a8204d76a8b23848"
+    },
+    {
+      "path": "docs/ACQUISITION.md",
+      "bytes": 6646,
+      "sha256": "d1fce190c50de807d1958611a11e985d9ed8ceaed7babafb292df1b745f39bbe"
+    },
+    {
+      "path": "docs/DATA_CONTRACT.md",
+      "bytes": 7590,
+      "sha256": "56faee670f717ecd66db61d5f5f44a0687f6d8e8dd97133bf49e54c0df756b0c"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_NOTES.md",
+      "bytes": 7676,
+      "sha256": "b2b27a460180e99fcfeb3a3b052426e398e142f09b8035a234186ff12655da1c"
+    },
+    {
+      "path": "docs/RAINFALL.md",
+      "bytes": 7973,
+      "sha256": "d3b5108715468710cec4aa8bbd2cdf1e6db6f156446b37b3e86ad61fa26c2cf1"
+    },
+    {
+      "path": "docs/VALIDATION.md",
+      "bytes": 3219,
+      "sha256": "d7b719aa939b67e03465a4fd1d0ef5eb8239791334bd1b00b3e249980c1ca94f"
+    },
+    {
+      "path": "earth_engine/Rainfall_20250627_original.js",
+      "bytes": 16323,
+      "sha256": "81d5832798aa33ea3a857911a14d14d747fda64e2a108ca673356dba603d9765"
+    },
+    {
+      "path": "earth_engine/Script1.js",
+      "bytes": 511862,
+      "sha256": "a893a8c3e58a64ae4aba90c12cd7a9e5f3e1b86daba4500e1f4a05d315d399ea"
+    },
+    {
+      "path": "earth_engine/Script2.js",
+      "bytes": 511982,
+      "sha256": "f08116eb0b50a1347c099cee3d9b3737a3e5b626209f2a5f021960dd475f151b"
+    },
+    {
+      "path": "earth_engine/check_rainfall_samples.js",
+      "bytes": 4717,
+      "sha256": "846d3be3f3248a0a40a87530a733a6395423afe2000f5ee49edf3329b52b3ed1"
+    },
+    {
+      "path": "earth_engine/export_for_codex.js",
+      "bytes": 2092,
+      "sha256": "f7bd49f734bd082a77de59cca94f41a8cc90fc0e64e40dfba2e45baba9aeaaae"
+    },
+    {
+      "path": "earth_engine/read_handoff_metadata.js",
+      "bytes": 943,
+      "sha256": "a98f597b2a6c2d3d05a87638c5beec22d00ea5e0922d256376e349bd4874cc0a"
+    },
+    {
+      "path": "earth_engine/read_rainfall_metadata.js",
+      "bytes": 526,
+      "sha256": "eeb5f3b705f03f9216bd18d9627f2be758a0d719685eb6c71c062326be31cfd5"
+    },
+    {
+      "path": "earth_engine/read_rainfall_pixels.js",
+      "bytes": 5037,
+      "sha256": "cf9b859388ecf188ce456174e286628af522c3f1a3885faa2d7ebe49c4cb82bd"
+    },
+    {
+      "path": "earth_engine/uploads/sofia_green_areas_2020.zip",
+      "bytes": 17971454,
+      "sha256": "f09cdf89e65dc28403b7faa43658c9c09be58856e1b28a63d0b38696361b6b35"
+    },
+    {
+      "path": "earth_engine/uploads/sofia_sewer_routes_green_split.zip",
+      "bytes": 213537,
+      "sha256": "14e66de9a475d161c6096debf54606a31b57193690b052546d82e972bce246d9"
+    },
+    {
+      "path": "requirements-data.txt",
+      "bytes": 137,
+      "sha256": "e8ec18d907abcf8c070be25e10280e1eed951d80b528cff02945d2afbbff0081"
+    },
+    {
+      "path": "scripts/export_ee_assets.py",
+      "bytes": 5436,
+      "sha256": "c13a38e4f43753344480b154b7d8b3efabea528c9891b2a2b1b6ae3b2a57fc51"
+    },
+    {
+      "path": "scripts/prepare_rainfall.py",
+      "bytes": 4826,
+      "sha256": "9451f0bff115604d2d58aaea32f09e4b5419e54635b08427909d5ad30ad72b8d"
+    },
+    {
+      "path": "scripts/prepare_vectors.py",
+      "bytes": 6317,
+      "sha256": "9796d86500ab0297890e49cc8f74a72d3ae5353a0d984d1a8d4f4f2ca13a011a"
+    },
+    {
+      "path": "scripts/verify_handoff.py",
+      "bytes": 4880,
+      "sha256": "5c320ce2b9fdbafb66fce1d39d591c831e4d5d8fe4d2746b09c3dbd241f3fe29"
+    },
+    {
+      "path": "scripts/verify_rainfall.py",
+      "bytes": 2902,
+      "sha256": "6d974c21cd05667239aaaff1599b0a1fb3ce6f12f244696cd45298f861a7e854"
+    },
+    {
+      "path": "shared/elevation_scale.mjs",
+      "bytes": 2159,
+      "sha256": "84a7b5c536d8aa27aca7435fab70bac55e1dc43ec833406e48bf8e3f6d1b28ac"
+    },
+    {
+      "path": "tests/elevation_scale.test.mjs",
+      "bytes": 2318,
+      "sha256": "2a8dd0fe0b21150f660549a8dd3cb217b8434f30f16e2095735717af595b3d87"
+    }
+  ],
+  "updated_date": "2026-10-25",
+  "full_daily_rainfall_asset_values_and_masks_included": true,
+  "rain_station_feature_count": 55,
+  "rainfall_original_script_sha256": "81d5832798aa33ea3a857911a14d14d747fda64e2a108ca673356dba603d9765"
+}

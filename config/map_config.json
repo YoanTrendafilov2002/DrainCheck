@@ -1,0 +1,316 @@
+{
+  "name": "Sofia Terrain, Sewer, Rainfall & Pluvial Screening Explorer",
+  "snapshot_date": "2026-10-24",
+  "project": "rivertracker-512606",
+  "study_area_wgs84": [
+    23,
+    42.4,
+    23.7,
+    42.95
+  ],
+  "initial_view": {
+    "longitude": 23.30135,
+    "latitude": 42.75068,
+    "zoom": 14
+  },
+  "elevation": {
+    "asset": "projects/rivertracker-512606/assets/sofia_dtm_2024_1m_gee",
+    "asset_band": "b1",
+    "app_band": "elevation",
+    "source_label": "SofiaPlan municipal DTM",
+    "listed_valid_at": "2024-10-01",
+    "crs": "EPSG:7801",
+    "vertical_datum": "Baltic 1982",
+    "vertical_crs": "EPSG:5786",
+    "transform": [
+      1,
+      0,
+      299392,
+      0,
+      -1,
+      4753611
+    ],
+    "native_pixel_size_m": 1,
+    "nodata": -9999,
+    "opacity": 0.95,
+    "default_scale": "whole-study-area",
+    "auto_fit": false,
+    "palette": [
+      "0b4da2",
+      "27a7df",
+      "6ddcc7",
+      "83ca42",
+      "d7e865",
+      "fff2a3",
+      "f6bd60",
+      "e76f51",
+      "b53252"
+    ],
+    "normalization": {
+      "percentiles_start": 0,
+      "percentiles_end": 100,
+      "percentile_step": 0.5,
+      "control_points": 201,
+      "equalized_weight": 0.8,
+      "linear_weight": 0.2,
+      "whole_area_statistics_scale_m": 60,
+      "local_statistics_scale_m": 10,
+      "best_effort": true,
+      "max_pixels": 2000000,
+      "tile_scale": 4,
+      "max_buckets": 65536,
+      "min_bucket_width": 0.05,
+      "max_raw": 4096,
+      "duplicate_knots": "Keep first strictly increasing elevation, then force first/last normalized levels to 0/1; flat extent maps to 0.5",
+      "outside_range": "clamp",
+      "legend_levels": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ],
+      "whole_area_quantile_file": "data/reference/elevation_quantiles_whole_area.json"
+    },
+    "observed_whole_area_legend_only": {
+      "elevation_m": [
+        501,
+        574.3,
+        808.3,
+        1062.6,
+        2278.8
+      ],
+      "normalized_levels": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ],
+      "note": "Rounded UI observations only. Full 201-quantile snapshot is included in data/reference/elevation_quantiles_whole_area.json."
+    }
+  },
+  "hillshade": {
+    "enabled": true,
+    "azimuth_deg": 315,
+    "illumination_elevation_deg": 45,
+    "opacity": 0.22
+  },
+  "routes": {
+    "default_zone": "inside",
+    "source_year": 2009,
+    "statuses": [
+      {
+        "value": "existing",
+        "label": "Existing routes",
+        "color": "#00e5ff",
+        "line_style": "solid",
+        "source_count": 464
+      },
+      {
+        "value": "planned",
+        "label": "Planned routes",
+        "color": "#ff4dce",
+        "line_style": "dashed",
+        "source_count": 250
+      },
+      {
+        "value": "open",
+        "label": "Open channels",
+        "color": "#ffeb3b",
+        "line_style": "solid",
+        "source_count": 3
+      }
+    ]
+  },
+  "green_areas": {
+    "source_year": 2020,
+    "mask": "all 64956 nonempty source polygons",
+    "default_visible": true,
+    "default_display": "2175 polygons intersecting routes",
+    "fill_color": "#52c468",
+    "fill_opacity": 0.3137254901960784,
+    "outline_color": "#246b35",
+    "outline_width_px": 1,
+    "note": "Exact prototype styling is in Script1; retain readable green translucent polygons and source geometry."
+  },
+  "infrastructure": {
+    "asset": "projects/rivertracker-512606/assets/sofia_infrastructure_pps",
+    "count": 322025,
+    "default_visible": false,
+    "categories": [
+      {
+        "code": 1,
+        "label": "Unknown",
+        "color": "#bdbdbd",
+        "count": 0
+      },
+      {
+        "code": 2,
+        "label": "Water supply",
+        "color": "#00c8ff",
+        "count": 40994
+      },
+      {
+        "code": 3,
+        "label": "Sewerage",
+        "color": "#ff9f1c",
+        "count": 70790
+      },
+      {
+        "code": 4,
+        "label": "Collectors",
+        "color": "#e76f51",
+        "count": 1050
+      },
+      {
+        "code": 5,
+        "label": "Power network",
+        "color": "#ffeb3b",
+        "count": 116844
+      },
+      {
+        "code": 6,
+        "label": "Low-current network",
+        "color": "#c77dff",
+        "count": 81336
+      },
+      {
+        "code": 7,
+        "label": "District heating / steam",
+        "color": "#ff4d6d",
+        "count": 10928
+      },
+      {
+        "code": null,
+        "label": "Unspecified in source",
+        "color": "#ffffff",
+        "count": 83
+      }
+    ]
+  },
+  "imperviousness": {
+    "enabled": false,
+    "reason": "Explicitly removed from active map by user; do not reintroduce."
+  },
+  "rainfall": {
+    "event_local_date": "2025-06-27",
+    "timezone": "Europe/Sofia",
+    "units": "mm",
+    "quantity": "daily accumulated precipitation",
+    "source_script": "earth_engine/Rainfall_20250627_original.js",
+    "documentation": "docs/RAINFALL.md",
+    "default_visible": true,
+    "default_product": "merged_250m",
+    "one_raster_at_a_time": true,
+    "opacity": 0.7,
+    "palette": [
+      "f7fbff",
+      "c6dbef",
+      "6baed6",
+      "2171b5",
+      "08306b",
+      "54278f",
+      "e7298a"
+    ],
+    "colour_interpolation": "continuous",
+    "display_smoothing": "optional bilinear; native-cell view available",
+    "statistics_and_sampling": "native numeric grids; original masks; display threshold/smoothing do not alter values",
+    "stations": {
+      "asset": "projects/rivertracker-512606/assets/sofia_rain_20250627/wu_stations",
+      "file": "data/rainfall/wu_stations.geojson",
+      "count": 55,
+      "accepted_qc": "ok",
+      "accepted_count": 43,
+      "rejected_count": 12,
+      "accepted_default_visible": true,
+      "rejected_default_visible": false,
+      "properties": [
+        "station_id",
+        "rain_mm",
+        "qc",
+        "rows"
+      ]
+    },
+    "products": [
+      {
+        "id": "merged_250m",
+        "label": "Merged radar + stations",
+        "asset": "projects/rivertracker-512606/assets/sofia_rain_20250627/merged_250m",
+        "file": "data/rainfall/merged_250m.tif",
+        "band": "rain_mm",
+        "crs": "EPSG:4326",
+        "transform": [
+          0.003054851458076265,
+          0,
+          23.18,
+          0,
+          -0.0022457779374775422,
+          42.76
+        ],
+        "width": 104,
+        "height": 71,
+        "nominal_product_grid_m": 250,
+        "grid_note": "Stored latitude/longitude grid; metric cell dimensions vary.",
+        "display_range_mm": [
+          0,
+          30
+        ],
+        "default_display_threshold_mm": 0.5,
+        "nodata": -9999
+      },
+      {
+        "id": "radar_bias_corrected_250m",
+        "label": "Bias-corrected radar",
+        "asset": "projects/rivertracker-512606/assets/sofia_rain_20250627/radar_bias_corrected_250m",
+        "file": "data/rainfall/radar_bias_corrected_250m.tif",
+        "band": "rain_mm",
+        "crs": "EPSG:4326",
+        "transform": [
+          0.003054851458076265,
+          0,
+          23.18,
+          0,
+          -0.0022457779374775422,
+          42.76
+        ],
+        "width": 104,
+        "height": 71,
+        "nominal_product_grid_m": 250,
+        "grid_note": "Stored latitude/longitude grid; metric cell dimensions vary.",
+        "display_range_mm": [
+          0,
+          30
+        ],
+        "default_display_threshold_mm": null,
+        "nodata": -9999
+      },
+      {
+        "id": "radar_raw_1km",
+        "label": "Raw radar daily accumulation",
+        "asset": "projects/rivertracker-512606/assets/sofia_rain_20250627/radar_raw_1km",
+        "file": "data/rainfall/radar_raw_1km.tif",
+        "band": "rain_mm",
+        "crs": "EPSG:4326",
+        "transform": [
+          0.010398141544071897,
+          0,
+          22.831742360561023,
+          0,
+          -0.010398141544071897,
+          43.05713699491116
+        ],
+        "width": 98,
+        "height": 69,
+        "nominal_product_grid_m": 1000,
+        "grid_note": "Stored latitude/longitude grid; metric cell dimensions vary.",
+        "display_range_mm": [
+          0,
+          110
+        ],
+        "default_display_threshold_mm": null,
+        "nodata": -9999
+      }
+    ]
+  }
+}

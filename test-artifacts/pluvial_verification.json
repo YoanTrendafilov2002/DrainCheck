@@ -1,0 +1,400 @@
+{
+  "verified_at_utc": "2026-10-25T06:52:30.100544+00:00",
+  "status": "PASS: implementation, data integrity and rendering checks; not scientific flood validation",
+  "local_url": "http://127.0.0.1:8040/",
+  "pluvial_revision": "f42644a668cdc14d",
+  "recommended_mode": "ponding",
+  "experimental_modes": [
+    "combined",
+    "concentration"
+  ],
+  "routing_diagnostic": "pluvial_routing_diagnostic.json",
+  "source_grid_and_factor_verification": {
+    "source_grid_and_hash_verified": true,
+    "all_missing_imd_cells_checked": true,
+    "all_first5bands_pixel_equal_to_source": true,
+    "score_range_checked_all_cells": true,
+    "source_hash_unchanged_before_after": true,
+    "native_hash_unchanged_before_after": true,
+    "output_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+    "elapsed_seconds": 175.1
+  },
+  "counts": {
+    "terrain_cells": 53682786,
+    "eligible_cells": 53187833,
+    "boundary_excluded_cells": 494953,
+    "other_invalid_factor_cells": 0,
+    "positive_depression_cells": 2067207,
+    "depression_dominant_cells": 513180,
+    "concentration_dominant_cells": 52674653
+  },
+  "terrain_by_mode": {
+    "ponding": {
+      "terrain_cells": 53682786,
+      "eligible_cells": 53187833,
+      "uncertain_cells": 494953,
+      "no_terrain_data_cells": 0,
+      "classes": [
+        {
+          "label": "Lower signal",
+          "cells": 52154734,
+          "area_km2": 1303.86835
+        },
+        {
+          "label": "Raised",
+          "cells": 413024,
+          "area_km2": 10.3256
+        },
+        {
+          "label": "Higher signal",
+          "cells": 301229,
+          "area_km2": 7.530725
+        },
+        {
+          "label": "Strongest signal",
+          "cells": 318846,
+          "area_km2": 7.97115
+        },
+        {
+          "label": "Uncertain terrain",
+          "cells": 494953,
+          "area_km2": 12.373825
+        },
+        {
+          "label": "No terrain data",
+          "cells": 0,
+          "area_km2": 0.0
+        }
+      ],
+      "sensitivity": [
+        {
+          "threshold": 70,
+          "cells": 620075,
+          "area_km2": 15.501875,
+          "percent_eligible": 1.1658211380787031
+        },
+        {
+          "threshold": 80,
+          "cells": 413976,
+          "area_km2": 10.3494,
+          "percent_eligible": 0.7783283819816461
+        },
+        {
+          "threshold": 90,
+          "cells": 186655,
+          "area_km2": 4.666375,
+          "percent_eligible": 0.35093552316748833
+        }
+      ]
+    },
+    "concentration": {
+      "terrain_cells": 53682786,
+      "eligible_cells": 53187833,
+      "uncertain_cells": 494953,
+      "no_terrain_data_cells": 0,
+      "classes": [
+        {
+          "label": "Lower signal",
+          "cells": 32612047,
+          "area_km2": 815.301175
+        },
+        {
+          "label": "Raised",
+          "cells": 11445303,
+          "area_km2": 286.132575
+        },
+        {
+          "label": "Higher signal",
+          "cells": 5654011,
+          "area_km2": 141.350275
+        },
+        {
+          "label": "Strongest signal",
+          "cells": 3476472,
+          "area_km2": 86.9118
+        },
+        {
+          "label": "Uncertain terrain",
+          "cells": 494953,
+          "area_km2": 12.373825
+        },
+        {
+          "label": "No terrain data",
+          "cells": 0,
+          "area_km2": 0.0
+        }
+      ],
+      "sensitivity": [
+        {
+          "threshold": 70,
+          "cells": 9130483,
+          "area_km2": 228.262075,
+          "percent_eligible": 17.16648805752248
+        },
+        {
+          "threshold": 80,
+          "cells": 5081993,
+          "area_km2": 127.049825,
+          "percent_eligible": 9.554803633379837
+        },
+        {
+          "threshold": 90,
+          "cells": 1956149,
+          "area_km2": 48.903725,
+          "percent_eligible": 3.677812931389778
+        }
+      ]
+    },
+    "combined": {
+      "terrain_cells": 53682786,
+      "eligible_cells": 53187833,
+      "uncertain_cells": 494953,
+      "no_terrain_data_cells": 0,
+      "classes": [
+        {
+          "label": "Lower signal",
+          "cells": 32471080,
+          "area_km2": 811.777
+        },
+        {
+          "label": "Raised",
+          "cells": 11368617,
+          "area_km2": 284.215425
+        },
+        {
+          "label": "Higher signal",
+          "cells": 5662184,
+          "area_km2": 141.5546
+        },
+        {
+          "label": "Strongest signal",
+          "cells": 3685952,
+          "area_km2": 92.1488
+        },
+        {
+          "label": "Uncertain terrain",
+          "cells": 494953,
+          "area_km2": 12.373825
+        },
+        {
+          "label": "No terrain data",
+          "cells": 0,
+          "area_km2": 0.0
+        }
+      ],
+      "sensitivity": [
+        {
+          "threshold": 70,
+          "cells": 9348136,
+          "area_km2": 233.7034,
+          "percent_eligible": 17.575703826850773
+        },
+        {
+          "threshold": 80,
+          "cells": 5311907,
+          "area_km2": 132.797675,
+          "percent_eligible": 9.987071667311582
+        },
+        {
+          "threshold": 90,
+          "cells": 2117553,
+          "area_km2": 52.938825,
+          "percent_eligible": 3.981273311134898
+        }
+      ]
+    }
+  },
+  "point_record_overlap_by_mode": {
+    "ponding": {
+      "Lower signal": {
+        "point_count": 320339,
+        "route_length_m": 523711.555793296
+      },
+      "Raised": {
+        "point_count": 729,
+        "route_length_m": 6666.984062811483
+      },
+      "Higher signal": {
+        "point_count": 623,
+        "route_length_m": 6590.114018807386
+      },
+      "Strongest signal": {
+        "point_count": 272,
+        "route_length_m": 2634.5688651562245
+      },
+      "Uncertain terrain": {
+        "point_count": 62,
+        "route_length_m": 559.7907631430357
+      },
+      "No terrain data": {
+        "point_count": 0,
+        "route_length_m": 0.0
+      }
+    },
+    "concentration": {
+      "Lower signal": {
+        "point_count": 148065,
+        "route_length_m": 261877.8788193271
+      },
+      "Raised": {
+        "point_count": 93026,
+        "route_length_m": 137524.10150289678
+      },
+      "Higher signal": {
+        "point_count": 60129,
+        "route_length_m": 96373.587456851
+      },
+      "Strongest signal": {
+        "point_count": 20743,
+        "route_length_m": 43827.65496099624
+      },
+      "Uncertain terrain": {
+        "point_count": 62,
+        "route_length_m": 559.7907631430357
+      },
+      "No terrain data": {
+        "point_count": 0,
+        "route_length_m": 0.0
+      }
+    },
+    "combined": {
+      "Lower signal": {
+        "point_count": 147645,
+        "route_length_m": 259633.1513619422
+      },
+      "Raised": {
+        "point_count": 92944,
+        "route_length_m": 136914.78547475854
+      },
+      "Higher signal": {
+        "point_count": 60372,
+        "route_length_m": 97128.83452198292
+      },
+      "Strongest signal": {
+        "point_count": 21002,
+        "route_length_m": 45926.451381387495
+      },
+      "Uncertain terrain": {
+        "point_count": 62,
+        "route_length_m": 559.7907631430357
+      },
+      "No terrain data": {
+        "point_count": 0,
+        "route_length_m": 0.0
+      }
+    }
+  },
+  "live_sample": {
+    "coordinates": {
+      "lon": 23.320027,
+      "lat": 42.698992
+    },
+    "native_height": {
+      "longitude": 23.320027,
+      "latitude": 42.698992,
+      "crs": "EPSG:7801",
+      "vertical_datum": "Baltic 1982",
+      "sample_resolution_m": 1,
+      "row": 22027,
+      "column": 22017,
+      "pixel_center_easting": 321409.5,
+      "pixel_center_northing": 4731583.5,
+      "status": "ok",
+      "elevation_m": 539.0
+    },
+    "terrain_factors_and_scores": {
+      "longitude": 23.320027,
+      "latitude": 42.698992,
+      "analysis_resolution_m": 5,
+      "method": "terrain-relative-screen-v1",
+      "status": "ok",
+      "class": "Strongest signal",
+      "score": 87.24049377441406,
+      "row": 4405,
+      "column": 4403,
+      "factors": {
+        "mean_ground_elevation_m": 539.068115234375,
+        "depression_fill_depth_m": 1.931884765625,
+        "slope_degrees": 3.501389980316162,
+        "upstream_contributing_area_m2": 225.0,
+        "possible_missing_upstream_terrain": 0.0,
+        "depression_percentile": 87.24049377441406,
+        "concentration_flatness_score": 47.921363830566406,
+        "relative_screening_score": 87.24049377441406
+      },
+      "pixel_center": [
+        321409.5,
+        4731583.5
+      ],
+      "crs": "EPSG:7801",
+      "ponding_score": 87.24049377441406,
+      "concentration_score": 47.921363830566406,
+      "depression_depth_m": 1.931884765625,
+      "slope_degrees": 3.501389980316162,
+      "contributing_area_m2": 225.0,
+      "boundary_influence": false,
+      "class_label": "Strongest signal",
+      "class_index": 3,
+      "dominant_pathway": "depression",
+      "interpretation": "Relative terrain signal, not flood probability or event flood depth."
+    },
+    "browser_display": "Native 539.00 m; selected ponding score 87.2/100, fill descriptor1.93m; experimental concentration47.9 andcombined87.2 shown separately"
+  },
+  "download_range_requests": {
+    "raster": {
+      "status": 206,
+      "content_range": "bytes 0-511/892396676",
+      "content_type": "image/tiff"
+    },
+    "points": {
+      "status": 206,
+      "content_range": "bytes 0-511/65150717",
+      "content_type": "text/csv; charset=utf-8"
+    },
+    "routes": {
+      "status": 206,
+      "content_range": "bytes 0-511/1895711",
+      "content_type": "text/csv; charset=utf-8"
+    }
+  },
+  "tests": {
+    "python_passed": 63,
+    "javascript_passed": 15,
+    "total_passed": 78,
+    "failed": 0
+  },
+  "build": "TypeScript and Vite production build passed; existing MapLibre bundle-size advisory remains",
+  "browser_checks": [
+    "Real5m screening tile render and four-class legend",
+    "Depression default is opt-in and existing terrain/route layers remain available",
+    "Per-mode class areas and all-inventory exposure counts update; old-mode counts clear during fetch",
+    "Selected mode score matches inspector; native1m height readout remains separate",
+    "Concentration/combined modes visibly label observed routing artefacts as experimental",
+    "Responsive390x740: controls initially collapsed, can open Pluvial; document scrollWidth390 equals clientWidth390",
+    "Temporary viewport reset to desktop",
+    "No browser console errors in final QA tab"
+  ],
+  "screenshots": [
+    "pluvial-overview.jpg",
+    "pluvial-inspector.jpg",
+    "pluvial-mobile.jpg"
+  ],
+  "observed_flood_accuracy_validated": false,
+  "risk_limits": [
+    "No local storm forcing, infiltration, inlet/pipe capacity, current building/culvert representation or asset vulnerability.",
+    "No annual exceedance probability, water depth, flood footprint or expected loss is estimated.",
+    "Geometric depression storage does not establish event likelihood; zero depression does not mean safe.",
+    "DenseD8/grid structures found in real contributing-area data are amplified by the experimental flow-based index."
+  ],
+  "water_hackathon_repository": {
+    "clone_succeeded": false,
+    "public_http_status": 401,
+    "normal_git_helper": "Failed to load System.Configuration4.0.0.0; no noninteractive username available",
+    "contents_reviewed": false,
+    "review_receipt": "../docs/WATER_HACKATHON_REVIEW.md"
+  },
+  "originals_unchanged": true,
+  "fabricated_terrain_used": false,
+  "authenticated_earth_engine_calls": false,
+  "public_publication": false
+}

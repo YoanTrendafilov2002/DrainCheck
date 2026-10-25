@@ -1,0 +1,44 @@
+[
+  {
+    "file": "sofiaplan_floods_2021_layer310_metadata.json",
+    "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/310?f=pjson",
+    "bytes": 5439,
+    "sha256": "a5328c6d2747dc5fc2a17c2909c010a895db81b684a5ec6d813451ac470f13a7",
+    "retrieved_utc": "2026-10-25T07:55:27.853157+00:00"
+  },
+  {
+    "file": "sofiaplan_floods_2021_layer310_native.json",
+    "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/310/query?where=1%3D1&outFields=*&returnGeometry=true&f=pjson",
+    "bytes": 424185,
+    "sha256": "985911dcece7799de3ecee9066402f7d4fb9d9360dd446c422a452d25bc910ca",
+    "retrieved_utc": "2026-10-25T07:55:50.816078+00:00"
+  },
+  {
+    "file": "sofiaplan_floods_2021_layer310.geojson",
+    "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/310/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+    "bytes": 252579,
+    "sha256": "20fcb72c0b65fbb8700ef0af9e11b44dbd87acf4dead82ef7d8bbfcea7deee18",
+    "retrieved_utc": "2026-10-25T07:55:27.972060+00:00"
+  },
+  {
+    "file": "sofiaplan_floods_2021_layer310_count.json",
+    "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/310/query?where=1%3D1&returnCountOnly=true&f=pjson",
+    "bytes": 17,
+    "sha256": "b1834903dd3cd3d7612a5f68166b05961e0c57713eed86b798e35633cc546bf7",
+    "retrieved_utc": "2026-10-25T07:55:27.879563+00:00"
+  },
+  {
+    "file": "sofiaplan_atlas_service_metadata.json",
+    "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer?f=pjson",
+    "bytes": 111250,
+    "sha256": "28fe21a26a5955e038b13dbed5423ed17d711e96064f6d6bbec62e3b798c943f",
+    "retrieved_utc": "2026-10-25T07:55:27.944137+00:00"
+  },
+  {
+    "file": "sofiaplan_floods_2021_layer310_metadata.xml",
+    "url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/310/metadata?f=pjson",
+    "bytes": 9938,
+    "sha256": "6edff478f4fdee053145e2330debaeaf7b0c51fdbcde6dc06939d5da4440f9ca",
+    "retrieved_utc": "2026-10-25T07:55:27.956104+00:00"
+  }
+]

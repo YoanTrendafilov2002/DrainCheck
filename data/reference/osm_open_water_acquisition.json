@@ -1,0 +1,17 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "download_utc": "2026-10-25T07:31:52.542206+00:00",
+  "raw_file": "osm_open_water_20261025T073109Z.json",
+  "query_file": "osm_open_water_20261025T073109Z.overpass",
+  "bbox": [
+    23.033601825086354,
+    42.392740683952645,
+    23.700971220841907,
+    42.913568431160385
+  ],
+  "elements": 586,
+  "osm_base_timestamp": "2026-10-25T07:30:02Z",
+  "attempts": [],
+  "raw_sha256": "fac32b04617a843356983496bc772970f7a62462a0a8526ecaeb9cf803a126c6",
+  "query_sha256": "2073985b485bdf675e6d21df0640de901089b2bc4e8ce818060ffce870297d75"
+}

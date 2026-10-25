@@ -1,0 +1,26 @@
+[
+  {
+    "file": "agkk_building_layer0.json",
+    "url": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0?f=pjson",
+    "bytes": 58453,
+    "sha256": "f141026ec7aad8fa11e5549bf835dbcab83c2143b49d22672641ea491ba95f70",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T08:23:51.116098+00:00"
+  },
+  {
+    "file": "agkk_building_wms_capabilities.xml",
+    "url": "https://inspire.cadastre.bg/arcgis/services/Building/MapServer/WmsServer?SERVICE=WMS&REQUEST=GetCapabilities",
+    "bytes": 6565,
+    "sha256": "40840ec57f7256091d7542381d6c89787b8ee7f59a9b546dd24a309226837150",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T08:23:51.158256+00:00"
+  },
+  {
+    "file": "agkk_building_catalogue.xml",
+    "url": "https://inspireportal.egov.bg/geonetwork/srv/api/records/602ad10f-cdd5-49cc-b919-50dc45825bb3/formatters/xml",
+    "bytes": 28798,
+    "sha256": "876b3ba4c70c286cf613ccca107c251f8f31a14909a5ad046367bda0f566e74a",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T08:23:51.373720+00:00"
+  }
+]

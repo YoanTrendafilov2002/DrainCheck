@@ -1,0 +1,38 @@
+{
+  "nonempty_green_count": 64956,
+  "empty_source_ids": [
+    "44262725-1836-4bb5-8018-2be5874cc418",
+    "369be83c-b0d6-464e-85e2-0ede87309999",
+    "aa07c3ac-ff11-45df-9ef0-e906e14986e5",
+    "4c8f98b5-a1e4-494e-b476-833a72cb7cd1",
+    "574d7c15-8930-429e-9f5f-b4bd96d07f7f",
+    "0f5a4620-ec39-42fe-bda6-eca7afc724c9"
+  ],
+  "repaired_source_ids": [
+    "866e1e3f-da40-4151-a219-81c6f66c942c"
+  ],
+  "display_green_count": 2175,
+  "points_count": 322025,
+  "point_categories": {
+    "2": 40994,
+    "6": 81336,
+    "5": 116844,
+    "3": 70790,
+    "7": 10928,
+    "4": 1050,
+    "missing": 83
+  },
+  "originals_unchanged": true,
+  "clipping": "Prepared sections from handoff; all nonempty source greens used in analysis mask",
+  "schema_version": "sofia-spatial-v1",
+  "input_sha256": {
+    "data\\derived\\green_intersecting_routes.geojson": "e17c54e5f9fb85ae8dbc56b93b1bc2adf6bf096ecee3ff75665ebffa457432d2",
+    "data\\derived\\sewer_routes_all.geojson": "ec1b1685242e30c6dc5d95d248f0461ad836b228e4f0f3821d29d139ce69ba2c",
+    "data\\derived\\sewer_routes_inside.geojson": "f912c1ce8b5213fcef9a49a19a8de3fec4b23509c29133240b3520ef9ecbe7e5",
+    "data\\derived\\sewer_routes_outside.geojson": "a57a0dd50793cd83b5bc58d8017fb3736425b126d416708443c8f9438524529c",
+    "data\\raw\\green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557",
+    "data\\raw\\sofia_infrastructure_points.csv": "4771d2330e93d22739d45b859c107e5f986622228d496acf52872fd9765d0652",
+    "data\\raw\\vik_kanal_26_sofpr_20090000(1).geojson": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3",
+    "data\\raw\\vik_kanal_26_sofpr_20090000.geojson": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3"
+  }
+}

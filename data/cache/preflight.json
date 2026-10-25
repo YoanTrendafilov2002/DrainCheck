@@ -1,0 +1,25 @@
+{
+  "archive_status": "Original truncated ZIP preserved; complete rainfall supplement also preserved and manifest verified separately",
+  "supplied_verify_handoff": "Available: handoff/rainfall_supplement/scripts/verify_handoff.py",
+  "supplied_scale_tests": "Available: handoff/rainfall_supplement/tests/elevation_scale.test.mjs",
+  "original_script_snapshots": "Script1, Script2 and Rainfall_20250627_original.js preserved byte-for-byte in earth_engine/",
+  "archived_whole_area_curve": "Complete supplied 201-point Earth Engine snapshot available in data/reference/",
+  "independent_baseline_checks": [
+    {
+      "zone": "all",
+      "status": "PASS",
+      "count": 717
+    },
+    {
+      "zone": "inside",
+      "status": "PASS",
+      "count": 543
+    },
+    {
+      "zone": "outside",
+      "status": "PASS",
+      "count": 670
+    }
+  ],
+  "originals_unchanged": "PASS"
+}

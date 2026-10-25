@@ -1,0 +1,40 @@
+[
+  {
+    "file": "bddr_pastFloods_2020_2025.xlsx",
+    "url": "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN%202028-2033/aktual_PORN/04_PFRA_BG1_APP04_pastFloods_2020_2025.xlsx",
+    "bytes": 152584,
+    "sha256": "4e761887d9a2bbac4db86d17dfbcf2d9d838e9fa0f9008d428caed0e08ac7fb2",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:50:39.930349+00:00"
+  },
+  {
+    "file": "bddr_pastFloods_2011_2019.xlsx",
+    "url": "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN-2022-2027/PORN_Final/05_PFRA_BG1_APP05_pastFloods_2011_2019.xlsx",
+    "bytes": 257786,
+    "sha256": "9501fd9ee6c323d12dc90ed8e5a17d83ef8743d1f88104ba0d174776e338edf7",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:50:39.930349+00:00"
+  },
+  {
+    "file": "bddr_sofia_pfra_map.pdf",
+    "url": "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN-2022-2027/aktualizacia_PORN/BG1_APSFR_IS_041.pdf",
+    "bytes": 5686716,
+    "sha256": "e11add22a8e30528167cc252c2980b41d32e86e532c2965fa7945935d68d211b",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:50:40.202490+00:00"
+  },
+  {
+    "file": "nimh_2023_flood_events_report.pdf",
+    "url": "https://european-flood.emergency.copernicus.eu/sites/default/files/AM/AM2024/Summary%20of%20flood%20events%20in%20Bulgaria%20for%20the%20past%20year.pdf",
+    "status": "failed",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "file": "bddr_pfra_maps_index.html",
+    "url": "https://www.bd-dunav.bg/content/upravlenie-na-vodite/plan-za-upravlenie-na-riska-ot-navodneniia-2022-2027/aktualizaciia-na-porn-i-rzprn/karti/",
+    "bytes": 58961,
+    "sha256": "9654bbf4f3e1ab624220b0cd12868c345415e97314e59121186d2e99911b690a",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:50:40.193537+00:00"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "data\\raw\\green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson": {
+    "bytes": 53164382,
+    "sha256": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557"
+  },
+  "data\\raw\\sofia_infrastructure_points.csv": {
+    "bytes": 7084491,
+    "sha256": "4771d2330e93d22739d45b859c107e5f986622228d496acf52872fd9765d0652"
+  },
+  "data\\raw\\vik_kanal_26_sofpr_20090000(1).geojson": {
+    "bytes": 366359,
+    "sha256": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3"
+  },
+  "data\\raw\\vik_kanal_26_sofpr_20090000.geojson": {
+    "bytes": 366359,
+    "sha256": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3"
+  }
+}

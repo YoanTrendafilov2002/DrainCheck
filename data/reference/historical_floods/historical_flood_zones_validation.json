@@ -1,0 +1,84 @@
+{
+  "available": true,
+  "title": "Mapped 2021 flood zones — Sofiaplan drone survey",
+  "source_title": "Зони с наводнения от облитането с дрон през февруари 2021 г.",
+  "source_url": "https://urbandata.sofia.bg/dataset/flooded-areas-identified-by-drone-survey-february-2021",
+  "source_api_url": "https://api.sofiaplan.bg/datasets/549",
+  "service_url": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/310",
+  "provider": "Sofiaplan / Sofia Municipality",
+  "description": "Actual mapped flood-zone polygons from a municipal drone survey; northern Sofia municipality. Historical observation context, not modelled future hazard or a citywide pluvial validation set.",
+  "coverage_label": "Northern municipality near Novi Iskar, Trebich, Mirovyane and Zhiten; survey footprints are incomplete citywide coverage.",
+  "geometry_type": "Polygon/MultiPolygon",
+  "feature_count": 136,
+  "count": 136,
+  "bbox": [
+    23.242826238,
+    42.774055091,
+    23.370874017,
+    42.816893283
+  ],
+  "coverage_bbox_wgs84": [
+    23.242826238,
+    42.774055091,
+    23.370874017,
+    42.816893283
+  ],
+  "crs": "EPSG:4326",
+  "native_service_crs": "EPSG:7801",
+  "data_file": "data/reference/historical_floods/sofiaplan_flood_zones_2021_display.geojson",
+  "geojson_file": "data/reference/historical_floods/sofiaplan_flood_zones_2021_display.geojson",
+  "source_file": "data/reference/historical_floods/sofiaplan_dataset549_metadata.json",
+  "original_geojson_file": "data/reference/historical_floods/sofiaplan_dataset549_original.geojson",
+  "source_fields": [
+    "area_kv_m",
+    "id",
+    "id_ref",
+    "length_kvm",
+    "object_id"
+  ],
+  "source_area_field": "area_kv_m",
+  "sum_feature_area_m2": 1914939.2372467057,
+  "union_area_m2": 1909008.6609338354,
+  "area_note": "Computed from actual validated geometry inEPSG7801; feature-sum overlaps are not counted twice in the union area. The study's printed19,150ha total conflicts with these geometries and its own land-use totals, so that number is not used.",
+  "year": 2021,
+  "survey_date_label": "2021; catalogue says February, associated study describes January",
+  "catalogue_current_as_of": "2021-02-01",
+  "date_precision": "Year; catalogue says February 2021, while associated study describes January 2021 and captions 18 Jan 2021 imagery. No per-feature observation timestamps.",
+  "flood_type": "Unclassified per polygon; river-associated rainfall flooding in the associated study, not confirmed pure pluvial",
+  "license": "Not specified in municipal CKAN catalogue; source attribution retained. No CC/open licence has been invented.",
+  "attribution": "Sofiaplan / Sofia Municipality, dataset549 and Atlas of Analyses layer310",
+  "revision": "7fbfbcee6ee933f4",
+  "sha256": "215afe46b02716e72b61852cae1bd0abcdec81e81e2264fddc9e938e06e73bb5",
+  "source_sha256": "4dd3a56051da45f513097212b59ca6e8780c1c006c938c5c89ee04f3be64ce4d",
+  "geometry_repairs": [
+    {
+      "object_id": 41,
+      "source_validity": "Ring Self-intersection[23.343015714 42.791991513]",
+      "operation": "GEOS make_valid; polygon parts retained; non-area remnants omitted from display copy only",
+      "original_area_m2": 243490.1441697574,
+      "display_area_m2": 243490.14416975755
+    },
+    {
+      "object_id": 72,
+      "source_validity": "Ring Self-intersection[23.316654823 42.775885219]",
+      "operation": "GEOS make_valid; polygon parts retained; non-area remnants omitted from display copy only",
+      "original_area_m2": 5320.032077871942,
+      "display_area_m2": 5320.032077871938
+    }
+  ],
+  "known_example": {
+    "longitude": 23.361694114303877,
+    "latitude": 42.81236256982956,
+    "meaning": "Interior of a real mapped polygon; not an observed flood gauge or exact event location."
+  },
+  "limitations": [
+    "Surveyed footprints do not provide citywide survey coverage; no polygon does not mean no flooding.",
+    "The source does not separate pluvial from fluvial flooding per polygon, and no precise event date, depth, return period or rainfall hyetograph is attached.",
+    "The associated 2021 study describes rainfall-related flooding along the Iskar, Blato and Kriva rivers; do not call the polygons pure pluvial.",
+    "No terrain scores, open-water exclusions or asset-exposure calculations are changed by this context layer.",
+    "Two invalid source geometries were repaired only in the derived display copy; all originals and source properties remain preserved.",
+    "No reported non-flooded control coverage or observation-error assessment is available; no model calibration has been performed."
+  ],
+  "retrieved_utc": "2026-10-25T07:56:16Z",
+  "processed_utc": "2026-10-25T07:57:53.661180+00:00"
+}

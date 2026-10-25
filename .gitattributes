@@ -1,0 +1,3 @@
+# Preserve byte-identical scientific inputs, originals and verification hashes.
+# Source files also retain their existing line endings across Windows checkouts.
+* -text

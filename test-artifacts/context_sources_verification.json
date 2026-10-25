@@ -1,0 +1,105 @@
+{
+  "verified_on": "2026-10-25",
+  "application_version": "1.4.0",
+  "status": "Independent context implementation and historical-source checks pass; requested full-city Digital Twin geometry remains unavailable",
+  "automated_checks": {
+    "python_passed": 141,
+    "javascript_passed": 18,
+    "total_passed": 159,
+    "production_build": "PASS"
+  },
+  "renderer_revision": "fast-map-b8c295fdd224",
+  "historical_survey": {
+    "available": true,
+    "polygons": 136,
+    "revision": "7fbfbcee6ee933f4",
+    "source_url": "https://urbandata.sofia.bg/dataset/flooded-areas-identified-by-drone-survey-february-2021",
+    "display_sha256": "215afe46b02716e72b61852cae1bd0abcdec81e81e2264fddc9e938e06e73bb5",
+    "survey_date_label": "2021; catalogue says February, associated study describes January",
+    "flood_type": "Unclassified per polygon; river-associated rainfall flooding in the associated study, not confirmed pure pluvial",
+    "source_validation": {
+      "verified_at": "2026-10-25",
+      "survey_features": 136,
+      "distinct_source_ids": 136,
+      "all_display_geometries_valid": true,
+      "invalid_source_geometries_repaired_only_in_display": [
+        41,
+        72
+      ],
+      "display_geometry_area_change_m2_less_than": 1e-08,
+      "register_rows": 19,
+      "distinct_source_event_ids": 15,
+      "all_register_geometry_null": true,
+      "source_files_unchanged_and_receipt_sha256_verified": true,
+      "display_sha256_matches_metadata": true,
+      "revision": "7fbfbcee6ee933f4",
+      "file_contracts_exist": true,
+      "official_map_visually_reviewed": true,
+      "official_map_blue_hatching_not_observed_extent": true,
+      "survey_flood_type_not_relabelled_pure_pluvial": true,
+      "terrain_calibration_performed": false,
+      "checks": [
+        "scripts/acquire_public_historical_sources.py preserved and verified 22 original files",
+        "scripts/prepare_historical_floods.py read source workbook and preserved original checksums",
+        "scripts/prepare_historical_flood_zones.py verified all136features, retained source properties, repaired two self-intersections and verified originalSHA",
+        "Independent CSV/JSON counts, exact source row set, stable source IDs, SHA contracts and file references checked"
+      ]
+    }
+  },
+  "historical_register": {
+    "rows": 19,
+    "unique_event_ids": 15,
+    "type_counts": {
+      "Pluvial": 14,
+      "Pluvial + river": 2,
+      "Pluvial + infrastructure": 3
+    },
+    "register_status": "Draft PFRA 2028–2033, published for consultation; not a final adopted plan.",
+    "source_url": "https://www.bd-dunav.bg/content/upravlenie-na-vodite/plan-za-upravlenie-na-riska-ot-navodneniia-2028-2033/aktualizaciia-na-porn/",
+    "incident_geometries_inferred": false,
+    "official_pdf_original_verified": true,
+    "blue_hatching_interpreted_as_observed_inundation": false
+  },
+  "requested_buildings": {
+    "geometry_acquired": false,
+    "source_url": "https://citylab.gate-ai.eu/3d-city-model/",
+    "citywide_scope_primary_source": "https://www.sofia.bg/en/city-digital-twin",
+    "coverage_interpretation": "Current municipality description covers Sofia territory; older Lozenets subset is not a limit on the current service",
+    "blocker": "Connection timeouts before any HTTP/authentication response; no public geometry download or Cesium asset ID found",
+    "source_access_receipt": "data/reference/digital_twin_buildings/current_source_access.json",
+    "research_subset_substituted": false,
+    "adapter_and_index_tests": "PASS using isolated temporary fixtures only"
+  },
+  "browser_checks": {
+    "live_app": "http://127.0.0.1:8040/",
+    "actual_survey_polygons_visible": true,
+    "clicked_source_polygon_id": "1",
+    "clicked_native_elevation_m": 505.23,
+    "source_polygon_limitations_visible": true,
+    "register_descriptions_expand": true,
+    "history_pdf_and_csv_links_visible": true,
+    "unavailable_buildings_explicit_and_disabled": true,
+    "coverage_fit_preserves_filters": true,
+    "errors": [],
+    "lazy_survey_requests": {
+      "initial_hidden": 0,
+      "after_enable": 1,
+      "after_disable_reenable_fit": 1
+    },
+    "building_tile_requests_while_unavailable": 0,
+    "screenshots": [
+      "historical-flood-survey.jpg",
+      "historical-flood-sources.jpg"
+    ],
+    "original_user_map_camera_and_filters_preserved": true
+  },
+  "unchanged_analysis": {
+    "native_grid": "1 m EPSG:7801; Baltic 1982 values unchanged",
+    "analysis_grid_m": 5,
+    "spatial_revision": "af34c6d53d5b26fd",
+    "screening_revision": "2a0d5f6899cd036c",
+    "historical_or_building_inputs_used_in_scores": false,
+    "hydraulic_validation_claimed": false
+  },
+  "originals": "Acquired originals preserved; hashes verified by source validation and package manifest checks"
+}

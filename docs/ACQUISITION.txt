@@ -1,0 +1,70 @@
+EARTH ENGINE INPUT ACQUISITION
+
+The handoff's own docs/ACQUISITION.md was in the missing ZIP tail and could not
+be read. This is the implementation's independently authored acquisition guide,
+using the exact recovered asset inventory and grid contract.
+
+Actual acquisition for this build:
+  - Native DTM: existing local outputs/sofia_dtm_2024_1m_gee.tif, previously
+    verified lossless against the original and read-only during this build.
+  - Points: existing original outputs/sofia_infrastructure_points.csv, copied
+    unchanged into data/raw and all 322,025 rows indexed.
+  - No Earth Engine credentials were read, copied or placed in the source.
+  - No cloud export jobs or cloud infrastructure were started.
+
+Exact assets for a future authorized acquisition:
+  projects/rivertracker-512606/assets/sofia_dtm_2024_1m_gee
+  projects/rivertracker-512606/assets/sofia_infrastructure_pps
+
+Optional official SDK setup (run yourself in your environment if needed):
+  python -m pip install earthengine-api
+  earthengine authenticate
+  python scripts/acquire_ee.py inspect --project rivertracker-512606
+
+Credentials must stay in the server/user credential store, outside this folder
+and the frontend bundle. Do not send private keys through a browser URL.
+The acquisition utility is optional and was not live-tested in this build.
+
+To retrieve a complete real 201-point whole-area curve:
+  python scripts/acquire_ee.py export-statistics --out data/reference/ee_whole_area_quantiles.json
+  python scripts/import_quantiles.py data/reference/ee_whole_area_quantiles.json
+  python scripts/prepare_data.py
+Restart the API afterward. The supplied/imported snapshot remains unchanged.
+
+For full binaries, use an EXISTING Cloud Storage bucket you control. The
+commands below explicitly start export jobs when you choose to run them. They
+do not create buckets or change sharing. Check your bucket's normal storage
+terms/costs before choosing this optional route.
+
+  python scripts/acquire_ee.py export-dem --bucket YOUR_EXISTING_BUCKET
+  python scripts/acquire_ee.py export-points --bucket YOUR_EXISTING_BUCKET
+
+Monitor the returned task IDs in Earth Engine. Download the completed outputs
+using your normal authorized Cloud Storage access. An Image asset ID is not
+itself a public GeoTIFF URL. Failed or incomplete jobs are not usable files.
+
+The DEM export specifies the original EPSG:7801 affine grid, original extent,
+Float32 values, NoData -9999, and cloudOptimized GeoTIFF output. It performs no
+vertical datum conversion. If Earth Engine writes multiple tiles, retain every
+tile and assemble a single lossless native-grid raster before configuring this
+app; do not resize or shift them. Inspect with gdalinfo, or use Rasterio to
+verify dimensions 51722 x 54343, transform [1,0,299392,0,-1,4753611], EPSG:7801,
+one Float32 band and -9999 NoData. Keep Baltic 1982 as descriptive metadata.
+Place the final native file in data/external or set SOFIA_DTM_PATH in .env.
+
+The optional point export is full GeoJSON, preserving all properties/geometry.
+Keep it unchanged. For this delivered app the complete original local CSV is
+already available and indexed, so no conversion/export is necessary. To ingest
+a future changed point source, adapt the preparation import while retaining all
+new properties, then rerun counts/category/integrity tests; do not infer routes
+from point locations.
+
+Official authentication documentation:
+https://developers.google.com/earth-engine/guides/auth
+Official image-export documentation:
+https://developers.google.com/earth-engine/guides/exporting_images
+
+Complete-handoff recovery remains useful for exact comparison with its original
+saved scripts/tests/quantile curve, but is not required to run the app with the
+real local inputs used here. No preview PNG, fabricated surface, SRTM or
+Copernicus DEM is used as a replacement for the municipal native raster.

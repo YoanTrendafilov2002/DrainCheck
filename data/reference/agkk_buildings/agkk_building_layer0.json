@@ -1,0 +1,2857 @@
+{
+ "currentVersion": 10.91,
+ "id": 0,
+ "name": "BU.Building",
+ "type": "Feature Layer",
+ "description": "Building",
+ "geometryType": "esriGeometryPolygon",
+ "sourceSpatialReference": {
+  "wkid": 4258,
+  "latestWkid": 4258
+ },
+ "copyrightText": "Geodesy, cartography and cadastre agency",
+ "parentLayer": null,
+ "subLayers": [],
+ "minScale": 10000,
+ "maxScale": 0,
+ "drawingInfo": {
+  "renderer": {
+   "type": "simple",
+   "symbol": {
+    "type": "esriSFS",
+    "style": "esriSFSSolid",
+    "color": [
+     128,
+     128,
+     128,
+     255
+    ],
+    "outline": {
+     "type": "esriSLS",
+     "style": "esriSLSSolid",
+     "color": [
+      0,
+      0,
+      0,
+      255
+     ],
+     "width": 0.4
+    }
+   },
+   "label": "",
+   "description": ""
+  },
+  "transparency": 0,
+  "labelingInfo": null
+ },
+ "defaultVisibility": true,
+ "extent": {
+  "xmin": 22,
+  "ymin": 40,
+  "xmax": 29,
+  "ymax": 45,
+  "spatialReference": {
+   "wkid": 4258,
+   "latestWkid": 4258
+  }
+ },
+ "hasAttachments": false,
+ "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+ "displayField": "elevationvalue_srsname1",
+ "typeIdField": null,
+ "subtypeFieldName": null,
+ "subtypeField": null,
+ "defaultSubtypeCode": null,
+ "fields": [
+  {
+   "name": "objectid",
+   "type": "esriFieldTypeOID",
+   "alias": "objectid",
+   "domain": null
+  },
+  {
+   "name": "beginlifespanversion",
+   "type": "esriFieldTypeDate",
+   "alias": "beginlifespanversion",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "beginlifespanversion_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "beginlifespanversion_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "conditionofconstr",
+   "type": "esriFieldTypeString",
+   "alias": "conditionofconstr",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ConditionOfConstructionValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "declined",
+      "code": "declined"
+     },
+     {
+      "name": "demolished",
+      "code": "demolished"
+     },
+     {
+      "name": "functional",
+      "code": "functional"
+     },
+     {
+      "name": "projected",
+      "code": "projected"
+     },
+     {
+      "name": "ruin",
+      "code": "ruin"
+     },
+     {
+      "name": "under construction",
+      "code": "under construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "conditionofconstr_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "conditionofconstr_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofconstr_anypoint",
+   "type": "esriFieldTypeDate",
+   "alias": "dateofconstr_anypoint",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "dateofconstr_anypoint_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofconstr_anypoint_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofconstr_beginning",
+   "type": "esriFieldTypeDate",
+   "alias": "dateofconstr_beginning",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "dateofconstr_beginning_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofconstr_beginning_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofconstr_end",
+   "type": "esriFieldTypeDate",
+   "alias": "dateofconstr_end",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "dateofconstr_end_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofconstr_end_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofdem_beginning_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofdem_beginning_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofdemolition_anypoint",
+   "type": "esriFieldTypeDate",
+   "alias": "dateofdemolition_anypoint",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "dateofdemolition_anypoint_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofdemolition_anypoint_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofdemolition_beginning",
+   "type": "esriFieldTypeDate",
+   "alias": "dateofdemolition_beginning",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "dateofdemolition_end",
+   "type": "esriFieldTypeDate",
+   "alias": "dateofdemolition_end",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "dateofdemolition_end_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofdemolition_end_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofrenovation_anypoint",
+   "type": "esriFieldTypeDate",
+   "alias": "dateofrenovation_anypoint",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "dateofrenovation_anypoint_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofrenovation_anypoint_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofrenovation_begining",
+   "type": "esriFieldTypeDate",
+   "alias": "dateofrenovation_begining",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "dateofrenovation_begining_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofrenovation_begining_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofrenovation_end",
+   "type": "esriFieldTypeDate",
+   "alias": "dateofrenovation_end",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "dateofrenovation_end_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofrenovation_end_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "elevation_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "elevation_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "elevationreference1",
+   "type": "esriFieldTypeString",
+   "alias": "elevationreference1",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "elevationreference2",
+   "type": "esriFieldTypeString",
+   "alias": "elevationreference2",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "elevationreference3",
+   "type": "esriFieldTypeString",
+   "alias": "elevationreference3",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "elevationvalue_dim1",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "elevationvalue_dim1",
+   "domain": null
+  },
+  {
+   "name": "elevationvalue_dim2",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "elevationvalue_dim2",
+   "domain": null
+  },
+  {
+   "name": "elevationvalue_dim3",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "elevationvalue_dim3",
+   "domain": null
+  },
+  {
+   "name": "elevationvalue_srsname1",
+   "type": "esriFieldTypeString",
+   "alias": "elevationvalue_srsname1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "elevationvalue_srsname2",
+   "type": "esriFieldTypeString",
+   "alias": "elevationvalue_srsname2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "elevationvalue_srsname3",
+   "type": "esriFieldTypeString",
+   "alias": "elevationvalue_srsname3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "elevationvalue1",
+   "type": "esriFieldTypeString",
+   "alias": "elevationvalue1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "elevationvalue2",
+   "type": "esriFieldTypeString",
+   "alias": "elevationvalue2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "elevationvalue3",
+   "type": "esriFieldTypeString",
+   "alias": "elevationvalue3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "endlifespanversion",
+   "type": "esriFieldTypeDate",
+   "alias": "endlifespanversion",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "endlifespanversion_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "endlifespanversion_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "extref_infosystem1",
+   "type": "esriFieldTypeString",
+   "alias": "extref_infosystem1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "extref_infosystem2",
+   "type": "esriFieldTypeString",
+   "alias": "extref_infosystem2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "extref_infosystem3",
+   "type": "esriFieldTypeString",
+   "alias": "extref_infosystem3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "extref_infosystemname1",
+   "type": "esriFieldTypeString",
+   "alias": "extref_infosystemname1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "extref_infosystemname2",
+   "type": "esriFieldTypeString",
+   "alias": "extref_infosystemname2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "extref_infosystemname3",
+   "type": "esriFieldTypeString",
+   "alias": "extref_infosystemname3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "extref_reference1",
+   "type": "esriFieldTypeString",
+   "alias": "extref_reference1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "extref_reference2",
+   "type": "esriFieldTypeString",
+   "alias": "extref_reference2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "extref_reference3",
+   "type": "esriFieldTypeString",
+   "alias": "extref_reference3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "extref_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "extref_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "geographicalname_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "geographicalname_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "geographicalname1",
+   "type": "esriFieldTypeString",
+   "alias": "geographicalname1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "geographicalname2",
+   "type": "esriFieldTypeString",
+   "alias": "geographicalname2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "geographicalname3",
+   "type": "esriFieldTypeString",
+   "alias": "geographicalname3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "hag_heightref_void1",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_heightref_void1",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_heightref_void2",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_heightref_void2",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_heightref_void3",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_heightref_void3",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_heightref1",
+   "type": "esriFieldTypeString",
+   "alias": "hag_heightref1",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_heightref2",
+   "type": "esriFieldTypeString",
+   "alias": "hag_heightref2",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_heightref3",
+   "type": "esriFieldTypeString",
+   "alias": "hag_heightref3",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_lowref_void1",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_lowref_void1",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_lowref_void2",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_lowref_void2",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_lowref_void3",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_lowref_void3",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_lowref1",
+   "type": "esriFieldTypeString",
+   "alias": "hag_lowref1",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_lowref2",
+   "type": "esriFieldTypeString",
+   "alias": "hag_lowref2",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_lowref3",
+   "type": "esriFieldTypeString",
+   "alias": "hag_lowref3",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_status_void1",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_status_void1",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_status_void2",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_status_void2",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_status_void3",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_status_void3",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_status1",
+   "type": "esriFieldTypeString",
+   "alias": "hag_status1",
+   "length": 255,
+   "domain": {
+    "type": "codedValue",
+    "name": "HeightStatusValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "estimated",
+      "code": "estimated"
+     },
+     {
+      "name": "measured",
+      "code": "measured"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_status2",
+   "type": "esriFieldTypeString",
+   "alias": "hag_status2",
+   "length": 255,
+   "domain": {
+    "type": "codedValue",
+    "name": "HeightStatusValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "estimated",
+      "code": "estimated"
+     },
+     {
+      "name": "measured",
+      "code": "measured"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_status3",
+   "type": "esriFieldTypeString",
+   "alias": "hag_status3",
+   "length": 255,
+   "domain": {
+    "type": "codedValue",
+    "name": "HeightStatusValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "estimated",
+      "code": "estimated"
+     },
+     {
+      "name": "measured",
+      "code": "measured"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hag_value1",
+   "type": "esriFieldTypeString",
+   "alias": "hag_value1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "hag_value2",
+   "type": "esriFieldTypeString",
+   "alias": "hag_value2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "hag_value3",
+   "type": "esriFieldTypeString",
+   "alias": "hag_value3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "hag_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hag_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "id_localid",
+   "type": "esriFieldTypeString",
+   "alias": "id_localid",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "id_namespace",
+   "type": "esriFieldTypeString",
+   "alias": "id_namespace",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "id_versionid",
+   "type": "esriFieldTypeString",
+   "alias": "id_versionid",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "id_versionid_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "id_versionid_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "buildingnature_code1",
+   "type": "esriFieldTypeString",
+   "alias": "buildingnature_code1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "buildingnature_code2",
+   "type": "esriFieldTypeString",
+   "alias": "buildingnature_code2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "buildingnature_code3",
+   "type": "esriFieldTypeString",
+   "alias": "buildingnature_code3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "buildingnature_label1",
+   "type": "esriFieldTypeString",
+   "alias": "buildingnature_label1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "buildingnature_label2",
+   "type": "esriFieldTypeString",
+   "alias": "buildingnature_label2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "buildingnature_label3",
+   "type": "esriFieldTypeString",
+   "alias": "buildingnature_label3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "buildingnature_uri1",
+   "type": "esriFieldTypeString",
+   "alias": "buildingnature_uri1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "buildingnature_uri2",
+   "type": "esriFieldTypeString",
+   "alias": "buildingnature_uri2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "buildingnature_uri3",
+   "type": "esriFieldTypeString",
+   "alias": "buildingnature_uri3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "buildingnature_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "buildingnature_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "currentuse_code1",
+   "type": "esriFieldTypeString",
+   "alias": "currentuse_code1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "currentuse_code2",
+   "type": "esriFieldTypeString",
+   "alias": "currentuse_code2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "currentuse_code3",
+   "type": "esriFieldTypeString",
+   "alias": "currentuse_code3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "currentuse_label1",
+   "type": "esriFieldTypeString",
+   "alias": "currentuse_label1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "currentuse_label2",
+   "type": "esriFieldTypeString",
+   "alias": "currentuse_label2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "currentuse_label3",
+   "type": "esriFieldTypeString",
+   "alias": "currentuse_label3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "currentuse_percentage_void1",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "currentuse_percentage_void1",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "currentuse_percentage_void2",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "currentuse_percentage_void2",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "currentuse_percentage_void3",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "currentuse_percentage_void3",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "currentuse_percentage1",
+   "type": "esriFieldTypeInteger",
+   "alias": "currentuse_percentage1",
+   "domain": null
+  },
+  {
+   "name": "currentuse_percentage2",
+   "type": "esriFieldTypeInteger",
+   "alias": "currentuse_percentage2",
+   "domain": null
+  },
+  {
+   "name": "currentuse_percentage3",
+   "type": "esriFieldTypeInteger",
+   "alias": "currentuse_percentage3",
+   "domain": null
+  },
+  {
+   "name": "currentuse_uri1",
+   "type": "esriFieldTypeString",
+   "alias": "currentuse_uri1",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "currentuse_uri2",
+   "type": "esriFieldTypeString",
+   "alias": "currentuse_uri2",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "currentuse_uri3",
+   "type": "esriFieldTypeString",
+   "alias": "currentuse_uri3",
+   "length": 255,
+   "domain": null
+  },
+  {
+   "name": "currentuse_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "currentuse_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "numberofbuildingunits",
+   "type": "esriFieldTypeInteger",
+   "alias": "numberofbuildingunits",
+   "domain": null
+  },
+  {
+   "name": "numberofbuildingunits_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "numberofbuildingunits_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "numberofdwellings",
+   "type": "esriFieldTypeInteger",
+   "alias": "numberofdwellings",
+   "domain": null
+  },
+  {
+   "name": "numberofdwellings_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "numberofdwellings_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "numberoffloorsaboveground",
+   "type": "esriFieldTypeInteger",
+   "alias": "numberoffloorsaboveground",
+   "domain": null
+  },
+  {
+   "name": "numberoffloorsaboveground_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "numberoffloorsaboveground_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "buildingpart_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "buildingpart_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hgeomestimatedaccuracy_value",
+   "type": "esriFieldTypeDouble",
+   "alias": "hgeomestimatedaccuracy_value",
+   "domain": null
+  },
+  {
+   "name": "hgeomestimatedaccuracy_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "hgeomestimatedaccuracy_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "hgeomref",
+   "type": "esriFieldTypeString",
+   "alias": "hgeomref",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "HorizontalGeometryReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "combined",
+      "code": "combined"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "envelope",
+      "code": "envelope"
+     },
+     {
+      "name": "footprint",
+      "code": "footprint"
+     },
+     {
+      "name": "lower floor above ground",
+      "code": "lower floor above ground"
+     },
+     {
+      "name": "point inside building",
+      "code": "point inside building"
+     },
+     {
+      "name": "point inside cadastral parcel",
+      "code": "point inside cadastral parcel"
+     },
+     {
+      "name": "roof edge",
+      "code": "roof edge"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "referencegeometry",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "referencegeometry",
+   "domain": null
+  },
+  {
+   "name": "vgeomestimatedaccuracy_value",
+   "type": "esriFieldTypeDouble",
+   "alias": "vgeomestimatedaccuracy_value",
+   "domain": null
+  },
+  {
+   "name": "vgeomestimatedaccuracy_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "vgeomestimatedaccuracy_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "vgeomref",
+   "type": "esriFieldTypeString",
+   "alias": "vgeomref",
+   "length": 50,
+   "domain": {
+    "type": "codedValue",
+    "name": "ElevationReferenceValue",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "above ground envelope",
+      "code": "above ground envelope"
+     },
+     {
+      "name": "bottom of construction",
+      "code": "bottom of construction"
+     },
+     {
+      "name": "entrance point",
+      "code": "entrance point"
+     },
+     {
+      "name": "general eave",
+      "code": "general eave"
+     },
+     {
+      "name": "general ground",
+      "code": "general ground"
+     },
+     {
+      "name": "general roof",
+      "code": "general roof"
+     },
+     {
+      "name": "general roof edge",
+      "code": "general roof edge"
+     },
+     {
+      "name": "highest eave",
+      "code": "highest eave"
+     },
+     {
+      "name": "highest ground point",
+      "code": "highest ground point"
+     },
+     {
+      "name": "highest point",
+      "code": "highest point"
+     },
+     {
+      "name": "highest roof edge",
+      "code": "highest roof edge"
+     },
+     {
+      "name": "lowest eave",
+      "code": "lowest eave"
+     },
+     {
+      "name": "lowest floor above ground",
+      "code": "lowest floor above ground"
+     },
+     {
+      "name": "lowest ground point",
+      "code": "lowest ground point"
+     },
+     {
+      "name": "lowest roof edge",
+      "code": "lowest roof edge"
+     },
+     {
+      "name": "top of construction",
+      "code": "top of construction"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "ifcid",
+   "type": "esriFieldTypeInteger",
+   "alias": "ifcid",
+   "domain": null
+  },
+  {
+   "name": "conditionofconstr_uri",
+   "type": "esriFieldTypeString",
+   "alias": "conditionofconstr_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "elevationreference1_uri",
+   "type": "esriFieldTypeString",
+   "alias": "elevationreference1_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "elevationreference2_uri",
+   "type": "esriFieldTypeString",
+   "alias": "elevationreference2_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "elevationreference3_uri",
+   "type": "esriFieldTypeString",
+   "alias": "elevationreference3_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hag_heightref1_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hag_heightref1_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hag_heightref2_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hag_heightref2_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hag_heightref3_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hag_heightref3_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hag_lowref1_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hag_lowref1_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hag_lowref2_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hag_lowref2_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hag_lowref3_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hag_lowref3_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "vgeomref_uri",
+   "type": "esriFieldTypeString",
+   "alias": "vgeomref_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hgeomref_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hgeomref_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hag_status1_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hag_status1_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hag_status2_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hag_status2_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "hag_status3_uri",
+   "type": "esriFieldTypeString",
+   "alias": "hag_status3_uri",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "dateofconstr_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofconstr_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofdemolition_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofdemolition_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "dateofrenovation_void",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "dateofrenovation_void",
+   "domain": {
+    "type": "codedValue",
+    "name": "VoidReasonValue",
+    "description": "Reason an attribute is void",
+    "codedValues": [
+     {
+      "name": "No reason given",
+      "code": 0
+     },
+     {
+      "name": "Unknown",
+      "code": 1
+     },
+     {
+      "name": "Unpopulated",
+      "code": 2
+     },
+     {
+      "name": "Withheld",
+      "code": 3
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDuplicate"
+   }
+  },
+  {
+   "name": "shape",
+   "type": "esriFieldTypeGeometry",
+   "alias": "shape",
+   "domain": null
+  },
+  {
+   "name": "st_area(shape)",
+   "type": "esriFieldTypeDouble",
+   "alias": "st_area(shape)",
+   "domain": null
+  },
+  {
+   "name": "st_perimeter(shape)",
+   "type": "esriFieldTypeDouble",
+   "alias": "st_perimeter(shape)",
+   "domain": null
+  }
+ ],
+ "geometryField": {
+  "name": "shape",
+  "type": "esriFieldTypeGeometry",
+  "alias": "shape"
+ },
+ "indexes": [
+  {
+   "name": "g556ifcid",
+   "fields": "ifcid",
+   "isAscending": true,
+   "isUnique": false,
+   "description": ""
+  },
+  {
+   "name": "r349_sde_rowid_uk",
+   "fields": "objectid",
+   "isAscending": true,
+   "isUnique": true,
+   "description": ""
+  },
+  {
+   "name": "a43_ix1",
+   "fields": "shape",
+   "isAscending": true,
+   "isUnique": true,
+   "description": ""
+  }
+ ],
+ "subtypes": [],
+ "relationships": [],
+ "canModifyLayer": true,
+ "canScaleSymbols": false,
+ "hasLabels": true,
+ "capabilities": "Map,Query,Data",
+ "maxRecordCount": 1000,
+ "supportsStatistics": true,
+ "supportsAdvancedQueries": true,
+ "supportedQueryFormats": "JSON, geoJSON",
+ "isDataVersioned": false,
+ "ownershipBasedAccessControlForFeatures": {"allowOthersToQuery": true},
+ "useStandardizedQueries": true,
+ "advancedQueryCapabilities": {
+  "useStandardizedQueries": true,
+  "supportsStatistics": true,
+  "supportsHavingClause": true,
+  "supportsCountDistinct": true,
+  "supportsOrderBy": true,
+  "supportsDistinct": true,
+  "supportsPagination": true,
+  "supportsTrueCurve": true,
+  "supportsReturningQueryExtent": true,
+  "supportsQueryWithDistance": true,
+  "supportsSqlExpression": true
+ },
+ "supportsDatumTransformation": true,
+ "hasGeometryProperties": true,
+ "geometryProperties": {
+  "shapeAreaFieldName": "st_area(shape)",
+  "shapeLengthFieldName": "st_perimeter(shape)",
+  "units": "esriDecimalDegrees"
+ },
+ "dateFieldsTimeReference": null,
+ "supportsCoordinatesQuantization": true
+}

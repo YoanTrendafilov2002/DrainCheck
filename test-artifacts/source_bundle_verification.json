@@ -1,0 +1,40 @@
+{
+  "verified_at": "2026-10-25T08:53:26.893924+00:00",
+  "scope": "Six standalone actual-source packaging/restoration checks, separate from the 220-test application baseline",
+  "checks": [
+    {
+      "name": "missing original restored from actual gzip; exact raw bytes and no partial file",
+      "status": "PASS"
+    },
+    {
+      "name": "existing matching original left untouched",
+      "status": "PASS"
+    },
+    {
+      "name": "existing conflicting original rejected and preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "compressed size/hash corruption rejected before installation",
+      "status": "PASS"
+    },
+    {
+      "name": "decoded hash mismatch rejected; validated temporary removed; no original installed",
+      "status": "PASS"
+    },
+    {
+      "name": "manifest cannot redirect restoration outside the fixed application input",
+      "status": "PASS"
+    }
+  ],
+  "check_count": 6,
+  "source_size_bytes": 53164382,
+  "bundle_size_bytes": 14094048,
+  "source_sha256_before": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557",
+  "source_sha256_after": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557",
+  "compressed_sha256": "e9ad442ba8dda32cc399442fe09744001289cd5001e531dfc0adec5f920a70d2",
+  "deterministic_gzip_mtime": 0,
+  "production_original_untouched": true,
+  "production_data_not_substituted": true,
+  "scratch_cleanup_confined_to_workspace": true
+}

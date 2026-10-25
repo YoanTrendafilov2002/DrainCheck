@@ -1,0 +1,33 @@
+{
+  "available": false,
+  "revision": "e2ff99bc4a24da87",
+  "title": "Sofia Digital Twin buildings",
+  "source_label": "GATE CityLab — current Sofia Digital Twin",
+  "source_url": "https://citylab.gate-ai.eu/3d-city-model/",
+  "coverage_label": "Whole-Sofia service requested; downloaded geometry coverage not yet verified",
+  "message": "The current official service cannot be reached from this environment; no full-city geometry has been acquired. A pilot/research subset is preserved separately and is not substituted.",
+  "feature_count": 0,
+  "coverage_bbox_wgs84": null,
+  "source_date": null,
+  "retrieved_at": "2026-10-25T07:58:41.334768+00:00",
+  "license": "Not yet verified for the current model; no geometry acquired",
+  "minzoom": 13,
+  "height": {
+    "available": false,
+    "field": null,
+    "semantics": "unavailable",
+    "count": 0
+  },
+  "limitations": [
+    "Current official viewer and 3D World Builder HTTPS GET requests timed out before an HTTP response; the latest recorded bounded checks allowed 8 seconds per request.",
+    "HTTP GET to the official viewer and HTTPS GET to the GATE project host also timed out before an HTTP response.",
+    "Browser navigation timed out; independent web retrieval returned a fetching timeout.",
+    "No sign-in, permission denial, source licence, geometry extent, feature count or height schema was received. The connection failure is not a permission block.",
+    "Historical Lozenets pilot documentation does not establish the current platform coverage. The requested whole-Sofia scope remains unverified locally.",
+    "The separately preserved 1,800 research roof outlines are 2D, have no building heights, and are not a substitute for the requested current full-city model."
+  ],
+  "access_receipt": "data/reference/digital_twin_buildings/current_source_access.json",
+  "separate_research_metadata": "data/cache/gate_lozenets_research_meta.json",
+  "geometry_acquired": false,
+  "context_only": true
+}

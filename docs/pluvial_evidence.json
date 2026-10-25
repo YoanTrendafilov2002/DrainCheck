@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-25",
+  "purpose": "Evidence register for a terrain-based Sofia pluvial-flood screening map; not a validated flood probability, flood depth, damage or loss model.",
+  "sources": [
+    {
+      "id": "sofia_security_2024_2030",
+      "title": "Sofia Municipality Strategic Security Vision 2024–2030",
+      "publisher": "Sofia Municipality",
+      "url": "https://www.sofia.bg/documents/d/guest/strategiceska-vizia-za-sigurnost-na-stolicna-obsina-2024-2030",
+      "locator": "Section 3.16, printed page 11 / PDF page 11; footnote 13 refers to the National Risk Profile adopted 4 January 2023.",
+      "findings": [
+        "The municipality identifies urban rain-driven flooding associated with intense precipitation as a major local risk and also identifies infrastructure-related flooding as possible."
+      ],
+      "supports": [
+        "Local relevance of pluvial flood screening"
+      ],
+      "does_not_support": [
+        "Street-level flood locations",
+        "Return periods",
+        "Calibration of this map"
+      ]
+    },
+    {
+      "id": "huang_2019_tci",
+      "title": "A Depression-Based Index to Represent Topographic Control in Urban Pluvial Flooding",
+      "authors": "Huang, H.; Chen, X.; Wang, X.; Wang, X.; Liu, L.",
+      "publisher": "Water 2019, 11(10), 2115",
+      "doi": "10.3390/w11102115",
+      "url": "https://www.mdpi.com/2073-4441/11/10/2115",
+      "locator": "Sections 2.1, 2.2, 3.4 and 4.1",
+      "findings": [
+        "Depression storage, contributing catchments and catchment slope are relevant terrain controls; their proposed TCI is ln(A*sqrt(S)/V), using depression catchment area A, dimensionless catchment mean slope S and depression storage volume V.",
+        "Its Guangzhou case study found depression-based TCI more useful than cell-based TWI; this does not establish transferable thresholds for Sofia.",
+        "The authors distinguish topographic control from actual flood risk. Their resolution experiment found greater instability for small depressions and coarser grids."
+      ],
+      "supports": [
+        "Inspect depressions and contributing terrain",
+        "Show resolution sensitivity",
+        "Do not call terrain-only scores actual risk"
+      ],
+      "does_not_support": [
+        "A scientifically established weighted sum of local fill depth, local slope and contributing area",
+        "Sofia-specific weights",
+        "Treating fill depth as storm flood depth"
+      ]
+    },
+    {
+      "id": "environment_agency_rofsw_2025",
+      "title": "Risk of flooding from surface water – understanding and using the map",
+      "publisher": "Environment Agency, UK Government",
+      "updated": "2025-01-30",
+      "url": "https://www.gov.uk/government/publications/flood-risk-maps-for-surface-water-how-to-use-the-map/risk-of-flooding-from-surface-water-understanding-and-using-the-map",
+      "locator": "Sections 2 and 3.2–3.5",
+      "findings": [
+        "Operational surface-water hazard mapping combines terrain with rainfall, runoff losses, drainage assumptions and hydraulic simulation; local and historical evidence are used for review.",
+        "The model accounts for buildings and distinguishes modelled depth and annual exceedance likelihood."
+      ],
+      "supports": [
+        "Rainfall and drainage are required for event or probability claims",
+        "Buildings influence urban flow",
+        "Independent local validation is necessary"
+      ],
+      "does_not_support": [
+        "Transferring England drainage rates or rainfall return periods to Sofia",
+        "Assigning probability from terrain percentiles"
+      ]
+    },
+    {
+      "id": "usgs_2010_dem_drainage",
+      "title": "Using Selective Drainage Methods to Extract Continuous Surface Flow from 1-Meter Lidar-Derived Digital Elevation Data",
+      "authors": "Poppenga, S.K.; Worstell, B.B.; Stoker, J.M.; Greenlee, S.K.",
+      "publisher": "USGS Scientific Investigations Report 2010–5059",
+      "url": "https://pubs.usgs.gov/sir/2010/5059/",
+      "doi": "10.3133/sir20105059",
+      "locator": "Report abstract",
+      "findings": [
+        "Roads, railways and other obstructions can create depressions in high-resolution elevation models. Filling without representing drainage through obstructions can produce an incorrect spill location and surface-flow route."
+      ],
+      "supports": [
+        "Flag culvert and obstruction uncertainty",
+        "Separate geometric fill depth from observed inundation"
+      ],
+      "does_not_support": [
+        "Assuming all identified depressions are genuine",
+        "Assuming all culverts are captured by the municipal DTM"
+      ]
+    },
+    {
+      "id": "undrr_disaster_risk",
+      "title": "Sendai Framework terminology: Disaster risk",
+      "publisher": "United Nations Office for Disaster Risk Reduction",
+      "url": "https://www.undrr.org/terminology/disaster-risk",
+      "findings": [
+        "Disaster risk depends on hazard, exposure, vulnerability and capacity, with potential losses considered over a time period."
+      ],
+      "supports": [
+        "Separate terrain screening from asset exposure and loss risk"
+      ],
+      "does_not_support": [
+        "Calling a terrain rank expected damage or annual flood risk"
+      ]
+    },
+    {
+      "id": "undrr_exposure",
+      "title": "Sendai Framework terminology: Exposure",
+      "publisher": "United Nations Office for Disaster Risk Reduction",
+      "url": "https://www.undrr.org/terminology/exposure",
+      "findings": [
+        "Exposure describes people, infrastructure and other assets located in hazard-prone areas; vulnerability and capacity are further inputs to quantitative risk."
+      ],
+      "supports": [
+        "Use infrastructure overlap as exposure context"
+      ],
+      "does_not_support": [
+        "Inferring asset vulnerability or damage from point locations alone"
+      ]
+    },
+    {
+      "id": "osm_mapped_open_water",
+      "title": "OpenStreetMap mapped open-water footprints: natural=water and water=river",
+      "publisher": "OpenStreetMap contributors",
+      "url": "https://wiki.openstreetmap.org/wiki/Tag:water%3Driver",
+      "locator": "Water=river describes the river water area; natural=water describes mapped water surfaces. Local snapshot and feature IDs are retained in data/reference.",
+      "findings": [
+        "The hidden exclusion uses the interiors of actual mapped water polygons on the aligned 5 m grid, including multipolygon holes.",
+        "Explicitly intermittent, seasonal, dry, disused, covered or indoor objects are excluded from this permanent-water mask; unbuffered waterway centrelines are not water footprints."
+      ],
+      "supports": [
+        "Exclude qualifying mapped open water from terrestrial pluvial scores, class areas and exposure counts; retain it as a separate excluded category"
+      ],
+      "does_not_support": [
+        "A current surveyed water edge",
+        "Complete narrow-river coverage",
+        "Riverbank or floodplain safety",
+        "A calibrated separation of all fluvial and pluvial flooding"
+      ]
+    }
+  ],
+  "available_data_interpretation": [
+    {
+      "dataset": "Municipal 1 m DTM; 5 m mean terrain derivatives",
+      "can_support": "Terrain shape, geometric depression storage, modelled downhill contributing area and slope; native 1 m inspection.",
+      "cannot_support": "Known vertical accuracy, rainfall intensity, water depth in a specified event, current buildings/kerbs/culverts, pipe hydraulics or observed flood occurrence. A 1 m grid does not establish 1 m accuracy.",
+      "source_url": "https://api.sofiaplan.bg/datasets/656"
+    },
+    {
+      "dataset": "2009 sewer route geometry",
+      "can_support": "Location and recorded existing/planned/open status of archived linework; overlap for inspection.",
+      "cannot_support": "Current drain coverage, storm inlet locations, connectivity, invert levels, pipe capacity, condition, blockage or reduction of flood susceptibility. Planned routes cannot be assumed operational."
+    },
+    {
+      "dataset": "2020 green-area polygons",
+      "can_support": "Recorded green-area context and comparison of overlaps.",
+      "cannot_support": "Measured impervious fraction, infiltration rate, soil saturation or stormwater storage. Do not lower a flood score simply because a cell intersects a green polygon."
+    },
+    {
+      "dataset": "Infrastructure point categories",
+      "can_support": "Counts and locations of records overlapping selected terrain screening classes.",
+      "cannot_support": "Number of unique physical assets, service importance, asset value, damage susceptibility, populations or drainage capacity. Source rows may represent multiple surveyed points along a structure."
+    },
+    {
+      "dataset": "OSM mapped open-water polygons",
+      "can_support": "A hidden 5 m exclusion mask for qualifying mapped water footprints. Excluded water receives no score; land scores and original terrain factors remain unchanged.",
+      "cannot_support": "Water-edge accuracy at the date of a storm, complete river coverage, bridge-deck classification or protection of surrounding land from river flooding.",
+      "source_url": "https://www.openstreetmap.org/copyright"
+    }
+  ],
+  "historical_evidence_leads": [
+    {
+      "id": "sofia_2023_06_15_16",
+      "title": "Sofia Municipality: situation report at 07:00, 16 June 2023",
+      "url": "https://www.sofia.bg/w/%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8F-%D0%B7%D0%B0-%D0%BE%D0%B1%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0%D1%82%D0%B0-%D0%BA%D1%8A%D0%BC-7-00-%D1%87%D0%B0%D1%81%D0%B0",
+      "publication_date": "2023-06-16",
+      "event_date_precision": "Overnight before the morning report; not an exact timestamp for each location.",
+      "reported_locations": [
+        "Southern arc of Sofia Ring Road",
+        "Lion's Bridge tunnels",
+        "Simeonovo",
+        "Dragalevtsi",
+        "Vitosha quarter",
+        "Kremikovtsi district"
+      ],
+      "finding": "The municipality reports temporary road closures from ponding at the southern ring road and Lion's Bridge tunnels, plus overnight inundation/other storm reports in named districts. It cites a citywide range of 40–70 mm of rain by midnight from NIMH.",
+      "use": "Qualitative historical evidence and a lead for requesting exact incident locations and times. Broad district mentions include mixed storm impacts and are not complete flood footprints.",
+      "calibration_used": false,
+      "not_available": [
+        "Incident coordinates",
+        "Mapped inundation extent",
+        "Depths",
+        "Storm hyetographs",
+        "Complete reporting coverage",
+        "Verified non-flooded control locations"
+      ]
+    },
+    {
+      "id": "nimh_2025_10_27_sofia",
+      "title": "NIMH Monthly Hydrometeorological Bulletin, October 2025",
+      "publisher": "National Institute of Meteorology and Hydrology, Bulgaria",
+      "url": "https://bulletins.cfd.meteo.bg/bull/Buletin_NIMH_202510.pdf",
+      "locator": "Printed page 11, especially dangerous phenomena, 27 October",
+      "event_date": "2025-10-27",
+      "finding": "NIMH reports a flooded Sofia intersection disrupting several tram lines and a measured 24-hour rainfall total of 42.9 mm.",
+      "use": "Independent evidence that rainfall-related urban disruption occurred; identify the intersection and obtain incident details before spatial comparison. The total is not street-level rainfall or a short-duration intensity.",
+      "calibration_used": false,
+      "not_available": [
+        "Named intersection in the text",
+        "Incident coordinates",
+        "Inundation extent",
+        "Depth",
+        "Sub-hourly rainfall profile",
+        "Negative control coverage"
+      ]
+    }
+  ],
+  "recommended_implementation_contract": {
+    "map_label": "Pluvial flood screening — relative terrain susceptibility",
+    "factor_layers": [
+      "Geometric depression fill depth (m; not flood depth)",
+      "Upstream contributing area (m²; terrain routing)",
+      "Ground slope (degrees)",
+      "Boundary-influenced routing / uncertain input"
+    ],
+    "ranking": "Any per-cell composite, percentile normalization, thresholds, weights, mask or high-priority class is an analyst-defined screening choice unless separately calibrated. Display its formula and factor values. Do not label this TCI or TWI unless the published algorithm and units are actually implemented.",
+    "sensitivity": "Compare at least depth-focused, flow-focused and balanced analyst scenarios; report class/rank changes and stable overlap. Scenario agreement is internal sensitivity, not validation or confidence probability.",
+    "exposure": "Show infrastructure record counts and route lengths overlapping priority terrain separately, retaining source dates and status. Do not convert these to losses or use sewer density as capacity.",
+    "unknowns": "Mask missing raster inputs and flag boundary-influenced flow; zero is not an acceptable replacement for unknown. Outside the screen does not mean safe.",
+    "hydrology": "D8 routing and fill-depth describe simplified surface topography. Larger contributing area can identify river valleys as well as rainfall flow paths; do not automatically identify either as a pluvial flood event.",
+    "minimum_validation_for_upgrade": "Geolocated independently recorded pluvial flood events with dates and negative/coverage evidence; local sub-hourly rainfall or IDF data; drainage and culvert inventory/capacity/condition; verified terrain accuracy and current building/road representation. Use event calibration and held-out validation before probability, return-period, depth or loss claims."
+  }
+}

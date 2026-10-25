@@ -1,0 +1,17 @@
+{
+  "fingerprint": "0ac7e720950ec1472f843cd6dae17f5cb91edcdd34990eb24bcdff4a7f2f6515",
+  "revision": "af34c6d53d5b26fd",
+  "inputs": {
+    "vectors": {
+      "data\\derived\\green_intersecting_routes.geojson": "e17c54e5f9fb85ae8dbc56b93b1bc2adf6bf096ecee3ff75665ebffa457432d2",
+      "data\\derived\\sewer_routes_all.geojson": "ec1b1685242e30c6dc5d95d248f0461ad836b228e4f0f3821d29d139ce69ba2c",
+      "data\\derived\\sewer_routes_inside.geojson": "f912c1ce8b5213fcef9a49a19a8de3fec4b23509c29133240b3520ef9ecbe7e5",
+      "data\\derived\\sewer_routes_outside.geojson": "a57a0dd50793cd83b5bc58d8017fb3736425b126d416708443c8f9438524529c",
+      "data\\raw\\green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557",
+      "data\\raw\\sofia_infrastructure_points.csv": "4771d2330e93d22739d45b859c107e5f986622228d496acf52872fd9765d0652",
+      "data\\raw\\vik_kanal_26_sofpr_20090000(1).geojson": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3",
+      "data\\raw\\vik_kanal_26_sofpr_20090000.geojson": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3"
+    },
+    "native_dtm_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3"
+  }
+}

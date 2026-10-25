@@ -1,0 +1,48 @@
+{
+  "available": true,
+  "revision": "2976469c28e5ac01",
+  "title": "Archival cadastral building outlines",
+  "source_label": "GIS Sofia / Sofia Municipality — archival cadastral plan buildings",
+  "source_url": "https://urbandata.sofia.bg/en/dataset/cad_plan_sgr-zip",
+  "download_url": "https://urbandata.sofia.bg/dataset/24283798-c042-44de-9bd0-8cec77f2200b/resource/5e7418f8-4a75-4b75-b247-e8d0d74354de/download/cad_plan_sgr.zip",
+  "license": "Creative Commons Attribution (cc-by), as listed by the municipal catalogue; version not specified there",
+  "license_url": "http://www.opendefinition.org/licenses/cc-by",
+  "coverage_label": "Actual extent of the municipal archival cadastral plan snapshot; not a guarantee of current cadastral completeness",
+  "coverage_bbox_wgs84": [
+    23.07737749032376,
+    42.42408986496466,
+    23.638263837193204,
+    42.856842995001124
+  ],
+  "feature_count": 265216,
+  "original_feature_count": 265216,
+  "source_date": null,
+  "catalogue_valid_at": "2026-09-08",
+  "catalogue_created_at": "2026-09-09T09:14:39.234076",
+  "catalogue_modified_at": "2026-09-09T09:16:25.895684",
+  "retrieved_at": "2026-10-25T08:23:47.205849+00:00",
+  "minzoom": 13,
+  "height": {
+    "available": false,
+    "field": null,
+    "semantics": "unavailable",
+    "count": 0
+  },
+  "source_crs": "Geographic GeoJSON without crs member; interpreted as WGS84 longitude/latitude",
+  "output_crs": "EPSG:4326",
+  "original_archive_sha256": "1e81de4fff53d2c78957a0847b3afef51210cb8d89253212018103ab4684fbe0",
+  "geojson_sha256": "5601797499e815cd2908e2c773904dd04425e3e0de5c390381aed0492c7de71a",
+  "geometry_repair_count": 0,
+  "nonpolygon_or_empty_omitted_count": 0,
+  "exact_normalized_duplicate_geometry_count": 0,
+  "promoted_to_main_cadastre": false,
+  "limitations": [
+    "The provider explicitly calls these archival building boundaries from before the current cadastral map and registers took effect.",
+    "The catalogue valid-at label 8 September 2026 is not a verified survey or construction date for individual archived buildings.",
+    "The original rn field is a snapshot row identifier; it is not a verified national cadastral building identifier.",
+    "numer_of_floors is preserved verbatim. Floor counts are not converted to heights and no extrusions are inferred.",
+    "Unknown functional_type and ownership strings remain as supplied; archived outlines do not prove current ownership or legal boundaries.",
+    "Geometry repairs, if any, are limited to documented validity repair in the display derivative. The downloaded ZIP remains unchanged.",
+    "This separate archival reference does not replace AGKK national building data or the unavailable Digital Twin model, and does not alter terrain, drainage routing, water masks or pluvial scores."
+  ]
+}

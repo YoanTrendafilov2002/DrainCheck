@@ -1,0 +1,542 @@
+{
+  "accepted_features": 537,
+  "repaired_source_ids": [],
+  "rejected": [
+    {
+      "osm_id": "way/28311944",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "name": "\u0421\u0435\u0441\u043b\u0430\u0432\u0441\u043a\u043e \u0435\u0437\u0435\u0440\u043e",
+        "name:bg": "\u0421\u0435\u0441\u043b\u0430\u0432\u0441\u043a\u043e \u0435\u0437\u0435\u0440\u043e",
+        "name:en": "Seslavtsi Lake",
+        "natural": "water",
+        "water": "pond"
+      }
+    },
+    {
+      "osm_id": "way/28312024",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "natural": "water"
+      }
+    },
+    {
+      "osm_id": "way/265403144",
+      "reason": "intermittent=yes",
+      "tags": {
+        "area": "yes",
+        "intermittent": "yes",
+        "natural": "water"
+      }
+    },
+    {
+      "osm_id": "way/297384709",
+      "reason": "splash_pad_not_standing_water",
+      "tags": {
+        "amenity": "fountain",
+        "drinking_water": "no",
+        "fountain": "splash_pad",
+        "lit": "yes",
+        "natural": "water",
+        "water": "fountain"
+      }
+    },
+    {
+      "osm_id": "way/297384713",
+      "reason": "splash_pad_not_standing_water",
+      "tags": {
+        "amenity": "fountain",
+        "drinking_water": "no",
+        "fountain": "splash_pad",
+        "lit": "yes",
+        "natural": "water",
+        "water": "fountain"
+      }
+    },
+    {
+      "osm_id": "way/297384727",
+      "reason": "splash_pad_not_standing_water",
+      "tags": {
+        "amenity": "fountain",
+        "drinking_water": "no",
+        "fountain": "splash_pad",
+        "image": "https://photos.app.goo.gl/VXX3EXeehshFLCAi8",
+        "lit": "yes",
+        "natural": "water",
+        "water": "fountain"
+      }
+    },
+    {
+      "osm_id": "way/699768825",
+      "reason": "disused=yes",
+      "tags": {
+        "disused": "yes",
+        "natural": "water",
+        "water": "pond"
+      }
+    },
+    {
+      "osm_id": "way/798052460",
+      "reason": "splash_pad_not_standing_water",
+      "tags": {
+        "amenity": "fountain",
+        "drinking_water": "no",
+        "fountain": "splash_pad",
+        "level": "-1",
+        "lit": "yes",
+        "natural": "water",
+        "water": "fountain"
+      }
+    },
+    {
+      "osm_id": "way/800730928",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "natural": "water",
+        "salt": "no",
+        "water": "pond"
+      }
+    },
+    {
+      "osm_id": "way/952038751",
+      "reason": "intermittent=yes",
+      "tags": {
+        "basin": "evaporation",
+        "intermittent": "yes",
+        "natural": "water",
+        "water": "basin"
+      }
+    },
+    {
+      "osm_id": "way/1219276605",
+      "reason": "splash_pad_not_standing_water",
+      "tags": {
+        "amenity": "fountain",
+        "drinking_water": "no",
+        "fountain": "splash_pad",
+        "lit": "yes",
+        "natural": "water",
+        "ref:BG:rhm_sofia": "969",
+        "water": "fountain",
+        "wikidata": "Q141110582"
+      }
+    },
+    {
+      "osm_id": "way/1228294031",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "natural": "water",
+        "water": "basin"
+      }
+    },
+    {
+      "osm_id": "way/1234109017",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "level": "-1",
+        "natural": "water"
+      }
+    },
+    {
+      "osm_id": "way/1310469383",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "natural": "water",
+        "water": "basin"
+      }
+    },
+    {
+      "osm_id": "way/1314607626",
+      "reason": "indoor",
+      "tags": {
+        "animal": "alligator",
+        "attraction": "animal",
+        "indoor": "yes",
+        "name": "\u041c\u0438\u0441\u0438\u0441\u0438\u043f\u0441\u043a\u0438 \u0430\u043b\u0438\u0433\u0430\u0442\u043e\u0440",
+        "name:bg": "\u041c\u0438\u0441\u0438\u0441\u0438\u043f\u0441\u043a\u0438 \u0430\u043b\u0438\u0433\u0430\u0442\u043e\u0440",
+        "name:en": "American Alligator",
+        "natural": "water",
+        "species": "Alligator mississippiensis",
+        "tourism": "attraction",
+        "water": "pond",
+        "zoo": "reptile"
+      }
+    },
+    {
+      "osm_id": "way/1317924908",
+      "reason": "indoor",
+      "tags": {
+        "indoor": "yes",
+        "natural": "water",
+        "water": "pond"
+      }
+    },
+    {
+      "osm_id": "way/1323403122",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1340789046",
+      "reason": "construction=yes",
+      "tags": {
+        "construction": "yes",
+        "natural": "water",
+        "water": "lake"
+      }
+    },
+    {
+      "osm_id": "way/1341771831",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1348501208",
+      "reason": "indoor",
+      "tags": {
+        "indoor": "yes",
+        "natural": "water",
+        "water": "pond"
+      }
+    },
+    {
+      "osm_id": "way/1356465345",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1356733317",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1364005616",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1378622477",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1378631380",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1414490612",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1414490614",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1414490619",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1414490620",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1450103313",
+      "reason": "intermittent=yes",
+      "tags": {
+        "barrier": "ditch",
+        "intermittent": "yes",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1450203419",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1450205717",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459547971",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459548935",
+      "reason": "intermittent=yes",
+      "tags": {
+        "area": "yes",
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "tunnel": "yes",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459549433",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459549434",
+      "reason": "intermittent=yes",
+      "tags": {
+        "area": "yes",
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "tunnel": "yes",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459578120",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "tunnel": "yes",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459578121",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "tunnel": "yes",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459578122",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "tunnel": "yes",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459578123",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "tunnel": "yes",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459578124",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459587349",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "tunnel": "yes",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459587350",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459587351",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "tunnel": "yes",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459587352",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1459587353",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1502136793",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "1",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    },
+    {
+      "osm_id": "relation/18028796",
+      "reason": "indoor",
+      "tags": {
+        "indoor": "yes",
+        "name": "\u0411\u0430\u0441\u0435\u0439\u043d \u0441 \u0444\u043e\u043d\u0442\u0430\u043d",
+        "name:de": "Wasserbecken mit Font\u00e4ne",
+        "natural": "water",
+        "type": "multipolygon",
+        "water": "pond"
+      }
+    },
+    {
+      "osm_id": "relation/18142180",
+      "reason": "geometry:Inner ring has no enclosing outer ring",
+      "tags": {
+        "intermittent": "no",
+        "natural": "water",
+        "salt": "yes",
+        "swimming": "no",
+        "type": "multipolygon",
+        "water": "lake"
+      }
+    }
+  ],
+  "rejection_counts": {
+    "intermittent=yes": 37,
+    "splash_pad_not_standing_water": 5,
+    "disused=yes": 1,
+    "indoor": 4,
+    "construction=yes": 1,
+    "geometry:Inner ring has no enclosing outer ring": 1
+  }
+}

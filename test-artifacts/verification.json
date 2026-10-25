@@ -1,0 +1,2568 @@
+{
+  "prepared_on": "2026-10-25",
+  "application": "Sofia Terrain, Sewer, Rainfall & Pluvial Screening Explorer",
+  "application_version": "1.6.0",
+  "frontend_package_version": "1.0.0",
+  "version_provenance": {
+    "application_version": "Running FastAPI backend: http://127.0.0.1:8040/openapi.json -> info.version",
+    "frontend_package_version": "Local frontend package manifest: package.json -> version; this is a separately versioned component"
+  },
+  "status": "PASS for independent implemented app checks",
+  "automated_tests": {
+    "python_integration": {
+      "passed": 196,
+      "failed": 0,
+      "junit": "../test-results.xml"
+    },
+    "javascript_rules": {
+      "passed": 24,
+      "failed": 0
+    },
+    "total_passed": 220
+  },
+  "production_build": "PASS: TypeScript and Vite production build",
+  "launcher_smoke_check": "PASS: scripts/serve.py --no-browser correctly reuses the running app",
+  "browser_checks_scope": "Earlier browser checks retained with their original scope; current AGKK checks are in cadastral_context below",
+  "browser_checks": [
+    "Real desktop regional rendering, elevation overlay and viewport infrastructure tiles",
+    "All routes 717; disabling planned gives 467 and 319.94 km",
+    "Inside defaults 543 and 137.86 km",
+    "Actual map click: 521.7890625 m, shown 521.79 m, source pixel column 20637 / row 16248",
+    "Mobile 390 x 740: controls initially collapsed; route 434 selected with original Bulgarian property text and inside length 357.7 m",
+    "All-green display option keeps route statistics unchanged",
+    "Optional sewerage points toggle and no-external-basemap view",
+    "Local fit produces a 201-point 10 m statistics scale; auto-fit remains off",
+    "Zooming outside the fitted view keeps its scope ID and displays Fit/Reset cue",
+    "Reset restores whole-area scale",
+    "Same-page shared hash URL updates camera/filters without manual reload",
+    "No browser errors in the separate final QA tab"
+  ],
+  "screenshots": [
+    "regional-map.jpg",
+    "mobile-route-inspector.jpg",
+    "local-fit-inspector.jpg",
+    "locked-local-scale.jpg",
+    "overview.jpg",
+    "pluvial-overview.jpg",
+    "pluvial-inspector.jpg",
+    "open-water-excluded.jpg",
+    "open-water-mask-only.jpg",
+    "open-water-user-view.jpg",
+    "historical-flood-survey.jpg",
+    "historical-flood-sources.jpg",
+    "cadastral-buildings.jpg",
+    "cadastral-inspector.jpg"
+  ],
+  "cadastral_context": {
+    "verified_on": "2026-10-25T08:44:29.534608+00:00",
+    "application_version": "1.6.0",
+    "status": "PASS: independent AGKK cadastral context integrated; earlier data/functions retained",
+    "automated_tests": {
+      "python": 196,
+      "javascript": 24,
+      "total": 220,
+      "failed": 0,
+      "junit": "../test-results.xml",
+      "javascript_result_basis": "Parent final Node run:24passing; supplied original5scale tests are separate"
+    },
+    "production_build": "PASS: TypeScript and Vite production build (parent final build)",
+    "running_application": {
+      "url": "http://127.0.0.1:8040/",
+      "application_id": "sofia-terrain-explorer",
+      "renderer_revision": "fast-map-3a4129cd2623",
+      "launcher_no_browser_reuses_existing_app": true
+    },
+    "source": {
+      "title": "AGKK INSPIRE cadastral buildings",
+      "provider": "Geodesy, Cartography and Cadastre Agency, Bulgaria (AGKK/GCCA)",
+      "source_url": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
+      "source_kind": "AGKK INSPIRE cadastral building polygons",
+      "feature_count": 334033,
+      "revision": "568d80b32ddb42f2",
+      "source_crs": "EPSG:4258",
+      "crs": "EPSG:4326",
+      "query_bbox_wgs84": [
+        23,
+        42.4,
+        23.7,
+        42.95
+      ],
+      "coverage_bbox_wgs84": [
+        22.999896932000066,
+        42.40073163006055,
+        23.700164678000075,
+        42.9501015390591
+      ],
+      "source_date": null,
+      "retrieved_at": "2026-10-25T08:28:02.687309+00:00",
+      "acquisition_completed_utc": "2026-10-25T08:30:16.648666+00:00",
+      "source_publication_date": "2021-11-03",
+      "metadata_revision_date": "2024-04-29",
+      "catalogue_date_note": "INSPIRE catalogue publication: 2021-11-03; metadata revision: 2024-04-29. Feature lifecycle dates vary; survey date is unknown.",
+      "license": "Official INSPIRE metadata: no limitations to public access; use constraints reference Tariff14. No CC licence or unrestricted redistribution right has been inferred.",
+      "height": {
+        "available": false,
+        "semantics": null,
+        "reason": "Source floor counts are not measured height in metres; no 3D height is inferred."
+      },
+      "sha256": "e9e948f31556a68a3b2724b8ab3abfd664126073f0b09dc4eb8e51a479536fc8",
+      "raw_manifest_sha256": "a3f6271380387fbaf660fed20468c89bf408d9d1e8f8b187a55b61d9fdb34903"
+    },
+    "source_counts": {
+      "unique_source_oids": 334033,
+      "distinct_nonempty_cadastral_identifiers": 334018,
+      "raw_batches": 335,
+      "transfer_limited_batches": 0,
+      "source_geometry_unchanged_in_display": true,
+      "source_attributes_preserved_in_original_batches": true,
+      "geometry_repairs": 0,
+      "unique_physical_building_count_established": false
+    },
+    "acquisition_validation_receipt": "agkk_buildings_validation.json",
+    "browser_verification": {
+      "basis": "Parent real browser QA, screenshots independently visually reviewed",
+      "zoom": 17,
+      "central_sofia_real_footprints_visible": true,
+      "independent_cadastral_layer_visibility": true,
+      "source_date_shown_unknown_not_catalogue_publication": true,
+      "selected_source_id": "2716694",
+      "selected_cadastral_identifier": "68134.100.74.5",
+      "original_attributes_visible": true,
+      "one_floor_is_not_converted_to_height": true,
+      "counter_snapshots_off_on": {
+        "recorded_requests_before": 9,
+        "recorded_requests_after": 9,
+        "recorded_renders_before": 18,
+        "recorded_renders_after": 18,
+        "interpretation": "Recorded parent browser cache-reuse check; not a new wall-clock performance benchmark"
+      },
+      "screenshots": [
+        {
+          "file": "cadastral-buildings.jpg",
+          "bytes": 123387,
+          "sha256": "41388a65ff19d1bfd88cc046acca715a96e3af2cd14b7c6667a0414ab654bfd9",
+          "visually_reviewed": true
+        },
+        {
+          "file": "cadastral-inspector.jpg",
+          "bytes": 133693,
+          "sha256": "d5db9be713d65d27931cb7bd8f72c091e8346f213014e588574b185cb023e121",
+          "visually_reviewed": true
+        }
+      ]
+    },
+    "independent_api_feature_check": {
+      "source_id": "2716694",
+      "cadastral_identifier": "68134.100.74.5",
+      "original_property_count": 139,
+      "returned_property_count": 145,
+      "all_original_properties_equal": true,
+      "full_coordinate_arrays_equal": true,
+      "original_null_and_void_fields_retained": true,
+      "numberoffloorsaboveground": 1,
+      "inferred_height_m": null,
+      "raw_source_batch_file": "data/reference/agkk_buildings/batches/batch_00058.geojson.gz",
+      "raw_source_batch_sha256": "2a32c860ab1e7c29908a4263f636ab915c4b2d6e82ac4cfbea3bc747326ab165"
+    },
+    "unchanged_inspection_sample": {
+      "longitude": 23.33032128151407,
+      "latitude": 42.69564895655974,
+      "native_elevation_m": 552.0,
+      "native_pixel_row": 22420,
+      "native_pixel_column": 22851,
+      "native_resolution_m": 1,
+      "rainfall_product": "merged_250m",
+      "rainfall_mm": 14.428980827331543,
+      "rainfall_displayed_mm": 14.43,
+      "ponding_P": 0.0,
+      "concentration_C": 40.34538269042969,
+      "combined_S": 40.34538269042969,
+      "screening_resolution_m": 5,
+      "buildings_do_not_enter_scores": true
+    },
+    "retained_revisions": {
+      "legacy_spatial": "af34c6d53d5b26fd",
+      "rainfall": "88036868558c20ce",
+      "native_dtm_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3",
+      "open_water": "ee06795221a5005e",
+      "historical_survey": "7fbfbcee6ee933f4",
+      "whole_area_reference_snapshot_sha256": "58f9145e4bc1ab41e26cf49e735e21b24ebbc89157f839510e3f8f7552bff916",
+      "screening_source": "f42644a668cdc14d",
+      "screening_runtime_with_water_exclusion": "2a0d5f6899cd036c"
+    },
+    "retained_functions": [
+      "Native 1 m elevation, NoData and continuous whole/local colour scales",
+      "Rainfall products, native samples, 55 stations/QC, valid zero and ellipsoidal totals",
+      "717 routes, green partitions/filters/properties and full-precision exports",
+      "322,025 infrastructure records and category filters",
+      "P/C/S terrain screening, exposure exports and hidden mapped-water exclusion",
+      "136 historical survey polygons plus official register/PDF/CSV",
+      "Digital Twin availability adapter and independent source status",
+      "Shareable URL state, mobile controls and revision-aware tile caches"
+    ],
+    "requested_digital_twin_buildings": {
+      "geometry_acquired": false,
+      "available": false,
+      "feature_count": 0,
+      "source_url": "https://citylab.gate-ai.eu/3d-city-model/",
+      "status": "Current full-city DigitalTwin geometry remains unacquired; AGKK cadastre is separately labelled and does not claim to be the DigitalTwin"
+    },
+    "publication_performed_by_this_verification": false,
+    "github_publication_claimed": false,
+    "paid_orders_or_accounts_created": false,
+    "limitations": [
+      "Acquired from a public INSPIRE service; currency relative to the operational KAIS register is not guaranteed.",
+      "Study-bbox coverage is not an administrative-municipality selection, and source cadastral records do not prove complete current physical-building coverage.",
+      "Floors and INSPIRE void codes are retained; floor counts are not converted into metres.",
+      "Buildings are separate visual context and do not alter native terrain, rainfall, pluvial scores, water exclusions or exposure calculations.",
+      "Some source fields may be absent/void. No owner information or proprietary account was requested.",
+      "This snapshot covers the query rectangle, not an administrative-city inventory.334033source records are not asserted to be334033unique physical buildings.",
+      "Prior rainfall/performance/context receipts retain their earlier version/test scope; this receipt records the current cadastral integration."
+    ],
+    "frontend_package_version": "1.0.0",
+    "version_provenance": {
+      "application_version": "Running FastAPI backend: http://127.0.0.1:8040/openapi.json -> info.version",
+      "frontend_package_version": "Local frontend package manifest: package.json -> version; this is a separately versioned component"
+    }
+  },
+  "cadastral_acquisition_validation": {
+    "verified_at": "2026-10-25T08:36:09.666543+00:00",
+    "source_service": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
+    "count": 334033,
+    "distinct_source_oids": 334033,
+    "exact_initial_id_set": true,
+    "batches": 335,
+    "all_compressed_and_original_content_checksums_match": true,
+    "transfer_limited_batches": 0,
+    "source_geometry_equal_for_every_display_feature": true,
+    "selected_original_attributes_equal_for_every_feature": true,
+    "full_original_attributes_preserved_in_batches": true,
+    "geometry_types": {
+      "Polygon": 334032,
+      "MultiPolygon": 1
+    },
+    "all_display_geometry_valid": true,
+    "geometry_repairs": [],
+    "no_geometry_simplification": true,
+    "no_height_inference": true,
+    "index_integrity": "ok",
+    "index_count": 334033,
+    "index_rtree_count": 334033,
+    "revision": "568d80b32ddb42f2",
+    "metadata": {
+      "available": true,
+      "title": "AGKK INSPIRE cadastral buildings",
+      "provider": "Geodesy, Cartography and Cadastre Agency, Bulgaria (AGKK/GCCA)",
+      "source_url": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
+      "source_name": "BU.Building \u2014 Buildings from Cadastral map of Bulgaria",
+      "source_kind": "AGKK INSPIRE cadastral building polygons",
+      "description": "Official national cadastral-building snapshot intersecting the app study rectangle, with actual source geometry and identifiers. Survey date and synchronization with the operational KAIS register are not established.",
+      "feature_count": 334033,
+      "count": 334033,
+      "coverage_bbox_wgs84": [
+        22.999896932000066,
+        42.40073163006055,
+        23.700164678000075,
+        42.9501015390591
+      ],
+      "bbox": [
+        22.999896932000066,
+        42.40073163006055,
+        23.700164678000075,
+        42.9501015390591
+      ],
+      "query_bbox_wgs84": [
+        23,
+        42.4,
+        23.7,
+        42.95
+      ],
+      "coverage_label": "Buildings intersecting study rectangle [23,42.4,23.7,42.95]; this rectangle is not Sofia's administrative boundary. Full source polygons are retained at its edge.",
+      "coverage_note": "Complete for the initial service object-ID list in the query rectangle; not an independently verified complete inventory of all existing buildings.",
+      "crs": "EPSG:4326",
+      "source_crs": "EPSG:4258",
+      "geometry_type": "Polygon/MultiPolygon",
+      "min_zoom": 13,
+      "height": {
+        "available": false,
+        "semantics": null,
+        "reason": "Source floor counts are not measured height in metres; no 3D height is inferred."
+      },
+      "source_fields": [
+        "objectid",
+        "id_localid",
+        "id_namespace",
+        "id_versionid",
+        "beginlifespanversion",
+        "endlifespanversion",
+        "numberoffloorsaboveground",
+        "numberoffloorsaboveground_void",
+        "numberofdwellings",
+        "numberofdwellings_void",
+        "conditionofconstr",
+        "conditionofconstr_void",
+        "currentuse_code1",
+        "currentuse_label1",
+        "currentuse_void",
+        "hgeomref",
+        "hgeomestimatedaccuracy_value",
+        "hgeomestimatedaccuracy_void",
+        "referencegeometry"
+      ],
+      "source_attributes": "Full original INSPIRE attributes retained in gzip batch responses and available for source feature inspection.",
+      "raw_manifest_file": "data/reference/agkk_buildings/manifest.json",
+      "raw_manifest_sha256": "a3f6271380387fbaf660fed20468c89bf408d9d1e8f8b187a55b61d9fdb34903",
+      "raw_batch_format": "GeoJSON FeatureCollection gzip; features/properties/objectid",
+      "data_file": "data/derived/cadastral_buildings.geojson",
+      "geojson_file": "data/derived/cadastral_buildings.geojson",
+      "index_file": "data/cache/cadastral_buildings.sqlite",
+      "sha256": "e9e948f31556a68a3b2724b8ab3abfd664126073f0b09dc4eb8e51a479536fc8",
+      "revision": "568d80b32ddb42f2",
+      "retrieved_utc": "2026-10-25T08:28:02.687309+00:00",
+      "acquisition_completed_utc": "2026-10-25T08:30:16.648666+00:00",
+      "source_date": null,
+      "license": "Official INSPIRE metadata: no limitations to public access; use constraints reference Tariff14. No CC licence or unrestricted redistribution right has been inferred.",
+      "attribution": "Geodesy, Cartography and Cadastre Agency, Bulgaria (AGKK/GCCA)",
+      "known_example": {
+        "source_id": "2716694",
+        "source_oid": 2716694,
+        "cadastral_id": "68134.100.74.5",
+        "longitude": 23.33032128151407,
+        "latitude": 42.69564895655974,
+        "source_batch_file": "data/reference/agkk_buildings/batches/batch_00058.geojson.gz",
+        "source_batch_sha256": "2a32c860ab1e7c29908a4263f636ab915c4b2d6e82ac4cfbea3bc747326ab165"
+      },
+      "limitations": [
+        "Acquired from a public INSPIRE service; currency relative to the operational KAIS register is not guaranteed.",
+        "Study-bbox coverage is not an administrative-municipality selection, and source cadastral records do not prove complete current physical-building coverage.",
+        "Floors and INSPIRE void codes are retained; floor counts are not converted into metres.",
+        "Buildings are separate visual context and do not alter native terrain, rainfall, pluvial scores, water exclusions or exposure calculations.",
+        "Some source fields may be absent/void. No owner information or proprietary account was requested."
+      ],
+      "validation": {
+        "source_ids_expected": 334033,
+        "source_ids_received_unique": 334033,
+        "cadastral_identifiers_distinct_nonnull": 334018,
+        "transfer_limited_batches": 0,
+        "original_batch_count": 335,
+        "geometry_simplification": false,
+        "geometry_repairs": [],
+        "floor_counts": {
+          "floor_count_nonnull": 334033,
+          "floor_count_null": 0
+        }
+      },
+      "feature_lines_sha256": "288e5ff7933bee9b5d05b3120f24802eb83e531ee2015e45eaa210ca84bc6bc0",
+      "source_label": "AGKK/GCCA \u2014 INSPIRE cadastral building service",
+      "retrieved_at": "2026-10-25T08:28:02.687309+00:00",
+      "catalogue_date_note": "INSPIRE catalogue publication: 2021-11-03; metadata revision: 2024-04-29. Feature lifecycle dates vary; survey date is unknown.",
+      "source_publication_date": "2021-11-03",
+      "metadata_revision_date": "2024-04-29",
+      "known_examples": [
+        {
+          "source_id": "3701",
+          "source_oid": 3701,
+          "cadastral_id": "52249.5.432.1",
+          "longitude": 23.623437775553356,
+          "latitude": 42.405822687560544,
+          "source_batch_file": "data/reference/agkk_buildings/batches/batch_00001.geojson.gz",
+          "source_batch_sha256": "d832a8fe0f108435c1765b9aff3ace6c42dddcf1e57b91508a0cf756595b2ae8"
+        },
+        {
+          "source_id": "2716694",
+          "source_oid": 2716694,
+          "cadastral_id": "68134.100.74.5",
+          "longitude": 23.33032128151407,
+          "latitude": 42.69564895655974,
+          "source_batch_file": "data/reference/agkk_buildings/batches/batch_00058.geojson.gz",
+          "source_batch_sha256": "2a32c860ab1e7c29908a4263f636ab915c4b2d6e82ac4cfbea3bc747326ab165"
+        }
+      ]
+    }
+  },
+  "rainfall_receipt_scope": "Historical v1.5 rainfall verification retained; its earlier207-test count is not the current220-test integration result",
+  "rainfall_supplement": {
+    "verified_on": "2026-10-25",
+    "application_version": "1.5.0",
+    "status": "PASS: rainfall supplement; existing application functions retained",
+    "automated_tests": {
+      "python": 184,
+      "javascript": 23,
+      "total": 207,
+      "failed": 0,
+      "junit": "../test-results.xml"
+    },
+    "production_build": "PASS: TypeScript, Vite and precompressed assets",
+    "supplied_checks": {
+      "reviewed_utc": "2026-10-25T08:10:21.378063+00:00",
+      "source_root": "work\\supplement_handoff\\sofia_app_handoff",
+      "read_only": true,
+      "preserved_handoff_copy": {
+        "path": "handoff/rainfall_supplement",
+        "files": 53,
+        "sha256_differences_from_extracted_original": [],
+        "original_manifest_verification_after_copy": "PASS: 52 manifest entries; manifest is the53rd file"
+      },
+      "products": {
+        "merged_250m": {
+          "width": 104,
+          "height": 71,
+          "crs": "EPSG:4326",
+          "transform": [
+            0.003054851458076265,
+            0,
+            23.18,
+            0,
+            -0.0022457779374775422,
+            42.76
+          ],
+          "bounds_wgs84": [
+            23.18,
+            42.600549766439094,
+            23.49770455163993,
+            42.76
+          ],
+          "dtype": "float32",
+          "band_names": [
+            "rain_mm"
+          ],
+          "nodata": -9999,
+          "layout": "COG",
+          "valid_pixels": 7384,
+          "masked_pixels": 0,
+          "mask_values": [
+            1
+          ],
+          "valid_exact_zero_count": 0,
+          "masked_snapshot_zero_count": 0,
+          "min_mm": 0.06267654895782471,
+          "max_mm": 27.14878273010254,
+          "sum_native_mm_not_area_weighted": 82356.24369587004,
+          "mean_mm_unweighted": 11.153337445269507,
+          "mean_mm_area_weighted": 11.15520234517876,
+          "valid_area_km2": 461.23775663405513,
+          "full_grid_area_km2": 461.23775663405513,
+          "precipitation_volume_m3": 5145200.504489201,
+          "summary_matches": true,
+          "cell_area_m2_range": [
+            62386.571894168854,
+            62542.318969249725
+          ],
+          "mid_grid_cell_width_m": [
+            250.37868442358726,
+            250.3877014942761
+          ],
+          "mid_grid_cell_height_m": 249.47563283074987,
+          "float32_cast_max_abs_difference_valid": 0,
+          "native_point_checks": [
+            {
+              "row": 0,
+              "column": 0,
+              "value": 8.710189819335938,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 35,
+              "column": 52,
+              "value": 20.801280975341797,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 70,
+              "column": 103,
+              "value": 11.363007545471191,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 20,
+              "column": 10,
+              "value": 10.671051979064941,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 30,
+              "column": 50,
+              "value": 15.838749885559082,
+              "valid": true,
+              "pass": true
+            }
+          ],
+          "data_sha256": "902b743d49cf077bf0c738042c62c4c7ed6fbf154a5f30590f6e038f82f7c66f"
+        },
+        "radar_bias_corrected_250m": {
+          "width": 104,
+          "height": 71,
+          "crs": "EPSG:4326",
+          "transform": [
+            0.003054851458076265,
+            0,
+            23.18,
+            0,
+            -0.0022457779374775422,
+            42.76
+          ],
+          "bounds_wgs84": [
+            23.18,
+            42.600549766439094,
+            23.49770455163993,
+            42.76
+          ],
+          "dtype": "float32",
+          "band_names": [
+            "rain_mm"
+          ],
+          "nodata": -9999,
+          "layout": "COG",
+          "valid_pixels": 7384,
+          "masked_pixels": 0,
+          "mask_values": [
+            1
+          ],
+          "valid_exact_zero_count": 0,
+          "masked_snapshot_zero_count": 0,
+          "min_mm": 2.4131176471710205,
+          "max_mm": 20.15553092956543,
+          "sum_native_mm_not_area_weighted": 83688.75933384895,
+          "mean_mm_unweighted": 11.333797309567844,
+          "mean_mm_area_weighted": 11.335462805615851,
+          "valid_area_km2": 461.23775663405513,
+          "full_grid_area_km2": 461.23775663405513,
+          "precipitation_volume_m3": 5228343.434871028,
+          "summary_matches": true,
+          "cell_area_m2_range": [
+            62386.571894168854,
+            62542.318969249725
+          ],
+          "mid_grid_cell_width_m": [
+            250.37868442358726,
+            250.3877014942761
+          ],
+          "mid_grid_cell_height_m": 249.47563283074987,
+          "float32_cast_max_abs_difference_valid": 0,
+          "native_point_checks": [
+            {
+              "row": 0,
+              "column": 0,
+              "value": 8.710189819335938,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 35,
+              "column": 52,
+              "value": 14.864659309387207,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 70,
+              "column": 103,
+              "value": 11.363007545471191,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 20,
+              "column": 10,
+              "value": 10.689406394958496,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 30,
+              "column": 50,
+              "value": 12.617443084716797,
+              "valid": true,
+              "pass": true
+            }
+          ],
+          "data_sha256": "d572da07990aa5dde0fc485a37f14531198d56376d3d26bd39a62e0217c3bcf6"
+        },
+        "radar_raw_1km": {
+          "width": 98,
+          "height": 69,
+          "crs": "EPSG:4326",
+          "transform": [
+            0.010398141544071897,
+            0,
+            22.831742360561023,
+            0,
+            -0.010398141544071897,
+            43.05713699491116
+          ],
+          "bounds_wgs84": [
+            22.831742360561023,
+            42.3396652283702,
+            23.85076023188007,
+            43.05713699491116
+          ],
+          "dtype": "float32",
+          "band_names": [
+            "rain_mm"
+          ],
+          "nodata": -9999,
+          "layout": "COG",
+          "valid_pixels": 5041,
+          "masked_pixels": 1721,
+          "mask_values": [
+            0,
+            1
+          ],
+          "valid_exact_zero_count": 0,
+          "masked_snapshot_zero_count": 0,
+          "min_mm": 2.863697052001953,
+          "max_mm": 109.69969940185547,
+          "sum_native_mm_not_area_weighted": 158558.2662782669,
+          "mean_mm_unweighted": 31.45373264794027,
+          "mean_mm_area_weighted": 31.467681289022128,
+          "valid_area_km2": 4961.043603465896,
+          "full_grid_area_km2": 6654.803182416964,
+          "precipitation_volume_m3": 156112538.97480673,
+          "summary_matches": true,
+          "cell_area_m2_range": [
+            978612.592622757,
+            989656.5918636322
+          ],
+          "mid_grid_cell_width_m": [
+            851.9385874847848,
+            852.0807451700708
+          ],
+          "mid_grid_cell_height_m": 1155.0969212382734,
+          "float32_cast_max_abs_difference_valid": 0,
+          "native_point_checks": [
+            {
+              "row": 0,
+              "column": 0,
+              "value": null,
+              "valid": false,
+              "pass": true
+            },
+            {
+              "row": 34,
+              "column": 49,
+              "value": 53.340576171875,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 68,
+              "column": 97,
+              "value": null,
+              "valid": false,
+              "pass": true
+            },
+            {
+              "row": 20,
+              "column": 10,
+              "value": 7.2316741943359375,
+              "valid": true,
+              "pass": true
+            },
+            {
+              "row": 30,
+              "column": 50,
+              "value": 35.898956298828125,
+              "valid": true,
+              "pass": true
+            }
+          ],
+          "data_sha256": "b925fe1aa37aa29fc7773d3345f2b358245cd46c1ad9e5424850847acb06acdb"
+        }
+      },
+      "supplied_verification": [
+        {
+          "command": "verify_handoff",
+          "status": "fulfilled",
+          "exit_code": 0,
+          "output": "{\r\n  \"verified_manifest_files\": 52,\r\n  \"prototype_payload_counts\": [\r\n    717,\r\n    1930,\r\n    2175\r\n  ],\r\n  \"route_counts\": {\r\n    \"all\": 717,\r\n    \"inside\": 543,\r\n    \"outside\": 670\r\n  },\r\n  \"route_length_m\": {\r\n    \"all\": 540163.0135031902,\r\n    \"inside\": 137858.69885054993,\r\n    \"outside\": 402304.31468007684\r\n  },\r\n  \"raw_files_preserved\": true,\r\n  \"duplicate_pipe_upload_kept\": true,\r\n  \"native_DTM_bytes_bundled\": false,\r\n  \"infrastructure_point_bytes_bundled\": false\r\n}\r\n"
+        },
+        {
+          "command": "verify_rainfall",
+          "status": "fulfilled",
+          "exit_code": 0,
+          "output": "PASS: 3 complete native rainfall COGs; masks/grid preserved; 15 independent samples; 55 stations (43 accepted/12 rejected); original script unchanged.\r\n"
+        },
+        {
+          "command": "elevation_scale_tests",
+          "status": "fulfilled",
+          "exit_code": 0,
+          "output": "\u2714 uniform distribution gives an invertible linear stretch (2.5684ms)\n\u2714 repeated quantiles and flat terrain never divide by zero (0.4211ms)\n\u2714 small relief remains distinguishable; data are not quantized (1.9313ms)\n\u2714 missing pixels remain transparent and invalid quantiles fail clearly (0.5087ms)\n\u2714 live whole-area quantiles reproduce the observed Earth Engine legend (1.1642ms)\n\u2139 tests 5\n\u2139 suites 0\n\u2139 pass 5\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 112.3496\n"
+        }
+      ],
+      "stations": {
+        "count": 55,
+        "unique_station_ids": 55,
+        "qc_counts": {
+          "implausible": 2,
+          "ok": 43,
+          "partial day": 2,
+          "too low vs neighbours (12 mm)": 1,
+          "too low vs neighbours (13 mm)": 1,
+          "too low vs neighbours (14 mm)": 2,
+          "too low vs neighbours (17 mm)": 1,
+          "too low vs neighbours (6 mm)": 1,
+          "too low vs neighbours (8 mm)": 2
+        },
+        "accepted_count": 43,
+        "rejected_count": 12,
+        "properties_keys": [
+          "qc",
+          "rain_mm",
+          "rows",
+          "station_id"
+        ],
+        "rain_min_mm": 0,
+        "rain_max_mm": 441.7,
+        "zero_rain_count": 6,
+        "negative_rain_count": 0,
+        "nonfinite_rain_count": 0,
+        "all_point_geometries": true,
+        "valid_lonlat": true,
+        "accepted_valid_zero": {
+          "station_id": "ISOFIA682",
+          "longitude": 23.43,
+          "latitude": 42.65,
+          "rain_mm": 0,
+          "qc": "ok",
+          "rows": 589
+        },
+        "rejected_extreme": {
+          "station_id": "ISOFIA667",
+          "longitude": 23.33,
+          "latitude": 42.66,
+          "rain_mm": 441.7,
+          "qc": "implausible"
+        }
+      },
+      "elevation_curve_comparison": {
+        "supplied_source_asset": "projects/rivertracker-512606/assets/sofia_dtm_2024_1m_gee",
+        "supplied_scope": "whole-study-area",
+        "supplied_bounds_wgs84": [
+          23,
+          42.4,
+          23.7,
+          42.95
+        ],
+        "supplied_statistics_scale_m": 60,
+        "supplied_quantile_count": 201,
+        "supplied_legend": [
+          {
+            "level": 0,
+            "elevation_m": 501.0126647949219
+          },
+          {
+            "level": 0.25,
+            "elevation_m": 574.2708865685195
+          },
+          {
+            "level": 0.5,
+            "elevation_m": 808.2795589853039
+          },
+          {
+            "level": 0.75,
+            "elevation_m": 1062.6197323211716
+          },
+          {
+            "level": 1,
+            "elevation_m": 2278.76025390625
+          }
+        ],
+        "current_scope": "whole-study-area",
+        "current_bbox": [
+          23,
+          42.4,
+          23.7,
+          42.95
+        ],
+        "current_statistics_scale_m": 60,
+        "current_provenance": "Locally recomputed from native DTM because archived 201-point curve is in truncated ZIP tail; not the archived EE snapshot",
+        "current_legend": [
+          {
+            "level": 0,
+            "elevation_m": 501.0205993652344
+          },
+          {
+            "level": 0.25,
+            "elevation_m": 574.2494632726607
+          },
+          {
+            "level": 0.5,
+            "elevation_m": 808.1199701873817
+          },
+          {
+            "level": 0.75,
+            "elevation_m": 1062.521725832964
+          },
+          {
+            "level": 1,
+            "elevation_m": 2278.974853515625
+          }
+        ],
+        "max_abs_quantile_difference_m": 1.7365624999995362,
+        "all_quantiles_identical": false,
+        "shared_algorithm": "Both use continuous hybrid80% empirical percentile +20% linear height and first occurrence of repeated quantiles; exported API names/flat-terrain representation differ.",
+        "current_mask_caveat": "Current JS/Python normalize helpers rely on callers masking -9999; supplied portable module explicitly returns null for -9999. Existing terrain native adapter masks NoData before display.",
+        "captured_before_whole_curve_restoration": true
+      },
+      "provenance_limits": [
+        "Original live Earth Engine acquisition is asserted by the supplied metadata and independent-check files; no fresh authenticated Earth Engine query was performed in this audit.",
+        "15 supplied native point checks comprise13numeric checks and2masked checks; they are separate handoff records, not a live re-validation of upstream meteorology.",
+        "The daily-label UTC interpretation is documented, but unavailable upstream aggregation programs/time series prevent independent validation of the original accumulation window.",
+        "OPERA/Weather Underground lineage and approximate raw-bias claims are provenance, not independently validated rainfall accuracy or redistribution licence.",
+        "A daily rainfall total cannot provide a subhourly pluvial hyetograph, observed storm flood depth, runoff volume or drainage capacity."
+      ],
+      "manifest_before_after_verified": true,
+      "findings": [
+        {
+          "severity": "High if misused",
+          "confidence": "High",
+          "finding": "Only a single daily accumulation is supplied; no subhourly temporal forcing or independent flood response calibration.",
+          "risk": "Cannot infer storm peaks, mm/hour, pluvial flood depths, sewer loads or rainfall-event return period.",
+          "remediation": "Display actual daily data as separate context; preserve the terrain screen as uncalibrated."
+        },
+        {
+          "severity": "Medium",
+          "confidence": "High",
+          "finding": "Three products have unequal footprints; raw stored cells are about852\u00d71155m centrally, not square1km.",
+          "risk": "Comparing whole-product means/volumes as correction factors would confound coverage and geometry.",
+          "remediation": "State per-product native valid coverage and use ellipsoidal cell areas. Any future bias comparison needs a common valid footprint."
+        },
+        {
+          "severity": "Medium",
+          "confidence": "High",
+          "finding": "An accepted real station records0mm, while all raster valid cells are positive; raw has1721masked cells.",
+          "risk": "Truthiness-based checks may drop a valid station or replace missing rainfall with zero.",
+          "remediation": "Test null/mask separately from numeric zero, and retain station QC."
+        },
+        {
+          "severity": "Medium",
+          "confidence": "High",
+          "finding": "The restored201-point Earth Engine curve is now supplied and differs slightly from the application's local approximation.",
+          "risk": "Old text claiming the original curve is unavailable would become false; rounded legend values cannot reconstruct it.",
+          "remediation": "Use quantiles_m for the whole-study-area display reference with original source/provenance; preserve native data and local-fit algorithms. Retain old cache as a labelled previous approximation."
+        },
+        {
+          "severity": "Provenance limitation",
+          "confidence": "High",
+          "finding": "Upstream correction/QC source programs and radar/station time series are absent; source labels and processing accuracy cannot be independently verified from this payload.",
+          "risk": "Approximatelyfourfold raw bias, native250m observations or complete redistribution permission would be unsupported claims.",
+          "remediation": "Preserve source claims as unverified provenance, do not apply another correction, and keep rights unspecified."
+        }
+      ]
+    },
+    "preserved_supplement": {
+      "supplement_zip_sha256": "cb5b0842df2ce084bd4e7c63291afef6619abbc0162803cf61b7eedc3079ff1d",
+      "prompt_sha256": "e179c342c76747f7826a046eb0fe9219d951e6da965f9cbab2cf324f6c65732b",
+      "files": {
+        "CODEX_PROMPT.md": {
+          "bytes": 12177,
+          "sha256": "e179c342c76747f7826a046eb0fe9219d951e6da965f9cbab2cf324f6c65732b"
+        },
+        "MANIFEST.json": {
+          "bytes": 9725,
+          "sha256": "336022d6005aadb88c4a966fc7876dff497cf0a72600b3717b2651f5d45d1cc6"
+        },
+        "README.md": {
+          "bytes": 6624,
+          "sha256": "9855e8f0c07aed05dc3342cb2782fe090b40a325e8995bfd180bff7028bb8a27"
+        },
+        "requirements-data.txt": {
+          "bytes": 137,
+          "sha256": "e8ec18d907abcf8c070be25e10280e1eed951d80b528cff02945d2afbbff0081"
+        },
+        "archive/encode_inline.py": {
+          "bytes": 3541,
+          "sha256": "f646609275b4650e0ca74fab7acf26602883380271a5f7fe4a9f445b13e1f379"
+        },
+        "archive/pack_vectors.py": {
+          "bytes": 637,
+          "sha256": "dcee212139214b6c4fd10c09e27892a2cfea4c9e9ae6985c2d3d1e4971642a22"
+        },
+        "archive/prepare_vectors.py": {
+          "bytes": 3450,
+          "sha256": "6607eea9bf27cd03e5c9f62c2b04006bbcd98a4f56943123a289238a411a071c"
+        },
+        "archive/unpack_vectors.js": {
+          "bytes": 3557,
+          "sha256": "15c60345ed2c06142689bae1ae59d4afefd37186384d06bbe84874e3d15b7d77"
+        },
+        "config/map_config.json": {
+          "bytes": 8217,
+          "sha256": "bb33f29d76a233fc4116f8c4b3889ca0d32be452e7b22d699d98e2007e0a5ceb"
+        },
+        "data/asset_dependencies.json": {
+          "bytes": 1972,
+          "sha256": "c3d1edce62b437235dd184155998def81816e9b51e9015fe5a3ea3ede6ac5515"
+        },
+        "docs/ACQUISITION.md": {
+          "bytes": 6646,
+          "sha256": "d1fce190c50de807d1958611a11e985d9ed8ceaed7babafb292df1b745f39bbe"
+        },
+        "docs/DATA_CONTRACT.md": {
+          "bytes": 7590,
+          "sha256": "56faee670f717ecd66db61d5f5f44a0687f6d8e8dd97133bf49e54c0df756b0c"
+        },
+        "docs/IMPLEMENTATION_NOTES.md": {
+          "bytes": 7676,
+          "sha256": "b2b27a460180e99fcfeb3a3b052426e398e142f09b8035a234186ff12655da1c"
+        },
+        "docs/RAINFALL.md": {
+          "bytes": 7973,
+          "sha256": "d3b5108715468710cec4aa8bbd2cdf1e6db6f156446b37b3e86ad61fa26c2cf1"
+        },
+        "docs/VALIDATION.md": {
+          "bytes": 3219,
+          "sha256": "d7b719aa939b67e03465a4fd1d0ef5eb8239791334bd1b00b3e249980c1ca94f"
+        },
+        "earth_engine/check_rainfall_samples.js": {
+          "bytes": 4717,
+          "sha256": "846d3be3f3248a0a40a87530a733a6395423afe2000f5ee49edf3329b52b3ed1"
+        },
+        "earth_engine/export_for_codex.js": {
+          "bytes": 2092,
+          "sha256": "f7bd49f734bd082a77de59cca94f41a8cc90fc0e64e40dfba2e45baba9aeaaae"
+        },
+        "earth_engine/Rainfall_20250627_original.js": {
+          "bytes": 16323,
+          "sha256": "81d5832798aa33ea3a857911a14d14d747fda64e2a108ca673356dba603d9765"
+        },
+        "earth_engine/read_handoff_metadata.js": {
+          "bytes": 943,
+          "sha256": "a98f597b2a6c2d3d05a87638c5beec22d00ea5e0922d256376e349bd4874cc0a"
+        },
+        "earth_engine/read_rainfall_metadata.js": {
+          "bytes": 526,
+          "sha256": "eeb5f3b705f03f9216bd18d9627f2be758a0d719685eb6c71c062326be31cfd5"
+        },
+        "earth_engine/read_rainfall_pixels.js": {
+          "bytes": 5037,
+          "sha256": "cf9b859388ecf188ce456174e286628af522c3f1a3885faa2d7ebe49c4cb82bd"
+        },
+        "earth_engine/Script1.js": {
+          "bytes": 511862,
+          "sha256": "a893a8c3e58a64ae4aba90c12cd7a9e5f3e1b86daba4500e1f4a05d315d399ea"
+        },
+        "earth_engine/Script2.js": {
+          "bytes": 511982,
+          "sha256": "f08116eb0b50a1347c099cee3d9b3737a3e5b626209f2a5f021960dd475f151b"
+        },
+        "scripts/export_ee_assets.py": {
+          "bytes": 5436,
+          "sha256": "c13a38e4f43753344480b154b7d8b3efabea528c9891b2a2b1b6ae3b2a57fc51"
+        },
+        "scripts/prepare_rainfall.py": {
+          "bytes": 4826,
+          "sha256": "9451f0bff115604d2d58aaea32f09e4b5419e54635b08427909d5ad30ad72b8d"
+        },
+        "scripts/prepare_vectors.py": {
+          "bytes": 6317,
+          "sha256": "9796d86500ab0297890e49cc8f74a72d3ae5353a0d984d1a8d4f4f2ca13a011a"
+        },
+        "scripts/verify_handoff.py": {
+          "bytes": 4880,
+          "sha256": "5c320ce2b9fdbafb66fce1d39d591c831e4d5d8fe4d2746b09c3dbd241f3fe29"
+        },
+        "scripts/verify_rainfall.py": {
+          "bytes": 2902,
+          "sha256": "6d974c21cd05667239aaaff1599b0a1fb3ce6f12f244696cd45298f861a7e854"
+        },
+        "shared/elevation_scale.mjs": {
+          "bytes": 2159,
+          "sha256": "84a7b5c536d8aa27aca7435fab70bac55e1dc43ec833406e48bf8e3f6d1b28ac"
+        },
+        "tests/elevation_scale.test.mjs": {
+          "bytes": 2318,
+          "sha256": "2a8dd0fe0b21150f660549a8dd3cb217b8434f30f16e2095735717af595b3d87"
+        },
+        "data/derived/green_intersecting_routes.geojson": {
+          "bytes": 3585198,
+          "sha256": "e17c54e5f9fb85ae8dbc56b93b1bc2adf6bf096ecee3ff75665ebffa457432d2"
+        },
+        "data/derived/sewer_routes_all.geojson": {
+          "bytes": 489489,
+          "sha256": "ec1b1685242e30c6dc5d95d248f0461ad836b228e4f0f3821d29d139ce69ba2c"
+        },
+        "data/derived/sewer_routes_inside.geojson": {
+          "bytes": 498732,
+          "sha256": "f912c1ce8b5213fcef9a49a19a8de3fec4b23509c29133240b3520ef9ecbe7e5"
+        },
+        "data/derived/sewer_routes_outside.geojson": {
+          "bytes": 633614,
+          "sha256": "a57a0dd50793cd83b5bc58d8017fb3736425b126d416708443c8f9438524529c"
+        },
+        "data/derived/summary.json": {
+          "bytes": 1995,
+          "sha256": "26fa8f4b9bad8dc0a140503a7da38bb6b5ff81a56a9db3d87e0a193de9dd7160"
+        },
+        "data/rainfall/earth_engine_metadata.json": {
+          "bytes": 8755,
+          "sha256": "bfb66137a2123233eae244a753ff052fa5d89fc6147d6820a69cf7a8c04359ed"
+        },
+        "data/rainfall/merged_250m.tif": {
+          "bytes": 27206,
+          "sha256": "902b743d49cf077bf0c738042c62c4c7ed6fbf154a5f30590f6e038f82f7c66f"
+        },
+        "data/rainfall/native_point_checks.json": {
+          "bytes": 1311,
+          "sha256": "6e6178188e8b813dc81af394eef3f9e5e795cf2d942ec051eae492a60ce0b0d7"
+        },
+        "data/rainfall/radar_bias_corrected_250m.tif": {
+          "bytes": 25037,
+          "sha256": "d572da07990aa5dde0fc485a37f14531198d56376d3d26bd39a62e0217c3bcf6"
+        },
+        "data/rainfall/radar_raw_1km.tif": {
+          "bytes": 16553,
+          "sha256": "b925fe1aa37aa29fc7773d3345f2b358245cd46c1ad9e5424850847acb06acdb"
+        },
+        "data/rainfall/summary.json": {
+          "bytes": 2856,
+          "sha256": "28d3bd0154c679f0c1d449a926ae5185c2b39066441bc9f207c1a8d5789ae00b"
+        },
+        "data/rainfall/wu_stations.geojson": {
+          "bytes": 19046,
+          "sha256": "067e6e63078cd2945c2a14098fa77224eee964711f95cdc1a1da62bbc61c955b"
+        },
+        "data/raw/green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson": {
+          "bytes": 53164382,
+          "sha256": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557"
+        },
+        "data/raw/vik_kanal_26_sofpr_20090000(1).geojson": {
+          "bytes": 366359,
+          "sha256": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3"
+        },
+        "data/raw/vik_kanal_26_sofpr_20090000.geojson": {
+          "bytes": 366359,
+          "sha256": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3"
+        },
+        "data/reference/earth_engine_live_metadata.json": {
+          "bytes": 8600,
+          "sha256": "120b10452ae93182d58cb8968197996305a5964a5bdbbc04ed49efade91b7771"
+        },
+        "data/reference/elevation_quantiles_whole_area.json": {
+          "bytes": 7004,
+          "sha256": "58f9145e4bc1ab41e26cf49e735e21b24ebbc89157f839510e3f8f7552bff916"
+        },
+        "data/reference/sofia_dtm_2024_preview.png": {
+          "bytes": 922889,
+          "sha256": "864ee7585cc8769bc1bfbb5fc7562b4af500adc366d40e94a8204d76a8b23848"
+        },
+        "data/rainfall/native_arrays/merged_250m.json": {
+          "bytes": 152933,
+          "sha256": "747641e2d7c4441653c8ff47434b96ec092612436d123010a22527728bd711a7"
+        },
+        "data/rainfall/native_arrays/radar_bias_corrected_250m.json": {
+          "bytes": 153602,
+          "sha256": "a13794629fd3cc916c33486fbf33fdb1b2441068ae6fa5c268d10a5fc13497f3"
+        },
+        "data/rainfall/native_arrays/radar_raw_1km.json": {
+          "bytes": 118066,
+          "sha256": "d6a078e2e1450938489e92e0c407e6b599a0368a4eeac87234dd83e7201c140c"
+        },
+        "earth_engine/uploads/sofia_green_areas_2020.zip": {
+          "bytes": 17971454,
+          "sha256": "f09cdf89e65dc28403b7faa43658c9c09be58856e1b28a63d0b38696361b6b35"
+        },
+        "earth_engine/uploads/sofia_sewer_routes_green_split.zip": {
+          "bytes": 213537,
+          "sha256": "14e66de9a475d161c6096debf54606a31b57193690b052546d82e972bce246d9"
+        }
+      },
+      "existing_app_snapshot": "handoff/pre_rainfall_source.zip",
+      "existing_data_replaced": false
+    },
+    "native_rainfall": {
+      "revision": "88036868558c20ce",
+      "period": {
+        "local_date": "2025-06-27",
+        "timezone": "Europe/Sofia",
+        "start_utc": "2025-06-26T21:00:00Z",
+        "end_utc": "2025-06-27T21:00:00Z",
+        "utc_start_inclusive": "2025-06-26T21:00:00Z",
+        "utc_end_exclusive": "2025-06-27T21:00:00Z",
+        "aggregation_window_verified_from_upstream_code": false
+      },
+      "units": "daily accumulated mm",
+      "source_files_sha256": {
+        "earth_engine_metadata.json": "bfb66137a2123233eae244a753ff052fa5d89fc6147d6820a69cf7a8c04359ed",
+        "wu_stations.geojson": "067e6e63078cd2945c2a14098fa77224eee964711f95cdc1a1da62bbc61c955b",
+        "merged_250m.tif": "902b743d49cf077bf0c738042c62c4c7ed6fbf154a5f30590f6e038f82f7c66f",
+        "native_arrays/merged_250m.json": "747641e2d7c4441653c8ff47434b96ec092612436d123010a22527728bd711a7",
+        "radar_bias_corrected_250m.tif": "d572da07990aa5dde0fc485a37f14531198d56376d3d26bd39a62e0217c3bcf6",
+        "native_arrays/radar_bias_corrected_250m.json": "a13794629fd3cc916c33486fbf33fdb1b2441068ae6fa5c268d10a5fc13497f3",
+        "radar_raw_1km.tif": "b925fe1aa37aa29fc7773d3345f2b358245cd46c1ad9e5424850847acb06acdb",
+        "native_arrays/radar_raw_1km.json": "d6a078e2e1450938489e92e0c407e6b599a0368a4eeac87234dd83e7201c140c"
+      },
+      "products": {
+        "merged_250m": {
+          "grid": {
+            "crs": "EPSG:4326",
+            "transform": [
+              0.003054851458076265,
+              0.0,
+              23.18,
+              0.0,
+              -0.0022457779374775422,
+              42.76
+            ],
+            "width": 104,
+            "height": 71,
+            "nodata": -9999,
+            "band": "rain_mm",
+            "tiff_band_index": 1,
+            "tiff_band_description": "rain_mm",
+            "nominal_product_grid_m": 250,
+            "note": "Stored geographic cells; metric dimensions vary. Nominal output grid is not independently measured rainfall resolution."
+          },
+          "statistics": {
+            "scope": "whole product; all valid native cells; outside / masked cells excluded",
+            "area_method": "WGS84 ellipsoidal four-corner geographic-cell polygon areas (pyproj.Geod); no display resampling",
+            "valid_coverage_area_m2": 461237756.6342888,
+            "valid_area_km2": 461.2377566342888,
+            "valid_cell_count": 7384,
+            "total_cell_count": 7384,
+            "masked_cell_count": 0,
+            "min_mm": 0.06267654895782471,
+            "max_mm": 27.14878273010254,
+            "area_weighted_mean_mm": 11.155202345178711,
+            "mean_mm_unweighted": 11.153337445269507,
+            "precipitation_volume_m3": 5145200.5044917865,
+            "quantity": "precipitation volume, not runoff or floodwater",
+            "display_threshold_affects_statistics": false
+          },
+          "range_mm": [
+            0,
+            30
+          ]
+        },
+        "radar_bias_corrected_250m": {
+          "grid": {
+            "crs": "EPSG:4326",
+            "transform": [
+              0.003054851458076265,
+              0.0,
+              23.18,
+              0.0,
+              -0.0022457779374775422,
+              42.76
+            ],
+            "width": 104,
+            "height": 71,
+            "nodata": -9999,
+            "band": "rain_mm",
+            "tiff_band_index": 1,
+            "tiff_band_description": "rain_mm",
+            "nominal_product_grid_m": 250,
+            "note": "Stored geographic cells; metric dimensions vary. Nominal output grid is not independently measured rainfall resolution."
+          },
+          "statistics": {
+            "scope": "whole product; all valid native cells; outside / masked cells excluded",
+            "area_method": "WGS84 ellipsoidal four-corner geographic-cell polygon areas (pyproj.Geod); no display resampling",
+            "valid_coverage_area_m2": 461237756.6342888,
+            "valid_area_km2": 461.2377566342888,
+            "valid_cell_count": 7384,
+            "total_cell_count": 7384,
+            "masked_cell_count": 0,
+            "min_mm": 2.4131176471710205,
+            "max_mm": 20.15553092956543,
+            "area_weighted_mean_mm": 11.335462805615734,
+            "mean_mm_unweighted": 11.333797309567844,
+            "precipitation_volume_m3": 5228343.434873622,
+            "quantity": "precipitation volume, not runoff or floodwater",
+            "display_threshold_affects_statistics": false
+          },
+          "range_mm": [
+            0,
+            30
+          ]
+        },
+        "radar_raw_1km": {
+          "grid": {
+            "crs": "EPSG:4326",
+            "transform": [
+              0.010398141544071897,
+              0.0,
+              22.831742360561023,
+              0.0,
+              -0.010398141544071897,
+              43.05713699491116
+            ],
+            "width": 98,
+            "height": 69,
+            "nodata": -9999,
+            "band": "rain_mm",
+            "tiff_band_index": 1,
+            "tiff_band_description": "rain_mm",
+            "nominal_product_grid_m": 1000,
+            "note": "Stored geographic cells; metric dimensions vary. Nominal output grid is not independently measured rainfall resolution."
+          },
+          "statistics": {
+            "scope": "whole product; all valid native cells; outside / masked cells excluded",
+            "area_method": "WGS84 ellipsoidal four-corner geographic-cell polygon areas (pyproj.Geod); no display resampling",
+            "valid_coverage_area_m2": 4961043603.466343,
+            "valid_area_km2": 4961.043603466343,
+            "valid_cell_count": 5041,
+            "total_cell_count": 6762,
+            "masked_cell_count": 1721,
+            "min_mm": 2.863697052001953,
+            "max_mm": 109.69969940185547,
+            "area_weighted_mean_mm": 31.46768128902224,
+            "mean_mm_unweighted": 31.45373264794027,
+            "precipitation_volume_m3": 156112538.97482133,
+            "quantity": "precipitation volume, not runoff or floodwater",
+            "display_threshold_affects_statistics": false
+          },
+          "range_mm": [
+            0,
+            110
+          ]
+        }
+      },
+      "stations": {
+        "total": 55,
+        "accepted": 43,
+        "rejected": 12,
+        "accepted_count": 43,
+        "rejected_count": 12,
+        "accepted_qc": "ok",
+        "accepted_default_visible": true,
+        "rejected_default_visible": false
+      },
+      "all_values_and_masks_verified": true,
+      "independent_native_point_checks_passed": 15,
+      "originals_modified": false,
+      "new_bias_correction_applied": false,
+      "upstream_methodology_independently_validated": false
+    },
+    "browser_verification": {
+      "running_url": "http://127.0.0.1:8040/",
+      "renderer_revision": "fast-map-35e478fec9b4",
+      "final_corrected_and_raw_choices_render": true,
+      "legends_final_corrected_0_30_raw_0_110_mm": true,
+      "bilinear_display_only_option": true,
+      "statistics_unchanged_when_display_threshold_disabled": true,
+      "valid_zero_station": {
+        "station_id": "ISOFIA682",
+        "rain_mm": 0,
+        "qc": "ok",
+        "rows": 589
+      },
+      "hidden_native_pixel": {
+        "row": 48,
+        "column": 81,
+        "rain_mm": 0.06267654895782471,
+        "retained_in_statistics_and_download": true
+      },
+      "rejected_station": {
+        "station_id": "ISOFIA408",
+        "rain_mm": 265.9,
+        "qc": "implausible",
+        "rows": 589,
+        "styled_red_cross": true
+      },
+      "native_ground_elevation_and_5m_screening_inspector_retained": true,
+      "mobile_390_740_controls_default_collapsed_and_rainfall_tab_usable": true,
+      "temporary_viewport_reset": true,
+      "console_errors": [],
+      "screenshots": [
+        "rainfall-regional.jpg",
+        "rainfall-native-hidden.jpg",
+        "rainfall-station-qc.jpg",
+        "rainfall-mobile.jpg"
+      ],
+      "launcher_reuses_existing_api_after_title_change": true,
+      "launcher_stable_id_and_older_api_compatibility_tests_passed": true
+    },
+    "retained_functions": [
+      "Native 1 m elevation sampling and original NoData",
+      "Continuous elevation legend, local fit, reset and opt-in auto-fit",
+      "All/inside/outside routes, all status filters, original properties and full-precision exports",
+      "Full green mask and display choices",
+      "All infrastructure-point categories, initially off",
+      "Existing P/C/S terrain screening and exposure exports",
+      "Automatic mapped open-water exclusion",
+      "Historical survey polygons and official register/PDF/CSV",
+      "Digital Twin source status and independent context adapter",
+      "Basemap choices and attribution",
+      "Shareable map/layer/filter/scale URLs",
+      "Persistent revision-aware tile caching"
+    ],
+    "preservation": {
+      "native_source_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3",
+      "spatial_revision": "af34c6d53d5b26fd",
+      "screening_revision": "2a0d5f6899cd036c",
+      "old_data_and_analysis_file_hashes_unchanged": true,
+      "route_count": 717,
+      "nonempty_green_count": 64956,
+      "infrastructure_count": 322025,
+      "whole_area_curve": "Complete supplied 201-point EE snapshot restored; previous locally recomputed curve archived",
+      "old_visual_golden_hashes_preserved_and_verified_with_archived_curve": true,
+      "native_height_grid_values_and_hillshade_unchanged": true,
+      "local_scale_ids_not_invalidated_by_supplement": true
+    },
+    "limitations": [
+      "Only daily rainfall for 2025-06-27 is supplied; no storm-intensity time series or animation",
+      "Nominal 250 m and 1 km products have geographic native grids and different coverage",
+      "Precipitation volume is not runoff, sewer loading, floodwater volume or flood depth",
+      "Rainfall is not used to recalibrate or alter the earlier terrain screening",
+      "Current full-city Digital Twin geometry remains unconnected; no subset is substituted"
+    ],
+    "public_publishing_performed": false,
+    "paid_infrastructure_created": false,
+    "new_EE_jobs_or_permissions_changes": false,
+    "missing_inputs_for_rainfall_supplement": []
+  },
+  "historical_context_receipt_before_rainfall": {
+    "verified_on": "2026-10-25",
+    "application_version": "1.4.0",
+    "status": "Independent context implementation and historical-source checks pass; requested full-city Digital Twin geometry remains unavailable",
+    "automated_checks": {
+      "python_passed": 141,
+      "javascript_passed": 18,
+      "total_passed": 159,
+      "production_build": "PASS"
+    },
+    "renderer_revision": "fast-map-b8c295fdd224",
+    "historical_survey": {
+      "available": true,
+      "polygons": 136,
+      "revision": "7fbfbcee6ee933f4",
+      "source_url": "https://urbandata.sofia.bg/dataset/flooded-areas-identified-by-drone-survey-february-2021",
+      "display_sha256": "215afe46b02716e72b61852cae1bd0abcdec81e81e2264fddc9e938e06e73bb5",
+      "survey_date_label": "2021; catalogue says February, associated study describes January",
+      "flood_type": "Unclassified per polygon; river-associated rainfall flooding in the associated study, not confirmed pure pluvial",
+      "source_validation": {
+        "verified_at": "2026-10-25",
+        "survey_features": 136,
+        "distinct_source_ids": 136,
+        "all_display_geometries_valid": true,
+        "invalid_source_geometries_repaired_only_in_display": [
+          41,
+          72
+        ],
+        "display_geometry_area_change_m2_less_than": 1e-08,
+        "register_rows": 19,
+        "distinct_source_event_ids": 15,
+        "all_register_geometry_null": true,
+        "source_files_unchanged_and_receipt_sha256_verified": true,
+        "display_sha256_matches_metadata": true,
+        "revision": "7fbfbcee6ee933f4",
+        "file_contracts_exist": true,
+        "official_map_visually_reviewed": true,
+        "official_map_blue_hatching_not_observed_extent": true,
+        "survey_flood_type_not_relabelled_pure_pluvial": true,
+        "terrain_calibration_performed": false,
+        "checks": [
+          "scripts/acquire_public_historical_sources.py preserved and verified 22 original files",
+          "scripts/prepare_historical_floods.py read source workbook and preserved original checksums",
+          "scripts/prepare_historical_flood_zones.py verified all136features, retained source properties, repaired two self-intersections and verified originalSHA",
+          "Independent CSV/JSON counts, exact source row set, stable source IDs, SHA contracts and file references checked"
+        ]
+      }
+    },
+    "historical_register": {
+      "rows": 19,
+      "unique_event_ids": 15,
+      "type_counts": {
+        "Pluvial": 14,
+        "Pluvial + river": 2,
+        "Pluvial + infrastructure": 3
+      },
+      "register_status": "Draft PFRA 2028\u20132033, published for consultation; not a final adopted plan.",
+      "source_url": "https://www.bd-dunav.bg/content/upravlenie-na-vodite/plan-za-upravlenie-na-riska-ot-navodneniia-2028-2033/aktualizaciia-na-porn/",
+      "incident_geometries_inferred": false,
+      "official_pdf_original_verified": true,
+      "blue_hatching_interpreted_as_observed_inundation": false
+    },
+    "requested_buildings": {
+      "geometry_acquired": false,
+      "source_url": "https://citylab.gate-ai.eu/3d-city-model/",
+      "citywide_scope_primary_source": "https://www.sofia.bg/en/city-digital-twin",
+      "coverage_interpretation": "Current municipality description covers Sofia territory; older Lozenets subset is not a limit on the current service",
+      "blocker": "Connection timeouts before any HTTP/authentication response; no public geometry download or Cesium asset ID found",
+      "source_access_receipt": "data/reference/digital_twin_buildings/current_source_access.json",
+      "research_subset_substituted": false,
+      "adapter_and_index_tests": "PASS using isolated temporary fixtures only"
+    },
+    "browser_checks": {
+      "live_app": "http://127.0.0.1:8040/",
+      "actual_survey_polygons_visible": true,
+      "clicked_source_polygon_id": "1",
+      "clicked_native_elevation_m": 505.23,
+      "source_polygon_limitations_visible": true,
+      "register_descriptions_expand": true,
+      "history_pdf_and_csv_links_visible": true,
+      "unavailable_buildings_explicit_and_disabled": true,
+      "coverage_fit_preserves_filters": true,
+      "errors": [],
+      "lazy_survey_requests": {
+        "initial_hidden": 0,
+        "after_enable": 1,
+        "after_disable_reenable_fit": 1
+      },
+      "building_tile_requests_while_unavailable": 0,
+      "screenshots": [
+        "historical-flood-survey.jpg",
+        "historical-flood-sources.jpg"
+      ],
+      "original_user_map_camera_and_filters_preserved": true
+    },
+    "unchanged_analysis": {
+      "native_grid": "1 m EPSG:7801; Baltic 1982 values unchanged",
+      "analysis_grid_m": 5,
+      "spatial_revision": "af34c6d53d5b26fd",
+      "screening_revision": "2a0d5f6899cd036c",
+      "historical_or_building_inputs_used_in_scores": false,
+      "hydraulic_validation_claimed": false
+    },
+    "originals": "Acquired originals preserved; hashes verified by source validation and package manifest checks"
+  },
+  "pluvial_screening": {
+    "status": "PASS: implementation, source provenance, masking and rendering checks; not flood validation",
+    "verified_at_utc": "2026-10-25T07:45:48.557794+00:00",
+    "local_url": "http://127.0.0.1:8040/",
+    "pluvial_revision": "2a0d5f6899cd036c",
+    "terrain_revision": "f42644a668cdc14d",
+    "renderer_revision": "fast-map-90204fd3aa65",
+    "open_water_revision": "ee06795221a5005e",
+    "automated_checks": {
+      "python_passed": 130,
+      "frontend_passed": 15,
+      "total_passed": 145,
+      "failed": 0
+    },
+    "source": {
+      "provider": "OpenStreetMap contributors via Overpass API",
+      "url": "https://www.openstreetmap.org",
+      "license": "ODbL1.0",
+      "license_url": "https://www.openstreetmap.org/copyright",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "download_utc": "2026-10-25T07:31:52.542206+00:00",
+      "osm_base_timestamp": "2026-10-25T07:30:02Z",
+      "endpoint": "https://overpass-api.de/api/interpreter",
+      "raw_file": "osm_open_water_20261025T073109Z.json",
+      "raw_sha256": "fac32b04617a843356983496bc772970f7a62462a0a8526ecaeb9cf803a126c6",
+      "query_file": "osm_open_water_20261025T073109Z.overpass",
+      "query_sha256": "2073985b485bdf675e6d21df0640de901089b2bc4e8ce818060ffce870297d75",
+      "geojson_file": "data\\reference\\open_water_polygons.geojson",
+      "geojson_sha256": "c7d63f4d8dcea916f11372aa4911988e483a50901f94a4beda72da33b43ab509"
+    },
+    "mask_counts": {
+      "water_cells": 1519688,
+      "water_area_km2": 37.9922,
+      "accepted_source_polygons": 537,
+      "accepted_river_polygons": 18,
+      "rejected_source_objects": 49,
+      "water_pixels_outside_valid_terrain_removed": 203925
+    },
+    "grid": {
+      "crs": "EPSG:7801",
+      "shape": [
+        10869,
+        10345
+      ],
+      "transform": [
+        5.0,
+        0.0,
+        299392.0,
+        0.0,
+        -5.0,
+        4753611.0
+      ],
+      "dtype": "uint8",
+      "nodata": null,
+      "values": {
+        "0": "not mapped qualifying water; also outside valid terrain",
+        "1": "mapped qualifying water exclusion"
+      }
+    },
+    "controls": {
+      "Ariana lake water": {
+        "longitude": 23.337247642167377,
+        "latitude": 42.690042699335194,
+        "status": "excluded_open_water",
+        "score": null,
+        "water_excluded": true
+      },
+      "Pancharevo lake water": {
+        "longitude": 23.40675247166021,
+        "latitude": 42.60506180530598,
+        "status": "excluded_open_water",
+        "score": null,
+        "water_excluded": true
+      },
+      "Lily lake water": {
+        "longitude": 23.34235504018018,
+        "latitude": 42.68532104373126,
+        "status": "excluded_open_water",
+        "score": null,
+        "water_excluded": true
+      },
+      "Mapped river footprint; OSM water=river": {
+        "longitude": 23.359073637791244,
+        "latitude": 42.66766873740193,
+        "status": "excluded_open_water",
+        "score": null,
+        "water_excluded": true
+      },
+      "Ariana island hole is not masked": {
+        "longitude": 23.336833150705026,
+        "latitude": 42.68967465294718,
+        "status": "ok",
+        "score": 97.11591339111328,
+        "water_excluded": false
+      },
+      "VasilLevski playing field remains unmasked": {
+        "longitude": 23.3352531692,
+        "latitude": 42.6875642953,
+        "status": "ok",
+        "score": 75.79025268554688,
+        "water_excluded": false
+      }
+    },
+    "mode_accounting": {
+      "ponding": {
+        "excluded": {
+          "point_count": 15,
+          "route_length_m": 679.703456033095
+        },
+        "terrain": {
+          "terrain_cells": 53682786,
+          "eligible_cells": 51682623,
+          "uncertain_cells": 480475,
+          "no_terrain_data_cells": 0,
+          "water_excluded_cells": 1519688,
+          "classes": [
+            {
+              "label": "Lower signal",
+              "cells": 50856418,
+              "area_km2": 1271.41045
+            },
+            {
+              "label": "Raised",
+              "cells": 399928,
+              "area_km2": 9.9982
+            },
+            {
+              "label": "Higher signal",
+              "cells": 250157,
+              "area_km2": 6.253925
+            },
+            {
+              "label": "Strongest signal",
+              "cells": 176120,
+              "area_km2": 4.403
+            },
+            {
+              "label": "Uncertain terrain",
+              "cells": 480475,
+              "area_km2": 12.011875
+            },
+            {
+              "label": "No terrain data",
+              "cells": 0,
+              "area_km2": 0.0
+            },
+            {
+              "label": "Excluded open water",
+              "cells": 1519688,
+              "area_km2": 37.9922
+            }
+          ],
+          "sensitivity": [
+            {
+              "threshold": 70,
+              "cells": 426277,
+              "area_km2": 10.656925,
+              "percent_eligible": 0.8247975339796512
+            },
+            {
+              "threshold": 80,
+              "cells": 264512,
+              "area_km2": 6.6128,
+              "percent_eligible": 0.5118006491272705
+            },
+            {
+              "threshold": 90,
+              "cells": 115946,
+              "area_km2": 2.89865,
+              "percent_eligible": 0.22434232875525686
+            }
+          ]
+        }
+      },
+      "concentration": {
+        "excluded": {
+          "point_count": 15,
+          "route_length_m": 679.703456033095
+        },
+        "terrain": {
+          "terrain_cells": 53682786,
+          "eligible_cells": 51682623,
+          "uncertain_cells": 480475,
+          "no_terrain_data_cells": 0,
+          "water_excluded_cells": 1519688,
+          "classes": [
+            {
+              "label": "Lower signal",
+              "cells": 32478910,
+              "area_km2": 811.97275
+            },
+            {
+              "label": "Raised",
+              "cells": 11305900,
+              "area_km2": 282.6475
+            },
+            {
+              "label": "Higher signal",
+              "cells": 5423507,
+              "area_km2": 135.587675
+            },
+            {
+              "label": "Strongest signal",
+              "cells": 2474306,
+              "area_km2": 61.85765
+            },
+            {
+              "label": "Uncertain terrain",
+              "cells": 480475,
+              "area_km2": 12.011875
+            },
+            {
+              "label": "No terrain data",
+              "cells": 0,
+              "area_km2": 0.0
+            },
+            {
+              "label": "Excluded open water",
+              "cells": 1519688,
+              "area_km2": 37.9922
+            }
+          ],
+          "sensitivity": [
+            {
+              "threshold": 70,
+              "cells": 7897813,
+              "area_km2": 197.445325,
+              "percent_eligible": 15.281370297324113
+            },
+            {
+              "threshold": 80,
+              "cells": 3980621,
+              "area_km2": 99.515525,
+              "percent_eligible": 7.702049100719985
+            },
+            {
+              "threshold": 90,
+              "cells": 1138451,
+              "area_km2": 28.461275,
+              "percent_eligible": 2.2027732609469144
+            }
+          ]
+        }
+      },
+      "combined": {
+        "excluded": {
+          "point_count": 15,
+          "route_length_m": 679.703456033095
+        },
+        "terrain": {
+          "terrain_cells": 53682786,
+          "eligible_cells": 51682623,
+          "uncertain_cells": 480475,
+          "no_terrain_data_cells": 0,
+          "water_excluded_cells": 1519688,
+          "classes": [
+            {
+              "label": "Lower signal",
+              "cells": 32356341,
+              "area_km2": 808.908525
+            },
+            {
+              "label": "Raised",
+              "cells": 11257055,
+              "area_km2": 281.426375
+            },
+            {
+              "label": "Higher signal",
+              "cells": 5455103,
+              "area_km2": 136.377575
+            },
+            {
+              "label": "Strongest signal",
+              "cells": 2614124,
+              "area_km2": 65.3531
+            },
+            {
+              "label": "Uncertain terrain",
+              "cells": 480475,
+              "area_km2": 12.011875
+            },
+            {
+              "label": "No terrain data",
+              "cells": 0,
+              "area_km2": 0.0
+            },
+            {
+              "label": "Excluded open water",
+              "cells": 1519688,
+              "area_km2": 37.9922
+            }
+          ],
+          "sensitivity": [
+            {
+              "threshold": 70,
+              "cells": 8069227,
+              "area_km2": 201.730675,
+              "percent_eligible": 15.613036900236274
+            },
+            {
+              "threshold": 80,
+              "cells": 4150616,
+              "area_km2": 103.7654,
+              "percent_eligible": 8.030970099950228
+            },
+            {
+              "threshold": 90,
+              "cells": 1249505,
+              "area_km2": 31.237625,
+              "percent_eligible": 2.4176501258459737
+            }
+          ]
+        }
+      }
+    },
+    "land_raster_export": {
+      "pluvial_revision": "2a0d5f6899cd036c",
+      "terrain_revision": "f42644a668cdc14d",
+      "open_water_revision": "ee06795221a5005e",
+      "output_sha256": "7d26ce0684b5d447e936d1082ba3bf83e069dc3c0ad875d19d914cd6ad3a7d23",
+      "source_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+      "open_water_sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030",
+      "grid": {
+        "crs": "EPSG:7801",
+        "shape": [
+          10869,
+          10345
+        ],
+        "transform": [
+          5,
+          0,
+          299392,
+          0,
+          -5,
+          4753611
+        ],
+        "nodata": -9999.0
+      },
+      "bands": [
+        "ponding_score_0_100",
+        "concentration_score_0_100",
+        "combined_score_0_100",
+        "open_water_excluded"
+      ],
+      "nodata": -9999,
+      "policy": "Score bands equal original scores on non-water cells and NoData over mapped open water. Water flag is NoData outside known terrain; zero means not mapped open water, not verified safe/dry land.",
+      "verification": {
+        "all_land_score_pixels_identical": true,
+        "all_water_score_pixels_nodata": true,
+        "all_flag_pixels_match": true
+      }
+    },
+    "browser_checks": [
+      "Actual mapped lake click reports Existing mapped water \u2014 excluded from pluvial screening.",
+      "Native elevation is still537.00m at the actual Ariana control.",
+      "Automatic hidden-mask notice and separate water-area/inventory category are visible.",
+      "No visible mask overlay or layer switch was added.",
+      "Original user camera, bearing, pitch and layer selections survive the update."
+    ],
+    "rendering_regression": "A zero-valid mask is reprojected without treating0 as NoData. Independent float-mask reference and positive land alpha checks prevent water expansion into land.",
+    "preserved": [
+      "Original native1m DTM",
+      "Original8band5m terrain factors and scores",
+      "Raw infrastructure and vectors",
+      "Original downloaded OSM response/query"
+    ],
+    "limitations": [
+      "OSM is community mapping, not a current surveyed water or flood boundary; missing/untagged narrow rivers remain unmasked.",
+      "0 means no qualifying mapped water, not verified land or absence of flood risk. No riverbank or floodplain safety exclusion is inferred.",
+      "Unmarked seasonality, source misclassification, bridge decks and changing water levels may affect mapped footprints.",
+      "Central Perlovska/canal polygons by VasilLevski are tagged intermittent=yes and deliberately remain unexcluded under this conservative rule.",
+      "At5m pixel-centre resolution narrow water slivers may contain no pixel centres. No arbitrary widening is applied."
+    ],
+    "reviewed_remaining_point": "water_point_23418488_review.json: a previously inspected high-score cell lies40.7m outside the nearest mapped water polygon; current shoreline state remains unverified.",
+    "screenshots": [
+      "open-water-excluded.jpg",
+      "open-water-user-view.jpg"
+    ]
+  },
+  "pluvial_before_water_exclusion": {
+    "verified_at_utc": "2026-10-25T06:52:30.100544+00:00",
+    "status": "PASS: implementation, data integrity and rendering checks; not scientific flood validation",
+    "local_url": "http://127.0.0.1:8040/",
+    "pluvial_revision": "f42644a668cdc14d",
+    "recommended_mode": "ponding",
+    "experimental_modes": [
+      "combined",
+      "concentration"
+    ],
+    "routing_diagnostic": "pluvial_routing_diagnostic.json",
+    "source_grid_and_factor_verification": {
+      "source_grid_and_hash_verified": true,
+      "all_missing_imd_cells_checked": true,
+      "all_first5bands_pixel_equal_to_source": true,
+      "score_range_checked_all_cells": true,
+      "source_hash_unchanged_before_after": true,
+      "native_hash_unchanged_before_after": true,
+      "output_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+      "elapsed_seconds": 175.1
+    },
+    "counts": {
+      "terrain_cells": 53682786,
+      "eligible_cells": 53187833,
+      "boundary_excluded_cells": 494953,
+      "other_invalid_factor_cells": 0,
+      "positive_depression_cells": 2067207,
+      "depression_dominant_cells": 513180,
+      "concentration_dominant_cells": 52674653
+    },
+    "terrain_by_mode": {
+      "ponding": {
+        "terrain_cells": 53682786,
+        "eligible_cells": 53187833,
+        "uncertain_cells": 494953,
+        "no_terrain_data_cells": 0,
+        "classes": [
+          {
+            "label": "Lower signal",
+            "cells": 52154734,
+            "area_km2": 1303.86835
+          },
+          {
+            "label": "Raised",
+            "cells": 413024,
+            "area_km2": 10.3256
+          },
+          {
+            "label": "Higher signal",
+            "cells": 301229,
+            "area_km2": 7.530725
+          },
+          {
+            "label": "Strongest signal",
+            "cells": 318846,
+            "area_km2": 7.97115
+          },
+          {
+            "label": "Uncertain terrain",
+            "cells": 494953,
+            "area_km2": 12.373825
+          },
+          {
+            "label": "No terrain data",
+            "cells": 0,
+            "area_km2": 0.0
+          }
+        ],
+        "sensitivity": [
+          {
+            "threshold": 70,
+            "cells": 620075,
+            "area_km2": 15.501875,
+            "percent_eligible": 1.1658211380787031
+          },
+          {
+            "threshold": 80,
+            "cells": 413976,
+            "area_km2": 10.3494,
+            "percent_eligible": 0.7783283819816461
+          },
+          {
+            "threshold": 90,
+            "cells": 186655,
+            "area_km2": 4.666375,
+            "percent_eligible": 0.35093552316748833
+          }
+        ]
+      },
+      "concentration": {
+        "terrain_cells": 53682786,
+        "eligible_cells": 53187833,
+        "uncertain_cells": 494953,
+        "no_terrain_data_cells": 0,
+        "classes": [
+          {
+            "label": "Lower signal",
+            "cells": 32612047,
+            "area_km2": 815.301175
+          },
+          {
+            "label": "Raised",
+            "cells": 11445303,
+            "area_km2": 286.132575
+          },
+          {
+            "label": "Higher signal",
+            "cells": 5654011,
+            "area_km2": 141.350275
+          },
+          {
+            "label": "Strongest signal",
+            "cells": 3476472,
+            "area_km2": 86.9118
+          },
+          {
+            "label": "Uncertain terrain",
+            "cells": 494953,
+            "area_km2": 12.373825
+          },
+          {
+            "label": "No terrain data",
+            "cells": 0,
+            "area_km2": 0.0
+          }
+        ],
+        "sensitivity": [
+          {
+            "threshold": 70,
+            "cells": 9130483,
+            "area_km2": 228.262075,
+            "percent_eligible": 17.16648805752248
+          },
+          {
+            "threshold": 80,
+            "cells": 5081993,
+            "area_km2": 127.049825,
+            "percent_eligible": 9.554803633379837
+          },
+          {
+            "threshold": 90,
+            "cells": 1956149,
+            "area_km2": 48.903725,
+            "percent_eligible": 3.677812931389778
+          }
+        ]
+      },
+      "combined": {
+        "terrain_cells": 53682786,
+        "eligible_cells": 53187833,
+        "uncertain_cells": 494953,
+        "no_terrain_data_cells": 0,
+        "classes": [
+          {
+            "label": "Lower signal",
+            "cells": 32471080,
+            "area_km2": 811.777
+          },
+          {
+            "label": "Raised",
+            "cells": 11368617,
+            "area_km2": 284.215425
+          },
+          {
+            "label": "Higher signal",
+            "cells": 5662184,
+            "area_km2": 141.5546
+          },
+          {
+            "label": "Strongest signal",
+            "cells": 3685952,
+            "area_km2": 92.1488
+          },
+          {
+            "label": "Uncertain terrain",
+            "cells": 494953,
+            "area_km2": 12.373825
+          },
+          {
+            "label": "No terrain data",
+            "cells": 0,
+            "area_km2": 0.0
+          }
+        ],
+        "sensitivity": [
+          {
+            "threshold": 70,
+            "cells": 9348136,
+            "area_km2": 233.7034,
+            "percent_eligible": 17.575703826850773
+          },
+          {
+            "threshold": 80,
+            "cells": 5311907,
+            "area_km2": 132.797675,
+            "percent_eligible": 9.987071667311582
+          },
+          {
+            "threshold": 90,
+            "cells": 2117553,
+            "area_km2": 52.938825,
+            "percent_eligible": 3.981273311134898
+          }
+        ]
+      }
+    },
+    "point_record_overlap_by_mode": {
+      "ponding": {
+        "Lower signal": {
+          "point_count": 320339,
+          "route_length_m": 523711.555793296
+        },
+        "Raised": {
+          "point_count": 729,
+          "route_length_m": 6666.984062811483
+        },
+        "Higher signal": {
+          "point_count": 623,
+          "route_length_m": 6590.114018807386
+        },
+        "Strongest signal": {
+          "point_count": 272,
+          "route_length_m": 2634.5688651562245
+        },
+        "Uncertain terrain": {
+          "point_count": 62,
+          "route_length_m": 559.7907631430357
+        },
+        "No terrain data": {
+          "point_count": 0,
+          "route_length_m": 0.0
+        }
+      },
+      "concentration": {
+        "Lower signal": {
+          "point_count": 148065,
+          "route_length_m": 261877.8788193271
+        },
+        "Raised": {
+          "point_count": 93026,
+          "route_length_m": 137524.10150289678
+        },
+        "Higher signal": {
+          "point_count": 60129,
+          "route_length_m": 96373.587456851
+        },
+        "Strongest signal": {
+          "point_count": 20743,
+          "route_length_m": 43827.65496099624
+        },
+        "Uncertain terrain": {
+          "point_count": 62,
+          "route_length_m": 559.7907631430357
+        },
+        "No terrain data": {
+          "point_count": 0,
+          "route_length_m": 0.0
+        }
+      },
+      "combined": {
+        "Lower signal": {
+          "point_count": 147645,
+          "route_length_m": 259633.1513619422
+        },
+        "Raised": {
+          "point_count": 92944,
+          "route_length_m": 136914.78547475854
+        },
+        "Higher signal": {
+          "point_count": 60372,
+          "route_length_m": 97128.83452198292
+        },
+        "Strongest signal": {
+          "point_count": 21002,
+          "route_length_m": 45926.451381387495
+        },
+        "Uncertain terrain": {
+          "point_count": 62,
+          "route_length_m": 559.7907631430357
+        },
+        "No terrain data": {
+          "point_count": 0,
+          "route_length_m": 0.0
+        }
+      }
+    },
+    "live_sample": {
+      "coordinates": {
+        "lon": 23.320027,
+        "lat": 42.698992
+      },
+      "native_height": {
+        "longitude": 23.320027,
+        "latitude": 42.698992,
+        "crs": "EPSG:7801",
+        "vertical_datum": "Baltic 1982",
+        "sample_resolution_m": 1,
+        "row": 22027,
+        "column": 22017,
+        "pixel_center_easting": 321409.5,
+        "pixel_center_northing": 4731583.5,
+        "status": "ok",
+        "elevation_m": 539.0
+      },
+      "terrain_factors_and_scores": {
+        "longitude": 23.320027,
+        "latitude": 42.698992,
+        "analysis_resolution_m": 5,
+        "method": "terrain-relative-screen-v1",
+        "status": "ok",
+        "class": "Strongest signal",
+        "score": 87.24049377441406,
+        "row": 4405,
+        "column": 4403,
+        "factors": {
+          "mean_ground_elevation_m": 539.068115234375,
+          "depression_fill_depth_m": 1.931884765625,
+          "slope_degrees": 3.501389980316162,
+          "upstream_contributing_area_m2": 225.0,
+          "possible_missing_upstream_terrain": 0.0,
+          "depression_percentile": 87.24049377441406,
+          "concentration_flatness_score": 47.921363830566406,
+          "relative_screening_score": 87.24049377441406
+        },
+        "pixel_center": [
+          321409.5,
+          4731583.5
+        ],
+        "crs": "EPSG:7801",
+        "ponding_score": 87.24049377441406,
+        "concentration_score": 47.921363830566406,
+        "depression_depth_m": 1.931884765625,
+        "slope_degrees": 3.501389980316162,
+        "contributing_area_m2": 225.0,
+        "boundary_influence": false,
+        "class_label": "Strongest signal",
+        "class_index": 3,
+        "dominant_pathway": "depression",
+        "interpretation": "Relative terrain signal, not flood probability or event flood depth."
+      },
+      "browser_display": "Native 539.00 m; selected ponding score 87.2/100, fill descriptor1.93m; experimental concentration47.9 andcombined87.2 shown separately"
+    },
+    "download_range_requests": {
+      "raster": {
+        "status": 206,
+        "content_range": "bytes 0-511/892396676",
+        "content_type": "image/tiff"
+      },
+      "points": {
+        "status": 206,
+        "content_range": "bytes 0-511/65150717",
+        "content_type": "text/csv; charset=utf-8"
+      },
+      "routes": {
+        "status": 206,
+        "content_range": "bytes 0-511/1895711",
+        "content_type": "text/csv; charset=utf-8"
+      }
+    },
+    "tests": {
+      "python_passed": 63,
+      "javascript_passed": 15,
+      "total_passed": 78,
+      "failed": 0
+    },
+    "build": "TypeScript and Vite production build passed; existing MapLibre bundle-size advisory remains",
+    "browser_checks": [
+      "Real5m screening tile render and four-class legend",
+      "Depression default is opt-in and existing terrain/route layers remain available",
+      "Per-mode class areas and all-inventory exposure counts update; old-mode counts clear during fetch",
+      "Selected mode score matches inspector; native1m height readout remains separate",
+      "Concentration/combined modes visibly label observed routing artefacts as experimental",
+      "Responsive390x740: controls initially collapsed, can open Pluvial; document scrollWidth390 equals clientWidth390",
+      "Temporary viewport reset to desktop",
+      "No browser console errors in final QA tab"
+    ],
+    "screenshots": [
+      "pluvial-overview.jpg",
+      "pluvial-inspector.jpg",
+      "pluvial-mobile.jpg"
+    ],
+    "observed_flood_accuracy_validated": false,
+    "risk_limits": [
+      "No local storm forcing, infiltration, inlet/pipe capacity, current building/culvert representation or asset vulnerability.",
+      "No annual exceedance probability, water depth, flood footprint or expected loss is estimated.",
+      "Geometric depression storage does not establish event likelihood; zero depression does not mean safe.",
+      "DenseD8/grid structures found in real contributing-area data are amplified by the experimental flow-based index."
+    ],
+    "water_hackathon_repository": {
+      "clone_succeeded": false,
+      "public_http_status": 401,
+      "normal_git_helper": "Failed to load System.Configuration4.0.0.0; no noninteractive username available",
+      "contents_reviewed": false,
+      "review_receipt": "../docs/WATER_HACKATHON_REVIEW.md"
+    },
+    "originals_unchanged": true,
+    "fabricated_terrain_used": false,
+    "authenticated_earth_engine_calls": false,
+    "public_publication": false
+  },
+  "performance_before_water_exclusion": {
+    "prepared_on": "2026-10-25",
+    "status": "PASS",
+    "renderer_revision": "fast-map-3d66372f29f7",
+    "automated_checks": {
+      "python": 110,
+      "javascript": 15,
+      "total": 125,
+      "failed": 0
+    },
+    "production_build": "TypeScript + Vite + deterministic static gzip: PASS",
+    "browser_checks": {
+      "all_expensive_layers_off": "Observed no raster, hillshade or vector requests in fresh QA tab",
+      "hillshade_only": {
+        "renderer_revision": "fast-map-3d66372f29f7",
+        "requests": {
+          "hillshade": 40
+        },
+        "tile_cache": {
+          "memory_hits": 0,
+          "disk_hits": 0,
+          "renders": 40,
+          "coalesced": 0,
+          "corrupt": 0,
+          "write_failures": 0,
+          "inflight": 0,
+          "memory_entries": 40,
+          "disk_entries": 54
+        },
+        "note": "Local implementation diagnostics; no source values or analysis scores are changed by caching."
+      },
+      "hide_hillshade_then_navigate_with_sewerage_only": {
+        "renderer_revision": "fast-map-3d66372f29f7",
+        "requests": {
+          "hillshade": 40,
+          "vector": 12
+        },
+        "tile_cache": {
+          "memory_hits": 0,
+          "disk_hits": 0,
+          "renders": 64,
+          "coalesced": 0,
+          "corrupt": 0,
+          "write_failures": 0,
+          "inflight": 0,
+          "memory_entries": 64,
+          "disk_entries": 78
+        },
+        "note": "Local implementation diagnostics; no source values or analysis scores are changed by caching."
+      },
+      "exposure_first_visit": {
+        "renderer_revision": "fast-map-3d66372f29f7",
+        "requests": {
+          "hillshade": 40,
+          "vector": 12,
+          "exposure": 1
+        },
+        "tile_cache": {
+          "memory_hits": 0,
+          "disk_hits": 0,
+          "renders": 64,
+          "coalesced": 0,
+          "corrupt": 0,
+          "write_failures": 0,
+          "inflight": 0,
+          "memory_entries": 64,
+          "disk_entries": 78
+        },
+        "note": "Local implementation diagnostics; no source values or analysis scores are changed by caching."
+      },
+      "exposure_revisit": {
+        "renderer_revision": "fast-map-3d66372f29f7",
+        "requests": {
+          "hillshade": 40,
+          "vector": 12,
+          "exposure": 1
+        },
+        "tile_cache": {
+          "memory_hits": 0,
+          "disk_hits": 0,
+          "renders": 64,
+          "coalesced": 0,
+          "corrupt": 0,
+          "write_failures": 0,
+          "inflight": 0,
+          "memory_entries": 64,
+          "disk_entries": 78
+        },
+        "note": "Local implementation diagnostics; no source values or analysis scores are changed by caching."
+      },
+      "original_user_view": "Reloaded port8040; preserved camera, all717 routes/540.16km, selected categories, terrain and hillshade. Existing local scale loaded; enabled auto-fit then recomputed it normally."
+    },
+    "static_transfer": {
+      "files": 4,
+      "identity_bytes": 1870800,
+      "gzip_bytes": 513622,
+      "reduction_percent": 72.55,
+      "limitation": "Bytes on the wire; not equivalent to load-time or JavaScript parsing reduction"
+    },
+    "vector_benchmark": {
+      "status": "passed",
+      "started_utc": "2026-10-25T07:27:14.805967+00:00",
+      "method": "Same-process direct uncached scalar/batch rendering; identical actual SQLite input; no HTTP timing or profiler overhead.",
+      "timing_limitations": "OS filesystem cache is not cleared. Small cases alternate renderer order; the default city case has one legacy-then-batch pair. Background machine load may affect wall time.",
+      "comparison": "Decoded MVT features compared by unique ID, including every geometry and property; feature/dictionary ordering may change encoded bytes.",
+      "database": {
+        "file": "C:\\Users\\Yoan\\Documents\\Codex\\2026-10-24\\hp\\outputs\\sofia_explorer_app\\data\\cache\\spatial.sqlite",
+        "sha256_before": "abc582c3335b82974f97088472762689d7f8273031387179f72554bf85834c66",
+        "indexes": [
+          "feature_lookup",
+          "green_display_lookup",
+          "route_lookup"
+        ],
+        "feature_counts": {
+          "green": 64956,
+          "points": 322025,
+          "routes": 1930
+        },
+        "sha256_after": "abc582c3335b82974f97088472762689d7f8273031387179f72554bf85834c66",
+        "unchanged_before_after": true
+      },
+      "versions": {
+        "numpy": "2.5.4",
+        "shapely": "2.2.0",
+        "pyproj": "3.8.0",
+        "mapbox-vector-tile": "2.2.0"
+      },
+      "python": "3.12.14",
+      "vector_version": "batch-mvt-v1",
+      "source_sha256": {
+        "benchmark": "4844ada2a1903d53343ed4f83fded8a41e428a58e6c74283d9775348f41a78ea",
+        "vector_renderer": "a89f15b0a90aa0d0c8e904e79c8bed0afb8489c3b947581a73d11c151a95b09e"
+      },
+      "records": [
+        {
+          "name": "points-street",
+          "kind": "points",
+          "z": 15,
+          "x": 18506,
+          "y": 12077,
+          "display": "all",
+          "repetitions_per_renderer": 2,
+          "timings_seconds": {
+            "legacy": [
+              0.66248440000345,
+              0.4972446000028867
+            ],
+            "batch": [
+              0.12607379999826662,
+              0.11242859999765642
+            ]
+          },
+          "median_legacy_seconds": 0.5798645000031684,
+          "median_batch_seconds": 0.11925119999796152,
+          "speedup_median": 4.862546456665263,
+          "old_features": 4301,
+          "new_features": 4301,
+          "same_id_set": true,
+          "same_decoded_geometry_properties": true,
+          "mismatch_ids": [],
+          "legacy_pbf_bytes": 230411,
+          "batch_pbf_bytes": 230411,
+          "batch_gzip_level3_bytes": 115099,
+          "legacy_pbf_sha256": "5d2e4426126fb102b1f26c9036cd481ad8359b2d3d598a6c2e34c07d2246ba4b",
+          "batch_pbf_sha256": "5d2e4426126fb102b1f26c9036cd481ad8359b2d3d598a6c2e34c07d2246ba4b",
+          "selected_categories": {
+            "categories": [
+              "3",
+              "4"
+            ],
+            "features": 476,
+            "same_id_geometry_properties_as_legacy_subset": true,
+            "direct_render_seconds": 0.02518009999766946,
+            "pbf_bytes": 27322,
+            "gzip_level3_bytes": 14481,
+            "interpretation": "Different requested payload: exact selected-category subset, not a like-for-like all-points timing."
+          }
+        },
+        {
+          "name": "green-subset-central",
+          "kind": "green",
+          "z": 13,
+          "x": 4626,
+          "y": 3019,
+          "display": "subset",
+          "repetitions_per_renderer": 2,
+          "timings_seconds": {
+            "legacy": [
+              0.15826589999778662,
+              0.15270210000744555
+            ],
+            "batch": [
+              0.05038629999035038,
+              0.04709100000036415
+            ]
+          },
+          "median_legacy_seconds": 0.15548400000261609,
+          "median_batch_seconds": 0.048738649995357264,
+          "speedup_median": 3.1901581192221604,
+          "old_features": 163,
+          "new_features": 163,
+          "same_id_set": true,
+          "same_decoded_geometry_properties": true,
+          "mismatch_ids": [],
+          "legacy_pbf_bytes": 20192,
+          "batch_pbf_bytes": 20223,
+          "batch_gzip_level3_bytes": 13795,
+          "legacy_pbf_sha256": "4519736ea632b5a2592ca46f9aacabdea5ec2f4006b4a089c9b909dd6c081627",
+          "batch_pbf_sha256": "9cc6be89bbf19a162eaf93501a596c81f9ee3cbe65b8a86d866236e41003fe1e"
+        },
+        {
+          "name": "routes-inside-central",
+          "kind": "routes",
+          "z": 13,
+          "x": 4626,
+          "y": 3019,
+          "display": "all",
+          "repetitions_per_renderer": 2,
+          "timings_seconds": {
+            "legacy": [
+              0.1138657000119565,
+              0.11520220000238623
+            ],
+            "batch": [
+              0.01181440000073053,
+              0.011862799990922213
+            ]
+          },
+          "median_legacy_seconds": 0.11453395000717137,
+          "median_batch_seconds": 0.011838599995826371,
+          "speedup_median": 9.674619469155951,
+          "old_features": 65,
+          "new_features": 65,
+          "same_id_set": true,
+          "same_decoded_geometry_properties": true,
+          "mismatch_ids": [],
+          "legacy_pbf_bytes": 8677,
+          "batch_pbf_bytes": 8682,
+          "batch_gzip_level3_bytes": 5858,
+          "legacy_pbf_sha256": "fa26550a9511480994fe9559fb32a69c7f467c098ed9405dad5724e5a74ea672",
+          "batch_pbf_sha256": "84e146dd49c5b05ae0ae6be5ef63892362e24761ba2228c704b38aa5762bf7b7"
+        },
+        {
+          "name": "points-city",
+          "kind": "points",
+          "z": 12,
+          "x": 2313,
+          "y": 1509,
+          "display": "all",
+          "repetitions_per_renderer": 1,
+          "timings_seconds": {
+            "legacy": [
+              13.14783630000602
+            ],
+            "batch": [
+              3.3323643000039738
+            ]
+          },
+          "median_legacy_seconds": 13.14783630000602,
+          "median_batch_seconds": 3.3323643000039738,
+          "speedup_median": 3.9454978856874505,
+          "old_features": 98511,
+          "new_features": 98511,
+          "same_id_set": true,
+          "same_decoded_geometry_properties": true,
+          "mismatch_ids": [],
+          "legacy_pbf_bytes": 4916351,
+          "batch_pbf_bytes": 4916351,
+          "batch_gzip_level3_bytes": 2336113,
+          "legacy_pbf_sha256": "6037b8fec851ce9b3de6ede8e28adea6df05a70cdd3da4ec946c114b7a689d5b",
+          "batch_pbf_sha256": "6037b8fec851ce9b3de6ede8e28adea6df05a70cdd3da4ec946c114b7a689d5b",
+          "selected_categories": {
+            "categories": [
+              "3",
+              "4"
+            ],
+            "features": 19117,
+            "same_id_geometry_properties_as_legacy_subset": true,
+            "direct_render_seconds": 1.0515462000039406,
+            "pbf_bytes": 1089047,
+            "gzip_level3_bytes": 533773,
+            "interpretation": "Different requested payload: exact selected-category subset, not a like-for-like all-points timing."
+          }
+        }
+      ],
+      "finished_utc": "2026-10-25T07:27:38.462063+00:00"
+    },
+    "raster_equivalence": {
+      "real_png_tiles": 24,
+      "all_bytes_equal": true,
+      "native_and_factor_samples_equal": true,
+      "fresh_cache_instance_disk_hits": 24,
+      "fresh_cache_instance_renders": 0,
+      "detail": "raster_performance_after.json"
+    },
+    "data_invariants": {
+      "spatial_revision": "af34c6d53d5b26fd",
+      "pluvial_revision": "f42644a668cdc14d",
+      "native_dtm_grid_m": 1,
+      "hydrology_grid_m": 5,
+      "source_feature_rows_and_length_totals_unchanged_after_display_index": true
+    },
+    "limitations": [
+      "First render of a new raster tile still performs real raster reads and reprojection.",
+      "Dense visible citywide point layers still require geometry encoding and browser drawing.",
+      "Timings are local samples, not a universal whole-app speedup.",
+      "Original live HTTP server became CPU-queued; its request times were not used for paired vector speedups."
+    ]
+  },
+  "rendering_quality": {
+    "status": "PASS",
+    "scope": "Real full-area 8 m display derivative, sampled for rendering QA",
+    "valid_sample_cells": 480041,
+    "low_endpoint_fraction": 4.166310794286321e-06,
+    "high_endpoint_fraction": 2.0831553971431605e-06,
+    "source_curve": "Locally recomputed from native DTM because archived 201-point curve is in truncated ZIP tail; not the archived EE snapshot",
+    "native_values_unchanged": true
+  },
+  "loaded_inputs": {
+    "native_dtm": "Existing real 1 m EPSG:7801 GeoTIFF, opened read-only",
+    "native_dtm_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3",
+    "original_sewer_routes": 717,
+    "nonempty_green_polygons": 64956,
+    "display_green_polygons": 2175,
+    "infrastructure_records": 322025,
+    "missing_point_type_records": 83,
+    "rainfall_products": 3,
+    "rain_stations": 55,
+    "cadastral_source_records": 334033,
+    "distinct_nonempty_cadastral_identifiers": 334018,
+    "cadastral_revision": "568d80b32ddb42f2",
+    "cadastral_scope": "Official AGKK INSPIRE polygons intersecting[23,42.4,23.7,42.95]; not an administrative-municipality selection or unique physical-building count",
+    "whole_area_colour_curve": "Full supplied 201-point Earth Engine snapshot restored; previous local approximation preserved"
+  },
+  "originals_unchanged": true,
+  "archive_history": "First ZIP was truncated and remains preserved. The complete 53-file supplement restores original scripts, validation tools and the full reference curve.",
+  "supplied_original_checks": {
+    "supplied_verify_handoff": "PASS: complete supplement manifest, 52 inventoried files",
+    "supplied_rainfall_verification": "PASS: all native arrays/masks and 15 independent point checks",
+    "supplied_original_scale_tests": "PASS: 5 tests, recorded separately from the app suite",
+    "saved_Script1_Script2_parity": "Original snapshots retained byte-for-byte; no claim of running the EE scripts in this environment",
+    "archived_EE_quantile_snapshot": "Restored as the active whole-area curve; native heights unchanged"
+  },
+  "external_services": {
+    "authenticated_EE_calls_executed": false,
+    "cloud_export_jobs_started": false,
+    "optional_EE_acquisition_utility": "Syntax/CLI-help checked; not live-tested",
+    "public_AGKK_acquisition": "Complete334033-record study-bbox snapshot;335preserved public read-only batches, no accounts/fees",
+    "github_publication_claimed_by_receipt": false,
+    "public_publication": false,
+    "paid_infrastructure_provisioned": false
+  },
+  "warnings": [
+    "The main MapLibre-related JavaScript chunk remains large; precompressed files reduce transfer bytes, not JavaScript parse cost.",
+    "A Starlette test client deprecation warning remains.",
+    "A deliberately ungeoreferenced preview-image rejection test emits a Rasterio warning.",
+    "Full-page screenshot export omitted WebGL pixels; actual compositor captures were used instead."
+  ],
+  "missing_access_blockers_for_local_app": [],
+  "requested_digital_twin_buildings": {
+    "geometry_acquired": false,
+    "implementation_checks": "PASS",
+    "status": "Full-city source remains unavailable: connection timeout before an HTTP response, not a permission rejection",
+    "coverage_description": "The current municipal page describes Sofia territory; older Lozenets research data are kept separately and are not substituted",
+    "source": "https://citylab.gate-ai.eu/3d-city-model/"
+  }
+}

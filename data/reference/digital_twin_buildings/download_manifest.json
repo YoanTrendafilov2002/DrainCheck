@@ -1,0 +1,38 @@
+{
+  "source": "Published author dataset referenced by DOI10.3390/rs16081386 refs32-34",
+  "retrieved_at": "2026-10-25T07:53:17.102Z",
+  "files": [
+    {
+      "file": "Outlines_Roof_Planes_1800.shp",
+      "source_url": "https://drive.google.com/file/d/1VPsO0cpR4GlE-aquSzAtfu37bVYzDvJ_/view",
+      "drive_id": "1VPsO0cpR4GlE-aquSzAtfu37bVYzDvJ_",
+      "modified_time": "2023-04-26T13:17:04.000Z",
+      "bytes": 819320,
+      "sha256": "9505573c14f1ce127734aa97a17b3f2b6dcec555d58fb51c9623bb8ab7675198"
+    },
+    {
+      "file": "Outlines_Roof_Planes_1800.dbf",
+      "source_url": "https://drive.google.com/file/d/1U21o53_P_rmF976aMtVQttlmjMY_oCu7/view",
+      "drive_id": "1U21o53_P_rmF976aMtVQttlmjMY_oCu7",
+      "modified_time": "2023-04-26T13:17:04.000Z",
+      "bytes": 25266,
+      "sha256": "aeaba8e08c59b277247d661fb4855b7e78e7e4e7664cb9813fcee2d37b64e2ed"
+    },
+    {
+      "file": "Outlines_Roof_Planes_1800.shx",
+      "source_url": "https://drive.google.com/file/d/16HmNSxxL_sqt12U-9whTB18DbAzj9JsY/view",
+      "drive_id": "16HmNSxxL_sqt12U-9whTB18DbAzj9JsY",
+      "modified_time": "2023-04-26T13:17:04.000Z",
+      "bytes": 14500,
+      "sha256": "e2e192f545b582c179b631d34214279b90edc2c177e0d160cd6b889ddf8c7523"
+    },
+    {
+      "file": "Outlines_Roof_Planes_1800.prj",
+      "source_url": "https://drive.google.com/file/d/1jEIXllLCIa52KZQtk02pN7j54vx7zgvf/view",
+      "drive_id": "1jEIXllLCIa52KZQtk02pN7j54vx7zgvf",
+      "modified_time": "2023-04-26T13:17:04.000Z",
+      "bytes": 492,
+      "sha256": "f5343f00c9d6db9d26f66e849410888ad3639231d40b1a3ca93a66222ff5a7d1"
+    }
+  ]
+}

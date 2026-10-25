@@ -1,0 +1,319 @@
+{
+  "scope": "Uncached renderer in fresh Python process; operating-system file cache may already be warm. No original data writes.",
+  "records": [
+    {
+      "location": "city",
+      "z": 11,
+      "x": 1156,
+      "y": 754,
+      "layer": "terrain",
+      "uncached_seconds": 0.6200481999985641,
+      "memory_cached_seconds": 4.899993655271828e-06,
+      "bytes": 63329,
+      "sha256": "b4e0731cf1980a63f81a18c023ab82b89ad4dfeabb2db2db58bd32237a2940ac"
+    },
+    {
+      "location": "city",
+      "z": 11,
+      "x": 1156,
+      "y": 754,
+      "layer": "hillshade",
+      "uncached_seconds": 0.18032610000227578,
+      "memory_cached_seconds": 4.1000021155923605e-06,
+      "bytes": 34617,
+      "sha256": "c89fe2086eff2387adbf3cf407fb80439ec927f580011b51381d89317d45b7af"
+    },
+    {
+      "location": "city",
+      "z": 11,
+      "x": 1156,
+      "y": 754,
+      "layer": "ponding",
+      "uncached_seconds": 0.5118322999915108,
+      "memory_cached_seconds": 5.199995939619839e-06,
+      "bytes": 5669,
+      "sha256": "cdd02b4c30f2cb3d775498db6424408bce86eaf16d45b1080774ba118a555c88"
+    },
+    {
+      "location": "city",
+      "z": 11,
+      "x": 1156,
+      "y": 754,
+      "layer": "concentration",
+      "uncached_seconds": 0.6063850999926217,
+      "memory_cached_seconds": 3.7999998312443495e-06,
+      "bytes": 44932,
+      "sha256": "59db7d65cb5b9b4f0d5f1918d22965e957dab482c4dc7722c7e424b2bbf008ce"
+    },
+    {
+      "location": "city",
+      "z": 14,
+      "x": 9254,
+      "y": 6039,
+      "layer": "terrain",
+      "uncached_seconds": 0.041693999999552034,
+      "memory_cached_seconds": 3.4999975468963385e-06,
+      "bytes": 33961,
+      "sha256": "0c19c9fcde297e46e76dc350fe80696bfb438a3d98531217469a380cad7105aa"
+    },
+    {
+      "location": "city",
+      "z": 14,
+      "x": 9254,
+      "y": 6039,
+      "layer": "hillshade",
+      "uncached_seconds": 0.028678199989371933,
+      "memory_cached_seconds": 2.5000044843181968e-06,
+      "bytes": 34970,
+      "sha256": "5ed6f8ba76e67e398657fae9f3b09b8c8834ff3a7b85de482722edb193124742"
+    },
+    {
+      "location": "city",
+      "z": 14,
+      "x": 9254,
+      "y": 6039,
+      "layer": "ponding",
+      "uncached_seconds": 0.03686120000202209,
+      "memory_cached_seconds": 2.4000037228688598e-06,
+      "bytes": 1893,
+      "sha256": "e82dc3192245561c8f01c7bc252107354cb9facc7d0d836274972413f7e38793"
+    },
+    {
+      "location": "city",
+      "z": 14,
+      "x": 9254,
+      "y": 6039,
+      "layer": "concentration",
+      "uncached_seconds": 0.048366100003477186,
+      "memory_cached_seconds": 1.8999999156221747e-06,
+      "bytes": 35699,
+      "sha256": "c21395855dbe33657fea5f5a9247087a490b96e175db26ab8a9d917a64aa83bf"
+    },
+    {
+      "location": "city",
+      "z": 16,
+      "x": 37016,
+      "y": 24158,
+      "layer": "terrain",
+      "uncached_seconds": 0.05337160000635777,
+      "memory_cached_seconds": 2.6999914553016424e-06,
+      "bytes": 15623,
+      "sha256": "47c0705bd5493925366c75e5fb243e132716922bcda156d1e2ca1a236d1059d1"
+    },
+    {
+      "location": "city",
+      "z": 16,
+      "x": 37016,
+      "y": 24158,
+      "layer": "hillshade",
+      "uncached_seconds": 0.04558010000619106,
+      "memory_cached_seconds": 2.7000060072168708e-06,
+      "bytes": 22834,
+      "sha256": "8dde2baee0e9c4c261c6c6b601512a8cdf395466f670db8e6a203e8357a596b7"
+    },
+    {
+      "location": "city",
+      "z": 16,
+      "x": 37016,
+      "y": 24158,
+      "layer": "ponding",
+      "uncached_seconds": 0.040630600007716566,
+      "memory_cached_seconds": 1.7999991541728377e-06,
+      "bytes": 858,
+      "sha256": "e24855ded062441717b41ceb3c6ab2c30a0508c26c2037a871dcafb9dec7cf64"
+    },
+    {
+      "location": "city",
+      "z": 16,
+      "x": 37016,
+      "y": 24158,
+      "layer": "concentration",
+      "uncached_seconds": 0.04284320000442676,
+      "memory_cached_seconds": 2.2000021999701858e-06,
+      "bytes": 9036,
+      "sha256": "c28102400bb1cc8f500fc3e58eed611c22dbe2fc7ae4b371dee01a800f1dae83"
+    },
+    {
+      "location": "outside",
+      "z": 11,
+      "x": 1151,
+      "y": 754,
+      "layer": "terrain",
+      "uncached_seconds": 0.016384700007620268,
+      "memory_cached_seconds": 2.1000014385208488e-06,
+      "bytes": 855,
+      "sha256": "7faec5e344cd573c88d0d24c48f9eea2ea2c3b7a449b851f0f45bbabb54c6064"
+    },
+    {
+      "location": "outside",
+      "z": 11,
+      "x": 1151,
+      "y": 754,
+      "layer": "hillshade",
+      "uncached_seconds": 0.007805499990354292,
+      "memory_cached_seconds": 1.5999976312741637e-06,
+      "bytes": 334,
+      "sha256": "196d7e036cd8d7d824462c5b7520faafcb38538aa9ca05d036ecf36434c08cc1"
+    },
+    {
+      "location": "outside",
+      "z": 11,
+      "x": 1151,
+      "y": 754,
+      "layer": "ponding",
+      "uncached_seconds": 0.01712509999924805,
+      "memory_cached_seconds": 2.2000021999701858e-06,
+      "bytes": 334,
+      "sha256": "196d7e036cd8d7d824462c5b7520faafcb38538aa9ca05d036ecf36434c08cc1"
+    },
+    {
+      "location": "outside",
+      "z": 11,
+      "x": 1151,
+      "y": 754,
+      "layer": "concentration",
+      "uncached_seconds": 0.015862500004004687,
+      "memory_cached_seconds": 2.1999876480549574e-06,
+      "bytes": 334,
+      "sha256": "196d7e036cd8d7d824462c5b7520faafcb38538aa9ca05d036ecf36434c08cc1"
+    },
+    {
+      "location": "outside",
+      "z": 14,
+      "x": 9211,
+      "y": 6038,
+      "layer": "terrain",
+      "uncached_seconds": 0.016216600008192472,
+      "memory_cached_seconds": 2.5000044843181968e-06,
+      "bytes": 855,
+      "sha256": "7faec5e344cd573c88d0d24c48f9eea2ea2c3b7a449b851f0f45bbabb54c6064"
+    },
+    {
+      "location": "outside",
+      "z": 14,
+      "x": 9211,
+      "y": 6038,
+      "layer": "hillshade",
+      "uncached_seconds": 0.008442800011835061,
+      "memory_cached_seconds": 1.6300007700920105e-05,
+      "bytes": 334,
+      "sha256": "196d7e036cd8d7d824462c5b7520faafcb38538aa9ca05d036ecf36434c08cc1"
+    },
+    {
+      "location": "outside",
+      "z": 14,
+      "x": 9211,
+      "y": 6038,
+      "layer": "ponding",
+      "uncached_seconds": 0.014730400012922473,
+      "memory_cached_seconds": 2.3000029614195228e-06,
+      "bytes": 334,
+      "sha256": "196d7e036cd8d7d824462c5b7520faafcb38538aa9ca05d036ecf36434c08cc1"
+    },
+    {
+      "location": "outside",
+      "z": 14,
+      "x": 9211,
+      "y": 6038,
+      "layer": "concentration",
+      "uncached_seconds": 0.014930099991033785,
+      "memory_cached_seconds": 3.1999952625483274e-06,
+      "bytes": 334,
+      "sha256": "196d7e036cd8d7d824462c5b7520faafcb38538aa9ca05d036ecf36434c08cc1"
+    },
+    {
+      "location": "outside",
+      "z": 16,
+      "x": 36845,
+      "y": 24155,
+      "layer": "terrain",
+      "uncached_seconds": 0.01688789999752771,
+      "memory_cached_seconds": 2.7000060072168708e-06,
+      "bytes": 855,
+      "sha256": "7faec5e344cd573c88d0d24c48f9eea2ea2c3b7a449b851f0f45bbabb54c6064"
+    },
+    {
+      "location": "outside",
+      "z": 16,
+      "x": 36845,
+      "y": 24155,
+      "layer": "hillshade",
+      "uncached_seconds": 0.008164899991243146,
+      "memory_cached_seconds": 1.4999968698248267e-06,
+      "bytes": 334,
+      "sha256": "196d7e036cd8d7d824462c5b7520faafcb38538aa9ca05d036ecf36434c08cc1"
+    },
+    {
+      "location": "outside",
+      "z": 16,
+      "x": 36845,
+      "y": 24155,
+      "layer": "ponding",
+      "uncached_seconds": 0.01510039999266155,
+      "memory_cached_seconds": 2.4999899324029684e-06,
+      "bytes": 334,
+      "sha256": "196d7e036cd8d7d824462c5b7520faafcb38538aa9ca05d036ecf36434c08cc1"
+    },
+    {
+      "location": "outside",
+      "z": 16,
+      "x": 36845,
+      "y": 24155,
+      "layer": "concentration",
+      "uncached_seconds": 0.014875799999572337,
+      "memory_cached_seconds": 2.2999884095042944e-06,
+      "bytes": 334,
+      "sha256": "196d7e036cd8d7d824462c5b7520faafcb38538aa9ca05d036ecf36434c08cc1"
+    }
+  ],
+  "samples": {
+    "native": {
+      "longitude": 23.3352531692,
+      "latitude": 42.6875642953,
+      "crs": "EPSG:7801",
+      "vertical_datum": "Baltic 1982",
+      "sample_resolution_m": 1,
+      "row": 23328,
+      "column": 23232,
+      "pixel_center_easting": 322624.5,
+      "pixel_center_northing": 4730282.5,
+      "status": "ok",
+      "elevation_m": 542.5020141601562
+    },
+    "pluvial": {
+      "longitude": 23.3352531692,
+      "latitude": 42.6875642953,
+      "analysis_resolution_m": 5,
+      "method": "terrain-relative-screen-v1",
+      "status": "ok",
+      "class": "Higher signal",
+      "score": 75.79025268554688,
+      "row": 4665,
+      "column": 4646,
+      "factors": {
+        "mean_ground_elevation_m": 542.49609375,
+        "depression_fill_depth_m": 0.0,
+        "slope_degrees": 0.4438459873199463,
+        "upstream_contributing_area_m2": 625.0,
+        "possible_missing_upstream_terrain": 0.0,
+        "depression_percentile": 0.0,
+        "concentration_flatness_score": 75.79025268554688,
+        "relative_screening_score": 75.79025268554688
+      },
+      "pixel_center": [
+        322624.5,
+        4730283.5
+      ],
+      "crs": "EPSG:7801",
+      "ponding_score": 0.0,
+      "concentration_score": 75.79025268554688,
+      "depression_depth_m": 0.0,
+      "slope_degrees": 0.4438459873199463,
+      "contributing_area_m2": 625.0,
+      "boundary_influence": false,
+      "class_label": "Higher signal",
+      "class_index": 2,
+      "dominant_pathway": "concentration / low slope"
+    }
+  }
+}

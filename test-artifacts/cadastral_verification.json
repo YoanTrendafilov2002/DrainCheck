@@ -1,0 +1,172 @@
+{
+  "verified_on": "2026-10-25T08:44:29.534608+00:00",
+  "application_version": "1.6.0",
+  "status": "PASS: independent AGKK cadastral context integrated; earlier data/functions retained",
+  "automated_tests": {
+    "python": 196,
+    "javascript": 24,
+    "total": 220,
+    "failed": 0,
+    "junit": "../test-results.xml",
+    "javascript_result_basis": "Parent final Node run:24passing; supplied original5scale tests are separate"
+  },
+  "production_build": "PASS: TypeScript and Vite production build (parent final build)",
+  "running_application": {
+    "url": "http://127.0.0.1:8040/",
+    "application_id": "sofia-terrain-explorer",
+    "renderer_revision": "fast-map-3a4129cd2623",
+    "launcher_no_browser_reuses_existing_app": true
+  },
+  "source": {
+    "title": "AGKK INSPIRE cadastral buildings",
+    "provider": "Geodesy, Cartography and Cadastre Agency, Bulgaria (AGKK/GCCA)",
+    "source_url": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
+    "source_kind": "AGKK INSPIRE cadastral building polygons",
+    "feature_count": 334033,
+    "revision": "568d80b32ddb42f2",
+    "source_crs": "EPSG:4258",
+    "crs": "EPSG:4326",
+    "query_bbox_wgs84": [
+      23,
+      42.4,
+      23.7,
+      42.95
+    ],
+    "coverage_bbox_wgs84": [
+      22.999896932000066,
+      42.40073163006055,
+      23.700164678000075,
+      42.9501015390591
+    ],
+    "source_date": null,
+    "retrieved_at": "2026-10-25T08:28:02.687309+00:00",
+    "acquisition_completed_utc": "2026-10-25T08:30:16.648666+00:00",
+    "source_publication_date": "2021-11-03",
+    "metadata_revision_date": "2024-04-29",
+    "catalogue_date_note": "INSPIRE catalogue publication: 2021-11-03; metadata revision: 2024-04-29. Feature lifecycle dates vary; survey date is unknown.",
+    "license": "Official INSPIRE metadata: no limitations to public access; use constraints reference Tariff14. No CC licence or unrestricted redistribution right has been inferred.",
+    "height": {
+      "available": false,
+      "semantics": null,
+      "reason": "Source floor counts are not measured height in metres; no 3D height is inferred."
+    },
+    "sha256": "e9e948f31556a68a3b2724b8ab3abfd664126073f0b09dc4eb8e51a479536fc8",
+    "raw_manifest_sha256": "a3f6271380387fbaf660fed20468c89bf408d9d1e8f8b187a55b61d9fdb34903"
+  },
+  "source_counts": {
+    "unique_source_oids": 334033,
+    "distinct_nonempty_cadastral_identifiers": 334018,
+    "raw_batches": 335,
+    "transfer_limited_batches": 0,
+    "source_geometry_unchanged_in_display": true,
+    "source_attributes_preserved_in_original_batches": true,
+    "geometry_repairs": 0,
+    "unique_physical_building_count_established": false
+  },
+  "acquisition_validation_receipt": "agkk_buildings_validation.json",
+  "browser_verification": {
+    "basis": "Parent real browser QA, screenshots independently visually reviewed",
+    "zoom": 17,
+    "central_sofia_real_footprints_visible": true,
+    "independent_cadastral_layer_visibility": true,
+    "source_date_shown_unknown_not_catalogue_publication": true,
+    "selected_source_id": "2716694",
+    "selected_cadastral_identifier": "68134.100.74.5",
+    "original_attributes_visible": true,
+    "one_floor_is_not_converted_to_height": true,
+    "counter_snapshots_off_on": {
+      "recorded_requests_before": 9,
+      "recorded_requests_after": 9,
+      "recorded_renders_before": 18,
+      "recorded_renders_after": 18,
+      "interpretation": "Recorded parent browser cache-reuse check; not a new wall-clock performance benchmark"
+    },
+    "screenshots": [
+      {
+        "file": "cadastral-buildings.jpg",
+        "bytes": 123387,
+        "sha256": "41388a65ff19d1bfd88cc046acca715a96e3af2cd14b7c6667a0414ab654bfd9",
+        "visually_reviewed": true
+      },
+      {
+        "file": "cadastral-inspector.jpg",
+        "bytes": 133693,
+        "sha256": "d5db9be713d65d27931cb7bd8f72c091e8346f213014e588574b185cb023e121",
+        "visually_reviewed": true
+      }
+    ]
+  },
+  "independent_api_feature_check": {
+    "source_id": "2716694",
+    "cadastral_identifier": "68134.100.74.5",
+    "original_property_count": 139,
+    "returned_property_count": 145,
+    "all_original_properties_equal": true,
+    "full_coordinate_arrays_equal": true,
+    "original_null_and_void_fields_retained": true,
+    "numberoffloorsaboveground": 1,
+    "inferred_height_m": null,
+    "raw_source_batch_file": "data/reference/agkk_buildings/batches/batch_00058.geojson.gz",
+    "raw_source_batch_sha256": "2a32c860ab1e7c29908a4263f636ab915c4b2d6e82ac4cfbea3bc747326ab165"
+  },
+  "unchanged_inspection_sample": {
+    "longitude": 23.33032128151407,
+    "latitude": 42.69564895655974,
+    "native_elevation_m": 552.0,
+    "native_pixel_row": 22420,
+    "native_pixel_column": 22851,
+    "native_resolution_m": 1,
+    "rainfall_product": "merged_250m",
+    "rainfall_mm": 14.428980827331543,
+    "rainfall_displayed_mm": 14.43,
+    "ponding_P": 0.0,
+    "concentration_C": 40.34538269042969,
+    "combined_S": 40.34538269042969,
+    "screening_resolution_m": 5,
+    "buildings_do_not_enter_scores": true
+  },
+  "retained_revisions": {
+    "legacy_spatial": "af34c6d53d5b26fd",
+    "rainfall": "88036868558c20ce",
+    "native_dtm_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3",
+    "open_water": "ee06795221a5005e",
+    "historical_survey": "7fbfbcee6ee933f4",
+    "whole_area_reference_snapshot_sha256": "58f9145e4bc1ab41e26cf49e735e21b24ebbc89157f839510e3f8f7552bff916",
+    "screening_source": "f42644a668cdc14d",
+    "screening_runtime_with_water_exclusion": "2a0d5f6899cd036c"
+  },
+  "retained_functions": [
+    "Native 1 m elevation, NoData and continuous whole/local colour scales",
+    "Rainfall products, native samples, 55 stations/QC, valid zero and ellipsoidal totals",
+    "717 routes, green partitions/filters/properties and full-precision exports",
+    "322,025 infrastructure records and category filters",
+    "P/C/S terrain screening, exposure exports and hidden mapped-water exclusion",
+    "136 historical survey polygons plus official register/PDF/CSV",
+    "Digital Twin availability adapter and independent source status",
+    "Shareable URL state, mobile controls and revision-aware tile caches"
+  ],
+  "requested_digital_twin_buildings": {
+    "geometry_acquired": false,
+    "available": false,
+    "feature_count": 0,
+    "source_url": "https://citylab.gate-ai.eu/3d-city-model/",
+    "status": "Current full-city DigitalTwin geometry remains unacquired; AGKK cadastre is separately labelled and does not claim to be the DigitalTwin"
+  },
+  "publication_performed_by_this_verification": false,
+  "github_publication_claimed": false,
+  "paid_orders_or_accounts_created": false,
+  "limitations": [
+    "Acquired from a public INSPIRE service; currency relative to the operational KAIS register is not guaranteed.",
+    "Study-bbox coverage is not an administrative-municipality selection, and source cadastral records do not prove complete current physical-building coverage.",
+    "Floors and INSPIRE void codes are retained; floor counts are not converted into metres.",
+    "Buildings are separate visual context and do not alter native terrain, rainfall, pluvial scores, water exclusions or exposure calculations.",
+    "Some source fields may be absent/void. No owner information or proprietary account was requested.",
+    "This snapshot covers the query rectangle, not an administrative-city inventory.334033source records are not asserted to be334033unique physical buildings.",
+    "Prior rainfall/performance/context receipts retain their earlier version/test scope; this receipt records the current cadastral integration."
+  ],
+  "frontend_package_version": "1.0.0",
+  "version_provenance": {
+    "application_version": "Running FastAPI backend: http://127.0.0.1:8040/openapi.json -> info.version",
+    "frontend_package_version": "Local frontend package manifest: package.json -> version; this is a separately versioned component"
+  }
+}

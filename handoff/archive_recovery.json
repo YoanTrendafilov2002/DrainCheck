@@ -1,0 +1,142 @@
+{
+  "zip_sha256": "638fc3108208bbd435c469ff4412528606b49d4b2c966b49e7dfc94a57c95533",
+  "zip_bytes": 15611946,
+  "closing_directory_present": false,
+  "recovered_entries": [
+    {
+      "name": "sofia_app_handoff/CODEX_PROMPT.md",
+      "compressed_bytes": 3964,
+      "uncompressed_bytes": 8486,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/README.md",
+      "compressed_bytes": 2457,
+      "uncompressed_bytes": 5288,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/archive/encode_inline.py",
+      "compressed_bytes": 1643,
+      "uncompressed_bytes": 3541,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/archive/pack_vectors.py",
+      "compressed_bytes": 380,
+      "uncompressed_bytes": 637,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/archive/prepare_vectors.py",
+      "compressed_bytes": 1464,
+      "uncompressed_bytes": 3450,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/archive/unpack_vectors.js",
+      "compressed_bytes": 1561,
+      "uncompressed_bytes": 3557,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/config/map_config.json",
+      "compressed_bytes": 1657,
+      "uncompressed_bytes": 4634,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/data/asset_dependencies.json",
+      "compressed_bytes": 573,
+      "uncompressed_bytes": 1385,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/data/derived/green_intersecting_routes.geojson",
+      "compressed_bytes": 1058132,
+      "uncompressed_bytes": 3585198,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/data/derived/sewer_routes_all.geojson",
+      "compressed_bytes": 99150,
+      "uncompressed_bytes": 489489,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/data/derived/sewer_routes_inside.geojson",
+      "compressed_bytes": 131709,
+      "uncompressed_bytes": 498732,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/data/derived/sewer_routes_outside.geojson",
+      "compressed_bytes": 166506,
+      "uncompressed_bytes": 633614,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/data/derived/summary.json",
+      "compressed_bytes": 842,
+      "uncompressed_bytes": 1995,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/data/raw/green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson",
+      "compressed_bytes": 14094030,
+      "uncompressed_bytes": 53164382,
+      "flags": 0,
+      "method": 8,
+      "complete": true,
+      "crc_verified": true
+    },
+    {
+      "name": "sofia_app_handoff/data/raw/vik_kanal_26_sofpr_20090000(1).geojson",
+      "compressed_bytes": 82655,
+      "uncompressed_bytes": 366359,
+      "flags": 0,
+      "method": 8,
+      "complete": false
+    }
+  ],
+  "stopped_at_offset": 15565183
+}

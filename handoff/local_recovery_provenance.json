@@ -1,0 +1,19 @@
+{
+  "source_zip_sha256": "638fc3108208bbd435c469ff4412528606b49d4b2c966b49e7dfc94a57c95533",
+  "source_zip_preserved": true,
+  "truncated_sewer_entry_recovered_from_local_file": true,
+  "raw_sewer_crc32": "4142c838",
+  "raw_sewer_sha256": "a1f8453fc1c5c7b93deea6b02eedaefe79de1510e25bbb57ed56e3751f829aa3",
+  "unrecoverable_archive_tail": [
+    "docs/ACQUISITION.md",
+    "docs/DATA_CONTRACT.md",
+    "shared/elevation_scale.mjs",
+    "data/reference/elevation_quantiles_whole_area.json",
+    "earth_engine/Script1.js",
+    "earth_engine/Script2.js",
+    "scripts/verify_handoff.py",
+    "tests/elevation_scale.test.mjs",
+    "MANIFEST.json"
+  ],
+  "originals_modified": false
+}

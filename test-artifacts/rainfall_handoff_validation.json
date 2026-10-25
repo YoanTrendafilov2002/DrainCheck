@@ -1,0 +1,461 @@
+{
+  "reviewed_utc": "2026-10-25T08:10:21.378063+00:00",
+  "source_root": "work\\supplement_handoff\\sofia_app_handoff",
+  "read_only": true,
+  "preserved_handoff_copy": {
+    "path": "handoff/rainfall_supplement",
+    "files": 53,
+    "sha256_differences_from_extracted_original": [],
+    "original_manifest_verification_after_copy": "PASS: 52 manifest entries; manifest is the53rd file"
+  },
+  "products": {
+    "merged_250m": {
+      "width": 104,
+      "height": 71,
+      "crs": "EPSG:4326",
+      "transform": [
+        0.003054851458076265,
+        0,
+        23.18,
+        0,
+        -0.0022457779374775422,
+        42.76
+      ],
+      "bounds_wgs84": [
+        23.18,
+        42.600549766439094,
+        23.49770455163993,
+        42.76
+      ],
+      "dtype": "float32",
+      "band_names": [
+        "rain_mm"
+      ],
+      "nodata": -9999,
+      "layout": "COG",
+      "valid_pixels": 7384,
+      "masked_pixels": 0,
+      "mask_values": [
+        1
+      ],
+      "valid_exact_zero_count": 0,
+      "masked_snapshot_zero_count": 0,
+      "min_mm": 0.06267654895782471,
+      "max_mm": 27.14878273010254,
+      "sum_native_mm_not_area_weighted": 82356.24369587004,
+      "mean_mm_unweighted": 11.153337445269507,
+      "mean_mm_area_weighted": 11.15520234517876,
+      "valid_area_km2": 461.23775663405513,
+      "full_grid_area_km2": 461.23775663405513,
+      "precipitation_volume_m3": 5145200.504489201,
+      "summary_matches": true,
+      "cell_area_m2_range": [
+        62386.571894168854,
+        62542.318969249725
+      ],
+      "mid_grid_cell_width_m": [
+        250.37868442358726,
+        250.3877014942761
+      ],
+      "mid_grid_cell_height_m": 249.47563283074987,
+      "float32_cast_max_abs_difference_valid": 0,
+      "native_point_checks": [
+        {
+          "row": 0,
+          "column": 0,
+          "value": 8.710189819335938,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 35,
+          "column": 52,
+          "value": 20.801280975341797,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 70,
+          "column": 103,
+          "value": 11.363007545471191,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 20,
+          "column": 10,
+          "value": 10.671051979064941,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 30,
+          "column": 50,
+          "value": 15.838749885559082,
+          "valid": true,
+          "pass": true
+        }
+      ],
+      "data_sha256": "902b743d49cf077bf0c738042c62c4c7ed6fbf154a5f30590f6e038f82f7c66f"
+    },
+    "radar_bias_corrected_250m": {
+      "width": 104,
+      "height": 71,
+      "crs": "EPSG:4326",
+      "transform": [
+        0.003054851458076265,
+        0,
+        23.18,
+        0,
+        -0.0022457779374775422,
+        42.76
+      ],
+      "bounds_wgs84": [
+        23.18,
+        42.600549766439094,
+        23.49770455163993,
+        42.76
+      ],
+      "dtype": "float32",
+      "band_names": [
+        "rain_mm"
+      ],
+      "nodata": -9999,
+      "layout": "COG",
+      "valid_pixels": 7384,
+      "masked_pixels": 0,
+      "mask_values": [
+        1
+      ],
+      "valid_exact_zero_count": 0,
+      "masked_snapshot_zero_count": 0,
+      "min_mm": 2.4131176471710205,
+      "max_mm": 20.15553092956543,
+      "sum_native_mm_not_area_weighted": 83688.75933384895,
+      "mean_mm_unweighted": 11.333797309567844,
+      "mean_mm_area_weighted": 11.335462805615851,
+      "valid_area_km2": 461.23775663405513,
+      "full_grid_area_km2": 461.23775663405513,
+      "precipitation_volume_m3": 5228343.434871028,
+      "summary_matches": true,
+      "cell_area_m2_range": [
+        62386.571894168854,
+        62542.318969249725
+      ],
+      "mid_grid_cell_width_m": [
+        250.37868442358726,
+        250.3877014942761
+      ],
+      "mid_grid_cell_height_m": 249.47563283074987,
+      "float32_cast_max_abs_difference_valid": 0,
+      "native_point_checks": [
+        {
+          "row": 0,
+          "column": 0,
+          "value": 8.710189819335938,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 35,
+          "column": 52,
+          "value": 14.864659309387207,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 70,
+          "column": 103,
+          "value": 11.363007545471191,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 20,
+          "column": 10,
+          "value": 10.689406394958496,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 30,
+          "column": 50,
+          "value": 12.617443084716797,
+          "valid": true,
+          "pass": true
+        }
+      ],
+      "data_sha256": "d572da07990aa5dde0fc485a37f14531198d56376d3d26bd39a62e0217c3bcf6"
+    },
+    "radar_raw_1km": {
+      "width": 98,
+      "height": 69,
+      "crs": "EPSG:4326",
+      "transform": [
+        0.010398141544071897,
+        0,
+        22.831742360561023,
+        0,
+        -0.010398141544071897,
+        43.05713699491116
+      ],
+      "bounds_wgs84": [
+        22.831742360561023,
+        42.3396652283702,
+        23.85076023188007,
+        43.05713699491116
+      ],
+      "dtype": "float32",
+      "band_names": [
+        "rain_mm"
+      ],
+      "nodata": -9999,
+      "layout": "COG",
+      "valid_pixels": 5041,
+      "masked_pixels": 1721,
+      "mask_values": [
+        0,
+        1
+      ],
+      "valid_exact_zero_count": 0,
+      "masked_snapshot_zero_count": 0,
+      "min_mm": 2.863697052001953,
+      "max_mm": 109.69969940185547,
+      "sum_native_mm_not_area_weighted": 158558.2662782669,
+      "mean_mm_unweighted": 31.45373264794027,
+      "mean_mm_area_weighted": 31.467681289022128,
+      "valid_area_km2": 4961.043603465896,
+      "full_grid_area_km2": 6654.803182416964,
+      "precipitation_volume_m3": 156112538.97480673,
+      "summary_matches": true,
+      "cell_area_m2_range": [
+        978612.592622757,
+        989656.5918636322
+      ],
+      "mid_grid_cell_width_m": [
+        851.9385874847848,
+        852.0807451700708
+      ],
+      "mid_grid_cell_height_m": 1155.0969212382734,
+      "float32_cast_max_abs_difference_valid": 0,
+      "native_point_checks": [
+        {
+          "row": 0,
+          "column": 0,
+          "value": null,
+          "valid": false,
+          "pass": true
+        },
+        {
+          "row": 34,
+          "column": 49,
+          "value": 53.340576171875,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 68,
+          "column": 97,
+          "value": null,
+          "valid": false,
+          "pass": true
+        },
+        {
+          "row": 20,
+          "column": 10,
+          "value": 7.2316741943359375,
+          "valid": true,
+          "pass": true
+        },
+        {
+          "row": 30,
+          "column": 50,
+          "value": 35.898956298828125,
+          "valid": true,
+          "pass": true
+        }
+      ],
+      "data_sha256": "b925fe1aa37aa29fc7773d3345f2b358245cd46c1ad9e5424850847acb06acdb"
+    }
+  },
+  "supplied_verification": [
+    {
+      "command": "verify_handoff",
+      "status": "fulfilled",
+      "exit_code": 0,
+      "output": "{\r\n  \"verified_manifest_files\": 52,\r\n  \"prototype_payload_counts\": [\r\n    717,\r\n    1930,\r\n    2175\r\n  ],\r\n  \"route_counts\": {\r\n    \"all\": 717,\r\n    \"inside\": 543,\r\n    \"outside\": 670\r\n  },\r\n  \"route_length_m\": {\r\n    \"all\": 540163.0135031902,\r\n    \"inside\": 137858.69885054993,\r\n    \"outside\": 402304.31468007684\r\n  },\r\n  \"raw_files_preserved\": true,\r\n  \"duplicate_pipe_upload_kept\": true,\r\n  \"native_DTM_bytes_bundled\": false,\r\n  \"infrastructure_point_bytes_bundled\": false\r\n}\r\n"
+    },
+    {
+      "command": "verify_rainfall",
+      "status": "fulfilled",
+      "exit_code": 0,
+      "output": "PASS: 3 complete native rainfall COGs; masks/grid preserved; 15 independent samples; 55 stations (43 accepted/12 rejected); original script unchanged.\r\n"
+    },
+    {
+      "command": "elevation_scale_tests",
+      "status": "fulfilled",
+      "exit_code": 0,
+      "output": "✔ uniform distribution gives an invertible linear stretch (2.5684ms)\n✔ repeated quantiles and flat terrain never divide by zero (0.4211ms)\n✔ small relief remains distinguishable; data are not quantized (1.9313ms)\n✔ missing pixels remain transparent and invalid quantiles fail clearly (0.5087ms)\n✔ live whole-area quantiles reproduce the observed Earth Engine legend (1.1642ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 112.3496\n"
+    }
+  ],
+  "stations": {
+    "count": 55,
+    "unique_station_ids": 55,
+    "qc_counts": {
+      "implausible": 2,
+      "ok": 43,
+      "partial day": 2,
+      "too low vs neighbours (12 mm)": 1,
+      "too low vs neighbours (13 mm)": 1,
+      "too low vs neighbours (14 mm)": 2,
+      "too low vs neighbours (17 mm)": 1,
+      "too low vs neighbours (6 mm)": 1,
+      "too low vs neighbours (8 mm)": 2
+    },
+    "accepted_count": 43,
+    "rejected_count": 12,
+    "properties_keys": [
+      "qc",
+      "rain_mm",
+      "rows",
+      "station_id"
+    ],
+    "rain_min_mm": 0,
+    "rain_max_mm": 441.7,
+    "zero_rain_count": 6,
+    "negative_rain_count": 0,
+    "nonfinite_rain_count": 0,
+    "all_point_geometries": true,
+    "valid_lonlat": true,
+    "accepted_valid_zero": {
+      "station_id": "ISOFIA682",
+      "longitude": 23.43,
+      "latitude": 42.65,
+      "rain_mm": 0,
+      "qc": "ok",
+      "rows": 589
+    },
+    "rejected_extreme": {
+      "station_id": "ISOFIA667",
+      "longitude": 23.33,
+      "latitude": 42.66,
+      "rain_mm": 441.7,
+      "qc": "implausible"
+    }
+  },
+  "elevation_curve_comparison": {
+    "supplied_source_asset": "projects/rivertracker-512606/assets/sofia_dtm_2024_1m_gee",
+    "supplied_scope": "whole-study-area",
+    "supplied_bounds_wgs84": [
+      23,
+      42.4,
+      23.7,
+      42.95
+    ],
+    "supplied_statistics_scale_m": 60,
+    "supplied_quantile_count": 201,
+    "supplied_legend": [
+      {
+        "level": 0,
+        "elevation_m": 501.0126647949219
+      },
+      {
+        "level": 0.25,
+        "elevation_m": 574.2708865685195
+      },
+      {
+        "level": 0.5,
+        "elevation_m": 808.2795589853039
+      },
+      {
+        "level": 0.75,
+        "elevation_m": 1062.6197323211716
+      },
+      {
+        "level": 1,
+        "elevation_m": 2278.76025390625
+      }
+    ],
+    "current_scope": "whole-study-area",
+    "current_bbox": [
+      23,
+      42.4,
+      23.7,
+      42.95
+    ],
+    "current_statistics_scale_m": 60,
+    "current_provenance": "Locally recomputed from native DTM because archived 201-point curve is in truncated ZIP tail; not the archived EE snapshot",
+    "current_legend": [
+      {
+        "level": 0,
+        "elevation_m": 501.0205993652344
+      },
+      {
+        "level": 0.25,
+        "elevation_m": 574.2494632726607
+      },
+      {
+        "level": 0.5,
+        "elevation_m": 808.1199701873817
+      },
+      {
+        "level": 0.75,
+        "elevation_m": 1062.521725832964
+      },
+      {
+        "level": 1,
+        "elevation_m": 2278.974853515625
+      }
+    ],
+    "max_abs_quantile_difference_m": 1.7365624999995362,
+    "all_quantiles_identical": false,
+    "shared_algorithm": "Both use continuous hybrid80% empirical percentile +20% linear height and first occurrence of repeated quantiles; exported API names/flat-terrain representation differ.",
+    "current_mask_caveat": "Current JS/Python normalize helpers rely on callers masking -9999; supplied portable module explicitly returns null for -9999. Existing terrain native adapter masks NoData before display.",
+    "captured_before_whole_curve_restoration": true
+  },
+  "provenance_limits": [
+    "Original live Earth Engine acquisition is asserted by the supplied metadata and independent-check files; no fresh authenticated Earth Engine query was performed in this audit.",
+    "15 supplied native point checks comprise13numeric checks and2masked checks; they are separate handoff records, not a live re-validation of upstream meteorology.",
+    "The daily-label UTC interpretation is documented, but unavailable upstream aggregation programs/time series prevent independent validation of the original accumulation window.",
+    "OPERA/Weather Underground lineage and approximate raw-bias claims are provenance, not independently validated rainfall accuracy or redistribution licence.",
+    "A daily rainfall total cannot provide a subhourly pluvial hyetograph, observed storm flood depth, runoff volume or drainage capacity."
+  ],
+  "manifest_before_after_verified": true,
+  "findings": [
+    {
+      "severity": "High if misused",
+      "confidence": "High",
+      "finding": "Only a single daily accumulation is supplied; no subhourly temporal forcing or independent flood response calibration.",
+      "risk": "Cannot infer storm peaks, mm/hour, pluvial flood depths, sewer loads or rainfall-event return period.",
+      "remediation": "Display actual daily data as separate context; preserve the terrain screen as uncalibrated."
+    },
+    {
+      "severity": "Medium",
+      "confidence": "High",
+      "finding": "Three products have unequal footprints; raw stored cells are about852×1155m centrally, not square1km.",
+      "risk": "Comparing whole-product means/volumes as correction factors would confound coverage and geometry.",
+      "remediation": "State per-product native valid coverage and use ellipsoidal cell areas. Any future bias comparison needs a common valid footprint."
+    },
+    {
+      "severity": "Medium",
+      "confidence": "High",
+      "finding": "An accepted real station records0mm, while all raster valid cells are positive; raw has1721masked cells.",
+      "risk": "Truthiness-based checks may drop a valid station or replace missing rainfall with zero.",
+      "remediation": "Test null/mask separately from numeric zero, and retain station QC."
+    },
+    {
+      "severity": "Medium",
+      "confidence": "High",
+      "finding": "The restored201-point Earth Engine curve is now supplied and differs slightly from the application's local approximation.",
+      "risk": "Old text claiming the original curve is unavailable would become false; rounded legend values cannot reconstruct it.",
+      "remediation": "Use quantiles_m for the whole-study-area display reference with original source/provenance; preserve native data and local-fit algorithms. Retain old cache as a labelled previous approximation."
+    },
+    {
+      "severity": "Provenance limitation",
+      "confidence": "High",
+      "finding": "Upstream correction/QC source programs and radar/station time series are absent; source labels and processing accuracy cannot be independently verified from this payload.",
+      "risk": "Approximatelyfourfold raw bias, native250m observations or complete redistribution permission would be unsupported claims.",
+      "remediation": "Preserve source claims as unverified provenance, do not apply another correction, and keep rights unspecified."
+    }
+  ]
+}

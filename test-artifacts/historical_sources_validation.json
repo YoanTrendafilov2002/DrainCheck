@@ -1,0 +1,25 @@
+{
+  "verified_at": "2026-10-25",
+  "survey_features": 136,
+  "distinct_source_ids": 136,
+  "all_display_geometries_valid": true,
+  "invalid_source_geometries_repaired_only_in_display": [41, 72],
+  "display_geometry_area_change_m2_less_than": 0.00000001,
+  "register_rows": 19,
+  "distinct_source_event_ids": 15,
+  "all_register_geometry_null": true,
+  "source_files_unchanged_and_receipt_sha256_verified": true,
+  "display_sha256_matches_metadata": true,
+  "revision": "7fbfbcee6ee933f4",
+  "file_contracts_exist": true,
+  "official_map_visually_reviewed": true,
+  "official_map_blue_hatching_not_observed_extent": true,
+  "survey_flood_type_not_relabelled_pure_pluvial": true,
+  "terrain_calibration_performed": false,
+  "checks": [
+    "scripts/acquire_public_historical_sources.py preserved and verified 22 original files",
+    "scripts/prepare_historical_floods.py read source workbook and preserved original checksums",
+    "scripts/prepare_historical_flood_zones.py verified all136features, retained source properties, repaired two self-intersections and verified originalSHA",
+    "Independent CSV/JSON counts, exact source row set, stable source IDs, SHA contracts and file references checked"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "captured_on": "2026-10-25",
+  "source": "Original running local app on port8040 before vector optimization; identity response bodies",
+  "spatial_revision": "af34c6d53d5b26fd",
+  "purpose": "Independent legacy display oracle: decoded feature IDs, geometry and scalar properties",
+  "files": [
+    {
+      "file": "vector_baseline_points_subset_15_18506_12077.pbf",
+      "bytes": 230411,
+      "sha256": "5d2e4426126fb102b1f26c9036cd481ad8359b2d3d598a6c2e34c07d2246ba4b",
+      "request": "/api/vector/points/15/18506/12077.pbf?zone=inside&display=subset&v=af34c6d53d5b26fd"
+    },
+    {
+      "file": "vector_baseline_green_all_13_4626_3019.pbf",
+      "bytes": 676129,
+      "sha256": "982fadd1153f336452f535e3b72a2dc60c892b469f2030906587aa124afcf5d0",
+      "request": "/api/vector/green/13/4626/3019.pbf?zone=inside&display=all&v=af34c6d53d5b26fd"
+    },
+    {
+      "file": "vector_baseline_green_subset_12_2313_1509.pbf",
+      "bytes": 81964,
+      "sha256": "7e8631cb367771db26ff473ca29439828161e4dd602a8d1981852aa54f007807",
+      "request": "/api/vector/green/12/2313/1509.pbf?zone=inside&display=subset&v=af34c6d53d5b26fd"
+    },
+    {
+      "file": "vector_baseline_routes_subset_12_2313_1509.pbf",
+      "bytes": 29301,
+      "sha256": "6e6c4c8a16e087da56733a3f59a8935da6598168e869721022d2a5b1839d0945",
+      "request": "/api/vector/routes/12/2313/1509.pbf?zone=all&display=subset&v=af34c6d53d5b26fd"
+    }
+  ]
+}

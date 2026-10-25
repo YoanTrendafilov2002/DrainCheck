@@ -1,0 +1,89 @@
+{
+  "merged_250m": {
+    "file": "data/rainfall/merged_250m.tif",
+    "asset_id": "projects/rivertracker-512606/assets/sofia_rain_20250627/merged_250m",
+    "crs": "EPSG:4326",
+    "transform": [
+      0.003054851458076265,
+      0,
+      23.18,
+      0,
+      -0.0022457779374775422,
+      42.76
+    ],
+    "width": 104,
+    "height": 71,
+    "valid_pixels": 7384,
+    "masked_pixels": 0,
+    "min_mm": 0.06267654895782471,
+    "max_mm": 27.14878273010254,
+    "mean_mm_unweighted": 11.153337445269507,
+    "mean_mm_area_weighted": 11.155202345178928,
+    "valid_area_km2": 461.237756634264,
+    "precipitation_volume_m3": 5145200.5044916095,
+    "volume_scope": "valid native cells only; rainfall volume, not runoff or floodwater",
+    "area_method": "WGS84 ellipsoidal polygon area per geographic cell; pyproj.Geod"
+  },
+  "radar_bias_corrected_250m": {
+    "file": "data/rainfall/radar_bias_corrected_250m.tif",
+    "asset_id": "projects/rivertracker-512606/assets/sofia_rain_20250627/radar_bias_corrected_250m",
+    "crs": "EPSG:4326",
+    "transform": [
+      0.003054851458076265,
+      0,
+      23.18,
+      0,
+      -0.0022457779374775422,
+      42.76
+    ],
+    "width": 104,
+    "height": 71,
+    "valid_pixels": 7384,
+    "masked_pixels": 0,
+    "min_mm": 2.4131176471710205,
+    "max_mm": 20.15553092956543,
+    "mean_mm_unweighted": 11.333797309567844,
+    "mean_mm_area_weighted": 11.335462805615963,
+    "valid_area_km2": 461.237756634264,
+    "precipitation_volume_m3": 5228343.434873447,
+    "volume_scope": "valid native cells only; rainfall volume, not runoff or floodwater",
+    "area_method": "WGS84 ellipsoidal polygon area per geographic cell; pyproj.Geod"
+  },
+  "radar_raw_1km": {
+    "file": "data/rainfall/radar_raw_1km.tif",
+    "asset_id": "projects/rivertracker-512606/assets/sofia_rain_20250627/radar_raw_1km",
+    "crs": "EPSG:4326",
+    "transform": [
+      0.010398141544071897,
+      0,
+      22.831742360561023,
+      0,
+      -0.010398141544071897,
+      43.05713699491116
+    ],
+    "width": 98,
+    "height": 69,
+    "valid_pixels": 5041,
+    "masked_pixels": 1721,
+    "min_mm": 2.863697052001953,
+    "max_mm": 109.69969940185547,
+    "mean_mm_unweighted": 31.45373264794027,
+    "mean_mm_area_weighted": 31.467681289022345,
+    "valid_area_km2": 4961.043603466327,
+    "precipitation_volume_m3": 156112538.97482133,
+    "volume_scope": "valid native cells only; rainfall volume, not runoff or floodwater",
+    "area_method": "WGS84 ellipsoidal polygon area per geographic cell; pyproj.Geod"
+  },
+  "stations": {
+    "total": 55,
+    "used": 43,
+    "rejected": 12
+  },
+  "period": {
+    "local_date": "2025-06-27",
+    "timezone": "Europe/Sofia",
+    "utc_start_inclusive": "2025-06-26T21:00:00Z",
+    "utc_end_exclusive": "2025-06-27T21:00:00Z",
+    "aggregation_window_verified_from_upstream_code": false
+  }
+}

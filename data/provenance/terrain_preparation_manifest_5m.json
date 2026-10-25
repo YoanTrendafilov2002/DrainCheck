@@ -1,0 +1,73 @@
+{
+  "source_1m_terrain": "C:\\Users\\Yoan\\Documents\\Codex\\2026-10-24\\hp\\outputs\\sofia_dtm_2024_1m_gee.tif",
+  "output": "C:\\Users\\Yoan\\Documents\\Codex\\2026-10-24\\hp\\outputs\\sofia_pluvial_demo\\sofia_pluvial_inputs_5m.tif",
+  "shape": [
+    10869,
+    10345
+  ],
+  "transform": [
+    5.0,
+    0.0,
+    299392.0,
+    0.0,
+    -5.0,
+    4753611.0
+  ],
+  "crs": "EPSG:7801",
+  "analysis_cell_size_m": 5,
+  "bands": [
+    {
+      "index": 1,
+      "name": "mean_ground_elevation_m",
+      "available": true
+    },
+    {
+      "index": 2,
+      "name": "depression_fill_depth_m",
+      "available": true
+    },
+    {
+      "index": 3,
+      "name": "slope_degrees",
+      "available": true
+    },
+    {
+      "index": 4,
+      "name": "upstream_contributing_area_m2",
+      "available": true
+    },
+    {
+      "index": 5,
+      "name": "possible_missing_upstream_terrain",
+      "available": true
+    },
+    {
+      "index": 6,
+      "name": "imperviousness_density_2024_pct",
+      "available": false
+    },
+    {
+      "index": 7,
+      "name": "upstream_sealed_area_m2",
+      "available": false
+    },
+    {
+      "index": 8,
+      "name": "missing_upstream_imperviousness",
+      "available": false
+    }
+  ],
+  "imperviousness_available": false,
+  "flat_routing_method": "equal-height-BFS-v1",
+  "imperviousness_provenance": null,
+  "missing_data_policy": "Absent IMD is NoData; full index remains unavailable.",
+  "boundary_policy": "Flag downstream cells influenced by any terrain mask/extent edge.",
+  "limitations": [
+    "Depression depth is not water depth.",
+    "D8 routing does not model buildings, culverts, sewer hydraulics or timing.",
+    "Terrain grid spacing does not establish vertical accuracy.",
+    "No flood probability or calibrated rainfall return period is supplied."
+  ],
+  "output_bytes": 325774749,
+  "elapsed_seconds": 117.7
+}

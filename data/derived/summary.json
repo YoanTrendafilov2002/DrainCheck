@@ -1,0 +1,75 @@
+{
+  "raw_pipe_features": 717,
+  "raw_green_features": 64962,
+  "nonempty_green_features": 64956,
+  "empty_green_source_ids": [
+    "44262725-1836-4bb5-8018-2be5874cc418",
+    "369be83c-b0d6-464e-85e2-0ede87309999",
+    "aa07c3ac-ff11-45df-9ef0-e906e14986e5",
+    "4c8f98b5-a1e4-494e-b476-833a72cb7cd1",
+    "574d7c15-8930-429e-9f5f-b4bd96d07f7f",
+    "0f5a4620-ec39-42fe-bda6-eca7afc724c9"
+  ],
+  "repaired_green_source_ids": [
+    "866e1e3f-da40-4151-a219-81c6f66c942c"
+  ],
+  "visible_green_features": 2175,
+  "source_status_counts": {
+    "existing": 464,
+    "open": 3,
+    "planned": 250
+  },
+  "zone_feature_counts": {
+    "all": 717,
+    "inside": 543,
+    "outside": 670
+  },
+  "zone_length_m": {
+    "all": 540163.0135031902,
+    "inside": 137858.69885054993,
+    "outside": 402304.31468007684
+  },
+  "zone_status_statistics": {
+    "all:existing": {
+      "count": 464,
+      "length_m": 318308.50461595063
+    },
+    "inside:existing": {
+      "count": 366,
+      "length_m": 94468.49729464852
+    },
+    "outside:existing": {
+      "count": 428,
+      "length_m": 223840.00734056253
+    },
+    "all:open": {
+      "count": 3,
+      "length_m": 1634.2283301412126
+    },
+    "outside:open": {
+      "count": 3,
+      "length_m": 1520.788368630716
+    },
+    "inside:open": {
+      "count": 1,
+      "length_m": 113.4399615190149
+    },
+    "all:planned": {
+      "count": 250,
+      "length_m": 220220.28055709891
+    },
+    "inside:planned": {
+      "count": 176,
+      "length_m": 43276.76159438239
+    },
+    "outside:planned": {
+      "count": 239,
+      "length_m": 176943.51897088357
+    }
+  },
+  "partition_error_m": 2.7436530217528343e-05,
+  "maximum_per_route_partition_error_m": 2.84950897366798e-06,
+  "geometry_crs": "EPSG:4326",
+  "clipping_method": "Planar WGS84 longitude/latitude intersection with the union of candidate green polygons; matches the existing prototype.",
+  "length_method": "WGS84 ellipsoidal geodesic length; route traversal multiplicity retained."
+}

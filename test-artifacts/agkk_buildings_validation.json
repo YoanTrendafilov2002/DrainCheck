@@ -1,0 +1,155 @@
+{
+  "verified_at": "2026-10-25T08:36:09.666543+00:00",
+  "source_service": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
+  "count": 334033,
+  "distinct_source_oids": 334033,
+  "exact_initial_id_set": true,
+  "batches": 335,
+  "all_compressed_and_original_content_checksums_match": true,
+  "transfer_limited_batches": 0,
+  "source_geometry_equal_for_every_display_feature": true,
+  "selected_original_attributes_equal_for_every_feature": true,
+  "full_original_attributes_preserved_in_batches": true,
+  "geometry_types": {
+    "Polygon": 334032,
+    "MultiPolygon": 1
+  },
+  "all_display_geometry_valid": true,
+  "geometry_repairs": [],
+  "no_geometry_simplification": true,
+  "no_height_inference": true,
+  "index_integrity": "ok",
+  "index_count": 334033,
+  "index_rtree_count": 334033,
+  "revision": "568d80b32ddb42f2",
+  "metadata": {
+    "available": true,
+    "title": "AGKK INSPIRE cadastral buildings",
+    "provider": "Geodesy, Cartography and Cadastre Agency, Bulgaria (AGKK/GCCA)",
+    "source_url": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
+    "source_name": "BU.Building — Buildings from Cadastral map of Bulgaria",
+    "source_kind": "AGKK INSPIRE cadastral building polygons",
+    "description": "Official national cadastral-building snapshot intersecting the app study rectangle, with actual source geometry and identifiers. Survey date and synchronization with the operational KAIS register are not established.",
+    "feature_count": 334033,
+    "count": 334033,
+    "coverage_bbox_wgs84": [
+      22.999896932000066,
+      42.40073163006055,
+      23.700164678000075,
+      42.9501015390591
+    ],
+    "bbox": [
+      22.999896932000066,
+      42.40073163006055,
+      23.700164678000075,
+      42.9501015390591
+    ],
+    "query_bbox_wgs84": [
+      23,
+      42.4,
+      23.7,
+      42.95
+    ],
+    "coverage_label": "Buildings intersecting study rectangle [23,42.4,23.7,42.95]; this rectangle is not Sofia's administrative boundary. Full source polygons are retained at its edge.",
+    "coverage_note": "Complete for the initial service object-ID list in the query rectangle; not an independently verified complete inventory of all existing buildings.",
+    "crs": "EPSG:4326",
+    "source_crs": "EPSG:4258",
+    "geometry_type": "Polygon/MultiPolygon",
+    "min_zoom": 13,
+    "height": {
+      "available": false,
+      "semantics": null,
+      "reason": "Source floor counts are not measured height in metres; no 3D height is inferred."
+    },
+    "source_fields": [
+      "objectid",
+      "id_localid",
+      "id_namespace",
+      "id_versionid",
+      "beginlifespanversion",
+      "endlifespanversion",
+      "numberoffloorsaboveground",
+      "numberoffloorsaboveground_void",
+      "numberofdwellings",
+      "numberofdwellings_void",
+      "conditionofconstr",
+      "conditionofconstr_void",
+      "currentuse_code1",
+      "currentuse_label1",
+      "currentuse_void",
+      "hgeomref",
+      "hgeomestimatedaccuracy_value",
+      "hgeomestimatedaccuracy_void",
+      "referencegeometry"
+    ],
+    "source_attributes": "Full original INSPIRE attributes retained in gzip batch responses and available for source feature inspection.",
+    "raw_manifest_file": "data/reference/agkk_buildings/manifest.json",
+    "raw_manifest_sha256": "a3f6271380387fbaf660fed20468c89bf408d9d1e8f8b187a55b61d9fdb34903",
+    "raw_batch_format": "GeoJSON FeatureCollection gzip; features/properties/objectid",
+    "data_file": "data/derived/cadastral_buildings.geojson",
+    "geojson_file": "data/derived/cadastral_buildings.geojson",
+    "index_file": "data/cache/cadastral_buildings.sqlite",
+    "sha256": "e9e948f31556a68a3b2724b8ab3abfd664126073f0b09dc4eb8e51a479536fc8",
+    "revision": "568d80b32ddb42f2",
+    "retrieved_utc": "2026-10-25T08:28:02.687309+00:00",
+    "acquisition_completed_utc": "2026-10-25T08:30:16.648666+00:00",
+    "source_date": null,
+    "license": "Official INSPIRE metadata: no limitations to public access; use constraints reference Tariff14. No CC licence or unrestricted redistribution right has been inferred.",
+    "attribution": "Geodesy, Cartography and Cadastre Agency, Bulgaria (AGKK/GCCA)",
+    "known_example": {
+      "source_id": "2716694",
+      "source_oid": 2716694,
+      "cadastral_id": "68134.100.74.5",
+      "longitude": 23.33032128151407,
+      "latitude": 42.69564895655974,
+      "source_batch_file": "data/reference/agkk_buildings/batches/batch_00058.geojson.gz",
+      "source_batch_sha256": "2a32c860ab1e7c29908a4263f636ab915c4b2d6e82ac4cfbea3bc747326ab165"
+    },
+    "limitations": [
+      "Acquired from a public INSPIRE service; currency relative to the operational KAIS register is not guaranteed.",
+      "Study-bbox coverage is not an administrative-municipality selection, and source cadastral records do not prove complete current physical-building coverage.",
+      "Floors and INSPIRE void codes are retained; floor counts are not converted into metres.",
+      "Buildings are separate visual context and do not alter native terrain, rainfall, pluvial scores, water exclusions or exposure calculations.",
+      "Some source fields may be absent/void. No owner information or proprietary account was requested."
+    ],
+    "validation": {
+      "source_ids_expected": 334033,
+      "source_ids_received_unique": 334033,
+      "cadastral_identifiers_distinct_nonnull": 334018,
+      "transfer_limited_batches": 0,
+      "original_batch_count": 335,
+      "geometry_simplification": false,
+      "geometry_repairs": [],
+      "floor_counts": {
+        "floor_count_nonnull": 334033,
+        "floor_count_null": 0
+      }
+    },
+    "feature_lines_sha256": "288e5ff7933bee9b5d05b3120f24802eb83e531ee2015e45eaa210ca84bc6bc0",
+    "source_label": "AGKK/GCCA — INSPIRE cadastral building service",
+    "retrieved_at": "2026-10-25T08:28:02.687309+00:00",
+    "catalogue_date_note": "INSPIRE catalogue publication: 2021-11-03; metadata revision: 2024-04-29. Feature lifecycle dates vary; survey date is unknown.",
+    "source_publication_date": "2021-11-03",
+    "metadata_revision_date": "2024-04-29",
+    "known_examples": [
+      {
+        "source_id": "3701",
+        "source_oid": 3701,
+        "cadastral_id": "52249.5.432.1",
+        "longitude": 23.623437775553356,
+        "latitude": 42.405822687560544,
+        "source_batch_file": "data/reference/agkk_buildings/batches/batch_00001.geojson.gz",
+        "source_batch_sha256": "d832a8fe0f108435c1765b9aff3ace6c42dddcf1e57b91508a0cf756595b2ae8"
+      },
+      {
+        "source_id": "2716694",
+        "source_oid": 2716694,
+        "cadastral_id": "68134.100.74.5",
+        "longitude": 23.33032128151407,
+        "latitude": 42.69564895655974,
+        "source_batch_file": "data/reference/agkk_buildings/batches/batch_00058.geojson.gz",
+        "source_batch_sha256": "2a32c860ab1e7c29908a4263f636ab915c4b2d6e82ac4cfbea3bc747326ab165"
+      }
+    ]
+  }
+}

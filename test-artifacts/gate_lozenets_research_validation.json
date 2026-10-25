@@ -1,0 +1,46 @@
+{
+  "available": true,
+  "revision": "bafb3bb653388cd3",
+  "feature_count": 1800,
+  "source_shape_type": "POLYGON (2D)",
+  "source_epsg": 7801,
+  "source_property_fields": [
+    "Area"
+  ],
+  "source_geometry_types": [
+    "Polygon"
+  ],
+  "valid_features": 1800,
+  "empty_features": 0,
+  "exact_duplicate_features": 0,
+  "source_holes": 1,
+  "output_holes": 1,
+  "coverage_bbox_wgs84": [
+    23.310369175845867,
+    42.63339072768455,
+    23.338904238208997,
+    42.68570217352425
+  ],
+  "maximum_crs_roundtrip_error_m": 4.669691231132387e-09,
+  "source_polygon_area_percentiles_m2": [
+    57.61311202579678,
+    317.21589512645704,
+    1219.6454399720344,
+    18185.424014876502
+  ],
+  "original_sha256_before": {
+    "Outlines_Roof_Planes_1800.shp": "9505573c14f1ce127734aa97a17b3f2b6dcec555d58fb51c9623bb8ab7675198",
+    "Outlines_Roof_Planes_1800.dbf": "aeaba8e08c59b277247d661fb4855b7e78e7e4e7664cb9813fcee2d37b64e2ed",
+    "Outlines_Roof_Planes_1800.shx": "e2e192f545b582c179b631d34214279b90edc2c177e0d160cd6b889ddf8c7523",
+    "Outlines_Roof_Planes_1800.prj": "f5343f00c9d6db9d26f66e849410888ad3639231d40b1a3ca93a66222ff5a7d1"
+  },
+  "original_sha256_after": {
+    "Outlines_Roof_Planes_1800.shp": "9505573c14f1ce127734aa97a17b3f2b6dcec555d58fb51c9623bb8ab7675198",
+    "Outlines_Roof_Planes_1800.dbf": "aeaba8e08c59b277247d661fb4855b7e78e7e4e7664cb9813fcee2d37b64e2ed",
+    "Outlines_Roof_Planes_1800.shx": "e2e192f545b582c179b631d34214279b90edc2c177e0d160cd6b889ddf8c7523",
+    "Outlines_Roof_Planes_1800.prj": "f5343f00c9d6db9d26f66e849410888ad3639231d40b1a3ca93a66222ff5a7d1"
+  },
+  "geojson_sha256": "a4c99f9fd3e942cb2a1b17aa04383038aaba710823c9986f1639ec0ef3cda266",
+  "height_available": false,
+  "promoted_to_requested_full_city_layer": false
+}

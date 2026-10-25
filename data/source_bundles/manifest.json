@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "method": "Lossless gzip storage of the unchanged original green-area GeoJSON; no geometry or attribute processing",
+  "bundles": [
+    {
+      "id": "legacy_green_areas",
+      "bundle_file": "data/source_bundles/green_areas_original.geojson.gz",
+      "bundle_size_bytes": 14094048,
+      "bundle_sha256": "e9ad442ba8dda32cc399442fe09744001289cd5001e531dfc0adec5f920a70d2",
+      "source_file": "data/raw/green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson",
+      "source_size_bytes": 53164382,
+      "source_sha256": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557",
+      "compression": "gzip",
+      "gzip_mtime": 0,
+      "source_label": "Sofiaplan municipal green areas \u2014 original supplied 2020 source",
+      "source_reference": "handoff/recovered_originals_manifest.json"
+    }
+  ]
+}

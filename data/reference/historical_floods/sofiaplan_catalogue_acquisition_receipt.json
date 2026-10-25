@@ -1,0 +1,30 @@
+[
+  {
+    "file": "sofiaplan_dataset549_metadata.json",
+    "url": "https://api.sofiaplan.bg/datasets/549",
+    "bytes": 198644,
+    "sha256": "4dd3a56051da45f513097212b59ca6e8780c1c006c938c5c89ee04f3be64ce4d",
+    "retrieved_utc": "2026-10-25T07:56:16.056370+00:00"
+  },
+  {
+    "file": "sofia_urbandata_floods2021_package.json",
+    "url": "https://urbandata.sofia.bg/api/3/action/package_show?id=flooded-areas-identified-by-drone-survey-february-2021",
+    "bytes": 7343,
+    "sha256": "77578096a564ece707e351e9d6f8f89ff199b478e58bf5b2d7df102101c0b29d",
+    "retrieved_utc": "2026-10-25T07:56:16.864303+00:00"
+  },
+  {
+    "file": "sofiaplan_2021_disasters_study.pdf",
+    "url": "https://sofiaplan.bg/wp-content/uploads/2021/03/I.10.3_%D0%91%D0%B5%D0%B4%D1%81%D1%82%D0%B2%D0%B8%D1%8F.pdf",
+    "bytes": 2417492,
+    "sha256": "a029f02ac1032859565af216347e8cd4b50c57fd57532b89d0421ed40a662e84",
+    "retrieved_utc": "2026-10-25T07:56:16.281922+00:00"
+  },
+  {
+    "file": "sofiaplan_2021_disasters_maps.pdf",
+    "url": "https://sofiaplan.bg/wp-content/uploads/2021/03/I.10.3_%D0%91%D0%B5%D0%B4%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D0%BA%D0%B0%D1%80%D1%82%D0%B8-1.pdf",
+    "bytes": 4670518,
+    "sha256": "5b4f660808f528616663cdd120a511c4bf51d58713e217b8395aaf96006ce36e",
+    "retrieved_utc": "2026-10-25T07:56:16.286660+00:00"
+  }
+]

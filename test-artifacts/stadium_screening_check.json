@@ -1,0 +1,1320 @@
+{
+  "scope": "Confirmed Vasil Levski National Stadium. Bulgarian Army measurements retained only as an earlier candidate-control check.",
+  "source_raster_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+  "pluvial_revision": "f42644a668cdc14d",
+  "native_dtm_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3",
+  "osm_source": {
+    "url": "https://www.openstreetmap.org/api/0.6/map?bbox=23.332,42.682,23.343,42.691",
+    "sha256": "177733c6e27535c27ed1257ed997e621ba2e9359c06dc78ea3ed2def4dc72f4d",
+    "licence": "OpenStreetMap contributors, ODbL1.0",
+    "downloaded_date": "2026-10-25"
+  },
+  "depth_rank_reference": {
+    "values": [
+      3.0517578125e-05,
+      0.00115966796875,
+      0.00164794921875,
+      0.002197265625,
+      0.00341796875,
+      0.005449218749999929,
+      0.0098876953125,
+      0.01655792236328124,
+      0.02398681640625,
+      0.026576538085937518,
+      0.033447265625,
+      0.04364013671875,
+      0.053955078125,
+      0.0640869140625,
+      0.074462890625,
+      0.08720275878906225,
+      0.0992431640625,
+      0.10125732421875,
+      0.10229217529296886,
+      0.1116943359375,
+      0.12469482421875,
+      0.13872955322265645,
+      0.15179443359375,
+      0.1656854248046875,
+      0.18102493286132804,
+      0.19683471679687514,
+      0.21165344238281225,
+      0.228271484375,
+      0.2432861328125,
+      0.2539093017578127,
+      0.27042816162109373,
+      0.28607177734375,
+      0.30132873535156257,
+      0.3170358276367189,
+      0.33447265625,
+      0.34857177734375,
+      0.366943359375,
+      0.38421630859375,
+      0.40206466674804675,
+      0.41790771484375,
+      0.43716873168945325,
+      0.455479736328126,
+      0.4735107421875,
+      0.4896240234375,
+      0.5022804260253908,
+      0.510711669921875,
+      0.514404296875,
+      0.5218505859375,
+      0.541015625,
+      0.55950927734375,
+      0.57196044921875,
+      0.58978271484375,
+      0.6073248291015623,
+      0.6287841796875,
+      0.6480712890625,
+      0.66717529296875,
+      0.6737060546875,
+      0.6802355957031248,
+      0.69171142578125,
+      0.7076803588867189,
+      0.72528076171875,
+      0.729248046875,
+      0.7411624145507814,
+      0.75048828125,
+      0.7535400390625,
+      0.7658251953124999,
+      0.7887507629394532,
+      0.800197143554688,
+      0.8203758239746097,
+      0.8384667968750001,
+      0.8612283325195316,
+      0.8829351806640631,
+      0.8870428466796891,
+      0.902740478515625,
+      0.9224853515625,
+      0.9416378784179686,
+      0.96185302734375,
+      0.97283935546875,
+      0.97467041015625,
+      0.9888916015625,
+      0.998956756591797,
+      1.0,
+      1.00567626953125,
+      1.0375228881835943,
+      1.0828924560546884,
+      1.1337402343750007,
+      1.1876220703125,
+      1.2442770385742192,
+      1.3059815979003915,
+      1.365960083007813,
+      1.4141754150390629,
+      1.463139038085938,
+      1.51800537109375,
+      1.5883972167968752,
+      1.660706481933592,
+      1.6737060546875,
+      1.694817199707031,
+      1.7776129150390627,
+      1.822509765625,
+      1.8931954956054686,
+      1.9736328125,
+      2.0,
+      2.0026483154296875,
+      2.2101231384277353,
+      2.4095458984375,
+      2.7509506225586016,
+      3.0,
+      3.210603027343751,
+      3.66815185546875,
+      3.9547119140625,
+      4.212339782714846,
+      4.80218505859375,
+      5.537335205078126,
+      6.0,
+      8.916082763671874,
+      12.0,
+      17.33859497070314,
+      28.0
+    ],
+    "ranks": [
+      0.0,
+      0.005,
+      0.155,
+      0.3075,
+      0.315,
+      0.32,
+      0.325,
+      0.33,
+      0.335,
+      0.34,
+      0.34500000000000003,
+      0.35000000000000003,
+      0.355,
+      0.36,
+      0.365,
+      0.37,
+      0.375,
+      0.385,
+      0.395,
+      0.4,
+      0.405,
+      0.41000000000000003,
+      0.41500000000000004,
+      0.42,
+      0.425,
+      0.43,
+      0.435,
+      0.44,
+      0.445,
+      0.45,
+      0.455,
+      0.46,
+      0.465,
+      0.47000000000000003,
+      0.47500000000000003,
+      0.48,
+      0.485,
+      0.49,
+      0.495,
+      0.5,
+      0.505,
+      0.51,
+      0.515,
+      0.52,
+      0.525,
+      0.5325,
+      0.54,
+      0.545,
+      0.55,
+      0.555,
+      0.5650000000000001,
+      0.5750000000000001,
+      0.58,
+      0.585,
+      0.59,
+      0.595,
+      0.6074999999999999,
+      0.62,
+      0.625,
+      0.63,
+      0.635,
+      0.64,
+      0.645,
+      0.65,
+      0.655,
+      0.66,
+      0.665,
+      0.67,
+      0.675,
+      0.68,
+      0.685,
+      0.6900000000000001,
+      0.6950000000000001,
+      0.7000000000000001,
+      0.705,
+      0.71,
+      0.715,
+      0.72,
+      0.725,
+      0.73,
+      0.735,
+      0.7600000000000001,
+      0.785,
+      0.79,
+      0.795,
+      0.8,
+      0.805,
+      0.81,
+      0.8150000000000001,
+      0.8200000000000001,
+      0.8250000000000001,
+      0.8300000000000001,
+      0.835,
+      0.84,
+      0.845,
+      0.85,
+      0.855,
+      0.86,
+      0.865,
+      0.87,
+      0.875,
+      0.8925000000000001,
+      0.91,
+      0.915,
+      0.92,
+      0.925,
+      0.9325000000000001,
+      0.9400000000000001,
+      0.9450000000000001,
+      0.9500000000000001,
+      0.9550000000000001,
+      0.96,
+      0.965,
+      0.97,
+      0.975,
+      0.98,
+      0.985,
+      0.995
+    ],
+    "sample_count": 129130,
+    "quantile_count": 201,
+    "tie_rule": "mean percentile position of repeated quantiles"
+  },
+  "stadia": [
+    {
+      "name": "Vasil Levski National Stadium",
+      "official_location_source": "https://www.visitsofia.bg/en/cityinfrastructure/what-to-do/sports-halls-and-stadiums/vasil-levski-national-stadium",
+      "stadium_osm_way": {
+        "id": "341968882",
+        "url": "https://www.openstreetmap.org/way/341968882",
+        "version": "16",
+        "timestamp": "2026-09-16T21:31:05Z"
+      },
+      "pitch_osm_way": {
+        "id": "1304896487",
+        "url": "https://www.openstreetmap.org/way/1304896487",
+        "version": "3",
+        "timestamp": "2026-01-02T10:27:02Z"
+      },
+      "pitch_centroid_lonlat": [
+        23.335253169201657,
+        42.68756429527624
+      ],
+      "pitch_polygon_area_m2": 7353.794589950348,
+      "pitch_centroid_sample": {
+        "longitude": 23.335253169201657,
+        "latitude": 42.68756429527624,
+        "analysis_resolution_m": 5,
+        "method": "terrain-relative-screen-v1",
+        "status": "ok",
+        "class": "Higher signal",
+        "score": 75.79025268554688,
+        "row": 4665,
+        "column": 4646,
+        "factors": {
+          "mean_ground_elevation_m": 542.49609375,
+          "depression_fill_depth_m": 0.0,
+          "slope_degrees": 0.4438459873199463,
+          "upstream_contributing_area_m2": 625.0,
+          "possible_missing_upstream_terrain": 0.0,
+          "depression_percentile": 0.0,
+          "concentration_flatness_score": 75.79025268554688,
+          "relative_screening_score": 75.79025268554688
+        },
+        "pixel_center": [
+          322624.5,
+          4730283.5
+        ],
+        "crs": "EPSG:7801",
+        "ponding_score": 0.0,
+        "concentration_score": 75.79025268554688,
+        "depression_depth_m": 0.0,
+        "slope_degrees": 0.4438459873199463,
+        "contributing_area_m2": 625.0,
+        "boundary_influence": false,
+        "class_label": "Higher signal",
+        "class_index": 2,
+        "dominant_pathway": "concentration / low slope"
+      },
+      "zones": {
+        "pitch": {
+          "mask_method": "All base5m cell centers inside actual OSMpolygon; read windowfloor(min)toceil(max)ensuresnoedgecropping.",
+          "window": [
+            4653,
+            4633,
+            25,
+            27
+          ],
+          "eligible_cells": 294,
+          "positive_fill_depth_cells": 0,
+          "height_min_median_max_m": [
+            542.21875,
+            542.5037536621094,
+            542.80908203125
+          ],
+          "fill_min_median_max_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "slope_min_median_max_deg": [
+            0.44320622086524963,
+            0.4548582285642624,
+            0.4959647059440613
+          ],
+          "area_min_median_max_m2": [
+            25.0,
+            400.0,
+            57450.0
+          ],
+          "modes": {
+            "ponding": {
+              "score_quantiles_0_10_50_90_95_100": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "classes": {
+                "Lower signal": {
+                  "cells": 294,
+                  "percent": 100.0
+                },
+                "Raised": {
+                  "cells": 0,
+                  "percent": 0.0
+                },
+                "Higher signal": {
+                  "cells": 0,
+                  "percent": 0.0
+                },
+                "Strongest signal": {
+                  "cells": 0,
+                  "percent": 0.0
+                }
+              }
+            },
+            "concentration": {
+              "score_quantiles_0_10_50_90_95_100": [
+                17.527755737304688,
+                50.28158073425293,
+                68.80920028686523,
+                82.02935638427734,
+                88.93708763122558,
+                90.45748138427734
+              ],
+              "classes": {
+                "Lower signal": {
+                  "cells": 28,
+                  "percent": 9.523809523809524
+                },
+                "Raised": {
+                  "cells": 129,
+                  "percent": 43.87755102040816
+                },
+                "Higher signal": {
+                  "cells": 110,
+                  "percent": 37.41496598639456
+                },
+                "Strongest signal": {
+                  "cells": 27,
+                  "percent": 9.183673469387756
+                }
+              }
+            },
+            "combined": {
+              "score_quantiles_0_10_50_90_95_100": [
+                17.527755737304688,
+                50.28158073425293,
+                68.80920028686523,
+                82.02935638427734,
+                88.93708763122558,
+                90.45748138427734
+              ],
+              "classes": {
+                "Lower signal": {
+                  "cells": 28,
+                  "percent": 9.523809523809524
+                },
+                "Raised": {
+                  "cells": 129,
+                  "percent": 43.87755102040816
+                },
+                "Higher signal": {
+                  "cells": 110,
+                  "percent": 37.41496598639456
+                },
+                "Strongest signal": {
+                  "cells": 27,
+                  "percent": 9.183673469387756
+                }
+              }
+            }
+          }
+        },
+        "stadium_envelope_outside_pitch": {
+          "mask_method": "All base5m cell centers inside actual OSMpolygon; read windowfloor(min)toceil(max)ensuresnoedgecropping.",
+          "window": [
+            4643,
+            4622,
+            46,
+            48
+          ],
+          "eligible_cells": 1263,
+          "positive_fill_depth_cells": 0,
+          "height_min_median_max_m": [
+            540.1605834960938,
+            542.5340576171875,
+            545.1119384765625
+          ],
+          "fill_min_median_max_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "slope_min_median_max_deg": [
+            0.0,
+            1.219527006149292,
+            11.81919002532959
+          ],
+          "area_min_median_max_m2": [
+            25.0,
+            250.0,
+            65900.0
+          ],
+          "modes": {
+            "ponding": {
+              "score_quantiles_0_10_50_90_95_100": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "classes": {
+                "Lower signal": {
+                  "cells": 1263,
+                  "percent": 100.0
+                },
+                "Raised": {
+                  "cells": 0,
+                  "percent": 0.0
+                },
+                "Higher signal": {
+                  "cells": 0,
+                  "percent": 0.0
+                },
+                "Strongest signal": {
+                  "cells": 0,
+                  "percent": 0.0
+                }
+              }
+            },
+            "concentration": {
+              "score_quantiles_0_10_50_90_95_100": [
+                11.961000442504883,
+                25.23220329284668,
+                54.55785369873047,
+                78.37143402099609,
+                82.86473541259762,
+                94.76051330566406
+              ],
+              "classes": {
+                "Lower signal": {
+                  "cells": 555,
+                  "percent": 43.942992874109265
+                },
+                "Raised": {
+                  "cells": 446,
+                  "percent": 35.312747426761675
+                },
+                "Higher signal": {
+                  "cells": 213,
+                  "percent": 16.864608076009503
+                },
+                "Strongest signal": {
+                  "cells": 49,
+                  "percent": 3.879651623119557
+                }
+              }
+            },
+            "combined": {
+              "score_quantiles_0_10_50_90_95_100": [
+                11.961000442504883,
+                25.23220329284668,
+                54.55785369873047,
+                78.37143402099609,
+                82.86473541259762,
+                94.76051330566406
+              ],
+              "classes": {
+                "Lower signal": {
+                  "cells": 555,
+                  "percent": 43.942992874109265
+                },
+                "Raised": {
+                  "cells": 446,
+                  "percent": 35.312747426761675
+                },
+                "Higher signal": {
+                  "cells": 213,
+                  "percent": 16.864608076009503
+                },
+                "Strongest signal": {
+                  "cells": 49,
+                  "percent": 3.879651623119557
+                }
+              }
+            }
+          }
+        },
+        "surrounding_0_to_100m_ring": {
+          "polygon_area_m2": 102818.72831391367,
+          "eligible_cells_5m": 4094,
+          "boundary_flagged_cells": 0,
+          "sampled_grid_area_m2": 102350,
+          "elevation_m": {
+            "minimum": 535.0,
+            "p10": 537.7110595703125,
+            "median": 542.2838134765625,
+            "p90": 546.873291015625,
+            "maximum": 548.0996704101562
+          },
+          "fill_depth_m": {
+            "minimum": 0.0,
+            "p10": 0.0,
+            "median": 0.0,
+            "p90": 0.0,
+            "maximum": 3.9766845703125
+          },
+          "filled_surface_height_m": {
+            "minimum": 535.0,
+            "p10": 537.7110595703125,
+            "median": 542.9144287109375,
+            "p90": 546.873291015625,
+            "maximum": 548.0996704101562
+          },
+          "slope_degrees": {
+            "minimum": 0.0,
+            "p10": 0.21374548971652985,
+            "median": 1.5655957460403442,
+            "p90": 9.277885437011719,
+            "maximum": 37.10408020019531
+          },
+          "upstream_area_m2": {
+            "minimum": 25.0,
+            "p10": 25.0,
+            "median": 175.0,
+            "p90": 1767.5,
+            "maximum": 45006676.0
+          },
+          "positive_depression_cells": 202,
+          "modes": {
+            "ponding": {
+              "scores": {
+                "minimum": 0.0,
+                "p10": 0.0,
+                "median": 0.0,
+                "p90": 0.0,
+                "maximum": 95.04264831542969
+              },
+              "classes": {
+                "Lower signal": 3953,
+                "Raised": 10,
+                "Higher signal": 10,
+                "Strongest signal": 121
+              }
+            },
+            "concentration": {
+              "scores": {
+                "minimum": 2.747133255004883,
+                "p10": 15.99454116821289,
+                "median": 44.95591735839844,
+                "p90": 75.77943420410156,
+                "maximum": 97.61053466796875
+              },
+              "classes": {
+                "Lower signal": 2363,
+                "Raised": 1116,
+                "Higher signal": 446,
+                "Strongest signal": 169
+              }
+            },
+            "combined": {
+              "scores": {
+                "minimum": 2.747133255004883,
+                "p10": 16.104759216308594,
+                "median": 45.902488708496094,
+                "p90": 78.73429870605469,
+                "maximum": 97.61053466796875
+              },
+              "classes": {
+                "Lower signal": 2279,
+                "Raised": 1099,
+                "Higher signal": 444,
+                "Strongest signal": 272
+              }
+            }
+          },
+          "representative_sample": {
+            "longitude": 23.337254091612902,
+            "latitude": 42.68757197372364,
+            "analysis_resolution_m": 5,
+            "method": "terrain-relative-screen-v1",
+            "status": "ok",
+            "class": "Lower signal",
+            "score": 26.670900344848633,
+            "row": 4666,
+            "column": 4679,
+            "factors": {
+              "mean_ground_elevation_m": 543.568603515625,
+              "depression_fill_depth_m": 0.0,
+              "slope_degrees": 1.9102774858474731,
+              "upstream_contributing_area_m2": 50.0,
+              "possible_missing_upstream_terrain": 0.0,
+              "depression_percentile": 0.0,
+              "concentration_flatness_score": 26.670900344848633,
+              "relative_screening_score": 26.670900344848633
+            },
+            "pixel_center": [
+              322789.5,
+              4730278.5
+            ],
+            "crs": "EPSG:7801",
+            "ponding_score": 0.0,
+            "concentration_score": 26.670900344848633,
+            "depression_depth_m": 0.0,
+            "slope_degrees": 1.9102774858474731,
+            "contributing_area_m2": 50.0,
+            "boundary_influence": false,
+            "class_label": "Lower signal",
+            "class_index": 0,
+            "dominant_pathway": "concentration / low slope"
+          }
+        },
+        "whole_stadium_envelope": {
+          "mask_method": "All base5m cell centers inside actual OSMpolygon; read windowfloor(min)toceil(max)ensuresnoedgecropping.",
+          "window": [
+            4643,
+            4622,
+            46,
+            48
+          ],
+          "eligible_cells": 1557,
+          "positive_fill_depth_cells": 0,
+          "height_min_median_max_m": [
+            540.1605834960938,
+            542.5169677734375,
+            545.1119384765625
+          ],
+          "fill_min_median_max_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "slope_min_median_max_deg": [
+            0.0,
+            0.861260175704956,
+            11.81919002532959
+          ],
+          "area_min_median_max_m2": [
+            25.0,
+            275.0,
+            65900.0
+          ],
+          "modes": {
+            "ponding": {
+              "score_quantiles_0_10_50_90_95_100": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "classes": {
+                "Lower signal": {
+                  "cells": 1557,
+                  "percent": 100.0
+                },
+                "Raised": {
+                  "cells": 0,
+                  "percent": 0.0
+                },
+                "Higher signal": {
+                  "cells": 0,
+                  "percent": 0.0
+                },
+                "Strongest signal": {
+                  "cells": 0,
+                  "percent": 0.0
+                }
+              }
+            },
+            "concentration": {
+              "score_quantiles_0_10_50_90_95_100": [
+                11.961000442504883,
+                27.7132080078125,
+                58.120513916015625,
+                78.7326889038086,
+                83.80093536376948,
+                94.76051330566406
+              ],
+              "classes": {
+                "Lower signal": {
+                  "cells": 583,
+                  "percent": 37.44380218368658
+                },
+                "Raised": {
+                  "cells": 575,
+                  "percent": 36.92999357739242
+                },
+                "Higher signal": {
+                  "cells": 323,
+                  "percent": 20.745022479126526
+                },
+                "Strongest signal": {
+                  "cells": 76,
+                  "percent": 4.881181759794476
+                }
+              }
+            },
+            "combined": {
+              "score_quantiles_0_10_50_90_95_100": [
+                11.961000442504883,
+                27.7132080078125,
+                58.120513916015625,
+                78.7326889038086,
+                83.80093536376948,
+                94.76051330566406
+              ],
+              "classes": {
+                "Lower signal": {
+                  "cells": 583,
+                  "percent": 37.44380218368658
+                },
+                "Raised": {
+                  "cells": 575,
+                  "percent": 36.92999357739242
+                },
+                "Higher signal": {
+                  "cells": 323,
+                  "percent": 20.745022479126526
+                },
+                "Strongest signal": {
+                  "cells": 76,
+                  "percent": 4.881181759794476
+                }
+              }
+            }
+          }
+        }
+      },
+      "native_pitch_check": {
+        "native_cells_1m": 7354,
+        "native_grid_area_m2": 7354,
+        "native_height_m": {
+          "minimum": 542.2026977539062,
+          "p10": 542.286376953125,
+          "median": 542.5048217773438,
+          "p90": 542.7223510742188,
+          "maximum": 542.8170166015625
+        },
+        "ratio_native_to_5m_cell_count": 25.01360544217687,
+        "native_area_to_5m_area_ratio": 1.000544217687075
+      },
+      "native_same5m_cell_check": {
+        "five_m_cell": [
+          4665,
+          4646
+        ],
+        "native_5x5_window": [
+          23325,
+          23230,
+          5,
+          5
+        ],
+        "native_minimum_m": 542.4741821289062,
+        "native_maximum_m": 542.5179443359375,
+        "native_mean_m": 542.49609375,
+        "derived_5m_mean_m": 542.49609375,
+        "difference_m": 0.0
+      },
+      "confirmed_user_stadium": true,
+      "centroid_projected_epsg7801": [
+        322624.0694926146,
+        4730282.4737778315
+      ],
+      "nearest_1m_pixel_sample": {
+        "longitude": 23.335253169201657,
+        "latitude": 42.68756429527624,
+        "crs": "EPSG:7801",
+        "vertical_datum": "Baltic 1982",
+        "sample_resolution_m": 1,
+        "row": 23328,
+        "column": 23232,
+        "pixel_center_easting": 322624.5,
+        "pixel_center_northing": 4730282.5,
+        "status": "ok",
+        "elevation_m": 542.5020141601562
+      },
+      "5m_sample_pixel_center_lonlat": [
+        23.335258100306557,
+        42.68757363013538
+      ],
+      "centroid_score_arithmetic": {
+        "area_rank_fraction": 0.6925000000000001,
+        "slope_rank_fraction": 0.17051812744809688,
+        "flatness_fraction": 0.8294818725519031,
+        "formula": "100*sqrt(area_rank*(1-slope_rank))",
+        "recomputed_concentration_score": 75.79024981765089,
+        "ponding_score": 0
+      }
+    },
+    {
+      "name": "Bulgarian Army Stadium",
+      "official_location_source": "https://visitsofia.bg/en/cityinfrastructure/what-to-do/sports-halls-and-stadiums/bulgarian-army-stadium",
+      "stadium_osm_way": {
+        "id": "1331127486",
+        "url": "https://www.openstreetmap.org/way/1331127486",
+        "version": "36",
+        "timestamp": "2026-10-02T18:20:55Z"
+      },
+      "pitch_osm_way": {
+        "id": "1421010433",
+        "url": "https://www.openstreetmap.org/way/1421010433",
+        "version": "4",
+        "timestamp": "2026-05-09T08:51:56Z"
+      },
+      "pitch_centroid_lonlat": [
+        23.33977394354398,
+        42.684169371234105
+      ],
+      "pitch_polygon_area_m2": 7170.236265934816,
+      "pitch_centroid_sample": {
+        "longitude": 23.33977394354398,
+        "latitude": 42.684169371234105,
+        "analysis_resolution_m": 5,
+        "method": "terrain-relative-screen-v1",
+        "status": "ok",
+        "class": "Higher signal",
+        "score": 72.31416320800781,
+        "row": 4742,
+        "column": 4718,
+        "factors": {
+          "mean_ground_elevation_m": 551.5794677734375,
+          "depression_fill_depth_m": 0.0,
+          "slope_degrees": 0.474026620388031,
+          "upstream_contributing_area_m2": 500.0,
+          "possible_missing_upstream_terrain": 0.0,
+          "depression_percentile": 0.0,
+          "concentration_flatness_score": 72.31416320800781,
+          "relative_screening_score": 72.31416320800781
+        },
+        "pixel_center": [
+          322984.5,
+          4729898.5
+        ],
+        "crs": "EPSG:7801",
+        "ponding_score": 0.0,
+        "concentration_score": 72.31416320800781,
+        "depression_depth_m": 0.0,
+        "slope_degrees": 0.474026620388031,
+        "contributing_area_m2": 500.0,
+        "boundary_influence": false,
+        "class_label": "Higher signal",
+        "class_index": 2,
+        "dominant_pathway": "concentration / low slope"
+      },
+      "zones": {
+        "pitch": {
+          "polygon_area_m2": 7170.236265934816,
+          "eligible_cells_5m": 294,
+          "boundary_flagged_cells": 0,
+          "sampled_grid_area_m2": 7350,
+          "elevation_m": {
+            "minimum": 551.3145751953125,
+            "p10": 551.375,
+            "median": 551.608642578125,
+            "p90": 551.8394165039062,
+            "maximum": 551.9337768554688
+          },
+          "fill_depth_m": {
+            "minimum": 0.0,
+            "p10": 0.0,
+            "median": 0.0,
+            "p90": 0.0,
+            "maximum": 0.0
+          },
+          "filled_surface_height_m": {
+            "minimum": 551.3145751953125,
+            "p10": 551.375,
+            "median": 551.608642578125,
+            "p90": 551.8394165039062,
+            "maximum": 551.9337768554688
+          },
+          "slope_degrees": {
+            "minimum": 0.4709670841693878,
+            "p10": 0.4720471501350403,
+            "median": 0.47352904081344604,
+            "p90": 0.7095887660980225,
+            "maximum": 0.7117464542388916
+          },
+          "upstream_area_m2": {
+            "minimum": 75.0,
+            "p10": 125.0,
+            "median": 300.0,
+            "p90": 942.5,
+            "maximum": 7900.0
+          },
+          "positive_depression_cells": 0,
+          "modes": {
+            "ponding": {
+              "scores": {
+                "minimum": 0.0,
+                "p10": 0.0,
+                "median": 0.0,
+                "p90": 0.0,
+                "maximum": 0.0
+              },
+              "classes": {
+                "Lower signal": 294,
+                "Raised": 0,
+                "Higher signal": 0,
+                "Strongest signal": 0
+              }
+            },
+            "concentration": {
+              "scores": {
+                "minimum": 37.39923095703125,
+                "p10": 46.71814727783203,
+                "median": 63.53207778930664,
+                "p90": 79.39053344726562,
+                "maximum": 88.69345092773438
+              },
+              "classes": {
+                "Lower signal": 38,
+                "Raised": 164,
+                "Higher signal": 84,
+                "Strongest signal": 8
+              }
+            },
+            "combined": {
+              "scores": {
+                "minimum": 37.39923095703125,
+                "p10": 46.71814727783203,
+                "median": 63.53207778930664,
+                "p90": 79.39053344726562,
+                "maximum": 88.69345092773438
+              },
+              "classes": {
+                "Lower signal": 38,
+                "Raised": 164,
+                "Higher signal": 84,
+                "Strongest signal": 8
+              }
+            }
+          },
+          "representative_sample": {
+            "longitude": 23.33977391731069,
+            "latitude": 42.68416930184697,
+            "analysis_resolution_m": 5,
+            "method": "terrain-relative-screen-v1",
+            "status": "ok",
+            "class": "Higher signal",
+            "score": 72.31416320800781,
+            "row": 4742,
+            "column": 4718,
+            "factors": {
+              "mean_ground_elevation_m": 551.5794677734375,
+              "depression_fill_depth_m": 0.0,
+              "slope_degrees": 0.474026620388031,
+              "upstream_contributing_area_m2": 500.0,
+              "possible_missing_upstream_terrain": 0.0,
+              "depression_percentile": 0.0,
+              "concentration_flatness_score": 72.31416320800781,
+              "relative_screening_score": 72.31416320800781
+            },
+            "pixel_center": [
+              322984.5,
+              4729898.5
+            ],
+            "crs": "EPSG:7801",
+            "ponding_score": 0.0,
+            "concentration_score": 72.31416320800781,
+            "depression_depth_m": 0.0,
+            "slope_degrees": 0.474026620388031,
+            "contributing_area_m2": 500.0,
+            "boundary_influence": false,
+            "class_label": "Higher signal",
+            "class_index": 2,
+            "dominant_pathway": "concentration / low slope"
+          }
+        },
+        "stadium_envelope_outside_pitch": {
+          "polygon_area_m2": 15296.390682575226,
+          "eligible_cells_5m": 603,
+          "boundary_flagged_cells": 0,
+          "sampled_grid_area_m2": 15075,
+          "elevation_m": {
+            "minimum": 550.1196899414062,
+            "p10": 551.0847778320312,
+            "median": 551.6991577148438,
+            "p90": 552.9185791015625,
+            "maximum": 554.2003173828125
+          },
+          "fill_depth_m": {
+            "minimum": 0.0,
+            "p10": 0.0,
+            "median": 0.0,
+            "p90": 0.0,
+            "maximum": 0.0
+          },
+          "filled_surface_height_m": {
+            "minimum": 550.1196899414062,
+            "p10": 551.0847778320312,
+            "median": 551.6991577148438,
+            "p90": 552.9185791015625,
+            "maximum": 554.2003173828125
+          },
+          "slope_degrees": {
+            "minimum": 0.0,
+            "p10": 0.4718926250934601,
+            "median": 0.647542417049408,
+            "p90": 5.683220863342285,
+            "maximum": 14.89832878112793
+          },
+          "upstream_area_m2": {
+            "minimum": 25.0,
+            "p10": 25.0,
+            "median": 325.0,
+            "p90": 1150.0,
+            "maximum": 13900.0
+          },
+          "positive_depression_cells": 0,
+          "modes": {
+            "ponding": {
+              "scores": {
+                "minimum": 0.0,
+                "p10": 0.0,
+                "median": 0.0,
+                "p90": 0.0,
+                "maximum": 0.0
+              },
+              "classes": {
+                "Lower signal": 603,
+                "Raised": 0,
+                "Higher signal": 0,
+                "Strongest signal": 0
+              }
+            },
+            "concentration": {
+              "scores": {
+                "minimum": 13.713969230651855,
+                "p10": 17.619354248046875,
+                "median": 59.45458221435547,
+                "p90": 80.1082763671875,
+                "maximum": 93.13084411621094
+              },
+              "classes": {
+                "Lower signal": 232,
+                "Raised": 197,
+                "Higher signal": 147,
+                "Strongest signal": 27
+              }
+            },
+            "combined": {
+              "scores": {
+                "minimum": 13.713969230651855,
+                "p10": 17.619354248046875,
+                "median": 59.45458221435547,
+                "p90": 80.1082763671875,
+                "maximum": 93.13084411621094
+              },
+              "classes": {
+                "Lower signal": 232,
+                "Raised": 197,
+                "Higher signal": 147,
+                "Strongest signal": 27
+              }
+            }
+          },
+          "representative_sample": {
+            "longitude": 23.340629742090137,
+            "latitude": 42.68418213317229,
+            "analysis_resolution_m": 5,
+            "method": "terrain-relative-screen-v1",
+            "status": "ok",
+            "class": "Lower signal",
+            "score": 24.539722442626953,
+            "row": 4743,
+            "column": 4732,
+            "factors": {
+              "mean_ground_elevation_m": 552.1611938476562,
+              "depression_fill_depth_m": 0.0,
+              "slope_degrees": 3.9078309535980225,
+              "upstream_contributing_area_m2": 50.0,
+              "possible_missing_upstream_terrain": 0.0,
+              "depression_percentile": 0.0,
+              "concentration_flatness_score": 24.539722442626953,
+              "relative_screening_score": 24.539722442626953
+            },
+            "pixel_center": [
+              323054.5,
+              4729893.5
+            ],
+            "crs": "EPSG:7801",
+            "ponding_score": 0.0,
+            "concentration_score": 24.539722442626953,
+            "depression_depth_m": 0.0,
+            "slope_degrees": 3.9078309535980225,
+            "contributing_area_m2": 50.0,
+            "boundary_influence": false,
+            "class_label": "Lower signal",
+            "class_index": 0,
+            "dominant_pathway": "concentration / low slope"
+          }
+        },
+        "surrounding_0_to_100m_ring": {
+          "polygon_area_m2": 87777.20691457095,
+          "eligible_cells_5m": 3501,
+          "boundary_flagged_cells": 0,
+          "sampled_grid_area_m2": 87525,
+          "elevation_m": {
+            "minimum": 546.5513916015625,
+            "p10": 548.0616455078125,
+            "median": 551.6814575195312,
+            "p90": 555.3761596679688,
+            "maximum": 561.0
+          },
+          "fill_depth_m": {
+            "minimum": 0.0,
+            "p10": 0.0,
+            "median": 0.0,
+            "p90": 0.0,
+            "maximum": 0.0
+          },
+          "filled_surface_height_m": {
+            "minimum": 546.5513916015625,
+            "p10": 548.0616455078125,
+            "median": 551.6814575195312,
+            "p90": 555.3761596679688,
+            "maximum": 561.0
+          },
+          "slope_degrees": {
+            "minimum": 0.0,
+            "p10": 0.09787751734256744,
+            "median": 1.6560245752334595,
+            "p90": 4.308139324188232,
+            "maximum": 25.882476806640625
+          },
+          "upstream_area_m2": {
+            "minimum": 25.0,
+            "p10": 25.0,
+            "median": 175.0,
+            "p90": 2025.0,
+            "maximum": 179300.0
+          },
+          "positive_depression_cells": 0,
+          "modes": {
+            "ponding": {
+              "scores": {
+                "minimum": 0.0,
+                "p10": 0.0,
+                "median": 0.0,
+                "p90": 0.0,
+                "maximum": 0.0
+              },
+              "classes": {
+                "Lower signal": 3501,
+                "Raised": 0,
+                "Higher signal": 0,
+                "Strongest signal": 0
+              }
+            },
+            "concentration": {
+              "scores": {
+                "minimum": 5.617274761199951,
+                "p10": 16.798120498657227,
+                "median": 47.909664154052734,
+                "p90": 79.0932846069336,
+                "maximum": 97.43863677978516
+              },
+              "classes": {
+                "Lower signal": 1856,
+                "Raised": 815,
+                "Higher signal": 691,
+                "Strongest signal": 139
+              }
+            },
+            "combined": {
+              "scores": {
+                "minimum": 5.617274761199951,
+                "p10": 16.798120498657227,
+                "median": 47.909664154052734,
+                "p90": 79.0932846069336,
+                "maximum": 97.43863677978516
+              },
+              "classes": {
+                "Lower signal": 1856,
+                "Raised": 815,
+                "Higher signal": 691,
+                "Strongest signal": 139
+              }
+            }
+          },
+          "representative_sample": {
+            "longitude": 23.34152781883331,
+            "latitude": 42.68419905768435,
+            "analysis_resolution_m": 5,
+            "method": "terrain-relative-screen-v1",
+            "status": "ok",
+            "class": "Higher signal",
+            "score": 80.89291381835938,
+            "row": 4743,
+            "column": 4747,
+            "factors": {
+              "mean_ground_elevation_m": 553.1749267578125,
+              "depression_fill_depth_m": 0.0,
+              "slope_degrees": 1.7200429439544678,
+              "upstream_contributing_area_m2": 93075.0,
+              "possible_missing_upstream_terrain": 0.0,
+              "depression_percentile": 0.0,
+              "concentration_flatness_score": 80.89291381835938,
+              "relative_screening_score": 80.89291381835938
+            },
+            "pixel_center": [
+              323129.5,
+              4729893.5
+            ],
+            "crs": "EPSG:7801",
+            "ponding_score": 0.0,
+            "concentration_score": 80.89291381835938,
+            "depression_depth_m": 0.0,
+            "slope_degrees": 1.7200429439544678,
+            "contributing_area_m2": 93075.0,
+            "boundary_influence": false,
+            "class_label": "Higher signal",
+            "class_index": 2,
+            "dominant_pathway": "concentration / low slope"
+          }
+        }
+      },
+      "native_pitch_check": {
+        "native_cells_1m": 7170,
+        "native_grid_area_m2": 7170,
+        "native_height_m": {
+          "minimum": 551.3131713867188,
+          "p10": 551.378662109375,
+          "median": 551.6082763671875,
+          "p90": 551.8308715820312,
+          "maximum": 552.0
+        },
+        "ratio_native_to_5m_cell_count": 24.387755102040817
+      },
+      "native_same5m_cell_check": {
+        "five_m_cell": [
+          4742,
+          4718
+        ],
+        "native_5x5_window": [
+          23710,
+          23590,
+          5,
+          5
+        ],
+        "native_minimum_m": 551.5560302734375,
+        "native_maximum_m": 551.6028442382812,
+        "native_mean_m": 551.5794067382812,
+        "derived_5m_mean_m": 551.5794677734375,
+        "difference_m": 6.103515625e-05
+      }
+    }
+  ],
+  "interpretation": [
+    "Ponding score is the percentile rank of positive filled-minus-original terrain depth. A deeper mapped bowl can produce a strong percentile without any storm simulation.",
+    "Filled-surface height is the regional priority-flood spill surface, not observed standing water or a design water level.",
+    "Stadium-envelope-outside-pitch includes stands, track and other surfaces; it is not a surveyed seating or roof polygon.",
+    "OSM features reflect map edits in2026; the labelled2024DTM may represent different, older terrain. Survey date/method/vertical error and changes since acquisition remain unknown.",
+    "No turf infiltration, field underdrains, pumps, inlet capacity, stadium engineering design or flood event observations are available in the screening inputs. The model therefore cannot establish actual stadium flood risk.",
+    "No named stadium is removed or downweighted. Any index change requires a general, evidence-based method and consistent application."
+  ],
+  "confirmed_user_stadium": "Vasil Levski National Stadium"
+}

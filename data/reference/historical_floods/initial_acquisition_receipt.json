@@ -1,0 +1,64 @@
+[
+  {
+    "file": "hanze_record_20478847.json",
+    "url": "https://zenodo.org/api/records/20478847",
+    "bytes": 10722,
+    "sha256": "c3246fa34bf4209006c857d6863a8aa7f5d3fa0c6b78bca1e52782ca34d67232",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:49:30.534723+00:00"
+  },
+  {
+    "file": "HANZE_events_v3_0_1b.csv",
+    "url": "https://zenodo.org/records/20478847/files/HANZE_events_v3_0_1b.csv?download=1",
+    "bytes": 618212,
+    "sha256": "9dee8b17f725b6700e9e4086c1a23c79415a1d616fd5e13de93eb412e8462a99",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:49:30.848895+00:00"
+  },
+  {
+    "file": "HANZE_references_v3_0_1b.csv",
+    "url": "https://zenodo.org/records/20478847/files/HANZE_references_v3_0_1b.csv?download=1",
+    "bytes": 268970,
+    "sha256": "7d3932ffb38f3b4c346d6a4858b1a19f883eb919a143108f1822f03419d6c9ed",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:49:30.733454+00:00"
+  },
+  {
+    "file": "Regions_v2024_simplified.zip",
+    "url": "https://zenodo.org/records/20478847/files/Regions_v2024_simplified.zip?download=1",
+    "bytes": 2430309,
+    "sha256": "4e8a4afe47940fbe38600fa7090faf84da389e7bb65bc72c1b65244c837b1ff8",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:49:31.489531+00:00"
+  },
+  {
+    "file": "S2_regions_codes_and_names_v2024.csv",
+    "url": "https://zenodo.org/records/20478847/files/S2_regions_codes_and_names_v2024.csv?download=1",
+    "bytes": 32001,
+    "sha256": "4d5f26a28b742debf86598f1cfd99887930de1d0e45ca72a6c3cd2ea90d57edc",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:49:31.200843+00:00"
+  },
+  {
+    "file": "bddr_pfra_2028_2033.html",
+    "url": "https://www.bd-dunav.bg/content/upravlenie-na-vodite/plan-za-upravlenie-na-riska-ot-navodneniia-2028-2033/aktualizaciia-na-porn/",
+    "bytes": 21821,
+    "sha256": "c632e435e83d8ad46e77623159b953f9ae0652b4ba2ba9186ee2ad8316561307",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:49:31.009329+00:00"
+  },
+  {
+    "file": "bddr_home.html",
+    "url": "https://www.bd-dunav.bg/",
+    "bytes": 33881,
+    "sha256": "1d14e984fba7ff4b880db7dbbad1519b90d6e9c2ff065bdade568d7a1bd8c779",
+    "status": "downloaded",
+    "retrieved_utc": "2026-10-25T07:49:33.086264+00:00"
+  },
+  {
+    "file": "bddr_geoserver_wfs.xml",
+    "url": "http://84.16.227.175/geoserver/ows?service=WFS&version=2.0.0&request=GetCapabilities",
+    "status": "failed",
+    "error": "timed out"
+  }
+]

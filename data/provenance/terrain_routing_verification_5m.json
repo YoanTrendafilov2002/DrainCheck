@@ -1,0 +1,135 @@
+{
+  "routing_checks": {
+    "status": "PASS",
+    "scope": "Synthetic routing checks, not Sofia flood calibration",
+    "pit_filled_without_lowering_terrain": true,
+    "total_area_conserved_at_terminal_cells": true,
+    "sealed_area_conserved_at_terminal_cells": true,
+    "coefficient_linear_combination_equals_direct_routing": true,
+    "toy_grid_cells": 81,
+    "toy_terminal_cells": 1
+  },
+  "live_earth_engine_tested": false,
+  "measured_flood_accuracy_tested": false,
+  "raster": {
+    "shape": [
+      10869,
+      10345
+    ],
+    "bands": [
+      {
+        "band": 1,
+        "name": "mean_ground_elevation_m",
+        "valid_cells": 53682786,
+        "minimum": 500.04241943359375,
+        "maximum": 2280.84326171875,
+        "zero_cells": 0,
+        "one_cells": 0
+      },
+      {
+        "band": 2,
+        "name": "depression_fill_depth_m",
+        "valid_cells": 53682786,
+        "minimum": 0.0,
+        "maximum": 28.0,
+        "zero_cells": 51583255,
+        "one_cells": 90871
+      },
+      {
+        "band": 3,
+        "name": "slope_degrees",
+        "valid_cells": 53631022,
+        "minimum": 0.0,
+        "maximum": 74.93433380126953,
+        "zero_cells": 4649998,
+        "one_cells": 0
+      },
+      {
+        "band": 4,
+        "name": "upstream_contributing_area_m2",
+        "valid_cells": 53682786,
+        "minimum": 25.0,
+        "maximum": 1091776768.0,
+        "zero_cells": 0,
+        "one_cells": 0
+      },
+      {
+        "band": 5,
+        "name": "possible_missing_upstream_terrain",
+        "valid_cells": 53682786,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "zero_cells": 53187833,
+        "one_cells": 494953
+      },
+      {
+        "band": 6,
+        "name": "imperviousness_density_2024_pct",
+        "valid_cells": 0,
+        "minimum": null,
+        "maximum": null,
+        "zero_cells": 0,
+        "one_cells": 0
+      },
+      {
+        "band": 7,
+        "name": "upstream_sealed_area_m2",
+        "valid_cells": 0,
+        "minimum": null,
+        "maximum": null,
+        "zero_cells": 0,
+        "one_cells": 0
+      },
+      {
+        "band": 8,
+        "name": "missing_upstream_imperviousness",
+        "valid_cells": 0,
+        "minimum": null,
+        "maximum": null,
+        "zero_cells": 0,
+        "one_cells": 0
+      }
+    ],
+    "crs": "EPSG:7801",
+    "transform": [
+      5.0,
+      0.0,
+      299392.0,
+      0.0,
+      -5.0,
+      4753611.0
+    ],
+    "nodata": -9999.0,
+    "bytes": 325774749,
+    "nominal_valid_area_km2": 1342.06965
+  },
+  "full_imperviousness_inputs_present": false,
+  "infrastructure_grid_checks": {
+    "source_records": 322025,
+    "inside_raster_extent": 322025,
+    "with_valid_5m_terrain": 322025,
+    "with_valid_slope": 322025,
+    "with_boundary_influence_flag": 62
+  },
+  "native_5x5_mean_checks": {
+    "status": "PASS",
+    "windows": 50,
+    "absolute_tolerance_metres": 0.0002
+  },
+  "full_municipal_routing_checks": {
+    "status": "PASS",
+    "every_routing_edge_is_downhill_or_equal_height": true,
+    "interior_terminal_cells": 0,
+    "terminal_cells": 5903,
+    "expected_total_area_m2": 1342069650.0,
+    "summed_terminal_area_m2": 1342069642.0,
+    "relative_difference": -5.960942489087657e-09,
+    "terminal_area_tolerance_relative": 1e-06
+  },
+  "source_files_unchanged_sha256": {
+    "sofia_dtm_2024_1m.tif": "503509ee6b0b6d596a25b4b7930d70b96100277588be79b8b645538be4f76bdc",
+    "sofia_dtm_2024_1m_gee.tif": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3"
+  },
+  "prepared_sha256": "62f71c04d766d8d5688655f0b2230429154a61a92d6a488a3a485dfc479ca71e",
+  "status": "PASS"
+}

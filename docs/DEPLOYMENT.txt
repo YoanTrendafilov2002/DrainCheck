@@ -1,0 +1,41 @@
+LOCAL / PRIVATE DEPLOYMENT
+
+Nothing has been published. The delivered launcher binds only 127.0.0.1.
+
+Local app, prebuilt frontend:
+  python scripts/serve.py
+  # or without automatically opening a browser:
+  python scripts/serve.py --no-browser --port 8040
+
+For another machine:
+  1. Copy the source package and the real native DTM. Install Python 3.12.
+  2. Create .venv and install requirements-lock.txt.
+  3. Copy .env.example to .env; point SOFIA_DTM_PATH at the actual native raster.
+  4. Run python scripts/prepare_data.py. Existing correct caches are reused.
+  5. Run python scripts/serve.py. Prebuilt dist/ is included.
+
+For code changes, install Node >=22 and pnpm, then:
+  pnpm install --frozen-lockfile
+  pnpm test
+  pnpm build
+Restart the Python service after replacing the build or source/data revision.
+
+For a user-managed private server/container, run the same ASGI app behind your
+usual HTTPS/authenticated reverse proxy. One worker is a practical starting
+point; raster and tile caches are per process and multiple workers increase RAM.
+Mount the original native raster read-only. Put data/cache on a writable local
+volume, and stop the service while rebuilding a changed spatial index. The API
+and dist frontend are served on the same origin, so no third-party CORS proxy is
+required. Public exposure would require your own access-control/reuse review;
+none is provisioned by these instructions or by the build.
+
+Only the public OpenFreeMap basemap and optional font assets depend on outside
+browser requests. The terrain, routes, green polygons and points are served by
+your own API. A no-external-basemap option is included. Basemap attribution is
+retained. API endpoint /api/health reports availability; /api/meta reports the
+data revision and actual loaded provenance.
+
+Dependency build note: Vite reports a large MapLibre-related JavaScript chunk
+(about 1.31 MB raw / 365 kB compressed). This is renderer code, not embedded
+GeoJSON. It is a build warning, not a failed check. Third-party Shapely/MVT and
+Starlette test-client deprecation warnings are recorded in test output.

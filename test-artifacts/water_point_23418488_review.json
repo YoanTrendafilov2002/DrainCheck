@@ -1,0 +1,88 @@
+{
+  "point": [
+    23.418488,
+    42.687939
+  ],
+  "row": 4691,
+  "column": 6010,
+  "pixel_center_wgs84": [
+    23.418496100741393,
+    42.68794545744195
+  ],
+  "mask_value": 0,
+  "source_snapshot": "osm_open_water_20261025T073109Z.json",
+  "findings": [
+    {
+      "osm_id": "relation/5186202",
+      "source_url": "https://www.openstreetmap.org/relation/5186202",
+      "tags": {
+        "natural": "water",
+        "type": "multipolygon"
+      },
+      "osm_timestamp": "2015-05-24T20:04:42Z",
+      "accepted": true,
+      "exclusion_reason": null,
+      "point_inside": false,
+      "pixel_center_inside": false,
+      "distance_from_user_point_m": 41.63137971808807,
+      "distance_from_pixel_center_m": 40.669001937971665,
+      "nearest_footprint_coordinate": [
+        23.418763700000003,
+        42.6882538
+      ]
+    },
+    {
+      "osm_id": "way/1426894172",
+      "source_url": "https://www.openstreetmap.org/way/1426894172",
+      "tags": {
+        "natural": "water",
+        "water": "canal"
+      },
+      "osm_timestamp": "2025-09-03T18:37:58Z",
+      "accepted": true,
+      "exclusion_reason": null,
+      "point_inside": false,
+      "pixel_center_inside": false,
+      "distance_from_user_point_m": 146.5693846030443,
+      "distance_from_pixel_center_m": 146.63155714482005,
+      "nearest_footprint_coordinate": [
+        23.419720732256323,
+        42.686982957402364
+      ]
+    },
+    {
+      "osm_id": "relation/16558829",
+      "source_url": "https://www.openstreetmap.org/relation/16558829",
+      "tags": {
+        "name": "\u0414\u0440\u0443\u0436\u0431\u0435\u043d\u0441\u043a\u043e \u0435\u0437\u0435\u0440\u043e",
+        "natural": "water",
+        "type": "multipolygon",
+        "water": "lake",
+        "wikidata": "Q20498888",
+        "wikipedia": "bg:\u0414\u0440\u0443\u0436\u0431\u0435\u043d\u0441\u043a\u043e \u0435\u0437\u0435\u0440\u043e"
+      },
+      "osm_timestamp": "2025-10-27T22:23:17Z",
+      "accepted": true,
+      "exclusion_reason": null,
+      "point_inside": false,
+      "pixel_center_inside": false,
+      "distance_from_user_point_m": 2709.5762119727415,
+      "distance_from_pixel_center_m": 2710.5174136764413,
+      "nearest_footprint_coordinate": [
+        23.4034032,
+        42.6662332
+      ]
+    },
+    {
+      "osm_id": "relation/18142180",
+      "geometry_error": "Inner ring has no enclosing outer ring",
+      "raw_bbox": {
+        "minlat": 42.7125554,
+        "minlon": 23.2846682,
+        "maxlat": 42.7130053,
+        "maxlon": 23.2851966
+      }
+    }
+  ],
+  "assessment": "The point and actual5m pixel centre are outside every reconstructed mapped water footprint. Nearest accepted water is41.63m away, so mask0 follows the source polygon rather than a rasterization error. This does not verify present-day dry land; nearest water geometry was last edited in2015. The one rejected invalid relation has bounding coordinates around23.285,42.713, far from this point."
+}

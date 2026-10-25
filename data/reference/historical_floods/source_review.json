@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-25",
+  "spatial_overlay_available": true,
+  "recommended_overlay": {
+    "source": "Sofiaplan drone flood survey dataset549 / ArcGIS layer310",
+    "geometry_grain": "Actual mapped survey polygons",
+    "title": "Mapped 2021 flood zones — Sofiaplan drone survey",
+    "feature_count": 136,
+    "processed_file": "data/reference/historical_floods/sofiaplan_flood_zones_2021_display.geojson",
+    "metadata_file": "data/cache/historical_flood_zones_meta.json",
+    "geometry_precision": "Survey accuracy and per-polygon observation dates are not supplied",
+    "type": "Unclassified per polygon; river-associated rainfall event context, not confirmed pure pluvial",
+    "revision": "7fbfbcee6ee933f4"
+  },
+  "sources": [
+    {
+      "id": "sofiaplan_2021_survey",
+      "url": "https://api.sofiaplan.bg/datasets/549",
+      "catalogue": "https://urbandata.sofia.bg/dataset/flooded-areas-identified-by-drone-survey-february-2021",
+      "service": "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer/310",
+      "kind": "Observed mapped flood zones",
+      "geometry": "136 Polygon/MultiPolygon features",
+      "date": "Catalogue February2021/current as01Feb2021; associated study January2021/image18Jan2021. Exact feature dates unresolved.",
+      "license": "Not specified in municipal catalogue",
+      "original": "sofiaplan_dataset549_original.geojson",
+      "original_sha256": "4dd3a56051da45f513097212b59ca6e8780c1c006c938c5c89ee04f3be64ce4d",
+      "used_for": "Separate historical survey context overlay; no terrain calibration"
+    },
+    {
+      "id": "sofiaplan_2021_study",
+      "url": "https://sofiaplan.bg/wp-content/uploads/2021/03/I.10.3_%D0%91%D0%B5%D0%B4%D1%81%D1%82%D0%B2%D0%B8%D1%8F.pdf",
+      "kind": "Municipal analysis of actual2021flood mapping",
+      "locator": "Printed264–265 / PDF5–6",
+      "used_for": "River-associated northern-event context and warning of incomplete surveyed extent",
+      "quality_issue": "Printed19,150ha total conflicts with1.915km² geometry sum and study land-use totals; printed area not adopted"
+    },
+    {
+      "id": "bddr_2020_2025_register",
+      "url": "https://www.bd-dunav.bg/content/upravlenie-na-vodite/plan-za-upravlenie-na-riska-ot-navodneniia-2028-2033/aktualizaciia-na-porn/",
+      "kind": "Actual historical records; draft2026PFRApublication",
+      "publication_date": "2026-08-14",
+      "observation_period": "2020–2025",
+      "selected_rows": 19,
+      "unique_event_ids": 15,
+      "selected_row_date_range": "2020-07-07 to2024-12-07",
+      "type_counts": {
+        "Pluvial": 14,
+        "Pluvial + river": 2,
+        "Pluvial + infrastructure": 3
+      },
+      "geometry": null,
+      "license": "No explicit open reuse licence identified on retrieved page",
+      "original": "bddr_pastFloods_2020_2025.xlsx",
+      "used_for": "Source-backed incident list and CSV; null geometry, no geocoding"
+    },
+    {
+      "id": "bddr_official_pfra_map",
+      "url": "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN-2022-2027/aktualizacia_PORN/BG1_APSFR_IS_041.pdf",
+      "kind": "PFRA context map with historical symbols and selected analysis zones",
+      "cycle": "2022–2027",
+      "scale": "1:150,000",
+      "original": "bddr_sofia_pfra_map.pdf",
+      "visually_reviewed": true,
+      "render_receipt": "work/bddr_sofia_pfra_map_review.png",
+      "used_for": "Official contextual map link/download",
+      "warning": "Blue hatching and river corridors are analysis zones, not observed inundation. Historical counts use separate orange/red circle symbols."
+    },
+    {
+      "id": "hanze_v3_0_1_beta",
+      "url": "https://zenodo.org/records/20478847",
+      "doi": "10.5281/zenodo.20478847",
+      "publication_date": "2026-05-31",
+      "observation_period": "1870–2025",
+      "license": "CC BY4.0",
+      "kind": "Observed event and impact catalogue",
+      "geometry_grain": "NUTS3 affected-region membership, not flood extent",
+      "sofia_city_event_count": 1,
+      "sofia_city_event": {
+        "id": "48",
+        "start": "2005-08-04",
+        "end": "2005-08-11",
+        "type": "River/fluvial",
+        "multi_region": true
+      },
+      "used_for": "Supplementary historic context; no region shaded as inundation"
+    },
+    {
+      "id": "sofia_20230616_report",
+      "url": "https://www.sofia.bg/w/%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8F-%D0%B7%D0%B0-%D0%BE%D0%B1%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0%D1%82%D0%B0-%D0%BA%D1%8A%D0%BC-7-00-%D1%87%D0%B0%D1%81%D0%B0",
+      "kind": "Municipal situation report",
+      "date": "2023-06-16",
+      "geometry": null,
+      "acquisition": "Readable by web search/open; direct archival403. No bypass attempted.",
+      "used_for": "Qualitative city pluvial evidence; broad descriptions not converted into points"
+    },
+    {
+      "id": "nimh_october2025",
+      "url": "https://bulletins.cfd.meteo.bg/bull/Buletin_NIMH_202510.pdf",
+      "kind": "National meteorological bulletin",
+      "locator": "Printed page11 /27Oct2025",
+      "geometry": null,
+      "original": "nimh_202510_bulletin.pdf",
+      "used_for": "Qualitative report of unnamed flooded Sofia intersection; no invented location"
+    }
+  ],
+  "checked_but_not_used": [
+    {
+      "source": "Danube Basin WFS",
+      "url": "http://84.16.227.175/geoserver/ows?service=WFS&version=2.0.0&request=GetCapabilities",
+      "status": "Timed out; no capabilities or historical feature data retrieved",
+      "official_link_verified": "Basin homepage includes public webGIS http://84.16.227.175/"
+    },
+    {
+      "source": "2026PFRAmaparchive",
+      "url": "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN%202028-2033/aktual_PORN/Karti_PORN_za_konsultacii.rar",
+      "status": "HEAD only,95,326,435bytes; not required after genuine survey geometry and earlier map were obtained"
+    },
+    {
+      "source": "2011–2019 Danube Basin past-flood register",
+      "original": "bddr_pastFloods_2011_2019.xlsx",
+      "status": "Preserved/read-only; strict Sofia city municipality/settlement selection returned no rows. Not proof of absence of flooding."
+    },
+    {
+      "source": "EFAS notifications",
+      "status": "Forecast warnings, not observations"
+    },
+    {
+      "source": "Modelled river/surface-water likelihood maps and APSFR",
+      "status": "Future hazard/analysis geometry; not historical flood footprints"
+    },
+    {
+      "source": "CEMS Sofia-region Madagascar activations",
+      "status": "Geographically unrelated to Bulgaria; rejected"
+    }
+  ],
+  "limitations": [
+    "Survey polygons and textual records are distinct datasets; do not conflate them or assign every incident to the survey footprint.",
+    "No complete citywide inventory or surveyed negative controls; no absence/safety or probability inference.",
+    "Rainfall flooding along river corridors can include river processes; pure pluvial calibration requires independent mechanisms and event data.",
+    "Original sources are unchanged; only two invalid rings repaired in derived display geometry, with near-zero area change."
+  ]
+}

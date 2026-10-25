@@ -1,0 +1,952 @@
+{
+  "type": "FeatureCollection",
+  "columns": {
+    "qc": "String",
+    "rain_mm": "Float",
+    "rows": "Integer",
+    "station_id": "String",
+    "system:index": "String"
+  },
+  "version": 1792858989902094,
+  "id": "projects/rivertracker-512606/assets/sofia_rain_20250627/wu_stations",
+  "properties": {
+    "system:asset_size": 5933
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.359999999999996,
+          42.66
+        ]
+      },
+      "id": "0000000000000000000b",
+      "properties": {
+        "qc": "implausible",
+        "rain_mm": 265.9,
+        "rows": 589,
+        "station_id": "ISOFIA408"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.330000000000002,
+          42.66
+        ]
+      },
+      "id": "00000000000000000025",
+      "properties": {
+        "qc": "implausible",
+        "rain_mm": 441.7,
+        "rows": 589,
+        "station_id": "ISOFIA667"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.24,
+          42.66
+        ]
+      },
+      "id": "00000000000000000032",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 14.2,
+        "rows": 297,
+        "station_id": "ISOFIA688"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.290000000000003,
+          42.69000000000001
+        ]
+      },
+      "id": "0000000000000000001b",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 8.6,
+        "rows": 529,
+        "station_id": "ISOFIA627"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.349999999999998,
+          42.72
+        ]
+      },
+      "id": "00000000000000000001",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 13.7,
+        "rows": 541,
+        "station_id": "I750"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.429999999999996,
+          42.67
+        ]
+      },
+      "id": "00000000000000000006",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 1.5,
+        "rows": 585,
+        "station_id": "IBUSMA2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.249999999999996,
+          42.65
+        ]
+      },
+      "id": "00000000000000000015",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 21.1,
+        "rows": 587,
+        "station_id": "ISOFIA584"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.280000000000005,
+          42.66
+        ]
+      },
+      "id": "00000000000000000026",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 10.2,
+        "rows": 587,
+        "station_id": "ISOFIA671"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.380000000000003,
+          42.71
+        ]
+      },
+      "id": "0000000000000000002c",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 6.9,
+        "rows": 587,
+        "station_id": "ISOFIA678"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.36,
+          42.72
+        ]
+      },
+      "id": "00000000000000000034",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 15.2,
+        "rows": 587,
+        "station_id": "ISOFIA693"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.349999999999998,
+          42.690000000000005
+        ]
+      },
+      "id": "00000000000000000000",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 24.9,
+        "rows": 589,
+        "station_id": "ISOFIA392"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.280000000000005,
+          42.65
+        ]
+      },
+      "id": "00000000000000000002",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 19,
+        "rows": 589,
+        "station_id": "IBOYAN10"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.270000000000003,
+          42.66
+        ]
+      },
+      "id": "00000000000000000003",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 9.9,
+        "rows": 589,
+        "station_id": "IBOYAN4"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.469999999999995,
+          42.66
+        ]
+      },
+      "id": "00000000000000000005",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 8.1,
+        "rows": 589,
+        "station_id": "ISOFIASO8"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.230000000000004,
+          42.68
+        ]
+      },
+      "id": "00000000000000000007",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 13,
+        "rows": 589,
+        "station_id": "IGORNA15"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.319999999999997,
+          42.690000000000005
+        ]
+      },
+      "id": "00000000000000000009",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 10.9,
+        "rows": 589,
+        "station_id": "ISOFIA31"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.359999999999996,
+          42.66
+        ]
+      },
+      "id": "0000000000000000000d",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 24.4,
+        "rows": 589,
+        "station_id": "ISOFIA460"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.319999999999997,
+          42.68
+        ]
+      },
+      "id": "0000000000000000000e",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 2.8,
+        "rows": 589,
+        "station_id": "ISOFIA463"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.3,
+          42.66
+        ]
+      },
+      "id": "0000000000000000000f",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 8.6,
+        "rows": 589,
+        "station_id": "ISOFIA474"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.36,
+          42.68
+        ]
+      },
+      "id": "00000000000000000010",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 18.3,
+        "rows": 589,
+        "station_id": "ISOFIA491"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.349999999999998,
+          42.65999999999999
+        ]
+      },
+      "id": "00000000000000000011",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 23.6,
+        "rows": 589,
+        "station_id": "ISOFIA512"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.260000000000005,
+          42.71
+        ]
+      },
+      "id": "00000000000000000012",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 7.1,
+        "rows": 589,
+        "station_id": "ISOFIA521"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.33,
+          42.68
+        ]
+      },
+      "id": "00000000000000000013",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 16.5,
+        "rows": 589,
+        "station_id": "ISOFIA553"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.270000000000003,
+          42.7
+        ]
+      },
+      "id": "00000000000000000017",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 23.6,
+        "rows": 589,
+        "station_id": "ISOFIA603"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.36,
+          42.67
+        ]
+      },
+      "id": "00000000000000000019",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 26.7,
+        "rows": 589,
+        "station_id": "ISOFIA618"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.290000000000003,
+          42.68
+        ]
+      },
+      "id": "0000000000000000001a",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 8.1,
+        "rows": 589,
+        "station_id": "ISOFIA624"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.349999999999998,
+          42.71
+        ]
+      },
+      "id": "0000000000000000001c",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 15.5,
+        "rows": 589,
+        "station_id": "ISOFIA630"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.319999999999997,
+          42.68
+        ]
+      },
+      "id": "0000000000000000001d",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 9.9,
+        "rows": 589,
+        "station_id": "ISOFIA633"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.24,
+          42.66
+        ]
+      },
+      "id": "0000000000000000001e",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 18.5,
+        "rows": 589,
+        "station_id": "ISOFIA643"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.31,
+          42.65999999999999
+        ]
+      },
+      "id": "0000000000000000001f",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 7.9,
+        "rows": 589,
+        "station_id": "ISOFIA647"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.380000000000003,
+          42.7
+        ]
+      },
+      "id": "00000000000000000020",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 5.6,
+        "rows": 589,
+        "station_id": "ISOFIA652"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.319999999999997,
+          42.65999999999999
+        ]
+      },
+      "id": "00000000000000000021",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 6.1,
+        "rows": 589,
+        "station_id": "ISOFIA656"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.4,
+          42.65
+        ]
+      },
+      "id": "00000000000000000022",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 11.7,
+        "rows": 589,
+        "station_id": "ISOFIA663"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.31,
+          42.69
+        ]
+      },
+      "id": "00000000000000000023",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 19,
+        "rows": 589,
+        "station_id": "ISOFIA665"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.340000000000003,
+          42.65
+        ]
+      },
+      "id": "00000000000000000024",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 16,
+        "rows": 589,
+        "station_id": "ISOFIA666"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.280000000000005,
+          42.69000000000001
+        ]
+      },
+      "id": "00000000000000000027",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 7.6,
+        "rows": 589,
+        "station_id": "ISOFIA673"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.290000000000003,
+          42.72
+        ]
+      },
+      "id": "00000000000000000028",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 3.8,
+        "rows": 589,
+        "station_id": "ISOFIA674"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.299999999999997,
+          42.71
+        ]
+      },
+      "id": "0000000000000000002a",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 3.8,
+        "rows": 589,
+        "station_id": "ISOFIA676"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.280000000000005,
+          42.67
+        ]
+      },
+      "id": "0000000000000000002d",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 25.9,
+        "rows": 589,
+        "station_id": "ISOFIA679"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.43,
+          42.65
+        ]
+      },
+      "id": "0000000000000000002e",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 0,
+        "rows": 589,
+        "station_id": "ISOFIA682"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.31,
+          42.7
+        ]
+      },
+      "id": "00000000000000000030",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 11.4,
+        "rows": 589,
+        "station_id": "ISOFIA684"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.24,
+          42.66
+        ]
+      },
+      "id": "00000000000000000031",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 16.8,
+        "rows": 589,
+        "station_id": "ISOFIA687"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.300000000000004,
+          42.67
+        ]
+      },
+      "id": "00000000000000000033",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 12.7,
+        "rows": 589,
+        "station_id": "ISOFIA692"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.36,
+          42.69000000000001
+        ]
+      },
+      "id": "00000000000000000035",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 12.7,
+        "rows": 589,
+        "station_id": "ISOFIA698"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.380000000000003,
+          42.71
+        ]
+      },
+      "id": "00000000000000000036",
+      "properties": {
+        "qc": "ok",
+        "rain_mm": 5.6,
+        "rows": 589,
+        "station_id": "ISOFIA699"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.28,
+          42.68
+        ]
+      },
+      "id": "00000000000000000018",
+      "properties": {
+        "qc": "partial day",
+        "rain_mm": 16,
+        "rows": 103,
+        "station_id": "ISOFIA606"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.33,
+          42.7
+        ]
+      },
+      "id": "00000000000000000014",
+      "properties": {
+        "qc": "partial day",
+        "rain_mm": 18.8,
+        "rows": 205,
+        "station_id": "ISOFIA568"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.33,
+          42.68
+        ]
+      },
+      "id": "0000000000000000002b",
+      "properties": {
+        "qc": "too low vs neighbours (12 mm)",
+        "rain_mm": 0.8,
+        "rows": 589,
+        "station_id": "ISOFIA677"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.270000000000003,
+          42.66
+        ]
+      },
+      "id": "0000000000000000000c",
+      "properties": {
+        "qc": "too low vs neighbours (13 mm)",
+        "rain_mm": 0,
+        "rows": 527,
+        "station_id": "ISOFIA458"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.249999999999996,
+          42.67
+        ]
+      },
+      "id": "00000000000000000029",
+      "properties": {
+        "qc": "too low vs neighbours (14 mm)",
+        "rain_mm": 0,
+        "rows": 453,
+        "station_id": "ISOFIA675"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.249999999999996,
+          42.68
+        ]
+      },
+      "id": "00000000000000000008",
+      "properties": {
+        "qc": "too low vs neighbours (14 mm)",
+        "rain_mm": 0,
+        "rows": 589,
+        "station_id": "IGORNA27"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.349999999999998,
+          42.65999999999999
+        ]
+      },
+      "id": "00000000000000000004",
+      "properties": {
+        "qc": "too low vs neighbours (17 mm)",
+        "rain_mm": 0,
+        "rows": 289,
+        "station_id": "IIZGRE1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.31,
+          42.71
+        ]
+      },
+      "id": "0000000000000000000a",
+      "properties": {
+        "qc": "too low vs neighbours (6 mm)",
+        "rain_mm": 0,
+        "rows": 589,
+        "station_id": "ISOFIA394"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.299999999999997,
+          42.71
+        ]
+      },
+      "id": "00000000000000000016",
+      "properties": {
+        "qc": "too low vs neighbours (8 mm)",
+        "rain_mm": 2,
+        "rows": 589,
+        "station_id": "ISOFIA587"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.31,
+          42.7
+        ]
+      },
+      "id": "0000000000000000002f",
+      "properties": {
+        "qc": "too low vs neighbours (8 mm)",
+        "rain_mm": 1,
+        "rows": 589,
+        "station_id": "ISOFIA683"
+      }
+    }
+  ]
+}

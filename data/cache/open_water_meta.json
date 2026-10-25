@@ -1,0 +1,177 @@
+{
+  "available": true,
+  "enabled": true,
+  "method": "osm-open-water-polygons-centres-v1",
+  "revision": "ee06795221a5005e",
+  "sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030",
+  "file": "data/cache/open_water_mask_5m.tif",
+  "source": {
+    "provider": "OpenStreetMap contributors via Overpass API",
+    "url": "https://www.openstreetmap.org",
+    "license": "ODbL1.0",
+    "license_url": "https://www.openstreetmap.org/copyright",
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "download_utc": "2026-10-25T07:31:52.542206+00:00",
+    "osm_base_timestamp": "2026-10-25T07:30:02Z",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "raw_file": "osm_open_water_20261025T073109Z.json",
+    "raw_sha256": "fac32b04617a843356983496bc772970f7a62462a0a8526ecaeb9cf803a126c6",
+    "query_file": "osm_open_water_20261025T073109Z.overpass",
+    "query_sha256": "2073985b485bdf675e6d21df0640de901089b2bc4e8ce818060ffce870297d75",
+    "geojson_file": "data\\reference\\open_water_polygons.geojson",
+    "geojson_sha256": "c7d63f4d8dcea916f11372aa4911988e483a50901f94a4beda72da33b43ab509"
+  },
+  "source_urls": [
+    "https://www.openstreetmap.org/copyright",
+    "https://wiki.openstreetmap.org/wiki/Tag:natural%3Dwater",
+    "https://wiki.openstreetmap.org/wiki/Tag:water%3Driver",
+    "https://wiki.openstreetmap.org/wiki/Relation:multipolygon",
+    "https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL"
+  ],
+  "retrieved": "2026-10-25T07:31:52.542206+00:00",
+  "coverage_bbox": [
+    23.033601825086354,
+    42.392740683952645,
+    23.700971220841907,
+    42.913568431160385
+  ],
+  "grid": {
+    "crs": "EPSG:7801",
+    "shape": [
+      10869,
+      10345
+    ],
+    "transform": [
+      5.0,
+      0.0,
+      299392.0,
+      0.0,
+      -5.0,
+      4753611.0
+    ],
+    "dtype": "uint8",
+    "nodata": null,
+    "values": {
+      "0": "not mapped qualifying water; also outside valid terrain",
+      "1": "mapped qualifying water exclusion"
+    }
+  },
+  "counts": {
+    "water_cells": 1519688,
+    "water_area_km2": 37.9922,
+    "accepted_source_polygons": 537,
+    "accepted_river_polygons": 18,
+    "rejected_source_objects": 49,
+    "water_pixels_outside_valid_terrain_removed": 203925
+  },
+  "water_cells": 1519688,
+  "water_area_km2": 37.9922,
+  "pixel_class_counts": {
+    "0": 110920117,
+    "1": 1519688
+  },
+  "policy": "Actual natural=water/legacy riverbank polygon interiors only; seasonal/intermittent/dry/disused/indoor/covered/splash-pad features excluded. Multipolygon holes preserved; no waterway-line buffers. Pixel-centre5m mask; outside valid terrain0.",
+  "limitations": [
+    "OSM is community mapping, not a current surveyed water or flood boundary; missing/untagged narrow rivers remain unmasked.",
+    "0 means no qualifying mapped water, not verified land or absence of flood risk. No riverbank or floodplain safety exclusion is inferred.",
+    "Unmarked seasonality, source misclassification, bridge decks and changing water levels may affect mapped footprints.",
+    "Central Perlovska/canal polygons by VasilLevski are tagged intermittent=yes and deliberately remain unexcluded under this conservative rule.",
+    "At5m pixel-centre resolution narrow water slivers may contain no pixel centres. No arbitrary widening is applied."
+  ],
+  "known_water_examples": [
+    {
+      "name": "Ariana lake water",
+      "osm_id": "relation/2905862",
+      "longitude": 23.337247642167377,
+      "latitude": 42.690042699335194,
+      "row": 4611,
+      "column": 4680,
+      "mask_value": 1,
+      "expected": 1,
+      "point_is_actual_pixel_center_inside_source_polygon": true
+    },
+    {
+      "name": "Pancharevo lake water",
+      "osm_id": "relation/11943054",
+      "longitude": 23.40675247166021,
+      "latitude": 42.60506180530598,
+      "row": 6527,
+      "column": 5772,
+      "mask_value": 1,
+      "expected": 1,
+      "point_is_actual_pixel_center_inside_source_polygon": true
+    },
+    {
+      "name": "Lily lake water",
+      "osm_id": "way/23149833",
+      "longitude": 23.34235504018018,
+      "latitude": 42.68532104373126,
+      "row": 4718,
+      "column": 4761,
+      "mask_value": 1,
+      "expected": 1,
+      "point_is_actual_pixel_center_inside_source_polygon": true
+    },
+    {
+      "name": "Mapped river footprint; OSM water=river",
+      "osm_id": "way/743562181",
+      "longitude": 23.359073637791244,
+      "latitude": 42.66766873740193,
+      "row": 5117,
+      "column": 5025,
+      "mask_value": 1,
+      "expected": 1,
+      "point_is_actual_pixel_center_inside_source_polygon": true
+    },
+    {
+      "name": "Ariana island hole is not masked",
+      "osm_id": "relation/2905862",
+      "longitude": 23.336833150705026,
+      "latitude": 42.68967465294718,
+      "row": 4619,
+      "column": 4673,
+      "mask_value": 0,
+      "expected": 0,
+      "point_is_actual_pixel_center_inside_source_polygon": true
+    },
+    {
+      "name": "VasilLevski playing field remains unmasked",
+      "longitude": 23.3352531692,
+      "latitude": 42.6875642953,
+      "row": 4665,
+      "column": 4646,
+      "mask_value": 0,
+      "expected": 0
+    }
+  ],
+  "excluded_central_water_objects": [
+    {
+      "osm_id": "way/1234109017",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "level": "-1",
+        "natural": "water"
+      }
+    },
+    {
+      "osm_id": "way/1341771831",
+      "reason": "intermittent=yes",
+      "tags": {
+        "intermittent": "yes",
+        "level": "-1",
+        "natural": "water",
+        "water": "canal"
+      }
+    }
+  ],
+  "geometry_review": "data/reference/open_water_geometry_review.json",
+  "verification": {
+    "exact_grid_type_nodata_and_all_pixels_checked": true,
+    "real_control_points_passed": true,
+    "original_osm_sha256_unchanged": true,
+    "pluvial_source_opened_read_only": true,
+    "elapsed_seconds": 4.16
+  }
+}

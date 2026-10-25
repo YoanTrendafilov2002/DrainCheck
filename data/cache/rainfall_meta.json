@@ -1,0 +1,389 @@
+{
+  "available": true,
+  "revision": "88036868558c20ce",
+  "title": "Rainfall — 27 June 2025",
+  "units": "mm",
+  "quantity": "daily accumulated precipitation",
+  "period": {
+    "local_date": "2025-06-27",
+    "timezone": "Europe/Sofia",
+    "start_utc": "2025-06-26T21:00:00Z",
+    "end_utc": "2025-06-27T21:00:00Z",
+    "utc_start_inclusive": "2025-06-26T21:00:00Z",
+    "utc_end_exclusive": "2025-06-27T21:00:00Z",
+    "aggregation_window_verified_from_upstream_code": false
+  },
+  "default_product": "merged_250m",
+  "default_visible": true,
+  "default_opacity": 0.7,
+  "products": {
+    "merged_250m": {
+      "id": "merged_250m",
+      "label": "Merged radar + stations",
+      "asset_id": "projects/rivertracker-512606/assets/sofia_rain_20250627/merged_250m",
+      "source_version": 1792858911610270,
+      "units": "mm",
+      "band": "rain_mm",
+      "range_mm": [
+        0,
+        30
+      ],
+      "display_range_mm": [
+        0,
+        30
+      ],
+      "palette": [
+        "f7fbff",
+        "c6dbef",
+        "6baed6",
+        "2171b5",
+        "08306b",
+        "54278f",
+        "e7298a"
+      ],
+      "colour_interpolation": "continuous",
+      "legend": [
+        {
+          "value": 0.0,
+          "colour": "#f7fbff"
+        },
+        {
+          "value": 5.0,
+          "colour": "#c6dbef"
+        },
+        {
+          "value": 10.0,
+          "colour": "#6baed6"
+        },
+        {
+          "value": 15.0,
+          "colour": "#2171b5"
+        },
+        {
+          "value": 20.0,
+          "colour": "#08306b"
+        },
+        {
+          "value": 25.0,
+          "colour": "#54278f"
+        },
+        {
+          "value": 30.0,
+          "colour": "#e7298a"
+        }
+      ],
+      "endpoint_clipping": "Colours clamp to 0–30 mm; native values remain unchanged",
+      "default_threshold_mm": 0.5,
+      "default_display_threshold_mm": 0.5,
+      "bbox": [
+        23.18,
+        42.600549766439094,
+        23.49770455163993,
+        42.76
+      ],
+      "coverage_bbox_wgs84": [
+        23.18,
+        42.600549766439094,
+        23.49770455163993,
+        42.76
+      ],
+      "grid": {
+        "crs": "EPSG:4326",
+        "transform": [
+          0.003054851458076265,
+          0.0,
+          23.18,
+          0.0,
+          -0.0022457779374775422,
+          42.76
+        ],
+        "width": 104,
+        "height": 71,
+        "nodata": -9999,
+        "band": "rain_mm",
+        "tiff_band_index": 1,
+        "tiff_band_description": "rain_mm",
+        "nominal_product_grid_m": 250,
+        "note": "Stored geographic cells; metric dimensions vary. Nominal output grid is not independently measured rainfall resolution."
+      },
+      "summary": {
+        "scope": "whole product; all valid native cells; outside / masked cells excluded",
+        "area_method": "WGS84 ellipsoidal four-corner geographic-cell polygon areas (pyproj.Geod); no display resampling",
+        "valid_coverage_area_m2": 461237756.6342888,
+        "valid_area_km2": 461.2377566342888,
+        "valid_cell_count": 7384,
+        "total_cell_count": 7384,
+        "masked_cell_count": 0,
+        "min_mm": 0.06267654895782471,
+        "max_mm": 27.14878273010254,
+        "area_weighted_mean_mm": 11.155202345178711,
+        "mean_mm_unweighted": 11.153337445269507,
+        "precipitation_volume_m3": 5145200.5044917865,
+        "quantity": "precipitation volume, not runoff or floodwater",
+        "display_threshold_affects_statistics": false
+      },
+      "revision": "88036868558c20ce-merged_250m"
+    },
+    "radar_bias_corrected_250m": {
+      "id": "radar_bias_corrected_250m",
+      "label": "Bias-corrected radar",
+      "asset_id": "projects/rivertracker-512606/assets/sofia_rain_20250627/radar_bias_corrected_250m",
+      "source_version": 1792858918889098,
+      "units": "mm",
+      "band": "rain_mm",
+      "range_mm": [
+        0,
+        30
+      ],
+      "display_range_mm": [
+        0,
+        30
+      ],
+      "palette": [
+        "f7fbff",
+        "c6dbef",
+        "6baed6",
+        "2171b5",
+        "08306b",
+        "54278f",
+        "e7298a"
+      ],
+      "colour_interpolation": "continuous",
+      "legend": [
+        {
+          "value": 0.0,
+          "colour": "#f7fbff"
+        },
+        {
+          "value": 5.0,
+          "colour": "#c6dbef"
+        },
+        {
+          "value": 10.0,
+          "colour": "#6baed6"
+        },
+        {
+          "value": 15.0,
+          "colour": "#2171b5"
+        },
+        {
+          "value": 20.0,
+          "colour": "#08306b"
+        },
+        {
+          "value": 25.0,
+          "colour": "#54278f"
+        },
+        {
+          "value": 30.0,
+          "colour": "#e7298a"
+        }
+      ],
+      "endpoint_clipping": "Colours clamp to 0–30 mm; native values remain unchanged",
+      "default_threshold_mm": null,
+      "default_display_threshold_mm": null,
+      "bbox": [
+        23.18,
+        42.600549766439094,
+        23.49770455163993,
+        42.76
+      ],
+      "coverage_bbox_wgs84": [
+        23.18,
+        42.600549766439094,
+        23.49770455163993,
+        42.76
+      ],
+      "grid": {
+        "crs": "EPSG:4326",
+        "transform": [
+          0.003054851458076265,
+          0.0,
+          23.18,
+          0.0,
+          -0.0022457779374775422,
+          42.76
+        ],
+        "width": 104,
+        "height": 71,
+        "nodata": -9999,
+        "band": "rain_mm",
+        "tiff_band_index": 1,
+        "tiff_band_description": "rain_mm",
+        "nominal_product_grid_m": 250,
+        "note": "Stored geographic cells; metric dimensions vary. Nominal output grid is not independently measured rainfall resolution."
+      },
+      "summary": {
+        "scope": "whole product; all valid native cells; outside / masked cells excluded",
+        "area_method": "WGS84 ellipsoidal four-corner geographic-cell polygon areas (pyproj.Geod); no display resampling",
+        "valid_coverage_area_m2": 461237756.6342888,
+        "valid_area_km2": 461.2377566342888,
+        "valid_cell_count": 7384,
+        "total_cell_count": 7384,
+        "masked_cell_count": 0,
+        "min_mm": 2.4131176471710205,
+        "max_mm": 20.15553092956543,
+        "area_weighted_mean_mm": 11.335462805615734,
+        "mean_mm_unweighted": 11.333797309567844,
+        "precipitation_volume_m3": 5228343.434873622,
+        "quantity": "precipitation volume, not runoff or floodwater",
+        "display_threshold_affects_statistics": false
+      },
+      "revision": "88036868558c20ce-radar_bias_corrected_250m"
+    },
+    "radar_raw_1km": {
+      "id": "radar_raw_1km",
+      "label": "Raw radar daily accumulation",
+      "asset_id": "projects/rivertracker-512606/assets/sofia_rain_20250627/radar_raw_1km",
+      "source_version": 1792858926328136,
+      "units": "mm",
+      "band": "rain_mm",
+      "range_mm": [
+        0,
+        110
+      ],
+      "display_range_mm": [
+        0,
+        110
+      ],
+      "palette": [
+        "f7fbff",
+        "c6dbef",
+        "6baed6",
+        "2171b5",
+        "08306b",
+        "54278f",
+        "e7298a"
+      ],
+      "colour_interpolation": "continuous",
+      "legend": [
+        {
+          "value": 0.0,
+          "colour": "#f7fbff"
+        },
+        {
+          "value": 18.333333333333332,
+          "colour": "#c6dbef"
+        },
+        {
+          "value": 36.666666666666664,
+          "colour": "#6baed6"
+        },
+        {
+          "value": 55.0,
+          "colour": "#2171b5"
+        },
+        {
+          "value": 73.33333333333333,
+          "colour": "#08306b"
+        },
+        {
+          "value": 91.66666666666666,
+          "colour": "#54278f"
+        },
+        {
+          "value": 110.0,
+          "colour": "#e7298a"
+        }
+      ],
+      "endpoint_clipping": "Colours clamp to 0–110 mm; native values remain unchanged",
+      "default_threshold_mm": null,
+      "default_display_threshold_mm": null,
+      "bbox": [
+        22.831742360561023,
+        42.3396652283702,
+        23.85076023188007,
+        43.05713699491116
+      ],
+      "coverage_bbox_wgs84": [
+        22.831742360561023,
+        42.3396652283702,
+        23.85076023188007,
+        43.05713699491116
+      ],
+      "grid": {
+        "crs": "EPSG:4326",
+        "transform": [
+          0.010398141544071897,
+          0.0,
+          22.831742360561023,
+          0.0,
+          -0.010398141544071897,
+          43.05713699491116
+        ],
+        "width": 98,
+        "height": 69,
+        "nodata": -9999,
+        "band": "rain_mm",
+        "tiff_band_index": 1,
+        "tiff_band_description": "rain_mm",
+        "nominal_product_grid_m": 1000,
+        "note": "Stored geographic cells; metric dimensions vary. Nominal output grid is not independently measured rainfall resolution."
+      },
+      "summary": {
+        "scope": "whole product; all valid native cells; outside / masked cells excluded",
+        "area_method": "WGS84 ellipsoidal four-corner geographic-cell polygon areas (pyproj.Geod); no display resampling",
+        "valid_coverage_area_m2": 4961043603.466343,
+        "valid_area_km2": 4961.043603466343,
+        "valid_cell_count": 5041,
+        "total_cell_count": 6762,
+        "masked_cell_count": 1721,
+        "min_mm": 2.863697052001953,
+        "max_mm": 109.69969940185547,
+        "area_weighted_mean_mm": 31.46768128902224,
+        "mean_mm_unweighted": 31.45373264794027,
+        "precipitation_volume_m3": 156112538.97482133,
+        "quantity": "precipitation volume, not runoff or floodwater",
+        "display_threshold_affects_statistics": false
+      },
+      "revision": "88036868558c20ce-radar_raw_1km"
+    }
+  },
+  "palette": [
+    "f7fbff",
+    "c6dbef",
+    "6baed6",
+    "2171b5",
+    "08306b",
+    "54278f",
+    "e7298a"
+  ],
+  "smoothing_options": [
+    "nearest",
+    "bilinear"
+  ],
+  "default_smoothing": "nearest",
+  "stations": {
+    "total": 55,
+    "accepted": 43,
+    "rejected": 12,
+    "accepted_count": 43,
+    "rejected_count": 12,
+    "accepted_qc": "ok",
+    "accepted_default_visible": true,
+    "rejected_default_visible": false
+  },
+  "source_label": "Supplied Earth Engine native-pixel copies; OPERA radar + Weather Underground stations",
+  "source_script": "handoff/rainfall_supplement/earth_engine/Rainfall_20250627_original.js",
+  "provenance": "Complete native numeric asset snapshots, not original pre-upload TIFF bytes; no resampling during transfer",
+  "source_files_sha256": {
+    "earth_engine_metadata.json": "bfb66137a2123233eae244a753ff052fa5d89fc6147d6820a69cf7a8c04359ed",
+    "wu_stations.geojson": "067e6e63078cd2945c2a14098fa77224eee964711f95cdc1a1da62bbc61c955b",
+    "merged_250m.tif": "902b743d49cf077bf0c738042c62c4c7ed6fbf154a5f30590f6e038f82f7c66f",
+    "native_arrays/merged_250m.json": "747641e2d7c4441653c8ff47434b96ec092612436d123010a22527728bd711a7",
+    "radar_bias_corrected_250m.tif": "d572da07990aa5dde0fc485a37f14531198d56376d3d26bd39a62e0217c3bcf6",
+    "native_arrays/radar_bias_corrected_250m.json": "a13794629fd3cc916c33486fbf33fdb1b2441068ae6fa5c268d10a5fc13497f3",
+    "radar_raw_1km.tif": "b925fe1aa37aa29fc7773d3345f2b358245cd46c1ad9e5424850847acb06acdb",
+    "native_arrays/radar_raw_1km.json": "d6a078e2e1450938489e92e0c407e6b599a0368a4eeac87234dd83e7201c140c"
+  },
+  "limitations": [
+    "Daily accumulated precipitation in mm, not mm/hour; no sub-daily time series is supplied.",
+    "The 250 m / 1 km names describe nominal output grids. Stored cells are geographic and their metric sizes vary; 250 m is not independently measured rainfall resolution.",
+    "Outside each product or in its native mask rainfall is unavailable, not zero. Products have different coverage.",
+    "OPERA radar and Weather Underground station attribution is retained. Upstream aggregation, station QC thresholds, correction/interpolation algorithms and uncertainty were not independently audited; their named programs are absent.",
+    "No additional factor-of-four correction is applied. The supplied corrected/final totals are used as stored.",
+    "Precipitation volume is rainfall falling on valid cells, not runoff, sewer load, floodwater, flood depth or flood probability.",
+    "The event day is interpreted from the Europe/Sofia label; upstream temporal aggregation code is not supplied.",
+    "Public redistribution rights for upstream OPERA / Weather Underground inputs were not independently verified."
+  ]
+}

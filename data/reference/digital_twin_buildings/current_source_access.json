@@ -1,0 +1,75 @@
+{
+  "checked_at": "2026-10-25T07:58:41.334768+00:00",
+  "requested_scope": "Current full-city Sofia Digital Twin buildings",
+  "requested_scope_status": "User states the twin covers all Sofia; actual geometry and coverage have not yet been acquired or independently verified locally",
+  "attempts": [
+    {
+      "url": "https://citylab.gate-ai.eu/3d-city-model/",
+      "started_at": "2026-10-25T07:58:33.252045+00:00",
+      "elapsed_seconds": 8.093,
+      "method": "GET with urllib.request; 8-second timeout",
+      "status_code": null,
+      "outcome": "connection_failure",
+      "error": "URLError: <urlopen error timed out>",
+      "authentication_response_received": false
+    },
+    {
+      "url": "https://citylab.gate-ai.eu/3d-world-builder/",
+      "started_at": "2026-10-25T07:58:33.252045+00:00",
+      "elapsed_seconds": 8.093,
+      "method": "GET with urllib.request; 8-second timeout",
+      "status_code": null,
+      "outcome": "connection_failure",
+      "error": "URLError: <urlopen error timed out>",
+      "authentication_response_received": false
+    },
+    {
+      "url": "http://citylab.gate-ai.eu/3d-city-model/",
+      "started_at": "2026-10-25T07:58:33.252045+00:00",
+      "elapsed_seconds": 8.093,
+      "method": "GET with urllib.request; 8-second timeout",
+      "status_code": null,
+      "outcome": "connection_failure",
+      "error": "URLError: <urlopen error timed out>",
+      "authentication_response_received": false
+    },
+    {
+      "url": "https://city.gate-ai.eu/",
+      "started_at": "2026-10-25T07:58:33.252045+00:00",
+      "elapsed_seconds": 8.093,
+      "method": "GET with urllib.request; 8-second timeout",
+      "status_code": null,
+      "outcome": "connection_failure",
+      "error": "URLError: <urlopen error timed out>",
+      "authentication_response_received": false
+    }
+  ],
+  "independent_web_retrieval": {
+    "url": "https://citylab.gate-ai.eu/3d-city-model/",
+    "tool": "web.open",
+    "outcome": "400 Timeout fetching",
+    "http_status_from_origin_unknown": true
+  },
+  "browser_attempt": {
+    "url": "https://citylab.gate-ai.eu/3d-city-model/",
+    "reported_by": "Parent agent during the same task",
+    "outcome": "Page navigation timed out after approximately21seconds"
+  },
+  "access_conclusion": "Current service is unreachable from this environment. This is a network/retrieval failure, not a returned permission or sign-in rejection. It does not establish service-wide unavailability or model coverage.",
+  "tokens_or_credentials_used": false,
+  "full_city_geometry_acquired": false,
+  "separate_research_subset": {
+    "metadata": "data/cache/gate_lozenets_research_meta.json",
+    "revision": "bafb3bb653388cd3",
+    "feature_count": 1800,
+    "geometry": "2D research roof outlines",
+    "substituted_for_requested_source": false
+  },
+  "other_primary_catalogues_checked": [
+    "https://gis.sofiaplan.bg/server/rest/services?f=pjson",
+    "https://gis.sofiaplan.bg/server/rest/services/bazovi_danni/bazovi_danni/FeatureServer?f=pjson",
+    "https://gis.sofiaplan.bg/server/rest/services/yuzhen_lozenets/yuzhen_lozenets/FeatureServer?f=pjson",
+    "https://gis.sofiaplan.bg/server/rest/services/programa_za_sofia/programa_sofia_atlas_na_analizite/MapServer?f=pjson"
+  ],
+  "catalogue_conclusion": "No actual current Digital Twin export was identified in the inspected catalogue layers. General municipal 2D building datasets remain separately sourced alternatives."
+}

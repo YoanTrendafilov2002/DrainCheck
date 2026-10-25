@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "scope": "Real full-area 8 m display derivative, sampled for rendering QA",
+  "valid_sample_cells": 480041,
+  "low_endpoint_fraction": 4.166310794286321e-06,
+  "high_endpoint_fraction": 2.0831553971431605e-06,
+  "source_curve": "Locally recomputed from native DTM because archived 201-point curve is in truncated ZIP tail; not the archived EE snapshot",
+  "native_values_unchanged": true
+}

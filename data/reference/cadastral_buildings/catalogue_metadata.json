@@ -1,0 +1,114 @@
+{
+  "help": "https://urbandata.sofia.bg/api/3/action/help_show?name=package_show",
+  "success": true,
+  "result": {
+    "author": "",
+    "author_email": "",
+    "creator_user_id": "547c27ff-0570-410d-b686-f57e5001694d",
+    "id": "24283798-c042-44de-9bd0-8cec77f2200b",
+    "isopen": true,
+    "license_id": "cc-by",
+    "license_title": "Creative Commons Признание",
+    "license_url": "http://www.opendefinition.org/licenses/cc-by",
+    "maintainer": "",
+    "maintainer_email": "",
+    "metadata_created": "2026-09-09T09:14:39.234076",
+    "metadata_modified": "2026-09-09T09:16:25.895684",
+    "name": "cad_plan_sgr-zip",
+    "notes": "Граници на сгради - съдържание на архивен кадастрален план към момента преди влизане в сила на кадастрална карта и кадастрални регистри",
+    "num_resources": 1,
+    "num_tags": 3,
+    "organization": {
+      "id": "ae4da99b-2fef-456e-9b10-8761b772b7fe",
+      "name": "gis-sofia-eood",
+      "title": "\"Географска информационна система – София” ЕООД",
+      "type": "organization",
+      "description": "„Географска информационна система – София” ЕООД е търговско дружество, чийто едноличен собственик е Столична община и е една от най-големите геодезически фирми в България. Седалището на дружеството е гр. София, ул. „Сердика“ №5, ЕИК 000656403.\r\nКомпанията ни е създадена през 1999 година, с предмет на дейност изграждане, поддържане и управление на информационната система на кадастралните, регулационните и застроителните планове за територията на Столична община.\r\nОсновната ни цел е да предоставяме качествени услуги в областта на геодезията, кадастъра, устройственото планиране и географските информационни системи.\r\nНашата мисия е да облекчим потребителите си, осигурявайки лесен и удобен достъп до необходимата и полезна за тях пространствена информация.\r\nОсновни приоритети в нашата работа са пълнота, актуалност, точност, надеждност и достъпност на данните.\r\n\r\nЛинк към допълнителна информация относно начина на предоставяне на данни: https://www.sofia.bg/urbanization-data",
+      "image_url": "2026-02-12-151011.658642GIS-logo.png",
+      "created": "2026-02-12T15:10:11.666537",
+      "is_organization": true,
+      "approval_status": "approved",
+      "state": "active"
+    },
+    "owner_org": "ae4da99b-2fef-456e-9b10-8761b772b7fe",
+    "private": false,
+    "state": "active",
+    "title": "Архивен  кадастрален план - сгради",
+    "type": "dataset",
+    "url": "",
+    "version": "",
+    "extras": [
+      {
+        "key": "Актуален към",
+        "value": "08.09.2026г."
+      }
+    ],
+    "groups": [
+      {
+        "description": "",
+        "display_name": "Карти и планове",
+        "id": "e2636df6-8372-49aa-ad57-02519df4f1b5",
+        "image_display_url": "https://urbandata.sofia.bg/uploads/group/2026-08-26-122046.925494gradsko-planirane.png",
+        "name": "maps-and-plans",
+        "title": "Карти и планове"
+      },
+      {
+        "description": "",
+        "display_name": "Сграден фонд",
+        "id": "286ad537-303c-4921-ad23-4bef591eb893",
+        "image_display_url": "https://urbandata.sofia.bg/uploads/group/2026-02-12-143848.706862sgraden-fond.png",
+        "name": "buldings",
+        "title": "Сграден фонд"
+      }
+    ],
+    "resources": [
+      {
+        "cache_last_updated": null,
+        "cache_url": null,
+        "created": "2026-09-09T09:15:25.752331",
+        "datastore_active": false,
+        "description": "Граници на сгради - съдържание на архивен кадастрален план към момента преди влизане в сила на кадастрална карта и кадастрални регистри ",
+        "format": "GeoJSON",
+        "hash": "",
+        "id": "5e7418f8-4a75-4b75-b247-e8d0d74354de",
+        "last_modified": "2026-09-09T09:15:25.720194",
+        "metadata_modified": "2026-09-09T09:15:25.942640",
+        "mimetype": "application/zip",
+        "mimetype_inner": null,
+        "name": " Архивен  кадастрален план - сгради",
+        "package_id": "24283798-c042-44de-9bd0-8cec77f2200b",
+        "position": 0,
+        "resource_type": null,
+        "size": 30104876,
+        "state": "active",
+        "url": "https://urbandata.sofia.bg/dataset/24283798-c042-44de-9bd0-8cec77f2200b/resource/5e7418f8-4a75-4b75-b247-e8d0d74354de/download/cad_plan_sgr.zip",
+        "url_type": "upload"
+      }
+    ],
+    "tags": [
+      {
+        "display_name": "Архивен план",
+        "id": "85502237-c0f9-4fb1-884b-5e82309b21b0",
+        "name": "Архивен план",
+        "state": "active",
+        "vocabulary_id": null
+      },
+      {
+        "display_name": "Кадастрален план",
+        "id": "8e201eea-6cc3-4a48-8ba5-10dd1b0c7397",
+        "name": "Кадастрален план",
+        "state": "active",
+        "vocabulary_id": null
+      },
+      {
+        "display_name": "Сгради",
+        "id": "602c6810-06c2-43b8-9fb2-3b4063e4f603",
+        "name": "Сгради",
+        "state": "active",
+        "vocabulary_id": null
+      }
+    ],
+    "relationships_as_subject": [],
+    "relationships_as_object": []
+  }
+}

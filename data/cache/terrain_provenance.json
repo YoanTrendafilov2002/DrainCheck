@@ -1,0 +1,9 @@
+{
+  "native_dtm_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3",
+  "native_dtm_bytes": 1388515396,
+  "native_dtm_basename": "sofia_dtm_2024_1m_gee.tif",
+  "native_grid_unchanged": true,
+  "display_spacing_m": 8,
+  "native_sample_spacing_m": 1,
+  "display_native_switch_zoom": 15
+}
