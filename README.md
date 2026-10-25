@@ -29,11 +29,12 @@ See the [installation guide](docs/INSTALLATION.md) for another computer and the
 Follow the terrain-screening, flood-evidence review and rainfall/pipe-blockage
 scenario paths in the diagram.
 
-![How DrainCheck works: input data, terrain screening, evidence review and rainfall/pipe-blockage scenarios](docs/DrainCheck_System_Schematic.png)
+![How DrainCheck works: three flows with one-line explanations](docs/DrainCheck_System_Schematic_Simple.png)
 
-Open the [full-size image](docs/DrainCheck_System_Schematic.png),
-[PDF](docs/DrainCheck_System_Schematic.pdf) or
-[editable SVG](docs/DrainCheck_System_Schematic.svg).
+Open the [full-size image](docs/DrainCheck_System_Schematic_Simple.png),
+[PDF](docs/DrainCheck_System_Schematic_Simple.pdf) or
+[editable SVG](docs/DrainCheck_System_Schematic_Simple.svg).
+The [detailed schematic](docs/DrainCheck_System_Schematic.pdf) explains the assumptions and additional map context.
 
 ## Start with the map
 
