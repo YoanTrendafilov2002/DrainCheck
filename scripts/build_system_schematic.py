@@ -20,11 +20,11 @@ parser.add_argument('--output-dir',type=Path,default=ROOT/('docs' if IN_REPO els
 parser.add_argument('--guide',type=Path,default=ROOT/('docs/RISK_CALCULATION_GUIDE.md' if IN_REPO else 'outputs/sofia_explorer_app/docs/RISK_CALCULATION_GUIDE.md'))
 parser.add_argument('--qa-dir',type=Path,default=ROOT/('data/cache/schematic_qa' if IN_REPO else 'work/schematic_qa'))
 parser.add_argument('--font-dir',type=Path,default=Path('C:/Windows/Fonts'))
-parser.add_argument('--simplified',action='store_true',help='Render six cards with one-line flow explanations; keep the detailed diagram separate.')
+parser.add_argument('--simplified',action='store_true',help='Render the dark right-to-left overview with concise explanations and calculation context.')
 args=parser.parse_args()
 OUT=args.output_dir;OUT.mkdir(parents=True,exist_ok=True)
 BASE=OUT/('DrainCheck_System_Schematic_Simple' if args.simplified else 'DrainCheck_System_Schematic')
-W,H=1920,1080
+W,H=(2560,1440) if args.simplified else (1920,1080)
 FONT_DIR=args.font_dir
 for key,file in [('Regular','segoeui.ttf'),('Semibold','seguisb.ttf'),('Bold','segoeuib.ttf')]:
     pdfmetrics.registerFont(TTFont(key,str(FONT_DIR/file)))
@@ -35,7 +35,7 @@ class Drawing:
     def __init__(self):
         self.svg=[f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="title desc">',
           '<title id="title">How DrainCheck works</title>',
-          ('<desc id="desc">Three simplified flows: terrain depression ranking to a relative ponding heatmap, flood evidence and buildings to review priorities, and assumed drainage loss to a baseline-versus-clogged local storage comparison.</desc>' if args.simplified else '<desc id="desc">Three parallel workflows show real terrain screening, categorical historical and building review, and an assumed rainfall and pipe blockage scenario using local terrain storage. River proximity and archived daily rainfall remain separate context.</desc>')]
+          ('<desc id="desc">Dark right-to-left workflow: source data, processing and map layers. Terrain factors feed a relative ponding heatmap; flood records and buildings feed review priorities; assumed storm and blockage inputs feed local depression storage and baseline/clogged/change comparisons. Land exclusions, river context, archived rainfall and model limitations remain explicit.</desc>' if args.simplified else '<desc id="desc">Three parallel workflows show real terrain screening, categorical historical and building review, and an assumed rainfall and pipe blockage scenario using local terrain storage. River proximity and archived daily rainfall remain separate context.</desc>')]
         self.c=canvas.Canvas(str(BASE.with_suffix('.pdf')),pagesize=(W,H),pageCompression=1)
         self.c.setTitle('How DrainCheck works')
         self.c.setAuthor('DrainCheck')
@@ -158,48 +158,103 @@ def draw_detailed(d):
     d.text(1709,1054,'25 OCT 2026',15,'Semibold',MUTED)
 
 def draw_simple(d):
-    """Three separate outputs; each process explanation occupies one line."""
-    d.rect(0,0,W,H,PAPER,PAPER,0)
-    d.text(80,67,'DRAINCHECK',18,'Bold',TEAL)
-    d.text(80,137,'How DrainCheck works',53,'Bold')
-    d.text(80,180,'Terrain, past floods and drainage scenarios.',25,'Regular',MUTED)
-    d.rect(1455,88,385,61,'#E7F0EF','#D0E0DD',13)
-    d.text(1478,127,'1 m terrain  ·  5 m analysis',24,'Semibold',TEAL)
+    """Follow the supplied source-right, processing-centre, layers-left template."""
+    bg='#07131C';white='#F0F8FC';soft='#A6C4D0';dark='#042B3A'
+    colors=['#0796B5','#32B7C4','#71D8D5']
+    d.rect(0,0,W,H,bg,bg,0)
+    d.text(64,67,'DRAINCHECK',19,'Bold',colors[2])
+    d.text(64,135,'How DrainCheck works',54,'Bold',white)
+    d.text(64,180,'Real terrain, flood evidence and editable storm scenarios.',25,'Regular',soft)
+    d.rect(2040,78,456,68,'#102B36','#20434D',12)
+    d.text(2063,121,'1 m inspection  ·  5 m analysis',25,'Semibold',colors[2])
+    for x,label in [(380,'Layers'),(960,'Processing'),(2080,'Source data')]:
+        d.text(x,230,label,28,'Semibold',white)
 
-    for x,label in [(80,'INPUT'),(598,'METHOD'),(1390,'OUTPUT')]:
-        d.text(x,239,label,15,'Bold',MUTED)
+    def box(x,y,w,h,label,title,body,color,title_size=29,body_size=21):
+        d.rect(x,y,w,h,color,color,16)
+        for text,size,font in [(label,15,'Bold'),(title,title_size,'Semibold')]+[(s,body_size,'Regular') for s in body]:
+            assert pdfmetrics.stringWidth(text,font,size)<=w-40,(text,w)
+        d.text(x+20,y+30,label,15,'Bold',dark)
+        d.text(x+20,y+72,title,title_size,'Semibold',dark)
+        for i,line in enumerate(body):d.text(x+20,y+110+i*32,line,body_size,'Regular',dark)
 
-    flows = [
-        (275,TEAL,'01  TERRAIN','Municipal 1 m DTM',
-         'Rank depression fill depth on a 5 m grid.',
-         'TERRAIN VIEW','Ponding heatmap','Relative signal · 0–100'),
-        (475,BLUE,'02  FLOOD EVIDENCE','Past floods + buildings',
-         'Combine ponding, floods and building overlap.',
-         'EVIDENCE VIEW','Review priorities','Past floods take precedence'),
-        (675,ORANGE,'03  WHAT-IF SCENARIO','Selected pipes + rain',
-         'Reduce assumed drainage near selected pipes.',
-         'STORM COMPARISON','Baseline / clogged / change','Estimated local depth + excess runoff'),
+    def left_arrow(x1,y,x2):
+        d.line(x1,y,x2+13,y,white,4)
+        d.polygon([(x2,y),(x2+14,y-9),(x2+14,y+9)],white)
+
+    # Terrain: slope/area diagnostics are retained without feeding the P formula.
+    y=260;c=colors[0]
+    box(2080,y,416,150,'01  REAL TERRAIN','Municipal 1 m DTM',
+        ['Baltic 1982 ground elevations.'],c)
+    box(1490,y,450,150,'ALIGNED 5 m GRID','Terrain factors',
+        ['Elevation · fill depth · slope · flow area'],c,body_size=20)
+    box(960,y,450,150,'PERCENTILE RANK','Ponding signal P',
+        ['Rank positive fill depth; zero if none.'],c,body_size=20)
+    box(380,y,440,150,'TERRAIN LAYER','Continuous heatmap',
+        ['P: 0–100 · not flood probability.'],c)
+    for right,left in [(2060,1960),(1470,1430),(940,840)]:left_arrow(right,y+75,left)
+    d.text(380,456,'P uses fill depth only; slope and upstream contributing area remain diagnostics.',21,'Regular',soft)
+
+    # P is an additional input to review classes, not overwritten by them.
+    d.line(1185,410,1185,505,white,3,dash=True)
+    d.polygon([(1185,520),(1177,505),(1193,505)],white)
+    d.text(1204,487,'P',20,'Bold',colors[1])
+    y=520;c=colors[1]
+    box(2080,y,416,150,'02  OBSERVED / MAPPED','Past floods + buildings',
+        ['136 flood polygons + cadastral footprints.'],c,title_size=27,body_size=18)
+    box(960,y,980,150,'SEPARATE REVIEW RULES','Combine P, flood evidence and building overlap',
+        ['Historical categories override lower terrain classes; buildings flag potential overlap.'],c,title_size=29,body_size=21)
+    box(380,y,440,150,'EVIDENCE LAYERS','Review priorities',
+        ['Independent historical-flood overlays.'],c,body_size=20)
+    for right,left in [(2060,1960),(940,840)]:left_arrow(right,y+75,left)
+    d.text(380,719,'History changes review categories; it does not change the terrain heatmap.',21,'Regular',soft)
+
+    # Scenario: assumed water balance, reduced removal, then real local storage.
+    y=820;c=colors[2]
+    box(2080,y,416,210,'03  USER-SET SCENARIO','Area + existing pipes',
+        ['Draw area; choose pipes and storm.',
+         'Drainage and blockage are assumed.'],c,title_size=28,body_size=20)
+    box(1490,y,450,210,'ASSUMED WATER BALANCE','Excess runoff',
+        ['Baseline: max(0, rain×c − rate×min/60)',
+         'Clogged: rate×(1−b/100) in pipe buffer.',
+         'Baseline removal applies elsewhere.'],c,body_size=19)
+    box(960,y,450,210,'USES REAL 5 m TERRAIN','Local depression storage',
+        ['Real bed + fill depth; cap at spill level.',
+         'Store each depression’s local runoff.'],c,title_size=27,body_size=20)
+    box(380,y,440,210,'STORM LAYERS','Baseline / clogged / change',
+        ['Est. depth (m) · excess runoff (mm)',
+         'Stored · overflow · unallocated (m³)'],c,title_size=26,body_size=20)
+    for right,left in [(2060,1960),(1470,1430),(940,840)]:left_arrow(right,y+105,left)
+    d.text(380,1078,'Overflow is not routed; runoff on zero-fill land remains unallocated.',21,'Regular',soft)
+    d.text(380,1120,'Inputs: rain (mm) · duration (min) · runoff coefficient c · assumed drainage rate (mm/h) · blockage b (%) · pipe buffer (m)',21,'Regular',soft)
+
+    # All three layer groups feed the same map; no framework claim is made.
+    d.line(300,335,300,925,white,4)
+    for yy in [335,595,925]:d.line(300,yy,380,yy,white,4)
+    left_arrow(300,595,245)
+    d.rect(64,515,170,160,'#102B36','#2B707D',24)
+    d.text(100,597,'DC',64,'Bold',colors[2])
+    d.text(112,639,'MAP',18,'Bold',white)
+    d.text(64,721,'DrainCheck',25,'Semibold',white)
+
+    # Independent context is explicit, without turning it into flood causation.
+    panels=[
+      (64,770,'LAND RULES',
+       ['Exclude mapped water and uncertain terrain.',
+        'Assume mapped greens absorb all rain.']),
+      (875,770,'RIVER CONTEXT',
+       ['River distance: adjacent / away context.',
+        'Proximity does not establish flood cause.']),
+      (1686,810,'SUPPLEMENTAL LAYERS',
+       ['Archived daily rain, assessments and infrastructure.',
+        'Archive rain does not set the storm slider.']),
     ]
-    for y,color,label,input_title,explanation,out_label,out_title,out_note in flows:
-        d.rect(80,y,450,142)
-        d.rect(80,y,5,142,color,color,2)
-        d.text(106,y+37,label,15,'Bold',color)
-        d.text(106,y+91,input_title,30,'Semibold')
-        width=pdfmetrics.stringWidth(explanation,'Regular',26)
-        assert width < 770,explanation
-        d.text(960-width/2,y+49,explanation,26,'Regular',MUTED)
-        d.arrow(553,y+81,1367,y+81,color)
-        d.rect(1390,y,450,142)
-        d.rect(1390,y,5,142,color,color,2)
-        d.text(1416,y+32,out_label,15,'Bold',color)
-        d.text(1416,y+74,out_title,27 if y==675 else 31,'Semibold')
-        d.text(1416,y+112,out_note,22,'Regular',MUTED)
-
-    d.rect(80,865,1760,75,'#EAF2EC','#D5E2D8',13)
-    d.text(103,911,'Mapped water and uncertain terrain excluded; mapped greens assumed to absorb all rain.',24,'Regular','#38754B')
-    d.line(80,978,1840,978,LINE,1)
-    d.text(80,1014,'Comparative screening, not a calibrated flood forecast.',24,'Semibold',INK)
-    d.text(80,1049,'Local storage estimates; no flow routing or sewer hydraulics.',22,'Regular',MUTED)
+    for x,w,label,body in panels:
+        d.rect(x,1165,w,155,'#10232E','#23404D',14)
+        d.text(x+22,1204,label,18,'Bold',colors[2])
+        for i,line in enumerate(body):d.text(x+22,1248+i*34,line,22,'Regular',soft)
+    d.line(64,1356,2496,1356,'#23404D',1)
+    d.text(64,1400,'Comparative screening and local storage estimates; no dynamic routing, sewer hydraulics or river-level simulation.',24,'Regular',white)
 
 
 d=Drawing()
@@ -209,20 +264,21 @@ d.finish()
 
 # Export and inspect the same vector PDF, avoiding platform SVG-font drift.
 pdf=pdfium.PdfDocument(str(BASE.with_suffix('.pdf')))
-page=pdf[0];bitmap=page.render(scale=2);bitmap.to_pil().save(BASE.with_suffix('.png'))
+scale=1.5 if args.simplified else 2
+page=pdf[0];bitmap=page.render(scale=scale);bitmap.to_pil().save(BASE.with_suffix('.png'))
 qa=args.qa_dir;qa.mkdir(parents=True,exist_ok=True)
 page.render(scale=1).to_pil().save(qa/'schematic-preview.png')
 reader=PdfReader(str(BASE.with_suffix('.pdf')));assert len(reader.pages)==1
 text=' '.join(('\n'.join(p.extract_text() or '' for p in reader.pages)).split())
-tokens = (['Municipal 1 m DTM','Rank depression fill depth','Ponding heatmap','Past floods take precedence','Reduce assumed drainage','Estimated local depth','assumed to absorb all rain','no flow routing or sewer hydraulics'] if args.simplified else ['Municipal 1 m DTM','136 observed flood polygons','Capacity loss','spill level','RIVER PROXIMITY','does not determine flood cause','Archived rain does not drive','unallocated'])
+tokens = (['Municipal 1 m DTM','Baltic 1982','Ponding signal P','zero if none','upstream contributing area','136 flood polygons','cadastral footprints','Historical categories override','rate×min/60','duration (min)','(1−b/100)','Baseline removal applies elsewhere','pipe buffer','spill level','local runoff','zero-fill','unallocated','runoff coefficient','blockage b (%)','greens absorb all rain','RIVER CONTEXT','does not establish flood cause','Archived daily rain','does not set the storm slider','no dynamic routing'] if args.simplified else ['Municipal 1 m DTM','136 observed flood polygons','Capacity loss','spill level','RIVER PROXIMITY','does not determine flood cause','Archived rain does not drive','unallocated'])
 for token in tokens:
     assert token in text,token
-receipt={'title':'How DrainCheck works','canvas':[W,H],'png_pixels':[W*2,H*2],
- 'layout':'simplified' if args.simplified else 'detailed',
+receipt={'title':'How DrainCheck works','canvas':[W,H],'png_pixels':[int(W*scale),int(H*scale)],
+ 'layout':'dark source-right template' if args.simplified else 'detailed',
  'one_page_pdf':True,'source_guide':'docs/RISK_CALCULATION_GUIDE.md','version':'1.9',
  'source_guide_sha256':hashlib.sha256(args.guide.read_bytes()).hexdigest(),
  'files':{p.name:{'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in [BASE.with_suffix(s) for s in ['.svg','.pdf','.png']]},
- 'semantic_checks':('PASS: six cards, one-line process explanations, separate ponding/evidence/scenario outputs, assumed drainage and green absorption, no forecast or hydraulic claim' if args.simplified else 'PASS: separate P, categorical review and hypothetical storm paths; explicit assumptions, units and independent river/archive context'),
+ 'semantic_checks':('PASS: terrain factors and P, historical precedence/buildings, storm inputs and assumed removal, local storage/spill/overflow/unallocated, exclusions, river proximity, independent rainfall and hydraulic limits retained' if args.simplified else 'PASS: separate P, categorical review and hypothetical storm paths; explicit assumptions, units and independent river/archive context'),
  'visual_qa':'Pending rendered inspection'}
 (qa/'verification.json').write_text(json.dumps(receipt,indent=2),encoding='utf-8')
 print(json.dumps(receipt))

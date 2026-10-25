@@ -1,54 +1,109 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440" role="img" aria-labelledby="title desc">
 <title id="title">How DrainCheck works</title>
-<desc id="desc">Three simplified flows: terrain depression ranking to a relative ponding heatmap, flood evidence and buildings to review priorities, and assumed drainage loss to a baseline-versus-clogged local storage comparison.</desc>
-<rect x="0" y="0" width="1920" height="1080" rx="0" fill="#F5F7F6" stroke="#F5F7F6"/>
-<text x="80" y="67" fill="#087D80" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="700">DRAINCHECK</text>
-<text x="80" y="137" fill="#17343F" font-family="Segoe UI,Arial,sans-serif" font-size="53" font-weight="700">How DrainCheck works</text>
-<text x="80" y="180" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="400">Terrain, past floods and drainage scenarios.</text>
-<rect x="1455" y="88" width="385" height="61" rx="13" fill="#E7F0EF" stroke="#D0E0DD"/>
-<text x="1478" y="127" fill="#087D80" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="600">1 m terrain  ·  5 m analysis</text>
-<text x="80" y="239" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">INPUT</text>
-<text x="598" y="239" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">METHOD</text>
-<text x="1390" y="239" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">OUTPUT</text>
-<rect x="80" y="275" width="450" height="142" rx="16" fill="#FFFFFF" stroke="#D8E2E5"/>
-<rect x="80" y="275" width="5" height="142" rx="2" fill="#087D80" stroke="#087D80"/>
-<text x="106" y="312" fill="#087D80" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">01  TERRAIN</text>
-<text x="106" y="366" fill="#17343F" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="600">Municipal 1 m DTM</text>
-<text x="727.77099609375" y="324" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="26" font-weight="400">Rank depression fill depth on a 5 m grid.</text>
-<line x1="553" y1="356" x2="1360" y2="356" stroke="#087D80" stroke-width="2"/>
-<polygon points="1367,356 1357,350 1357,362" fill="#087D80"/>
-<rect x="1390" y="275" width="450" height="142" rx="16" fill="#FFFFFF" stroke="#D8E2E5"/>
-<rect x="1390" y="275" width="5" height="142" rx="2" fill="#087D80" stroke="#087D80"/>
-<text x="1416" y="307" fill="#087D80" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">TERRAIN VIEW</text>
-<text x="1416" y="349" fill="#17343F" font-family="Segoe UI,Arial,sans-serif" font-size="31" font-weight="600">Ponding heatmap</text>
-<text x="1416" y="387" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Relative signal · 0–100</text>
-<rect x="80" y="475" width="450" height="142" rx="16" fill="#FFFFFF" stroke="#D8E2E5"/>
-<rect x="80" y="475" width="5" height="142" rx="2" fill="#5263A5" stroke="#5263A5"/>
-<text x="106" y="512" fill="#5263A5" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">02  FLOOD EVIDENCE</text>
-<text x="106" y="566" fill="#17343F" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="600">Past floods + buildings</text>
-<text x="689.38671875" y="524" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="26" font-weight="400">Combine ponding, floods and building overlap.</text>
-<line x1="553" y1="556" x2="1360" y2="556" stroke="#5263A5" stroke-width="2"/>
-<polygon points="1367,556 1357,550 1357,562" fill="#5263A5"/>
-<rect x="1390" y="475" width="450" height="142" rx="16" fill="#FFFFFF" stroke="#D8E2E5"/>
-<rect x="1390" y="475" width="5" height="142" rx="2" fill="#5263A5" stroke="#5263A5"/>
-<text x="1416" y="507" fill="#5263A5" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">EVIDENCE VIEW</text>
-<text x="1416" y="549" fill="#17343F" font-family="Segoe UI,Arial,sans-serif" font-size="31" font-weight="600">Review priorities</text>
-<text x="1416" y="587" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Past floods take precedence</text>
-<rect x="80" y="675" width="450" height="142" rx="16" fill="#FFFFFF" stroke="#D8E2E5"/>
-<rect x="80" y="675" width="5" height="142" rx="2" fill="#B56125" stroke="#B56125"/>
-<text x="106" y="712" fill="#B56125" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">03  WHAT-IF SCENARIO</text>
-<text x="106" y="766" fill="#17343F" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="600">Selected pipes + rain</text>
-<text x="692.80810546875" y="724" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="26" font-weight="400">Reduce assumed drainage near selected pipes.</text>
-<line x1="553" y1="756" x2="1360" y2="756" stroke="#B56125" stroke-width="2"/>
-<polygon points="1367,756 1357,750 1357,762" fill="#B56125"/>
-<rect x="1390" y="675" width="450" height="142" rx="16" fill="#FFFFFF" stroke="#D8E2E5"/>
-<rect x="1390" y="675" width="5" height="142" rx="2" fill="#B56125" stroke="#B56125"/>
-<text x="1416" y="707" fill="#B56125" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">STORM COMPARISON</text>
-<text x="1416" y="749" fill="#17343F" font-family="Segoe UI,Arial,sans-serif" font-size="27" font-weight="600">Baseline / clogged / change</text>
-<text x="1416" y="787" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Estimated local depth + excess runoff</text>
-<rect x="80" y="865" width="1760" height="75" rx="13" fill="#EAF2EC" stroke="#D5E2D8"/>
-<text x="103" y="911" fill="#38754B" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="400">Mapped water and uncertain terrain excluded; mapped greens assumed to absorb all rain.</text>
-<line x1="80" y1="978" x2="1840" y2="978" stroke="#D8E2E5" stroke-width="1"/>
-<text x="80" y="1014" fill="#17343F" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="600">Comparative screening, not a calibrated flood forecast.</text>
-<text x="80" y="1049" fill="#526B74" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Local storage estimates; no flow routing or sewer hydraulics.</text>
+<desc id="desc">Dark right-to-left workflow: source data, processing and map layers. Terrain factors feed a relative ponding heatmap; flood records and buildings feed review priorities; assumed storm and blockage inputs feed local depression storage and baseline/clogged/change comparisons. Land exclusions, river context, archived rainfall and model limitations remain explicit.</desc>
+<rect x="0" y="0" width="2560" height="1440" rx="0" fill="#07131C" stroke="#07131C"/>
+<text x="64" y="67" fill="#71D8D5" font-family="Segoe UI,Arial,sans-serif" font-size="19" font-weight="700">DRAINCHECK</text>
+<text x="64" y="135" fill="#F0F8FC" font-family="Segoe UI,Arial,sans-serif" font-size="54" font-weight="700">How DrainCheck works</text>
+<text x="64" y="180" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="400">Real terrain, flood evidence and editable storm scenarios.</text>
+<rect x="2040" y="78" width="456" height="68" rx="12" fill="#102B36" stroke="#20434D"/>
+<text x="2063" y="121" fill="#71D8D5" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="600">1 m inspection  ·  5 m analysis</text>
+<text x="380" y="230" fill="#F0F8FC" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="600">Layers</text>
+<text x="960" y="230" fill="#F0F8FC" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="600">Processing</text>
+<text x="2080" y="230" fill="#F0F8FC" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="600">Source data</text>
+<rect x="2080" y="260" width="416" height="150" rx="16" fill="#0796B5" stroke="#0796B5"/>
+<text x="2100" y="290" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">01  REAL TERRAIN</text>
+<text x="2100" y="332" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="600">Municipal 1 m DTM</text>
+<text x="2100" y="370" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Baltic 1982 ground elevations.</text>
+<rect x="1490" y="260" width="450" height="150" rx="16" fill="#0796B5" stroke="#0796B5"/>
+<text x="1510" y="290" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">ALIGNED 5 m GRID</text>
+<text x="1510" y="332" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="600">Terrain factors</text>
+<text x="1510" y="370" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Elevation · fill depth · slope · flow area</text>
+<rect x="960" y="260" width="450" height="150" rx="16" fill="#0796B5" stroke="#0796B5"/>
+<text x="980" y="290" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">PERCENTILE RANK</text>
+<text x="980" y="332" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="600">Ponding signal P</text>
+<text x="980" y="370" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Rank positive fill depth; zero if none.</text>
+<rect x="380" y="260" width="440" height="150" rx="16" fill="#0796B5" stroke="#0796B5"/>
+<text x="400" y="290" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">TERRAIN LAYER</text>
+<text x="400" y="332" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="600">Continuous heatmap</text>
+<text x="400" y="370" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">P: 0–100 · not flood probability.</text>
+<line x1="2060" y1="335" x2="1973" y2="335" stroke="#F0F8FC" stroke-width="4"/>
+<polygon points="1960,335 1974,326 1974,344" fill="#F0F8FC"/>
+<line x1="1470" y1="335" x2="1443" y2="335" stroke="#F0F8FC" stroke-width="4"/>
+<polygon points="1430,335 1444,326 1444,344" fill="#F0F8FC"/>
+<line x1="940" y1="335" x2="853" y2="335" stroke="#F0F8FC" stroke-width="4"/>
+<polygon points="840,335 854,326 854,344" fill="#F0F8FC"/>
+<text x="380" y="456" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">P uses fill depth only; slope and upstream contributing area remain diagnostics.</text>
+<line x1="1185" y1="410" x2="1185" y2="505" stroke="#F0F8FC" stroke-width="3" stroke-dasharray="5 5"/>
+<polygon points="1185,520 1177,505 1193,505" fill="#F0F8FC"/>
+<text x="1204" y="487" fill="#32B7C4" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="700">P</text>
+<rect x="2080" y="520" width="416" height="150" rx="16" fill="#32B7C4" stroke="#32B7C4"/>
+<text x="2100" y="550" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">02  OBSERVED / MAPPED</text>
+<text x="2100" y="592" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="27" font-weight="600">Past floods + buildings</text>
+<text x="2100" y="630" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="400">136 flood polygons + cadastral footprints.</text>
+<rect x="960" y="520" width="980" height="150" rx="16" fill="#32B7C4" stroke="#32B7C4"/>
+<text x="980" y="550" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">SEPARATE REVIEW RULES</text>
+<text x="980" y="592" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="600">Combine P, flood evidence and building overlap</text>
+<text x="980" y="630" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Historical categories override lower terrain classes; buildings flag potential overlap.</text>
+<rect x="380" y="520" width="440" height="150" rx="16" fill="#32B7C4" stroke="#32B7C4"/>
+<text x="400" y="550" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">EVIDENCE LAYERS</text>
+<text x="400" y="592" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="600">Review priorities</text>
+<text x="400" y="630" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Independent historical-flood overlays.</text>
+<line x1="2060" y1="595" x2="1973" y2="595" stroke="#F0F8FC" stroke-width="4"/>
+<polygon points="1960,595 1974,586 1974,604" fill="#F0F8FC"/>
+<line x1="940" y1="595" x2="853" y2="595" stroke="#F0F8FC" stroke-width="4"/>
+<polygon points="840,595 854,586 854,604" fill="#F0F8FC"/>
+<text x="380" y="719" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">History changes review categories; it does not change the terrain heatmap.</text>
+<rect x="2080" y="820" width="416" height="210" rx="16" fill="#71D8D5" stroke="#71D8D5"/>
+<text x="2100" y="850" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">03  USER-SET SCENARIO</text>
+<text x="2100" y="892" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="600">Area + existing pipes</text>
+<text x="2100" y="930" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Draw area; choose pipes and storm.</text>
+<text x="2100" y="962" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Drainage and blockage are assumed.</text>
+<rect x="1490" y="820" width="450" height="210" rx="16" fill="#71D8D5" stroke="#71D8D5"/>
+<text x="1510" y="850" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">ASSUMED WATER BALANCE</text>
+<text x="1510" y="892" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="600">Excess runoff</text>
+<text x="1510" y="930" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="19" font-weight="400">Baseline: max(0, rain×c − rate×min/60)</text>
+<text x="1510" y="962" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="19" font-weight="400">Clogged: rate×(1−b/100) in pipe buffer.</text>
+<text x="1510" y="994" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="19" font-weight="400">Baseline removal applies elsewhere.</text>
+<rect x="960" y="820" width="450" height="210" rx="16" fill="#71D8D5" stroke="#71D8D5"/>
+<text x="980" y="850" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">USES REAL 5 m TERRAIN</text>
+<text x="980" y="892" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="27" font-weight="600">Local depression storage</text>
+<text x="980" y="930" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Real bed + fill depth; cap at spill level.</text>
+<text x="980" y="962" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Store each depression’s local runoff.</text>
+<rect x="380" y="820" width="440" height="210" rx="16" fill="#71D8D5" stroke="#71D8D5"/>
+<text x="400" y="850" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">STORM LAYERS</text>
+<text x="400" y="892" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="26" font-weight="600">Baseline / clogged / change</text>
+<text x="400" y="930" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Est. depth (m) · excess runoff (mm)</text>
+<text x="400" y="962" fill="#042B3A" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="400">Stored · overflow · unallocated (m³)</text>
+<line x1="2060" y1="925" x2="1973" y2="925" stroke="#F0F8FC" stroke-width="4"/>
+<polygon points="1960,925 1974,916 1974,934" fill="#F0F8FC"/>
+<line x1="1470" y1="925" x2="1443" y2="925" stroke="#F0F8FC" stroke-width="4"/>
+<polygon points="1430,925 1444,916 1444,934" fill="#F0F8FC"/>
+<line x1="940" y1="925" x2="853" y2="925" stroke="#F0F8FC" stroke-width="4"/>
+<polygon points="840,925 854,916 854,934" fill="#F0F8FC"/>
+<text x="380" y="1078" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Overflow is not routed; runoff on zero-fill land remains unallocated.</text>
+<text x="380" y="1120" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="400">Inputs: rain (mm) · duration (min) · runoff coefficient c · assumed drainage rate (mm/h) · blockage b (%) · pipe buffer (m)</text>
+<line x1="300" y1="335" x2="300" y2="925" stroke="#F0F8FC" stroke-width="4"/>
+<line x1="300" y1="335" x2="380" y2="335" stroke="#F0F8FC" stroke-width="4"/>
+<line x1="300" y1="595" x2="380" y2="595" stroke="#F0F8FC" stroke-width="4"/>
+<line x1="300" y1="925" x2="380" y2="925" stroke="#F0F8FC" stroke-width="4"/>
+<line x1="300" y1="595" x2="258" y2="595" stroke="#F0F8FC" stroke-width="4"/>
+<polygon points="245,595 259,586 259,604" fill="#F0F8FC"/>
+<rect x="64" y="515" width="170" height="160" rx="24" fill="#102B36" stroke="#2B707D"/>
+<text x="100" y="597" fill="#71D8D5" font-family="Segoe UI,Arial,sans-serif" font-size="64" font-weight="700">DC</text>
+<text x="112" y="639" fill="#F0F8FC" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="700">MAP</text>
+<text x="64" y="721" fill="#F0F8FC" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="600">DrainCheck</text>
+<rect x="64" y="1165" width="770" height="155" rx="14" fill="#10232E" stroke="#23404D"/>
+<text x="86" y="1204" fill="#71D8D5" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="700">LAND RULES</text>
+<text x="86" y="1248" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Exclude mapped water and uncertain terrain.</text>
+<text x="86" y="1282" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Assume mapped greens absorb all rain.</text>
+<rect x="875" y="1165" width="770" height="155" rx="14" fill="#10232E" stroke="#23404D"/>
+<text x="897" y="1204" fill="#71D8D5" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="700">RIVER CONTEXT</text>
+<text x="897" y="1248" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">River distance: adjacent / away context.</text>
+<text x="897" y="1282" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Proximity does not establish flood cause.</text>
+<rect x="1686" y="1165" width="810" height="155" rx="14" fill="#10232E" stroke="#23404D"/>
+<text x="1708" y="1204" fill="#71D8D5" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="700">SUPPLEMENTAL LAYERS</text>
+<text x="1708" y="1248" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Archived daily rain, assessments and infrastructure.</text>
+<text x="1708" y="1282" fill="#A6C4D0" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="400">Archive rain does not set the storm slider.</text>
+<line x1="64" y1="1356" x2="2496" y2="1356" stroke="#23404D" stroke-width="1"/>
+<text x="64" y="1400" fill="#F0F8FC" font-family="Segoe UI,Arial,sans-serif" font-size="24" font-weight="400">Comparative screening and local storage estimates; no dynamic routing, sewer hydraulics or river-level simulation.</text>
 </svg>
