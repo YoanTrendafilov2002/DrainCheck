@@ -14,15 +14,9 @@ they are not validated flood forecasts or drainage-design calculations.
 
 **[Open the web demo](https://willing-platinum-tries-their.trycloudflare.com/)**
 
-The free demo runs through a temporary Cloudflare Tunnel. Its hosting computer
-must remain awake and online, with the app and tunnel running. The address
-changes when the tunnel restarts.
-
 For a configured local installation, double-click **Run_Sofia_App.cmd** and open
-**http://127.0.0.1:8040**. Keep its terminal window open. To share that installation
-through a new temporary HTTPS link, use **Run_Cloudflare_Demo.cmd**.
-See the [installation guide](docs/INSTALLATION.md) for another computer and the
-[demo guide](docs/CLOUDFLARE_TUNNEL_DEMO.md) for sharing and stopping the tunnel.
+**http://127.0.0.1:8040**. Keep its terminal window open.
+See the [installation guide](docs/INSTALLATION.md) to set up another computer.
 
 ## How DrainCheck works
 

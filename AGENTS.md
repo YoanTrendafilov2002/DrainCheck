@@ -22,6 +22,12 @@ This is the durable project instruction for subsequent work on this repository.
   `.env.example` is the permitted configuration template. Inspect staged paths
   and diffs before committing; never add ignored credentials or bulk data with
   `git add -f`.
+- Keep GitHub-facing writing concise and focused on using the app. The README
+  is a user guide: include the demo link and essential local run instructions,
+  with short setup commands in dedicated guides. Omit account identifiers,
+  deployment/session history, incidental environment details and hosting-cost
+  breakdowns unless the user specifically requests them. Keep commit messages
+  short and factual.
 - Follow the tracked-data policy in `docs/GITHUB_WORKFLOW.md`. Native DTM and
   pluvial rasters, generated SQLite indexes, national cadastral source batches,
   bulk geometry, dependency trees, archives and rendering caches remain local.

@@ -1,41 +1,27 @@
-LOCAL / PRIVATE DEPLOYMENT
+RUN AND SHARE DRAINCHECK
 
-Nothing has been published. The delivered launcher binds only 127.0.0.1.
+Install Python 3.12 dependencies and restore the matching real datasets using
+docs/INSTALLATION.md. A fresh Git checkout does not include the bulk datasets.
 
-Local app, prebuilt frontend:
+Local app, from its activated Python environment:
   python scripts/serve.py
-  # or without automatically opening a browser:
   python scripts/serve.py --no-browser --port 8040
+The API and built frontend are served at http://127.0.0.1:8040.
 
-For another machine:
-  1. Copy the source package and the real native DTM. Install Python 3.12.
-  2. Create .venv and install requirements-lock.txt.
-  3. Copy .env.example to .env; point SOFIA_DTM_PATH at the actual native raster.
-  4. Run python scripts/prepare_data.py. Existing correct caches are reused.
-  5. Run python scripts/serve.py. Prebuilt dist/ is included.
+Windows launchers:
+  Run_Sofia_App.cmd           Local app
+  Run_Cloudflare_Demo.cmd     Temporary public link; keep this PC online
 
-For code changes, install Node >=22 and pnpm, then:
+After frontend changes, install Node 22+ and pnpm, then run:
   pnpm install --frozen-lockfile
   pnpm test
   pnpm build
-Restart the Python service after replacing the build or source/data revision.
+Restart the app after changing its build, backend or prepared datasets.
 
-For a user-managed private server/container, run the same ASGI app behind your
-usual HTTPS/authenticated reverse proxy. One worker is a practical starting
-point; raster and tile caches are per process and multiple workers increase RAM.
-Mount the original native raster read-only. Put data/cache on a writable local
-volume, and stop the service while rebuilding a changed spatial index. The API
-and dist frontend are served on the same origin, so no third-party CORS proxy is
-required. Public exposure would require your own access-control/reuse review;
-none is provisioned by these instructions or by the build.
+Temporary sharing: docs/CLOUDFLARE_TUNNEL_DEMO.md
+Cloudflare hosting: docs/CLOUDFLARE_DEPLOYMENT.md
 
-Only the public OpenFreeMap basemap and optional font assets depend on outside
-browser requests. The terrain, routes, green polygons and points are served by
-your own API. A no-external-basemap option is included. Basemap attribution is
-retained. API endpoint /api/health reports availability; /api/meta reports the
-data revision and actual loaded provenance.
-
-Dependency build note: Vite reports a large MapLibre-related JavaScript chunk
-(about 1.31 MB raw / 365 kB compressed). This is renderer code, not embedded
-GeoJSON. It is a build warning, not a failed check. Third-party Shapely/MVT and
-Starlette test-client deprecation warnings are recorded in test output.
+Keep original terrain and source data intact. Flood screening and scenarios
+require matching 5 m rasters, water and river/stadium exclusions, their metadata,
+green mask and vector indexes. Check /api/health and the relevant layer metadata
+before sharing; terrain/spatial readiness alone does not verify every layer.
