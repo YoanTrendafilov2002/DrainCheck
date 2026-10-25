@@ -217,6 +217,73 @@ and preservation of source signatures, receipts and sampled values. Record
 the complete suite/build outcome in the current verification receipt after
 running it; previous receipts retain their original scope and test counts.
 
+## Version 1.9 selection and blockage scenarios
+
+Version 1.9 adds a hypothetical area-equivalent drainage-loss comparison. It
+reads real routes once from the full spatial index, selects existing source
+sections intersecting the drawn area, and compares assumed removal before and
+after blockage within their unioned influence buffers. Planned and open-channel
+routes remain separate inventory context. The model is not a connected sewer
+simulation or a measurement of capacity, clogging, flood depth or probability.
+Its equations, defaults, masks, units and actual-data example are documented in
+[the risk calculation guide](RISK_CALCULATION_GUIDE.md).
+
+The rainfall slider also drives a bounded local depression-storage estimate from
+actual mean ground elevations and original fill depths. Components retain only
+their own generated runoff and cap storage at their minimum recorded fill level;
+overflow and nondepression runoff remain explicit unallocated volumes. The
+separate six-band derivative preserves the three millimetre runoff fields and
+adds three estimated metre-depth fields. SciPy 1.18.1 is pinned with the other
+runtime dependencies for connected-component processing. Source terrain is not
+changed. Estimated local storage is not validated hydrodynamic flood depth.
+
+River-context filters use verified river polygons and actual assessment reaches;
+lake/pond/reservoir geometry and schematic points are excluded. The adjustable
+proximity threshold is not a floodplain or proof of fluvial causation. Its
+separate same-grid class mask and full-AOI strata remain local scenario outputs.
+Changing a tile's river display filter does not recalculate storage or alter the
+full-area statistics and download.
+
+Restore the genuine full vector index and matching 5 m terrain prerequisites
+before building the separate full-green grid mask:
+
+```powershell
+& '.venv/Scripts/python.exe' scripts/prepare_green_absorption.py
+```
+
+This writes `data/cache/green_absorption_5m.tif` and
+`data/cache/green_absorption_meta.json` without altering the full green source,
+spatial index, terrain or legacy scores. The binary mask uses centres on the
+unchanged 5 m EPSG:7801 grid. Matching source signatures, revision, output hash
+and header are checked. Rebuild the derivative after regenerating its source
+index; copying small metadata without the matching mask does not restore data.
+The full 64,956 nonempty polygons are used, including those absent from the old
+display subset. The 118.910825 km2 grid-wide mask area must not be relabelled as
+eligible terrain or the amount excluded from every user selection.
+
+Full absorption is a user-requested scenario assumption, enabled initially in
+the frontend. The original unmasked P/C/S scores and earlier API behaviour remain
+available. Hiding polygon display does not change analytical absorption. Existing
+water/uncertainty exclusions remain. Grey building fills and cool selected-area
+styling distinguish geometry from the warm active risk field. A visible blockage
+scenario substitutes its own common-scale runoff heatmap for the base terrain
+risk raster; all source functions remain available independently.
+
+Generated immutable scenario directories live under `data/cache/clogging/`.
+Keep those user selections/results and their rasters local and ignored, along
+with the green mask and other generated caches. Track the implementation,
+preparation script, tests, guide and permitted small provenance. Do not force-add
+scenario rasters or copy source originals into Git. Every result binds its actual
+parameters, AOI, selected IDs, implementation hash and source snapshot; changed
+sources require a new calculation rather than reuse of a stale result.
+
+Run the full restored-data Python suite, frontend tests and production build
+before publishing. Focused checks are `python -m pytest tests/test_clogging.py -q`
+and `python -m pytest tests/test_green_absorption.py -q`; they verify the genuine
+local inputs rather than fabricating replacement terrain. Record the actual
+current counts in the new verification receipt. Preserve older receipts as
+historical evidence with their original scope.
+
 ## Publishing a tested update
 
 1. Implement the requested work while preserving unrelated changes and originals.

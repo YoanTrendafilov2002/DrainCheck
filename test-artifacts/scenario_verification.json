@@ -1,0 +1,242 @@
+{
+  "status": "PASS",
+  "verified_utc": "2026-10-25T10:32:33.942993+00:00",
+  "application_version": "1.9.0",
+  "scope": "Area-selected real pipes, reversible full-green absorption, hypothetical storm/drainage loss, six runoff/depth maps and source-backed river context",
+  "automated_tests": {
+    "python": 254,
+    "javascript": 35,
+    "total": 289,
+    "failed": 0,
+    "python_run": "254 passed in81.03s; two existing warnings",
+    "javascript_run": "35 passed"
+  },
+  "production_build": "PASS: TypeScript/Vite,1749modules;2005262originalbytes; static gzip generated",
+  "source_originals_unchanged": true,
+  "source_values": "Original DTM and P/C/S unchanged; new separate scenario derivatives",
+  "green_absorption": {
+    "available": true,
+    "method": "all-mapped-green-absorption-pixel-centres-v1",
+    "revision": "feb6a7b62ce21050",
+    "sha256": "feb6a7b62ce21050258820a9f1f02b01f2c96ec474fbe70816859bf74a4cf12c",
+    "output_file": "data/cache/green_absorption_5m.tif",
+    "source_revision": "af34c6d53d5b26fd",
+    "source_files": {
+      "spatial_index": {
+        "file": "data/cache/spatial.sqlite",
+        "size_bytes": 138874880,
+        "mtime_ns": 1792913194535604300,
+        "sha256": "abc582c3335b82974f97088472762689d7f8273031387179f72554bf85834c66"
+      },
+      "spatial_revision": {
+        "file": "data/cache/spatial_revision_inputs.json",
+        "size_bytes": 1288,
+        "mtime_ns": 1792921531401360800,
+        "sha256": "f29f7f7190247364cef3826656897c9bf6ebdb43a0bd57d331c19d0edfa6bced"
+      },
+      "vector_provenance": {
+        "file": "data/cache/vector_provenance.json",
+        "size_bytes": 1833,
+        "mtime_ns": 1792860894575148300,
+        "sha256": "6cabcade574d1051c188293569d21ba15f4169300f4923573338dbe76e7b9a6a"
+      },
+      "green_original": {
+        "file": "data/raw/green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson",
+        "size_bytes": 53164382,
+        "mtime_ns": 1792859600796392800,
+        "sha256": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557"
+      },
+      "terrain_screening_grid": {
+        "file": "data/cache/pluvial_5m.tif",
+        "size_bytes": 892396676,
+        "mtime_ns": 1792863601405364000,
+        "sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e"
+      }
+    },
+    "source_counts": {
+      "nonempty_green_polygons": 64956,
+      "empty_source_records": 6,
+      "route_intersecting_display_subset": 2175,
+      "distinct_candidates_in_grid": 64956,
+      "query_rows_including_repeats": 70322
+    },
+    "grid": {
+      "crs": "EPSG:7801",
+      "shape": [
+        10869,
+        10345
+      ],
+      "transform": [
+        5.0,
+        0.0,
+        299392.0,
+        0.0,
+        -5.0,
+        4753611.0
+      ],
+      "nodata": null,
+      "dtype": "uint8"
+    },
+    "band": "assumed_absorbing_green_area",
+    "counts": {
+      "all_cells": 112439805,
+      "green_cells": 4756433,
+      "non_green_cells": 107683372,
+      "green_area_km2": 118.910825
+    },
+    "policy": "Cell centres inside the union of every mapped nonempty green polygon are scenario-excluded. Holes are retained; overlaps count once. Display subset and visibility have no effect.",
+    "scenario_assumption": "At the user\u2019s request, all mapped green areas are assumed to absorb water and therefore are excluded from displayed risk. This is a reversible scenario assumption, not measured infiltration or a hydraulic result.",
+    "limitations": [
+      "Mapped green areas do not establish soil permeability, infiltration rate, antecedent saturation or storage capacity.",
+      "This scenario assumes complete absorption; intense rainfall may exceed real infiltration or storage.",
+      "5 m cell-centre membership may omit narrow slivers; native source geometry and original terrain scores remain unchanged.",
+      "The mask covers the analysis rectangle; outside terrain, water and uncertainty retain their independent policies."
+    ],
+    "verification": {
+      "all_sources_unchanged": true,
+      "source_hashes_checked_before_after": true
+    },
+    "created_utc": "2026-10-25T10:07:42.157378+00:00",
+    "runtime_seconds": 18.688,
+    "reproduce": "python scripts/prepare_green_absorption.py",
+    "enabled_by_default": true,
+    "interpretation": "User-defined full absorption scenario; mapped green areas are excluded from the displayed risk, without changing original terrain scores.",
+    "cell_count": 4756433,
+    "area_km2": 118.910825
+  },
+  "river_context": {
+    "available": true,
+    "method": "documented-river-geometry-exact-metric-proximity-v1",
+    "revision": "b8c31089ac11b734",
+    "default_threshold_m": 100.0,
+    "distance_unit": "metres",
+    "distance_crs": "EPSG:7801",
+    "source_counts": {
+      "open_water_source_polygons": 537,
+      "osm_river_polygons": 18,
+      "nonriver_water_polygons_excluded": 519,
+      "official_context_source_features": 23,
+      "official_river_reaches": 19,
+      "schematic_or_nonreach_features_excluded": 4,
+      "included_river_geometries": 37
+    },
+    "source_revisions": {
+      "mapped_water": "ee06795221a5005e",
+      "official_assessment": "8641e0276fb3d96b"
+    },
+    "source_hashes": {
+      "open_water_polygons": "c7d63f4d8dcea916f11372aa4911988e483a50901f94a4beda72da33b43ab509",
+      "official_context": "73ca1d039dfb694b8be3c2e419d377492c37b458966125c4cad6b84070096293"
+    },
+    "source_urls": [
+      "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN%202028-2033/aktual_PORN/12_PFRA_BG1_APP12_APSFR_kmz.zip",
+      "https://www.openstreetmap.org/relation/1312913",
+      "https://www.openstreetmap.org/relation/15332273",
+      "https://www.openstreetmap.org/way/1202065042",
+      "https://www.openstreetmap.org/way/1356746645",
+      "https://www.openstreetmap.org/way/1364007164",
+      "https://www.openstreetmap.org/way/1414490621",
+      "https://www.openstreetmap.org/way/1419417666",
+      "https://www.openstreetmap.org/way/277253138",
+      "https://www.openstreetmap.org/way/287999013",
+      "https://www.openstreetmap.org/way/287999032",
+      "https://www.openstreetmap.org/way/373219090",
+      "https://www.openstreetmap.org/way/373391000",
+      "https://www.openstreetmap.org/way/373391527",
+      "https://www.openstreetmap.org/way/473952593",
+      "https://www.openstreetmap.org/way/474023934",
+      "https://www.openstreetmap.org/way/474023935",
+      "https://www.openstreetmap.org/way/474033682",
+      "https://www.openstreetmap.org/way/743562181"
+    ],
+    "filter": "Only exact water=river or legacy waterway=riverbank polygons, plus official geometry_role=assessment_reach LineString/MultiLineString. No schematic points, lake/reservoir/pond distance or invented river buffers enter nearest distances.",
+    "interpretation": "Proximity to mapped river geometry is contextual evidence only. River-adjacent land may have mixed rainfall, river or drainage influences; distance does not determine flood cause. Away from mapped rivers does not establish pluvial causation or absence of an unmapped river.",
+    "limitations": [
+      "Source snapshots and designated reaches are incomplete river mapping; narrow, intermittent, covered or unmapped channels may be missing.",
+      "The threshold is an adjustable proximity screening choice, not a floodplain boundary, return period or hydraulic connection.",
+      "Distances to river polygons measure distance to their actual footprint; points inside have distance zero. Distances to reaches use their supplied line geometry.",
+      "Reported flood mechanisms are preserved. This context never relabels an observed event as fluvial or pluvial.",
+      "Official reaches are prospective designations, not observed flood extents. Source dates are retained under the requested time-compatible scenario."
+    ]
+  },
+  "actual_examples": "scenario_actual_examples.json",
+  "model_limits": [
+    "Proximity is context, never a confirmed flood cause. Original reported mechanisms remain unchanged.",
+    "Estimated depth uses capped local depression storage; no surface routing, connected pipe hydraulics, river exchange or calibrated flood forecast.",
+    "Drainage capacity and influence buffer are editable assumptions. Mapped greens fully absorb rainfall only by the user scenario assumption.",
+    "Overflow, nondepression unallocated water, boundary truncation and numerical residual remain explicit."
+  ],
+  "performance": {
+    "scope": "400m by400m EPSG7801 AOI centred23.267111,42.684845; genuine local sources, fresh derivative cache; one cold and three distinct-rain warm full calculations",
+    "rainfall_mm": [
+      30,
+      31,
+      32,
+      33
+    ],
+    "seconds": [
+      0.62244429999555,
+      0.08295270000235178,
+      0.08979760001238901,
+      0.08563529999810271
+    ],
+    "cold_seconds": 0.62244429999555,
+    "warm_median_seconds": 0.08563529999810271,
+    "exact_river_grid_calculations": 1,
+    "river_grid_reused_for_rainfall_edits": true,
+    "spatial_raster_source_signatures_unchanged": true,
+    "area_m2": 160000.0000001397,
+    "grid": {
+      "crs": "EPSG:7801",
+      "transform": [
+        5.0,
+        0.0,
+        316832.0,
+        0.0,
+        -5.0,
+        4730326.0
+      ],
+      "width": 81,
+      "height": 81,
+      "resolution_m": 5,
+      "cell_area_m2": 25.0,
+      "row_offset": 4657,
+      "column_offset": 3488
+    },
+    "depth_clogged_max_m": [
+      0.09310969710350037,
+      0.09940969198942184,
+      0.10570969432592392,
+      0.112009696662426
+    ],
+    "additional_runoff_volume_m3": [
+      496.875,
+      496.875,
+      496.875,
+      496.875
+    ],
+    "note": "Single local measurement, not a citywide benchmark. Warm recalculations use new rainfall parameters and recompute actual runoff/storage; only the unchanged geometry/eligibility/proximity distance grid is reused."
+  },
+  "documentation": {
+    "pdf": "docs/DrainCheck_Risk_Calculation_Guide.pdf",
+    "pages": 12,
+    "sha256": "6e0b4e94d19bc56286b0d452ee533183d4ff67fd3f939a2f79ad78f1cc2c0f97",
+    "source": "docs/RISK_CALCULATION_GUIDE.md"
+  },
+  "browser_checks": {
+    "status": "PASS",
+    "checks": [
+      "Actual rectangle drag selects existing source pipe; selected blue pipe, blue AOI and grey filled buildings render together.",
+      "Rain slider and numeric field stay synchronized and automatically recalculate after pause.",
+      "Depth legends in metres and runoff legends in millimetres remain separate; scenario hides original P while visible; hiding restores P.",
+      "River filter changes shown cells only; full-selection totals and download semantics labelled.",
+      "Rainfall archival overlay remains supplemental and off; all original tabs retained.",
+      "Cold startup waits for revision metadata; actual fresh final-bundle browser emitted no errors."
+    ],
+    "screenshots": [
+      "scenario-rain-slider.png",
+      "scenario-depth-map.png"
+    ],
+    "fresh_final_bundle_console_errors": 0
+  }
+}

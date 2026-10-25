@@ -1,0 +1,937 @@
+{
+  "rain30": {
+    "scenario_id": "070b6ee771e7d124a22b485b90d33e75",
+    "parameters": {
+      "rainfall_mm": 30.0,
+      "duration_minutes": 60.0,
+      "drainage_capacity_mm_h": 15.0,
+      "blockage_percent": 100.0,
+      "influence_distance_m": 50.0,
+      "runoff_coefficient": 0.9,
+      "river_proximity_m": 100.0
+    },
+    "grid": {
+      "crs": "EPSG:7801",
+      "transform": [
+        5.0,
+        0.0,
+        316832.0,
+        0.0,
+        -5.0,
+        4730326.0
+      ],
+      "width": 81,
+      "height": 81,
+      "resolution_m": 5,
+      "cell_area_m2": 25.0,
+      "row_offset": 4657,
+      "column_offset": 3488
+    },
+    "statistics": {
+      "selection_area_m2": 160000.0000001397,
+      "rasterized_selection_area_m2": 160000.0,
+      "eligible_nongreen_land_area_m2": 112525.0,
+      "green_excluded_area_m2": 47475.0,
+      "mapped_green_area_in_selection_m2": 47475.0,
+      "green_within_selected_influence_area_m2": 10475.0,
+      "mapped_water_excluded_area_m2": 0.0,
+      "uncertain_or_missing_terrain_area_m2": 0.0,
+      "exclusion_partition": "Water first, then uncertain/missing terrain, then mapped green on otherwise eligible land; these exclusions plus eligible land partition the rasterized selection.",
+      "affected_eligible_area_m2": 33125.0,
+      "higher_ponding_affected_area_m2": 0.0,
+      "eligible_cell_count": 4501,
+      "affected_cell_count": 1325,
+      "effective_rainfall_mm": 27.0,
+      "baseline_excess_runoff_mm": 12.0,
+      "clogged_excess_runoff_in_influence_mm": 27.0,
+      "additional_excess_runoff_in_influence_mm": 15.0,
+      "baseline_potential_unremoved_volume_m3": 1350.3,
+      "clogged_potential_unremoved_volume_m3": 1847.175,
+      "additional_potential_unremoved_volume_m3": 496.875
+    },
+    "depth_statistics": {
+      "baseline": {
+        "max_depth_m": 0.08810969442129135,
+        "p95_depth_m": 0.08802424371242523,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 75.0,
+        "area_at_least_0_05m_m2": 75.0,
+        "area_at_least_0_1m_m2": 0.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 6.299999542534351,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 1344.0,
+        "numerical_storage_residual_m3": 4.5746564847348736e-07,
+        "unallocated_total_volume_m3": 1344.0000004574656,
+        "source_runoff_volume_m3": 1350.3,
+        "volume_balance_error_m3": 0.0
+      },
+      "clogged": {
+        "max_depth_m": 0.09310969710350037,
+        "p95_depth_m": 0.09302424639463425,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 75.0,
+        "area_at_least_0_05m_m2": 75.0,
+        "area_at_least_0_1m_m2": 0.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 6.6749997437000275,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 1840.5,
+        "numerical_storage_residual_m3": 2.56299972356544e-07,
+        "unallocated_total_volume_m3": 1840.5000002563,
+        "source_runoff_volume_m3": 1847.175,
+        "volume_balance_error_m3": 0.0
+      },
+      "change": {
+        "additional_stored_volume_m3": 0.3750002011656761,
+        "max_additional_depth_m": 0.005000002682209015
+      },
+      "components": {
+        "count": 1,
+        "boundary_truncated_count": 1,
+        "partial_influence_count": 1,
+        "positive_depression_area_m2": 525.0,
+        "storage_capacity_m3": 527.227783203125,
+        "connectivity": 8,
+        "boundary_rule": "A component adjacent to an AOI edge or excluded cell is potentially truncated; partial influence means the assumed loss buffer crosses it, not a hydraulic basin boundary.",
+        "details_first_100": [
+          {
+            "component_id": 1,
+            "cell_count": 21,
+            "spill_elevation_m": 583.9615478515625,
+            "storage_capacity_m3": 527.227783203125,
+            "potentially_boundary_truncated": true,
+            "baseline_source_runoff_m3": 6.3,
+            "clogged_source_runoff_m3": 6.675,
+            "baseline_stored_volume_m3": 6.299999542534351,
+            "clogged_stored_volume_m3": 6.6749997437000275
+          }
+        ],
+        "details_truncated": false
+      },
+      "interpretation": "Estimated local depression-storage depth in metres, using actual terrain and original fill-depth components. No surface-flow routing, connected sewer hydraulics, downstream overflow destination or calibrated inundation forecast."
+    },
+    "river_context": {
+      "available": true,
+      "revision": "b8c31089ac11b734",
+      "threshold_m": 100.0,
+      "distance_basis": "Exact EPSG:7801 point-to-source distances at eligible grid cell centres",
+      "class_cell_counts": {
+        "river_adjacent_possible_mixed": 0,
+        "away_from_mapped_river": 4501,
+        "unknown": 0
+      },
+      "class_area_m2": {
+        "river_adjacent_possible_mixed": 0.0,
+        "away_from_mapped_river": 112525.0,
+        "unknown": 0.0
+      },
+      "eligible_area_m2": 112525.0,
+      "near_river_area_m2": 0.0,
+      "away_from_mapped_river_area_m2": 112525.0,
+      "unknown_area_m2": 0.0,
+      "source_counts": {
+        "open_water_source_polygons": 537,
+        "osm_river_polygons": 18,
+        "nonriver_water_polygons_excluded": 519,
+        "official_context_source_features": 23,
+        "official_river_reaches": 19,
+        "schematic_or_nonreach_features_excluded": 4,
+        "included_river_geometries": 37
+      },
+      "causation": "not_determined",
+      "interpretation": "Proximity to mapped river geometry is contextual evidence only. River-adjacent land may have mixed rainfall, river or drainage influences; distance does not determine flood cause. Away from mapped rivers does not establish pluvial causation or absence of an unmapped river.",
+      "depth_by_proximity": {
+        "baseline": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 75.0,
+            "stored_volume_m3": 6.299999542534351,
+            "max_depth_m": 0.08810969442129135
+          }
+        },
+        "clogged": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 75.0,
+            "stored_volume_m3": 6.6749997437000275,
+            "max_depth_m": 0.09310969710350037
+          }
+        }
+      },
+      "filter_changes": "Display only; full-AOI statistics and six-band download are unchanged.",
+      "class_codes": {
+        "unknown": 0,
+        "river_adjacent_possible_mixed": 1,
+        "away_from_mapped_river": 2,
+        "outside_or_excluded": 255
+      }
+    }
+  },
+  "rain60": {
+    "scenario_id": "de14f0289280970a378358e5a4bbeb8b",
+    "parameters": {
+      "rainfall_mm": 60.0,
+      "duration_minutes": 60.0,
+      "drainage_capacity_mm_h": 15.0,
+      "blockage_percent": 100.0,
+      "influence_distance_m": 50.0,
+      "runoff_coefficient": 0.9,
+      "river_proximity_m": 100.0
+    },
+    "grid": {
+      "crs": "EPSG:7801",
+      "transform": [
+        5.0,
+        0.0,
+        316832.0,
+        0.0,
+        -5.0,
+        4730326.0
+      ],
+      "width": 81,
+      "height": 81,
+      "resolution_m": 5,
+      "cell_area_m2": 25.0,
+      "row_offset": 4657,
+      "column_offset": 3488
+    },
+    "statistics": {
+      "selection_area_m2": 160000.0000001397,
+      "rasterized_selection_area_m2": 160000.0,
+      "eligible_nongreen_land_area_m2": 112525.0,
+      "green_excluded_area_m2": 47475.0,
+      "mapped_green_area_in_selection_m2": 47475.0,
+      "green_within_selected_influence_area_m2": 10475.0,
+      "mapped_water_excluded_area_m2": 0.0,
+      "uncertain_or_missing_terrain_area_m2": 0.0,
+      "exclusion_partition": "Water first, then uncertain/missing terrain, then mapped green on otherwise eligible land; these exclusions plus eligible land partition the rasterized selection.",
+      "affected_eligible_area_m2": 33125.0,
+      "higher_ponding_affected_area_m2": 0.0,
+      "eligible_cell_count": 4501,
+      "affected_cell_count": 1325,
+      "effective_rainfall_mm": 54.0,
+      "baseline_excess_runoff_mm": 39.0,
+      "clogged_excess_runoff_in_influence_mm": 54.0,
+      "additional_excess_runoff_in_influence_mm": 15.0,
+      "baseline_potential_unremoved_volume_m3": 4388.475,
+      "clogged_potential_unremoved_volume_m3": 4885.35,
+      "additional_potential_unremoved_volume_m3": 496.875
+    },
+    "depth_statistics": {
+      "baseline": {
+        "max_depth_m": 0.22054177522659302,
+        "p95_depth_m": 0.22028543055057526,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 175.0,
+        "area_at_least_0_05m_m2": 100.0,
+        "area_at_least_0_1m_m2": 75.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 20.474999397993088,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 4368.0,
+        "numerical_storage_residual_m3": 6.020069136525308e-07,
+        "unallocated_total_volume_m3": 4368.000000602007,
+        "source_runoff_volume_m3": 4388.475,
+        "volume_balance_error_m3": 0.0
+      },
+      "clogged": {
+        "max_depth_m": 0.22268463671207428,
+        "p95_depth_m": 0.22242829203605652,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 175.0,
+        "area_at_least_0_05m_m2": 100.0,
+        "area_at_least_0_1m_m2": 75.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 20.849999459460378,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 4864.5,
+        "numerical_storage_residual_m3": 5.405396237279092e-07,
+        "unallocated_total_volume_m3": 4864.50000054054,
+        "source_runoff_volume_m3": 4885.35,
+        "volume_balance_error_m3": 0.0
+      },
+      "change": {
+        "additional_stored_volume_m3": 0.3750000614672899,
+        "max_additional_depth_m": 0.002142861485481262
+      },
+      "components": {
+        "count": 1,
+        "boundary_truncated_count": 1,
+        "partial_influence_count": 1,
+        "positive_depression_area_m2": 525.0,
+        "storage_capacity_m3": 527.227783203125,
+        "connectivity": 8,
+        "boundary_rule": "A component adjacent to an AOI edge or excluded cell is potentially truncated; partial influence means the assumed loss buffer crosses it, not a hydraulic basin boundary.",
+        "details_first_100": [
+          {
+            "component_id": 1,
+            "cell_count": 21,
+            "spill_elevation_m": 583.9615478515625,
+            "storage_capacity_m3": 527.227783203125,
+            "potentially_boundary_truncated": true,
+            "baseline_source_runoff_m3": 20.475,
+            "clogged_source_runoff_m3": 20.85,
+            "baseline_stored_volume_m3": 20.474999397993088,
+            "clogged_stored_volume_m3": 20.849999459460378
+          }
+        ],
+        "details_truncated": false
+      },
+      "interpretation": "Estimated local depression-storage depth in metres, using actual terrain and original fill-depth components. No surface-flow routing, connected sewer hydraulics, downstream overflow destination or calibrated inundation forecast."
+    },
+    "river_context": {
+      "available": true,
+      "revision": "b8c31089ac11b734",
+      "threshold_m": 100.0,
+      "distance_basis": "Exact EPSG:7801 point-to-source distances at eligible grid cell centres",
+      "class_cell_counts": {
+        "river_adjacent_possible_mixed": 0,
+        "away_from_mapped_river": 4501,
+        "unknown": 0
+      },
+      "class_area_m2": {
+        "river_adjacent_possible_mixed": 0.0,
+        "away_from_mapped_river": 112525.0,
+        "unknown": 0.0
+      },
+      "eligible_area_m2": 112525.0,
+      "near_river_area_m2": 0.0,
+      "away_from_mapped_river_area_m2": 112525.0,
+      "unknown_area_m2": 0.0,
+      "source_counts": {
+        "open_water_source_polygons": 537,
+        "osm_river_polygons": 18,
+        "nonriver_water_polygons_excluded": 519,
+        "official_context_source_features": 23,
+        "official_river_reaches": 19,
+        "schematic_or_nonreach_features_excluded": 4,
+        "included_river_geometries": 37
+      },
+      "causation": "not_determined",
+      "interpretation": "Proximity to mapped river geometry is contextual evidence only. River-adjacent land may have mixed rainfall, river or drainage influences; distance does not determine flood cause. Away from mapped rivers does not establish pluvial causation or absence of an unmapped river.",
+      "depth_by_proximity": {
+        "baseline": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 175.0,
+            "stored_volume_m3": 20.474999397993088,
+            "max_depth_m": 0.22054177522659302
+          }
+        },
+        "clogged": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 175.0,
+            "stored_volume_m3": 20.849999459460378,
+            "max_depth_m": 0.22268463671207428
+          }
+        }
+      },
+      "filter_changes": "Display only; full-AOI statistics and six-band download are unchanged.",
+      "class_codes": {
+        "unknown": 0,
+        "river_adjacent_possible_mixed": 1,
+        "away_from_mapped_river": 2,
+        "outside_or_excluded": 255
+      }
+    }
+  },
+  "zero_blockage": {
+    "scenario_id": "282cd0094f17a6cd1000f5141092036b",
+    "parameters": {
+      "rainfall_mm": 30.0,
+      "duration_minutes": 60.0,
+      "drainage_capacity_mm_h": 15.0,
+      "blockage_percent": 0.0,
+      "influence_distance_m": 50.0,
+      "runoff_coefficient": 0.9,
+      "river_proximity_m": 100.0
+    },
+    "grid": {
+      "crs": "EPSG:7801",
+      "transform": [
+        5.0,
+        0.0,
+        316832.0,
+        0.0,
+        -5.0,
+        4730326.0
+      ],
+      "width": 81,
+      "height": 81,
+      "resolution_m": 5,
+      "cell_area_m2": 25.0,
+      "row_offset": 4657,
+      "column_offset": 3488
+    },
+    "statistics": {
+      "selection_area_m2": 160000.0000001397,
+      "rasterized_selection_area_m2": 160000.0,
+      "eligible_nongreen_land_area_m2": 112525.0,
+      "green_excluded_area_m2": 47475.0,
+      "mapped_green_area_in_selection_m2": 47475.0,
+      "green_within_selected_influence_area_m2": 10475.0,
+      "mapped_water_excluded_area_m2": 0.0,
+      "uncertain_or_missing_terrain_area_m2": 0.0,
+      "exclusion_partition": "Water first, then uncertain/missing terrain, then mapped green on otherwise eligible land; these exclusions plus eligible land partition the rasterized selection.",
+      "affected_eligible_area_m2": 33125.0,
+      "higher_ponding_affected_area_m2": 0.0,
+      "eligible_cell_count": 4501,
+      "affected_cell_count": 1325,
+      "effective_rainfall_mm": 27.0,
+      "baseline_excess_runoff_mm": 12.0,
+      "clogged_excess_runoff_in_influence_mm": 12.0,
+      "additional_excess_runoff_in_influence_mm": 0.0,
+      "baseline_potential_unremoved_volume_m3": 1350.3,
+      "clogged_potential_unremoved_volume_m3": 1350.3,
+      "additional_potential_unremoved_volume_m3": 0.0
+    },
+    "depth_statistics": {
+      "baseline": {
+        "max_depth_m": 0.08810969442129135,
+        "p95_depth_m": 0.08802424371242523,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 75.0,
+        "area_at_least_0_05m_m2": 75.0,
+        "area_at_least_0_1m_m2": 0.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 6.299999542534351,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 1344.0,
+        "numerical_storage_residual_m3": 4.5746564847348736e-07,
+        "unallocated_total_volume_m3": 1344.0000004574656,
+        "source_runoff_volume_m3": 1350.3,
+        "volume_balance_error_m3": 0.0
+      },
+      "clogged": {
+        "max_depth_m": 0.08810969442129135,
+        "p95_depth_m": 0.08802424371242523,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 75.0,
+        "area_at_least_0_05m_m2": 75.0,
+        "area_at_least_0_1m_m2": 0.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 6.299999542534351,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 1344.0,
+        "numerical_storage_residual_m3": 4.5746564847348736e-07,
+        "unallocated_total_volume_m3": 1344.0000004574656,
+        "source_runoff_volume_m3": 1350.3,
+        "volume_balance_error_m3": 0.0
+      },
+      "change": {
+        "additional_stored_volume_m3": 0.0,
+        "max_additional_depth_m": 0.0
+      },
+      "components": {
+        "count": 1,
+        "boundary_truncated_count": 1,
+        "partial_influence_count": 1,
+        "positive_depression_area_m2": 525.0,
+        "storage_capacity_m3": 527.227783203125,
+        "connectivity": 8,
+        "boundary_rule": "A component adjacent to an AOI edge or excluded cell is potentially truncated; partial influence means the assumed loss buffer crosses it, not a hydraulic basin boundary.",
+        "details_first_100": [
+          {
+            "component_id": 1,
+            "cell_count": 21,
+            "spill_elevation_m": 583.9615478515625,
+            "storage_capacity_m3": 527.227783203125,
+            "potentially_boundary_truncated": true,
+            "baseline_source_runoff_m3": 6.3,
+            "clogged_source_runoff_m3": 6.3,
+            "baseline_stored_volume_m3": 6.299999542534351,
+            "clogged_stored_volume_m3": 6.299999542534351
+          }
+        ],
+        "details_truncated": false
+      },
+      "interpretation": "Estimated local depression-storage depth in metres, using actual terrain and original fill-depth components. No surface-flow routing, connected sewer hydraulics, downstream overflow destination or calibrated inundation forecast."
+    },
+    "river_context": {
+      "available": true,
+      "revision": "b8c31089ac11b734",
+      "threshold_m": 100.0,
+      "distance_basis": "Exact EPSG:7801 point-to-source distances at eligible grid cell centres",
+      "class_cell_counts": {
+        "river_adjacent_possible_mixed": 0,
+        "away_from_mapped_river": 4501,
+        "unknown": 0
+      },
+      "class_area_m2": {
+        "river_adjacent_possible_mixed": 0.0,
+        "away_from_mapped_river": 112525.0,
+        "unknown": 0.0
+      },
+      "eligible_area_m2": 112525.0,
+      "near_river_area_m2": 0.0,
+      "away_from_mapped_river_area_m2": 112525.0,
+      "unknown_area_m2": 0.0,
+      "source_counts": {
+        "open_water_source_polygons": 537,
+        "osm_river_polygons": 18,
+        "nonriver_water_polygons_excluded": 519,
+        "official_context_source_features": 23,
+        "official_river_reaches": 19,
+        "schematic_or_nonreach_features_excluded": 4,
+        "included_river_geometries": 37
+      },
+      "causation": "not_determined",
+      "interpretation": "Proximity to mapped river geometry is contextual evidence only. River-adjacent land may have mixed rainfall, river or drainage influences; distance does not determine flood cause. Away from mapped rivers does not establish pluvial causation or absence of an unmapped river.",
+      "depth_by_proximity": {
+        "baseline": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 75.0,
+            "stored_volume_m3": 6.299999542534351,
+            "max_depth_m": 0.08810969442129135
+          }
+        },
+        "clogged": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 75.0,
+            "stored_volume_m3": 6.299999542534351,
+            "max_depth_m": 0.08810969442129135
+          }
+        }
+      },
+      "filter_changes": "Display only; full-AOI statistics and six-band download are unchanged.",
+      "class_codes": {
+        "unknown": 0,
+        "river_adjacent_possible_mixed": 1,
+        "away_from_mapped_river": 2,
+        "outside_or_excluded": 255
+      }
+    }
+  },
+  "no_selected_pipe": {
+    "scenario_id": "12dd52f88f9dbffdce1147c768e59d7f",
+    "parameters": {
+      "rainfall_mm": 30.0,
+      "duration_minutes": 60.0,
+      "drainage_capacity_mm_h": 15.0,
+      "blockage_percent": 100.0,
+      "influence_distance_m": 50.0,
+      "runoff_coefficient": 0.9,
+      "river_proximity_m": 100.0
+    },
+    "grid": {
+      "crs": "EPSG:7801",
+      "transform": [
+        5.0,
+        0.0,
+        316832.0,
+        0.0,
+        -5.0,
+        4730326.0
+      ],
+      "width": 81,
+      "height": 81,
+      "resolution_m": 5,
+      "cell_area_m2": 25.0,
+      "row_offset": 4657,
+      "column_offset": 3488
+    },
+    "statistics": {
+      "selection_area_m2": 160000.0000001397,
+      "rasterized_selection_area_m2": 160000.0,
+      "eligible_nongreen_land_area_m2": 112525.0,
+      "green_excluded_area_m2": 47475.0,
+      "mapped_green_area_in_selection_m2": 47475.0,
+      "green_within_selected_influence_area_m2": 0.0,
+      "mapped_water_excluded_area_m2": 0.0,
+      "uncertain_or_missing_terrain_area_m2": 0.0,
+      "exclusion_partition": "Water first, then uncertain/missing terrain, then mapped green on otherwise eligible land; these exclusions plus eligible land partition the rasterized selection.",
+      "affected_eligible_area_m2": 0.0,
+      "higher_ponding_affected_area_m2": 0.0,
+      "eligible_cell_count": 4501,
+      "affected_cell_count": 0,
+      "effective_rainfall_mm": 27.0,
+      "baseline_excess_runoff_mm": 12.0,
+      "clogged_excess_runoff_in_influence_mm": 27.0,
+      "additional_excess_runoff_in_influence_mm": 15.0,
+      "baseline_potential_unremoved_volume_m3": 1350.3,
+      "clogged_potential_unremoved_volume_m3": 1350.3,
+      "additional_potential_unremoved_volume_m3": 0.0
+    },
+    "depth_statistics": {
+      "baseline": {
+        "max_depth_m": 0.08810969442129135,
+        "p95_depth_m": 0.08802424371242523,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 75.0,
+        "area_at_least_0_05m_m2": 75.0,
+        "area_at_least_0_1m_m2": 0.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 6.299999542534351,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 1344.0,
+        "numerical_storage_residual_m3": 4.5746564847348736e-07,
+        "unallocated_total_volume_m3": 1344.0000004574656,
+        "source_runoff_volume_m3": 1350.3,
+        "volume_balance_error_m3": 0.0
+      },
+      "clogged": {
+        "max_depth_m": 0.08810969442129135,
+        "p95_depth_m": 0.08802424371242523,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 75.0,
+        "area_at_least_0_05m_m2": 75.0,
+        "area_at_least_0_1m_m2": 0.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 6.299999542534351,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 1344.0,
+        "numerical_storage_residual_m3": 4.5746564847348736e-07,
+        "unallocated_total_volume_m3": 1344.0000004574656,
+        "source_runoff_volume_m3": 1350.3,
+        "volume_balance_error_m3": 0.0
+      },
+      "change": {
+        "additional_stored_volume_m3": 0.0,
+        "max_additional_depth_m": 0.0
+      },
+      "components": {
+        "count": 1,
+        "boundary_truncated_count": 1,
+        "partial_influence_count": 0,
+        "positive_depression_area_m2": 525.0,
+        "storage_capacity_m3": 527.227783203125,
+        "connectivity": 8,
+        "boundary_rule": "A component adjacent to an AOI edge or excluded cell is potentially truncated; partial influence means the assumed loss buffer crosses it, not a hydraulic basin boundary.",
+        "details_first_100": [
+          {
+            "component_id": 1,
+            "cell_count": 21,
+            "spill_elevation_m": 583.9615478515625,
+            "storage_capacity_m3": 527.227783203125,
+            "potentially_boundary_truncated": true,
+            "baseline_source_runoff_m3": 6.3,
+            "clogged_source_runoff_m3": 6.3,
+            "baseline_stored_volume_m3": 6.299999542534351,
+            "clogged_stored_volume_m3": 6.299999542534351
+          }
+        ],
+        "details_truncated": false
+      },
+      "interpretation": "Estimated local depression-storage depth in metres, using actual terrain and original fill-depth components. No surface-flow routing, connected sewer hydraulics, downstream overflow destination or calibrated inundation forecast."
+    },
+    "river_context": {
+      "available": true,
+      "revision": "b8c31089ac11b734",
+      "threshold_m": 100.0,
+      "distance_basis": "Exact EPSG:7801 point-to-source distances at eligible grid cell centres",
+      "class_cell_counts": {
+        "river_adjacent_possible_mixed": 0,
+        "away_from_mapped_river": 4501,
+        "unknown": 0
+      },
+      "class_area_m2": {
+        "river_adjacent_possible_mixed": 0.0,
+        "away_from_mapped_river": 112525.0,
+        "unknown": 0.0
+      },
+      "eligible_area_m2": 112525.0,
+      "near_river_area_m2": 0.0,
+      "away_from_mapped_river_area_m2": 112525.0,
+      "unknown_area_m2": 0.0,
+      "source_counts": {
+        "open_water_source_polygons": 537,
+        "osm_river_polygons": 18,
+        "nonriver_water_polygons_excluded": 519,
+        "official_context_source_features": 23,
+        "official_river_reaches": 19,
+        "schematic_or_nonreach_features_excluded": 4,
+        "included_river_geometries": 37
+      },
+      "causation": "not_determined",
+      "interpretation": "Proximity to mapped river geometry is contextual evidence only. River-adjacent land may have mixed rainfall, river or drainage influences; distance does not determine flood cause. Away from mapped rivers does not establish pluvial causation or absence of an unmapped river.",
+      "depth_by_proximity": {
+        "baseline": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 75.0,
+            "stored_volume_m3": 6.299999542534351,
+            "max_depth_m": 0.08810969442129135
+          }
+        },
+        "clogged": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 75.0,
+            "stored_volume_m3": 6.299999542534351,
+            "max_depth_m": 0.08810969442129135
+          }
+        }
+      },
+      "filter_changes": "Display only; full-AOI statistics and six-band download are unchanged.",
+      "class_codes": {
+        "unknown": 0,
+        "river_adjacent_possible_mixed": 1,
+        "away_from_mapped_river": 2,
+        "outside_or_excluded": 255
+      }
+    }
+  },
+  "zero_rain": {
+    "scenario_id": "cbf8630c33171bd6ff4d06da90155838",
+    "parameters": {
+      "rainfall_mm": 0.0,
+      "duration_minutes": 60.0,
+      "drainage_capacity_mm_h": 15.0,
+      "blockage_percent": 100.0,
+      "influence_distance_m": 50.0,
+      "runoff_coefficient": 0.9,
+      "river_proximity_m": 100.0
+    },
+    "grid": {
+      "crs": "EPSG:7801",
+      "transform": [
+        5.0,
+        0.0,
+        316832.0,
+        0.0,
+        -5.0,
+        4730326.0
+      ],
+      "width": 81,
+      "height": 81,
+      "resolution_m": 5,
+      "cell_area_m2": 25.0,
+      "row_offset": 4657,
+      "column_offset": 3488
+    },
+    "statistics": {
+      "selection_area_m2": 160000.0000001397,
+      "rasterized_selection_area_m2": 160000.0,
+      "eligible_nongreen_land_area_m2": 112525.0,
+      "green_excluded_area_m2": 47475.0,
+      "mapped_green_area_in_selection_m2": 47475.0,
+      "green_within_selected_influence_area_m2": 10475.0,
+      "mapped_water_excluded_area_m2": 0.0,
+      "uncertain_or_missing_terrain_area_m2": 0.0,
+      "exclusion_partition": "Water first, then uncertain/missing terrain, then mapped green on otherwise eligible land; these exclusions plus eligible land partition the rasterized selection.",
+      "affected_eligible_area_m2": 33125.0,
+      "higher_ponding_affected_area_m2": 0.0,
+      "eligible_cell_count": 4501,
+      "affected_cell_count": 1325,
+      "effective_rainfall_mm": 0.0,
+      "baseline_excess_runoff_mm": 0.0,
+      "clogged_excess_runoff_in_influence_mm": 0.0,
+      "additional_excess_runoff_in_influence_mm": 0.0,
+      "baseline_potential_unremoved_volume_m3": 0.0,
+      "clogged_potential_unremoved_volume_m3": 0.0,
+      "additional_potential_unremoved_volume_m3": 0.0
+    },
+    "depth_statistics": {
+      "baseline": {
+        "max_depth_m": 0.0,
+        "p95_depth_m": 0.0,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 0.0,
+        "area_at_least_0_05m_m2": 0.0,
+        "area_at_least_0_1m_m2": 0.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 0.0,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 0.0,
+        "numerical_storage_residual_m3": 0.0,
+        "unallocated_total_volume_m3": 0.0,
+        "source_runoff_volume_m3": 0.0,
+        "volume_balance_error_m3": 0.0
+      },
+      "clogged": {
+        "max_depth_m": 0.0,
+        "p95_depth_m": 0.0,
+        "p95_basis": "Positive estimated-depth cells only",
+        "ponded_area_m2": 0.0,
+        "area_at_least_0_05m_m2": 0.0,
+        "area_at_least_0_1m_m2": 0.0,
+        "area_at_least_0_3m_m2": 0.0,
+        "stored_volume_m3": 0.0,
+        "overflow_volume_m3": 0.0,
+        "unallocated_nondepression_volume_m3": 0.0,
+        "numerical_storage_residual_m3": 0.0,
+        "unallocated_total_volume_m3": 0.0,
+        "source_runoff_volume_m3": 0.0,
+        "volume_balance_error_m3": 0.0
+      },
+      "change": {
+        "additional_stored_volume_m3": 0.0,
+        "max_additional_depth_m": 0.0
+      },
+      "components": {
+        "count": 1,
+        "boundary_truncated_count": 1,
+        "partial_influence_count": 1,
+        "positive_depression_area_m2": 525.0,
+        "storage_capacity_m3": 527.227783203125,
+        "connectivity": 8,
+        "boundary_rule": "A component adjacent to an AOI edge or excluded cell is potentially truncated; partial influence means the assumed loss buffer crosses it, not a hydraulic basin boundary.",
+        "details_first_100": [
+          {
+            "component_id": 1,
+            "cell_count": 21,
+            "spill_elevation_m": 583.9615478515625,
+            "storage_capacity_m3": 527.227783203125,
+            "potentially_boundary_truncated": true,
+            "baseline_source_runoff_m3": 0.0,
+            "clogged_source_runoff_m3": 0.0,
+            "baseline_stored_volume_m3": 0.0,
+            "clogged_stored_volume_m3": 0.0
+          }
+        ],
+        "details_truncated": false
+      },
+      "interpretation": "Estimated local depression-storage depth in metres, using actual terrain and original fill-depth components. No surface-flow routing, connected sewer hydraulics, downstream overflow destination or calibrated inundation forecast."
+    },
+    "river_context": {
+      "available": true,
+      "revision": "b8c31089ac11b734",
+      "threshold_m": 100.0,
+      "distance_basis": "Exact EPSG:7801 point-to-source distances at eligible grid cell centres",
+      "class_cell_counts": {
+        "river_adjacent_possible_mixed": 0,
+        "away_from_mapped_river": 4501,
+        "unknown": 0
+      },
+      "class_area_m2": {
+        "river_adjacent_possible_mixed": 0.0,
+        "away_from_mapped_river": 112525.0,
+        "unknown": 0.0
+      },
+      "eligible_area_m2": 112525.0,
+      "near_river_area_m2": 0.0,
+      "away_from_mapped_river_area_m2": 112525.0,
+      "unknown_area_m2": 0.0,
+      "source_counts": {
+        "open_water_source_polygons": 537,
+        "osm_river_polygons": 18,
+        "nonriver_water_polygons_excluded": 519,
+        "official_context_source_features": 23,
+        "official_river_reaches": 19,
+        "schematic_or_nonreach_features_excluded": 4,
+        "included_river_geometries": 37
+      },
+      "causation": "not_determined",
+      "interpretation": "Proximity to mapped river geometry is contextual evidence only. River-adjacent land may have mixed rainfall, river or drainage influences; distance does not determine flood cause. Away from mapped rivers does not establish pluvial causation or absence of an unmapped river.",
+      "depth_by_proximity": {
+        "baseline": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          }
+        },
+        "clogged": {
+          "unknown": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "river_adjacent_possible_mixed": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          },
+          "away_from_mapped_river": {
+            "ponded_area_m2": 0.0,
+            "stored_volume_m3": 0.0,
+            "max_depth_m": 0.0
+          }
+        }
+      },
+      "filter_changes": "Display only; full-AOI statistics and six-band download are unchanged.",
+      "class_codes": {
+        "unknown": 0,
+        "river_adjacent_possible_mixed": 1,
+        "away_from_mapped_river": 2,
+        "outside_or_excluded": 255
+      }
+    }
+  }
+}

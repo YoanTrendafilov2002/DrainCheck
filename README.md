@@ -2,9 +2,11 @@
 
 A working local React + TypeScript + MapLibre application with a Python spatial
 API. It uses real supplied geometries, the real municipal 1 m DTM, and all
-322,025 infrastructure point records. Version 1.8 adds a continuous ponding
-heatmap and a grouped layer switchboard with distinctive source symbols and
-map styling. It retains the categorical evidence-review map, historical
+322,025 infrastructure point records. Version 1.9 adds area selection for
+hypothetical pipe-blockage comparisons, a rainfall slider with terrain-based
+local ponding estimates, river-proximity filters, the requested fully absorbing
+green-area scenario, and neutral grey filled buildings. The continuous ponding heatmap and
+grouped layer switchboard remain independently available. It retains the categorical evidence-review map, historical
 mechanism/certainty filters, official assessment context, AGKK cadastral
 buildings and every legacy P/C/S mode. It retains the supplied 27 June 2025 daily
 rainfall products and stations and the complete original Earth Engine whole-area
@@ -135,6 +137,71 @@ pnpm dev
 - On smaller screens the controls start collapsed. Native NoData, loading and
   request failures are distinct. Retry a failed map request explicitly; errors
   are not silently presented as valid terrain.
+
+## Area-selected blockage scenarios and green absorption
+
+Open **Scenario** and use **Draw pipe selection area** in the blockage scenario controls. Draw a
+rectangle on the map, then inspect the actual source routes intersecting it.
+Existing routes are selected initially; toggle individual existing source IDs
+before calculating. Planned and open-channel routes are reported as context and
+do not contribute functioning pipe capacity. Selection is independent of the
+inside/outside-green display partition and uses each original route once.
+
+Enter event rainfall (default 30 mm), duration (60 minutes), assumed drainage
+removal (15 mm/hour), blockage (100%), influence distance (50 m) and runoff
+coefficient (0.9). River proximity starts at 100 m as a separate contextual
+threshold. The removal rate is an **area-equivalent assumption**, not a
+measured or estimated capacity for each pipe. The calculation uses genuine
+aligned 5 m terrain, the full mapped green union and actual selected route
+geometry. It does not route water or solve pipe-network hydraulics.
+
+Effective runoff is rainfall multiplied by the entered coefficient. Baseline
+potential excess is the positive remainder after assumed removal over the event
+duration. Blockage reduces removal only within the chosen buffer of selected
+existing route sections. Outside that influence, the clogged view equals the
+baseline. Buffer overlaps are unioned, never counted twice. The 0-100 terrain
+score is not mixed numerically with millimetres of scenario runoff.
+
+Adjust the rainfall slider to recalculate the same area and pipe choices.
+Compare estimated **Baseline**, **Clogged** and **Additional** local ponding
+depths in metres, or the retained excess-runoff views in millimetres. Each view
+family uses a common colour scale.
+When visible, the scenario replaces the base terrain-risk raster as the active
+warm heatmap; area, selected pipes, buildings, green areas and evidence can still
+appear together. Buildings have grey filled shapes, the area uses a cool blue
+fill and boundary, and warm colours retain their single active risk meaning.
+Downloads contain six original-grid bands in a separate GeoTIFF: the three
+runoff fields followed by three estimated local storage-depth fields. A separate
+JSON record retains parameters, source IDs, assumptions and statistics.
+
+The depth estimate fills independent connected positive-depression components
+using actual ground elevations, capped by the minimum recorded fill surface.
+It uses only runoff generated within each component. Overflow and runoff on
+zero-fill land are explicitly unallocated; water is not routed from the whole
+rectangle into one depression. Potential boundary truncation is flagged. The
+river filter distinguishes river-adjacent possible mixed influences from land
+away from the supplied river geometry. Distance does not establish flood cause;
+filtering leaves full-area statistics and downloads unchanged.
+
+The user-requested **green absorption** assumption starts enabled. All 64,956
+nonempty green polygons absorb all rainfall and are excluded from scenario risk
+areas, even if their display layer is hidden. This is a scenario assumption,
+not measured permeability or unlimited real-world infiltration. The original
+unmasked P/C/S values remain preserved and inspectable. Water, uncertain terrain
+and outside coverage remain explicit exclusions.
+
+Scenario outputs report eligible area, green exclusion, affected area,
+additional potential unremoved volume and affected area with P at least 70.
+They are **not validated flood forecasts, flood probabilities or current clogging diagnoses**.
+No selected existing route means zero additional effect. All parameters,
+assumptions, source IDs and revisions are retained in the result record. The
+scenario is limited to 25 km2 and 1,000,000 cropped grid cells; draw a smaller
+or more compact area if either bound is exceeded.
+
+Read [the full risk calculation guide](docs/RISK_CALCULATION_GUIDE.md), also available as a [12-page PDF](docs/DrainCheck_Risk_Calculation_Guide.pdf), for input
+provenance, every equation and unit, a hand-worked example, a genuine local
+example, sensitivity, masking rules and reproduction. The guide distinguishes
+the scenario's entered event rain from the independent daily rainfall overlay.
 
 ## Performance
 
@@ -275,7 +342,9 @@ The Pluvial tab offers a continuous ponding heatmap, categorical evidence review
 and the original analyst-defined terrain screening and infrastructure overlap. Daily rainfall is
 a separate observed-product context layer; it does not calibrate or alter P/C/S
 scores. There is no validated event
-flood model, pipe invert, capacity or connectivity.
+flood model, measured pipe capacity, invert or connectivity. The separate v1.9
+blockage tool uses editable, explicit assumptions; it does not supply those
+missing measurements.
 The source dates do not establish current field conditions. Native 1 m spacing
 does not establish centimetre vertical accuracy.
 
@@ -317,8 +386,9 @@ water depth or expected damage.
 
 Layer styles distinguish their source meanings: warm heat colours for ponding,
 blue survey boundaries for observed flooding, separate ordinal assessment
-outlines/reaches/identifiers, amber cadastral outlines and green land-cover
-boundaries. Existing, planned and open sewer routes retain cyan, dashed magenta
+outlines/reaches/identifiers, grey filled cadastral buildings and green land-cover
+boundaries. A selected scenario area uses cool blue styling alongside the warm
+active risk field. Existing, planned and open sewer routes retain cyan, dashed magenta
 and yellow status colours, with dark casings for contrast. When screening is
 visible, green fill becomes lighter while its boundaries remain visible;
 this styling does not remove green polygons or change their route partition.
@@ -546,7 +616,7 @@ citywide building inventory. The exact publication is identified in Sources:
 GATE research building/roof outlines must not be described as the current live
 Digital Twin model or assumed to be surveyed ground-level footprints.
 
-Source outlines are shown in 2D. The optional **3D using source heights** control is
+Source building shapes are shown with a neutral grey 2D fill and outline. The optional **3D using source heights** control is
 offered only when the source confirms heights in metres above ground. Features
 without a valid source height remain 2D outlines; no height is guessed. Clicking
 a building shows its source properties separately from the native 1 m ground

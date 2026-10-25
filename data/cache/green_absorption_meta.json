@@ -1,0 +1,86 @@
+{
+  "available": true,
+  "method": "all-mapped-green-absorption-pixel-centres-v1",
+  "revision": "feb6a7b62ce21050",
+  "sha256": "feb6a7b62ce21050258820a9f1f02b01f2c96ec474fbe70816859bf74a4cf12c",
+  "output_file": "data/cache/green_absorption_5m.tif",
+  "source_revision": "af34c6d53d5b26fd",
+  "source_files": {
+    "spatial_index": {
+      "file": "data/cache/spatial.sqlite",
+      "size_bytes": 138874880,
+      "mtime_ns": 1792913194535604300,
+      "sha256": "abc582c3335b82974f97088472762689d7f8273031387179f72554bf85834c66"
+    },
+    "spatial_revision": {
+      "file": "data/cache/spatial_revision_inputs.json",
+      "size_bytes": 1288,
+      "mtime_ns": 1792921531401360800,
+      "sha256": "f29f7f7190247364cef3826656897c9bf6ebdb43a0bd57d331c19d0edfa6bced"
+    },
+    "vector_provenance": {
+      "file": "data/cache/vector_provenance.json",
+      "size_bytes": 1833,
+      "mtime_ns": 1792860894575148300,
+      "sha256": "6cabcade574d1051c188293569d21ba15f4169300f4923573338dbe76e7b9a6a"
+    },
+    "green_original": {
+      "file": "data/raw/green_areas_26_sofp_20200518_a00bddf3-4189-4e65-8216-a8575de25e8c.geojson",
+      "size_bytes": 53164382,
+      "mtime_ns": 1792859600796392800,
+      "sha256": "0bd91373cd82b604d1477a4411f04fd8fd691963c8c87f1234fe4b300f442557"
+    },
+    "terrain_screening_grid": {
+      "file": "data/cache/pluvial_5m.tif",
+      "size_bytes": 892396676,
+      "mtime_ns": 1792863601405364000,
+      "sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e"
+    }
+  },
+  "source_counts": {
+    "nonempty_green_polygons": 64956,
+    "empty_source_records": 6,
+    "route_intersecting_display_subset": 2175,
+    "distinct_candidates_in_grid": 64956,
+    "query_rows_including_repeats": 70322
+  },
+  "grid": {
+    "crs": "EPSG:7801",
+    "shape": [
+      10869,
+      10345
+    ],
+    "transform": [
+      5.0,
+      0.0,
+      299392.0,
+      0.0,
+      -5.0,
+      4753611.0
+    ],
+    "nodata": null,
+    "dtype": "uint8"
+  },
+  "band": "assumed_absorbing_green_area",
+  "counts": {
+    "all_cells": 112439805,
+    "green_cells": 4756433,
+    "non_green_cells": 107683372,
+    "green_area_km2": 118.910825
+  },
+  "policy": "Cell centres inside the union of every mapped nonempty green polygon are scenario-excluded. Holes are retained; overlaps count once. Display subset and visibility have no effect.",
+  "scenario_assumption": "At the user’s request, all mapped green areas are assumed to absorb water and therefore are excluded from displayed risk. This is a reversible scenario assumption, not measured infiltration or a hydraulic result.",
+  "limitations": [
+    "Mapped green areas do not establish soil permeability, infiltration rate, antecedent saturation or storage capacity.",
+    "This scenario assumes complete absorption; intense rainfall may exceed real infiltration or storage.",
+    "5 m cell-centre membership may omit narrow slivers; native source geometry and original terrain scores remain unchanged.",
+    "The mask covers the analysis rectangle; outside terrain, water and uncertainty retain their independent policies."
+  ],
+  "verification": {
+    "all_sources_unchanged": true,
+    "source_hashes_checked_before_after": true
+  },
+  "created_utc": "2026-10-25T10:07:42.157378+00:00",
+  "runtime_seconds": 18.688,
+  "reproduce": "python scripts/prepare_green_absorption.py"
+}

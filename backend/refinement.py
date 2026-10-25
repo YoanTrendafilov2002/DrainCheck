@@ -38,6 +38,7 @@ class LocalReviewPriority:
         self.receipt = self.cache/'review_priority_meta.json'
         self.pluvial = pluvial; self.cadastre = cadastre; self.history = history; self.assessment = assessment
         self.tiles = pluvial.tiles
+        self.green = None
 
     @staticmethod
     @lru_cache(maxsize=4)
@@ -92,7 +93,7 @@ class LocalReviewPriority:
             {'data': 'Official assessment geometry', 'use': 'Independent supplier-level overlay and full-precision containment; not an invented pixel flood probability.'},
         ]
 
-    def sample(self, lon, lat):
+    def sample(self, lon, lat, green_absorption=False):
         meta = self.meta()
         if not meta.get('available'):
             raise ValueError(meta['message'])
@@ -109,7 +110,7 @@ class LocalReviewPriority:
             raise ValueError('Review and original terrain eligibility disagree')
         history_ids = self.history_ids(*TO_GEO.transform(*centre)) if code != 255 else []
         context = self.local_context(lon, lat, centre, legacy.get('ponding_score')) if code != 255 else {'available': False, 'clogging_status': 'not_assessed', 'reason': 'Outside terrain coverage'}
-        return {'longitude': lon, 'latitude': lat, 'status': status, 'revision': meta['revision'],
+        result = {'longitude': lon, 'latitude': lat, 'status': status, 'revision': meta['revision'],
                 'analysis_resolution_m': 5, 'row': row, 'column': col,
                 'review_class': code if status == 'ok' else None,
                 'review_label': LABELS[code] if status == 'ok' else {'uncertain': 'Uncertain terrain', 'excluded_open_water': 'Excluded mapped open water', 'nodata': 'Outside terrain'}[status],
@@ -120,6 +121,15 @@ class LocalReviewPriority:
                 'drainage_context': context, 'official_assessment': self.assessment.intersections(lon, lat),
                 'source_dates': meta.get('source_dates'), 'scenario_assumption': meta.get('scenario_assumption'),
                 'interpretation': 'Rule-based review category. Class numbers are identifiers, not probabilities, flood depths or damage scores.'}
+        if green_absorption:
+            if self.green is None or not self.green.available:
+                raise ValueError('Full-green absorption mask unavailable')
+            if code not in (253,255) and self.green.sample_cell(row,col):
+                result.update(original_terrain={'review_class':result['review_class'],'review_label':result['review_label'],'ponding_score':result['legacy_ponding_score']},
+                              status='excluded_green_absorption',review_class=None,review_label='Assumed absorbing green area',
+                              legacy_ponding_score=None,green_absorption_assumption=True,
+                              interpretation='Mapped green area is excluded under the user-defined full absorption assumption; observed historical evidence remains available independently.')
+        return result
 
     def history_ids(self, lon, lat):
         meta = self.history.meta()
@@ -174,12 +184,15 @@ class LocalReviewPriority:
                 'summary': f"Within 100 m: {counts['existing']} existing, {counts['planned']} planned and {counts['open']} open-channel source routes; {points['sewerage']} sewerage and {points['collectors']} collector points. Capacity and clogging are not assessed.",
                 'interpretation': 'Counts and lengths are source geometry within 100 m, not connected pipe capacity or blockage. Planned routes remain separate. Green cover is a mapped polygon, not infiltration.'}
 
-    def tile(self, z, x, y, renderer):
+    def tile(self, z, x, y, renderer, green_absorption=False):
         meta = self.meta()
         if not meta.get('available'):
             raise ValueError(meta['message'])
         tile_bounds(z, x, y)
+        if green_absorption and (self.green is None or not self.green.available):
+            raise ValueError('Full-green absorption mask unavailable')
         key = ['review-categorical-v1', meta['revision'], renderer, z,x,y, file_signature(self.path), file_signature(self.receipt), file_signature(__file__)]
+        key.extend([green_absorption,*( [file_signature(self.green.path),file_signature(self.green.receipt)] if green_absorption else [])])
         def render():
             west, south, east, north = tile_bounds(z,x,y); spacing = (east-west)/256
             dest = np.full((256,256), 255, dtype=np.uint8)
@@ -187,6 +200,8 @@ class LocalReviewPriority:
                 reproject(rasterio.band(src,1), dest, src_transform=src.transform, src_crs=src.crs,
                           src_nodata=255, dst_transform=Affine(spacing,0,west,0,-spacing,north),
                           dst_crs='EPSG:3857', dst_nodata=255, resampling=Resampling.nearest, num_threads=1, warp_mem_limit=64)
-            return png(rgba(dest, meta['classes']))
+            colours=rgba(dest, meta['classes'])
+            if green_absorption:colours[self.green.tile_mask(z,x,y),3]=0
+            return png(colours)
         return self.tiles.get_or_render(key, render)
 

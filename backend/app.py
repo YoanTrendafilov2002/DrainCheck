@@ -27,6 +27,10 @@ from .flood_assessment import FloodAssessmentContext,history_mechanism_meta,hist
 from .refinement import LocalReviewPriority
 from .refinement_routes import create_refinement_router
 from .rainfall_routes import representation
+from .green_absorption import GreenAbsorption
+from .river_context import RiverContext
+from .clogging import CloggingScenarios
+from .clogging_routes import create_clogging_router
 
 ROOT=Path(__file__).resolve().parents[1];CACHE=ROOT/'data/cache'
 # Windows registry associations can incorrectly classify .js as text/plain.
@@ -46,11 +50,16 @@ history_survey=HistoricalSurveyContext(ROOT)
 rainfall=LocalRainfall(ROOT/'data/rainfall',CACHE)
 assessment=FloodAssessmentContext(ROOT)
 review_priority=LocalReviewPriority(ROOT,pluvial,cadastre,history_survey,assessment)
+green_absorption=GreenAbsorption(ROOT)
+pluvial.green=green_absorption
+review_priority.green=green_absorption
+river_context=RiverContext(ROOT)
+clogging_scenarios=CloggingScenarios(ROOT,pluvial,river_context)
 CONFIG=json.loads((ROOT/'config/map_config.json').read_text(encoding='utf-8'))
 PROJECT=Transformer.from_crs(4326,3857,always_xy=True).transform
 UNPROJECT=Transformer.from_crs(3857,4326,always_xy=True)
-app=FastAPI(title='Sofia Terrain, Rainfall & Pluvial Screening',version='1.8.0')
-RENDERER_REVISION='fast-map-'+hashlib.sha256(b''.join((ROOT/'backend'/name).read_bytes() for name in ['app.py','vector.py','terrain.py','pluvial.py','open_water.py','scale.py','http_cache.py','tile_cache.py','context_layers.py','rainfall.py','rainfall_routes.py','cadastre_routes.py','flood_assessment.py','refinement.py','refinement_routes.py'])+(ROOT/'config/map_config.json').read_bytes()+((CACHE/'whole_scale.json').read_bytes() if (CACHE/'whole_scale.json').is_file() else b'')+package_version('mapbox-vector-tile').encode()).hexdigest()[:12]
+app=FastAPI(title='Sofia Terrain, Rainfall & Pluvial Screening',version='1.9.0')
+RENDERER_REVISION='fast-map-'+hashlib.sha256(b''.join((ROOT/'backend'/name).read_bytes() for name in ['app.py','vector.py','terrain.py','pluvial.py','open_water.py','scale.py','http_cache.py','tile_cache.py','context_layers.py','rainfall.py','rainfall_routes.py','cadastre_routes.py','flood_assessment.py','refinement.py','refinement_routes.py','green_absorption.py','river_context.py','clogging.py','clogging_routes.py'])+(ROOT/'config/map_config.json').read_bytes()+((CACHE/'whole_scale.json').read_bytes() if (CACHE/'whole_scale.json').is_file() else b'')+package_version('mapbox-vector-tile').encode()).hexdigest()[:12]
 TILE_CACHE=get_tile_cache(str(CACHE/'rendered_tiles'))
 METRICS=PerformanceMetrics()
 app.add_middleware(RequestTiming,metrics=METRICS)
@@ -222,14 +231,16 @@ def historical_register():
     return FileResponse(path,filename=path.name,media_type='text/csv')
 
 @app.get('/api/history/zones/meta')
-def historical_zones_meta():return {**history_mechanism_meta(history_survey),'renderer_revision':RENDERER_REVISION}
+def historical_zones_meta():return {**history_mechanism_meta(history_survey),'renderer_revision':RENDERER_REVISION,'river_context':river_context.meta()}
 
 @app.get('/api/history/zones.geojson')
-def historical_zones(request:Request,v:str):
+def historical_zones(request:Request,v:str,river_proximity_m:float=Query(default=100,ge=5,le=1000)):
     data=history_survey.meta()
     if not data.get('available'):raise HTTPException(503,data.get('message','Real historical survey unavailable'))
     if v!=data['revision']:raise HTTPException(409,'Historical survey revision changed; reload the app')
-    try:collection=history_mechanism_collection(history_survey)
+    try:
+        source=history_mechanism_collection(history_survey)
+        collection={**source,'features':[{**f,'properties':{**f.get('properties',{}),'river_context':river_context.classify_geometry(f['geometry'],river_proximity_m,f.get('properties',{}).get('mechanism'))}} for f in source['features']]}
     except ValueError as error:raise HTTPException(503,str(error))
     return representation(request,collection,media_type='application/geo+json',immutable=True)
 
@@ -324,19 +335,31 @@ def pluvial_meta():
                     'No rainfall, infiltration, building barriers, drainage capacity or independently validated flood probability is included.'])
     return result
 
+@app.get('/api/green-absorption/meta')
+def green_absorption_meta():return green_absorption.meta()
+
+@app.get('/api/river-context/meta')
+def river_context_meta():return river_context.meta()
+
+@app.get('/api/river-context/sample')
+def river_context_sample(lon:float=Query(ge=-180,le=180),lat:float=Query(ge=-85,le=85),river_proximity_m:float=Query(default=100,ge=5,le=1000)):
+    return river_context.sample(lon,lat,river_proximity_m)
+
 @app.get('/api/pluvial/sample')
-def pluvial_sample(lon:float=Query(ge=-180,le=180),lat:float=Query(ge=-85,le=85)):
+def pluvial_sample(lon:float=Query(ge=-180,le=180),lat:float=Query(ge=-85,le=85),green_absorption:bool=False,river_proximity_m:float=Query(default=100,ge=5,le=1000)):
     if not math.isfinite(lon) or not math.isfinite(lat):raise HTTPException(422,'Finite coordinates required')
     if not pluvial.available:raise HTTPException(503,pluvial.meta().get('message','Terrain screening or required open-water mask unavailable'))
+    if green_absorption and not pluvial.green.available:raise HTTPException(503,pluvial.green.error)
     try:
-        result=pluvial.sample(lon,lat)
+        result=pluvial.sample(lon,lat,green_absorption)
     except ValueError as e:raise HTTPException(422,str(e))
     except Exception:raise HTTPException(503,'Screening pixel read failed; no substituted score')
     factors=result.get('factors',{})
     known=factors.get('mean_ground_elevation_m') is not None
     water_excluded=result['status']=='excluded_open_water'
-    uncertain=not water_excluded and (result['status']=='boundary-excluded' or (known and result.get('score') is None))
-    return {**result,'status':'uncertain' if uncertain else result['status'],
+    green_excluded=result['status']=='excluded_green_absorption'
+    uncertain=not (water_excluded or green_excluded) and (result['status']=='boundary-excluded' or (known and result.get('score') is None))
+    return {**result,'river_context':river_context.sample(lon,lat,river_proximity_m),'status':'uncertain' if uncertain else result['status'],
             'class_label':result.get('class'),
             'ponding_score':factors.get('depression_percentile'),
             'concentration_score':factors.get('concentration_flatness_score'),
@@ -344,7 +367,7 @@ def pluvial_sample(lon:float=Query(ge=-180,le=180),lat:float=Query(ge=-85,le=85)
             'slope_degrees':factors.get('slope_degrees'),
             'contributing_area_m2':factors.get('upstream_contributing_area_m2'),
             'boundary_influence':factors.get('possible_missing_upstream_terrain')==1,
-            'interpretation':'Existing mapped water is excluded from land pluvial screening; river flooding is not assessed.' if water_excluded else 'Relative terrain signal, not flood probability or event flood depth.'}
+            'interpretation':'Mapped green area is assumed to absorb all rainfall and excluded for this scenario.' if green_excluded else 'Existing mapped water is excluded from land pluvial screening; river flooding is not assessed.' if water_excluded else 'Relative terrain signal, not flood probability or event flood depth.'}
 
 @app.get('/api/pluvial/exposure')
 def pluvial_exposure(mode:Literal['ponding','combined','concentration']='ponding'):
@@ -382,10 +405,11 @@ def pluvial_download(kind:Literal['raster','points','routes','water-mask']):
     return FileResponse(path,filename=path.name,media_type='image/tiff' if kind in ('raster','water-mask') else 'text/csv')
 
 @app.get('/api/pluvial/{mode}/{z}/{x}/{y}.png')
-def pluvial_tile(request:Request,mode:Literal['heatmap','combined','ponding','concentration'],z:int,x:int,y:int,v:str):
+def pluvial_tile(request:Request,mode:Literal['heatmap','combined','ponding','concentration'],z:int,x:int,y:int,v:str,green_absorption:bool=False):
     if not pluvial.available:raise HTTPException(503,'Terrain screening unavailable')
     if v!=pluvial.meta()['revision']:raise HTTPException(409,'Screening data revision changed; reload the app')
-    try:data=pluvial.tile({'heatmap':'heatmap','combined':'screening','ponding':'depressions','concentration':'concentration'}[mode],z,x,y,pluvial.meta()['revision'])
+    if green_absorption and not pluvial.green.available:raise HTTPException(503,pluvial.green.error)
+    try:data=pluvial.tile({'heatmap':'heatmap','combined':'screening','ponding':'depressions','concentration':'concentration'}[mode],z,x,y,pluvial.meta()['revision'],green_absorption)
     except ValueError as e:raise HTTPException(422,str(e))
     except Exception:raise HTTPException(503,'Screening tile failed; no substituted risk surface')
     return representation(request,data,'image/png',True)
@@ -397,7 +421,8 @@ def performance():
 
 app.include_router(create_rainfall_router(rainfall))
 app.include_router(create_cadastre_router(cadastre,RENDERER_REVISION,TILE_CACHE))
-app.include_router(create_refinement_router(review_priority,assessment,RENDERER_REVISION))
+app.include_router(create_refinement_router(review_priority,assessment,RENDERER_REVISION,green_absorption,river_context))
+app.include_router(create_clogging_router(clogging_scenarios,RENDERER_REVISION))
 
 if (ROOT/'dist').is_dir():app.mount('/',CompressedStaticFiles(directory=ROOT/'dist',html=True),name='frontend')
 else:

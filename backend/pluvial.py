@@ -123,6 +123,7 @@ class LocalPluvial:
         self.receipt = self.cache/'pluvial_provenance.json'
         self.tiles=get_tile_cache(str((self.cache/'rendered_tiles').resolve()))
         self.water=OpenWaterMask(self.cache)
+        self.green=None
 
     @property
     def available(self):
@@ -159,11 +160,13 @@ class LocalPluvial:
         result['revision']=hashlib.sha256(('mapped-water-v1:'+terrain_revision+':'+water['revision']).encode()).hexdigest()[:16]
         return {'available':True,**result,'water_exclusion':water}
 
-    def sample(self, lon, lat):
+    def sample(self, lon, lat, green_absorption=False):
         if not self.available:
             raise ValueError('Terrain screening unavailable')
         if not math.isfinite(lon) or not math.isfinite(lat):
             raise ValueError('Finite coordinates required')
+        if green_absorption and (self.green is None or not self.green.available):
+            raise ValueError('Full-green absorption mask unavailable; no unmasked score substituted')
         x, y = XY.transform(lon, lat)
         result = {'longitude': lon, 'latitude': lat, 'analysis_resolution_m': 5,
                   'method': METHOD_VERSION, 'status': 'nodata', 'class': None, 'score': None,'water_excluded':False}
@@ -189,6 +192,14 @@ class LocalPluvial:
                 result.update(status='excluded_open_water',water_excluded=True,score=None,class_label=None,
                               ponding_score=None,concentration_score=None,unmasked_scores=original,
                               exclusion_reason='mapped-open-water',message='Mapped existing open water is excluded from terrestrial pluvial screening; no safe/unsafe score is assigned.')
+            elif green_absorption and factors['mean_ground_elevation_m'] is not None and self.green.sample_cell(row,col):
+                original={name:factors[name] for name in BAND_NAMES[5:]}
+                for name in BAND_NAMES[5:]:factors[name]=None
+                result.update(status='excluded_green_absorption',score=None,class_label=None,
+                              ponding_score=None,concentration_score=None,green_absorption_assumption=True,
+                              unmasked_scores=original,original_terrain=original,
+                              exclusion_reason='assumed-full-green-absorption',
+                              message='Mapped green area is assumed to absorb all rainfall in this scenario; original terrain scores are retained separately.')
             elif factors['possible_missing_upstream_terrain'] == 1:
                 result.update(status='uncertain', exclusion_reason='boundary-influence', message='Upstream terrain may extend beyond the available DTM; no screening class assigned.')
             elif factors['relative_screening_score'] is not None:
@@ -202,18 +213,21 @@ class LocalPluvial:
                 result.update(status='uncertain', exclusion_reason='invalid-factor', message='Terrain is present, but a required terrain factor is missing or invalid; no screening class assigned.')
             return result
 
-    def tile(self, mode, z, x, y, revision=''):
+    def tile(self, mode, z, x, y, revision='', green_absorption=False):
         if not self.available:
             raise ValueError('Terrain screening unavailable')
         if mode not in LAYERS:
             raise ValueError('Unknown terrain screening layer')
+        if green_absorption and (self.green is None or not self.green.available):
+            raise ValueError('Full-green absorption mask unavailable; no unmasked risk substituted')
         tile_bounds(z,x,y)
         key=['pluvial-mapped-water-png-v2-zero-valid',rasterio.__version__,Image.__version__,mode,z,x,y,revision,
              file_signature(self.path),file_signature(self.receipt),file_signature(self.water.path),
              file_signature(self.water.receipt),file_signature(__file__),file_signature(Path(__file__).with_name('open_water.py'))]
-        return self.tiles.get_or_render(key,lambda:self._render_tile(mode,z,x,y))
+        key.extend([green_absorption,*( [file_signature(self.green.path),file_signature(self.green.receipt),file_signature(Path(__file__).with_name('green_absorption.py'))] if green_absorption else [])])
+        return self.tiles.get_or_render(key,lambda:self._render_tile(mode,z,x,y,green_absorption))
 
-    def _render_tile(self,mode,z,x,y):
+    def _render_tile(self,mode,z,x,y,green_absorption=False):
         west, south, east, north = tile_bounds(z, x, y)
         spacing = (east-west)/256
         dst = np.full((256, 256), np.nan, dtype=np.float32)
@@ -243,4 +257,5 @@ class LocalPluvial:
         if mode != 'boundary':
             rgba[np.isfinite(terrain) & ~np.isfinite(dst)] = [120, 127, 136, 155]
         rgba[water==1,3]=0
+        if green_absorption:rgba[self.green.tile_mask(z,x,y),3]=0
         return png(rgba)
