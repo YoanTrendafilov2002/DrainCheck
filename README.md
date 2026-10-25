@@ -1,0 +1,476 @@
+# Sofia terrain, sewer & rainfall explorer
+
+A working local React + TypeScript + MapLibre application with a Python spatial
+API. It uses real supplied geometries, the real municipal 1 m DTM, and all
+322,025 infrastructure point records. Version 1.6 adds independently controlled
+AGKK cadastral building context. It retains the supplied 27 June 2025 daily
+rainfall products and stations and the complete original Earth Engine whole-area
+colour reference. Imperviousness is absent from the map.
+
+The requested source repository is
+[YoanTrendafilov2002/DrainCheck](https://github.com/YoanTrendafilov2002/DrainCheck).
+For Git checkout setup, the included-data policy and future tested updates, see
+[the GitHub workflow](docs/GITHUB_WORKFLOW.md). Large local originals and caches
+remain preserved outside Git; a source checkout needs `pnpm build` and data
+preparation rather than an already generated `dist/` directory.
+
+## Run on this computer
+
+Double-click **Run_Sofia_App.cmd**. It uses the existing Python environment,
+starts the server at **http://127.0.0.1:8040**, and opens the app when ready.
+Keep the terminal open. Press Ctrl+C in it to stop.
+If this app is already running, the launcher reopens it instead of starting a
+second server on the same port.
+
+The production frontend is already built in `dist/`; Node is not needed just
+to run it. If port 8040 is occupied, run the command below with `--port 8041`.
+
+```powershell
+Set-Location -LiteralPath 'C:\Users\Yoan\Documents\Codex\2026-10-24\hp\outputs\sofia_explorer_app'
+& '..\..\work\hydro_env\Scripts\python.exe' 'scripts/serve.py'
+```
+
+The native raster is read from the existing sibling file:
+`../sofia_dtm_2024_1m_gee.tif`. It is not copied into the source ZIP or modified.
+The archives, original raw vectors, duplicate sewer file, original point CSV and
+complete rainfall supplement are preserved. Existing terrain, sewer, green,
+point, P/C/S screening, hidden water exclusion, exposure, historical-evidence
+and building-source availability functions remain available. Real screenshots
+and verification records are in `test-artifacts/`.
+
+## Fresh installation / another computer
+
+Use Python 3.12 and a current Node release (22 or newer) if rebuilding the UI.
+For the prebuilt application, only Python is required.
+
+```powershell
+python -m venv .venv
+& '.venv/Scripts/python.exe' -m pip install -r requirements-lock.txt
+Copy-Item -LiteralPath '.env.example' -Destination '.env'
+```
+
+Put the real native DTM at `data/external/sofia_dtm_2024_1m_gee.tif`, or change
+`SOFIA_DTM_PATH` in `.env` to its actual path. It must be the full horizontal-CRS
+1 m municipal raster: 51,722 columns × 54,343 rows, Float32, EPSG:7801, affine
+`[1,0,299392,0,-1,4753611]`, NoData `-9999`. The adapter supports local GeoTIFFs
+and COGs. The already verified local input is a tiled GeoTIFF. A preview PNG,
+another DEM, or a raster with a different grid is rejected.
+
+```powershell
+& '.venv/Scripts/python.exe' 'scripts/prepare_data.py'
+& '.venv/Scripts/python.exe' 'scripts/prepare_rainfall_cache.py'
+& '.venv/Scripts/python.exe' 'scripts/restore_reference_scale.py'
+& '.venv/Scripts/python.exe' 'scripts/serve.py'
+```
+
+The full local source package includes real raw vectors/points, prepared geometries, native
+rainfall COGs/stations, and the spatial index/display/statistics cache. It excludes the 1.39 GB native DTM,
+dependencies and credentials. Without a native DTM, the real vector map still
+runs and elevation is explicitly unavailable; there is no substitute surface.
+The Git repository keeps permitted source inputs and small metadata but excludes
+generated indexes, native terrain, bulk cadastral geometry and archives. See the
+GitHub workflow for its separate checkout/bootstrap steps. Run the curve restorer
+only after the actual native DTM is present.
+
+## Development
+
+```text
+pnpm install --frozen-lockfile
+pnpm build
+```
+
+For development, run the API on port 8040 and `pnpm dev` in another terminal;
+Vite proxies `/api` locally. `pnpm-workspace.yaml` permits the required esbuild
+installation script. The exact frontend dependency graph is in `pnpm-lock.yaml`;
+the Python dependency closure is in `requirements-lock.txt`.
+
+```text
+python -m uvicorn backend.app:app --host 127.0.0.1 --port 8040
+pnpm dev
+```
+
+## Using the map
+
+- Open **Explore**. Routes start in **Inside green**, with existing, planned
+  and open statuses enabled. Switch exactly one zone at a time. Statistics
+  cover the full selected dataset, not just visible tiles.
+- Existing routes are cyan, planned routes dashed magenta, open channels yellow.
+  Click a route to inspect its original properties and computed section length.
+  **Export selected sections** returns full-precision geometry and source IDs.
+- **Whole study area** colours remain fixed while panning. **Fit this view**
+  measures local terrain statistics; **Reset** restores the whole-area curve.
+  Auto-fit is explicitly opt-in. A compact warning with Fit/Reset remains visible
+  when a locked local view moves outside its fitted area.
+- The continuous nine-colour legend uses inverse-mapped metre ticks. A 201-point
+  curve defines a continuous transform, not 201 elevation bands. Real height
+  values remain unchanged. Native readouts are 1 m; whole-area colour statistics
+  are 60 m, local statistics normally 10 m (coarser if the pixel cap requires it).
+- **Layers** provides elevation opacity, hillshade, green display selection,
+  all infrastructure categories (initially off), and basemap choice. Choosing
+  all green polygons displays the complete indexed source. It does not change
+  the already computed route partition. Attribution remains on the map.
+- Point data loads only when enabled, through viewport vector tiles. No route
+  connectivity or capacity is inferred from those points.
+- **Share view** copies the URL with map position, zone, statuses, layers,
+  opacity, colour-scale ID, auto-fit, basemap and rainfall controls. Local scales persist on the
+  same server; a link to an unavailable or old-revision scale reports that state.
+- On smaller screens the controls start collapsed. Native NoData, loading and
+  request failures are distinct. Retry a failed map request explicitly; errors
+  are not silently presented as valid terrain.
+
+## Performance
+
+Hidden layers stop requesting tiles, point tiles contain the selected categories,
+and a bounded persistent tile cache reuses completed rendering across visits and
+API restarts. Static assets and vector tiles support gzip. Native 1 m readouts,
+5 m terrain analysis and original data are unchanged. See
+[performance changes and measured limits](docs/PERFORMANCE.md), including real
+browser request checks and byte-for-byte raster verification. New uncached areas
+still incur their first-render cost.
+
+## Inputs actually used
+
+| Input | Loaded source | Coverage / provenance |
+|---|---|---|
+| Sewer routes | Real recovered GeoJSON; original local sewer file matched the truncated entry's CRC | 717 original routes; source 2009 |
+| Green mask | CRC-verified raw handoff GeoJSON | 64,956 nonempty polygons; 6 empty originals retained; 1 invalid geometry repaired only in processing copy; source 2020 |
+| Green display subset | Prepared handoff GeoJSON | 2,175 polygons intersecting routes |
+| Native terrain | Existing verified `sofia_dtm_2024_1m_gee.tif` | 1 m grid; Baltic 1982 heights; catalogue valid at 2024-10-01 |
+| Infrastructure | Existing original local CSV, copied unchanged | All 322,025 rows; 83 without type |
+| Whole-area colour curve | Complete supplied Earth Engine snapshot | All 201 quantiles; same study rectangle and 60 m display-statistics scope; previous local approximation archived |
+| Daily rainfall | Three supplied numeric native COGs | 27 June 2025 local day; final/corrected nominal 250 m products and nominal 1 km raw radar; distinct EPSG:4326 grids/masks |
+| Rain stations | Complete supplied station GeoJSON | 55 original station records; 43 accepted / 12 rejected; original QC retained |
+| Cadastral building context | National AGKK INSPIRE source snapshot | 334,033 source records / 334,018 distinct non-null cadastral IDs intersecting the study rectangle; source geometry and attributes preserved; no inferred heights |
+
+The first handoff ZIP was truncated; its original extraction receipt remains in
+`test-artifacts/verification.json`. The later complete supplement resolves the
+missing source tail. All **53 files** are preserved unchanged under
+`handoff/rainfall_supplement/`, including both saved EE scripts, the portable
+scale module, all 201 original quantiles, acquisition/data documentation,
+rainfall data and original verification scripts. Its 52 manifest-listed entries
+pass their original size/SHA-256 checks; the manifest itself is the 53rd file.
+The original archive is retained alongside this preserved directory.
+
+The default whole-area curve now uses the genuine supplied snapshot. It is a
+continuous 80% percentile / 20% linear-height display transform; native heights
+are unchanged. The previous locally estimated curve is retained in
+`data/reference/previous_whole_scales/`. Reapply the reference from the preserved
+source without changing the scientific raster or local-fit implementation:
+
+```text
+python scripts/restore_reference_scale.py
+```
+
+The restorer validates the exact source asset, scope and all 201 finite ordered
+values, preserves the original snapshot and backs up the previous generated
+curve. Five rounded legend labels are never accepted as a substitute. The two
+saved EE scripts and the rainfall attachment remain reference originals; the
+rainfall script's older elevation stretch is not reinstated. This computer
+already has the verified terrain, points and rainfall data; no new installation,
+Earth Engine login or cloud export is required to run the app.
+
+## Daily rainfall
+
+Use the independent rainfall controls to show the final merged radar/station
+product, bias-corrected radar or raw radar for **27 June 2025, Europe/Sofia**.
+Values and legends are accumulated **mm per local day**, not mm/hour. Final
+merged is the default product; its optional 0.5 mm visibility threshold affects
+display only. Fine-product legends span 0–30 mm and raw radar spans 0–110 mm.
+Visibility, opacity, native-cell/bilinear display preference, threshold and station
+filters are independent of terrain and routes and are retained in shared URLs.
+
+All 55 station records remain available: 43 accepted by the supplied QC and 12
+rejected, including their reasons and original values. Accepted stations start
+visible and rejected stations hidden. A real accepted station reports exactly
+0 mm; that remains a valid reading. Native rainfall sampling uses the selected
+product's original grid and mask. Smoothing cannot create additional measured
+resolution, alter statistics or extend valid coverage.
+
+Summary cards use full valid native-cell coverage and WGS84 ellipsoidal cell
+areas. They report area-weighted mean and **precipitation volume**, not runoff,
+floodwater or sewer load. Final/corrected products cover approximately 461.24 km²;
+raw radar has approximately 4,961.04 km² of valid cells and 1,721 masked cells.
+Their different coverage prevents interpreting whole-product totals as a bias
+correction factor. Neither the upstream five-minute series nor processing/QC
+programs are supplied, so no time animation, guessed correction or event flood
+simulation is made. See [rainfall sources and audit](docs/RAINFALL_SOURCES.md).
+
+Rebuild the derived rainfall summaries, or rerun the original complete-handoff
+checks, from this directory:
+
+```text
+python scripts/prepare_rainfall_cache.py
+python handoff/rainfall_supplement/scripts/verify_handoff.py
+python handoff/rainfall_supplement/scripts/verify_rainfall.py
+node --test handoff/rainfall_supplement/tests/elevation_scale.test.mjs
+```
+
+## Validation
+
+```text
+python -m pytest tests -q --junitxml=test-results.xml
+pnpm test
+pnpm build
+```
+
+The current production build passes **196 Python tests and 24 frontend tests
+(220 total)**, and the production frontend build passes. The earlier 159-test
+result remains historical. The three supplied validation flows also pass,
+including all rainfall pixels/masks, the 15 supplied point checks and five
+original elevation-scale tests; these are separate checks, not added again to
+the 220-test total. Current integration results are recorded in
+`test-results.xml`, the frontend test output and
+`test-artifacts/rainfall_handoff_validation.json`. Older performance
+timing receipts retain their original measurement scope; see
+[current checks and historical performance measurements](docs/PERFORMANCE.md).
+
+The integration tests check actual geometry partitioning against the full mask,
+traversal lengths, all filter combinations, exports, polygon holes/multipart
+geometry, point totals, native sampling, source NoData, rejected preview images,
+transparent uncovered tiles, nonlinear legend inversion, revision handling and
+local-fit caching. Frontend tests cover URL state and stale/cancelled requests.
+Browser checks cover actual rendering, route inspection, filters, local colour
+fit, scale locking/reset, optional points, and responsive controls.
+
+Baseline route checks:
+
+| Zone | Source routes represented | Length |
+|---|---:|---:|
+| All | 717 | 540.1630135 km |
+| Inside green | 543 | 137.8586989 km |
+| Outside green | 670 | 402.3043147 km |
+
+Counts overlap across zones; lengths partition within numerical tolerance.
+The Pluvial tab adds a transparent analyst-defined terrain screening index and
+infrastructure overlap. Daily rainfall is a separate observed-product context
+layer; it does not calibrate or alter P/C/S scores. There is no validated event
+flood model, pipe invert, capacity or connectivity.
+The source dates do not establish current field conditions. Native 1 m spacing
+does not establish centimetre vertical accuracy.
+
+## Architecture and deployment
+
+See `docs/ARCHITECTURE.txt` and `docs/DEPLOYMENT.txt`. The app runs locally;
+publishing its source to GitHub does not deploy the API or upload ignored native
+data. No paid infrastructure was provisioned. The app server uses local
+loopback; the optional public basemap/font
+assets are fetched by the browser. Choose **No external basemap** for a map
+without that external tile dependency.
+
+## Pluvial flood screening
+
+Open **Pluvial**, enable **Show terrain screening**, and start with the default
+depression-storage layer. Compare the experimental combined and
+runoff-concentration layers. Click a location for its real native
+1 m height, 5 m factor values and relative scores. The index stays fixed when
+elevation colours are fitted to a view. Grey means uncertain terrain; transparent
+means outside coverage or an automatically excluded mapped-water cell. These
+states are not low scores. No score establishes safety.
+
+Mapped open-water polygon interiors are excluded automatically from pluvial
+screening, without a visible water overlay or another layer switch. The panel
+reports mask area/cells, the Sources tab records provenance, and water clicks
+explicitly report **Existing mapped water — excluded from pluvial screening**.
+The underlying elevation/basemap can remain visible through the transparent
+screening layer. Water bodies and nearby banks can still flood; land beside
+mapped water remains eligible for screening. See
+[open-water sources and preparation](docs/OPEN_WATER_SOURCES.md).
+
+This is an **unvalidated terrain-susceptibility screen**, not annual flood
+probability, event water depth, a forecast or expected damage. The primary
+evidence is linked in the app and documented in `docs/PLUVIAL_EVIDENCE.md` and
+`docs/pluvial_evidence.json`. Official Sofia and NIMH reports establish local
+rainfall-related flooding, but their incomplete incident locations and coverage
+were not used to calibrate or validate the map.
+
+The fixed analyst rule is:
+
+* P = 100 × percentile rank of positive geometric depression-fill depth; zero where
+  depth is zero.
+* C = 100 × sqrt(rank(contributing area) × [1 − rank(slope)]).
+* S = max(P, C).
+
+Ranks are fractions from 201 quantiles of every fourth row/column on the real
+5 m grid (a deterministic 20 m reference sample). The reference covers the
+available municipal DTM, including mountains, not only the urban footprint.
+Classes at 50/70/85 are analyst display cutoffs. The app also compares exposure
+at 70/80/90. These choices are transparent hypotheses, not published validated
+weights or calibrated flood thresholds. A deep depression is potential storage,
+not a prediction of water depth or a proof of higher flood likelihood.
+Contributing area can identify river corridors as well as rainfall flow paths.
+
+All 322,025 point **records**, including 83 with missing category, and all 717
+archived full routes are joined separately to each terrain pathway. The selected
+map mode controls the displayed exposure counts and class areas. Counts are not
+unique damaged assets. Route lengths use original WGS84 geodesic segment lengths,
+assigned by midpoint samples at <=2.5 projected metres; their class assignment is
+approximate at 5 m cell boundaries. Historical planned lines are not assumed
+operational. Exposures are independent of display/route filters. Green polygons
+provide context, without an assumed infiltration benefit. Imperviousness remains
+excluded as requested; absent input bands are not treated as zero imperviousness.
+
+Reproduce from the previously verified real terrain derivatives:
+
+```text
+python scripts/prepare_pluvial.py --source ../sofia_pluvial_demo/sofia_pluvial_inputs_5m.tif --native ../sofia_dtm_2024_1m_gee.tif
+python scripts/prepare_open_water.py
+python scripts/prepare_pluvial_exposure.py
+pnpm build
+python -m pytest tests -q --junitxml=test-results.xml
+pnpm test
+```
+
+The first command verifies the source hash, grid and missing optional bands,
+copies the first five terrain factor bands unchanged, calculates scores in new
+bands, checks all copied factor pixels, score ranges and original source hashes,
+and writes `data/cache/pluvial_provenance.json`. The app downloads a separate
+land-screening GeoTIFF containing masked P/C/S scores and an open-water flag,
+alongside point/route overlap CSVs and the evidence register. The original
+terrain-factor/screening raster remains unchanged. Excluded water has no score;
+it is not assigned zero. Inventories retain its point records and route lengths
+in the separate **Excluded open water** bucket, outside ranked land classes and
+threshold counts.
+The verified earlier derivation script and routing receipt are preserved under
+`data/provenance/`; they describe priority filling, strict-downhill D8 and
+equal-height BFS routing, including conservation and boundary checks. No terrain
+preview image is used in any calculation. The packaged screening raster contains
+the actual five input factors and three derived scores; runtime needs no
+authenticated Earth Engine access or new downloads. To reproduce the separate
+real mapped-water exclusion, use `python scripts/prepare_open_water.py` and the
+remaining preparation steps in [the source guide](docs/OPEN_WATER_SOURCES.md).
+Acquired originals are preserved; refreshing the source is explicit.
+
+To upgrade this screen into a calibrated hazard/risk model, obtain local storm
+hyetographs or IDF rainfall, drainage/inlet/culvert geometry and capacity, terrain
+accuracy and current urban barriers, spatial flood observations and coverage,
+then calibrate and validate on separate events. Asset vulnerability and value are
+also required for damage/loss risk.
+
+### Routing structure found during real-data verification
+
+The real city-window contributing-area raster contains pronounced diagonal and
+parallel bands. The experimental concentration rule amplifies those D8/faceted
+terrain patterns; in the inspected window, over 97% of combined scores >=85
+occur at cells with zero depression depth. These are not verified physical
+pluvial flood hotspots. The app therefore defaults to geometric depression
+potential and marks both flow-based modes experimental, with a visible warning.
+See `docs/PLUVIAL_ROUTING_LIMITATIONS.md` and its reproducible diagnostic receipt.
+The original raster has not been blurred or altered to hide the patterns.
+Alternative flow-routing methods and independent survey/event observations are
+needed to assess them. Even depression storage is not an event likelihood model.
+
+The requested Water Hackathon repository could not be cloned: public Git access
+returned HTTP 401 and the normal credential helper also failed to load a local
+.NET dependency. No repository contents were incorporated. Exact attempts and
+the remaining review scope are in `docs/WATER_HACKATHON_REVIEW.md`.
+
+## Cadastral building context
+
+**Layers → Cadastral buildings** independently displays the national AGKK
+INSPIRE cadastral snapshot acquired on 25 October 2026. It contains **334,033
+source records**, representing **334,018 distinct non-null cadastral IDs**.
+Record count is not a count of independently verified unique physical buildings.
+The query selects polygons intersecting `[23,42.4,23.7,42.95]`; this study rectangle
+is not Sofia's administrative boundary. Whole source polygons at its edge are
+retained. Tiles load only when enabled, from **zoom 13**.
+
+Click an outline to inspect its cadastral identifier and source properties.
+Compact display tiles retain a provenance link to the original source batch;
+inspection restores all original attributes and verifies the batch checksum and
+identifier join. Downloads retain full-precision geometry. There are no measured
+above-ground heights in the app contract, so floor counts are preserved without
+invented extrusion heights. These outlines are visual context and do not alter
+terrain, rainfall, water exclusions, pluvial scores or exposure calculations.
+
+The service's survey date and synchronization with operational KAIS are not
+established. Complete retrieval of its queried object IDs does not prove current
+physical-building completeness. AGKK's public-access statement and Tariff 14
+usage constraints remain explicit; no unrestricted reuse licence is invented.
+See [national source and verification](docs/AGKK_CADASTRAL_BUILDINGS_SOURCES.md).
+The separate 265,216-record municipal archival plan remains preserved as an
+off-map reference, with [its own source notes](docs/CADASTRAL_BUILDINGS_SOURCES.md).
+The original Digital Twin availability, historical survey, rainfall, routes,
+infrastructure and terrain controls remain independent and available.
+
+## Building context
+
+The requested target is the **current whole-Sofia Digital Twin service**. At this
+verification, requests to the official GATE CityLab viewer and related service,
+including browser navigation, timed out before an HTTP response. No full-city
+geometry was acquired, so the main building layer remains unavailable. The
+failure was a **network timeout**, with no sign-in or permission-denial response;
+it is not evidence of a permission block. The separately preserved 1,800 Lozenets
+research roof outlines are not substituted for the requested whole-city model.
+See [source scope and connection evidence](docs/DIGITAL_TWIN_BUILDINGS_SOURCES.md).
+
+**Layers → Buildings context** independently controls the prepared source building
+outlines. The layer is enabled by default when available and only
+requests tiles from zoom 13 within its supplied coverage. **View coverage** moves
+to that verified extent while retaining the selected layers, filters and map
+orientation. The source name, date, licence, feature count and coverage limits
+are listed in **Sources**; the supplied extent must not be mistaken for a
+citywide building inventory. The exact publication is identified in Sources:
+GATE research building/roof outlines must not be described as the current live
+Digital Twin model or assumed to be surveyed ground-level footprints.
+
+Source outlines are shown in 2D. The optional **3D using source heights** control is
+offered only when the source confirms heights in metres above ground. Features
+without a valid source height remain 2D outlines; no height is guessed. Clicking
+a building shows its source properties separately from the native 1 m ground
+elevation. Building visibility and 3D preference are included in shared URLs.
+
+Buildings provide spatial context only. They do not modify the DTM, the 5 m
+hydrology or the pluvial scores, and are not assumed to be impermeable flow
+barriers, blocked drains, vulnerable assets or predicted damage.
+
+Reproducing the separately preserved research subset is optional preprocessing,
+not an app runtime requirement or a full-city acquisition. Use an environment
+with the app's geospatial dependencies plus the pinned Shapefile reader:
+
+```text
+python -m pip install pyshp==3.1.6
+python scripts/prepare_gate_research_buildings.py
+```
+
+The script validates the preserved original files and rebuilds only the
+separately named 2D research outputs. It does not promote them into the requested
+Digital Twin layer or invent building heights.
+
+## Official historical flood map and reports
+
+Open **Sources → Historical flood evidence → View official flood map (PDF)**.
+The preserved Danube Basin Directorate map is an official Sofia PFRA context
+map at 1:150,000 from the **2022–2027 cycle**. Its orange/red historical-event
+symbols identify past-flood locations/counts. Blue hatching and river corridors
+identify areas/types selected for hazard and risk analysis; they are not mapped
+observed inundation extents.
+
+The separate, newer **draft PFRA 2028–2033** register was published for
+consultation on 14 August 2026. The app retains 19 Sofia source rows representing
+15 event IDs, dated 2020–2024 within a parent register for 2020–2025. Source
+mechanisms are preserved: 14 pluvial rows, two mixed pluvial/river rows and three
+mixed pluvial/infrastructure rows. Inspect original descriptions, date-quality
+notes and source IDs in the panel, or download the Sofia rows as CSV.
+
+The earlier PDF does not depict every row in the newer register. The register
+does not supply machine-readable incident geometry, so the app does not invent
+event points or flood polygons. These sources remain separate evidence for
+inspection, without calibration or validation claims for the terrain screen.
+
+Separately, **Layers → Sofia flood survey · 2021** provides 136 real mapped
+flood-zone polygons from Sofiaplan's drone-survey dataset 549 / Atlas layer 310.
+Enable the optional overlay and use **View survey coverage** to visit the
+northern municipality near Novi Iskar, Trebich, Mirovyane and Zhiten. Blue dashed
+outlines and a very light fill distinguish these archived observations from the
+terrain index. The layer is off by default and its choice is saved in the URL.
+
+The catalogue refers to February 2021 while the associated study describes
+January and captions imagery from 18 January; no exact date has been invented.
+The source does not classify flood mechanism per polygon, and the associated
+report discusses river-associated rainfall flooding. These are not verified
+purely pluvial footprints or complete citywide coverage. Clicking a polygon shows
+its source ID and archive context alongside the unchanged native elevation and
+terrain scores. Displaying the survey does not recalibrate the model or change
+terrain, open-water exclusions or exposure calculations.
+
+
