@@ -40,12 +40,12 @@ export function MapView({state,meta,pluvialMeta,refinementMeta,buildingsMeta,cad
     }
     if(!m.getSource('green')){
       m.addSource('green',{type:'vector',tiles:vector('green',`&display=${s.green==='all'?'all':'subset'}`),maxzoom:18,attribution:'Green areas · source 2020'});
-      m.addLayer({id:'green-fill',source:'green','source-layer':'green',type:'fill',paint:{'fill-color':'#52c468','fill-opacity':.31},layout:{visibility:s.green==='off'?'none':'visible'}},before);
-      m.addLayer({id:'green-outline',source:'green','source-layer':'green',type:'line',paint:{'line-color':'#246b35','line-width':.8,'line-opacity':.65},layout:{visibility:s.green==='off'?'none':'visible'}},before);
+      m.addLayer({id:'green-fill',source:'green','source-layer':'green',type:'fill',paint:{'fill-color':'#52c468','fill-opacity':s.risk?.06:.19},layout:{visibility:s.green==='off'?'none':'visible'}},before);
+      m.addLayer({id:'green-outline',source:'green','source-layer':'green',type:'line',paint:{'line-color':'#338f52','line-width':.85,'line-opacity':s.risk?.55:.8},layout:{visibility:s.green==='off'?'none':'visible'}},before);
     }
     if(s.risk&&s.riskOpacity>0&&(s.riskMode==='review'?refinementMeta?.available:pluvialMeta?.available)&&!m.getSource('pluvial')){
       m.addSource('pluvial',{type:'raster',tileSize:256,tiles:[screeningTileUrl(s,pluvialMeta,refinementMeta,meta.renderer_revision||'v1')],minzoom:5,maxzoom:20,attribution:'Sofia evidence review / terrain screening · unvalidated · 5 m'});
-      m.addLayer({id:'pluvial',type:'raster',source:'pluvial',layout:{visibility:'visible'},paint:{'raster-opacity':s.riskOpacity,'raster-resampling':'nearest','raster-fade-duration':0}},m.getLayer('green-fill')?'green-fill':before);
+      m.addLayer({id:'pluvial',type:'raster',source:'pluvial',layout:{visibility:'visible'},paint:{'raster-opacity':s.riskOpacity,'raster-resampling':'nearest','raster-fade-duration':0}},m.getLayer('green-outline')?'green-outline':before);
     }
     if(s.historySurvey&&historySurveyMeta?.available&&!m.getSource('history-survey')){
       historyDataUrl.current=`${origin}/api/history/zones.geojson?v=${historySurveyMeta.revision}&r=${meta.renderer_revision||'v1'}`;
@@ -62,7 +62,7 @@ export function MapView({state,meta,pluvialMeta,refinementMeta,buildingsMeta,cad
       const levelColor:any=['match',['get','assessment_level'],'high','#d84b4b','medium','#ed9a3f','low','#e3ce65','#8ca2ac'];
       const mechanismColor:any=['match',['get','mechanism'],'pluvial','#37b9ae','river','#4e8fdd','mixed','#a785d1','infrastructure','#d5a452','#a2a9b2'];
       m.addLayer({id:'assessment-zone-fill',source:'flood-assessment',type:'fill',filter:['==',['geometry-type'],'Polygon'],paint:{'fill-color':levelColor,'fill-opacity':.06}},beforeAssessment);
-      m.addLayer({id:'assessment-zone-outline',source:'flood-assessment',type:'line',filter:['==',['geometry-type'],'Polygon'],paint:{'line-color':levelColor,'line-width':2.2,'line-opacity':.95}},beforeAssessment);
+      m.addLayer({id:'assessment-zone-outline',source:'flood-assessment',type:'line',filter:['==',['geometry-type'],'Polygon'],paint:{'line-color':levelColor,'line-width':2.4,'line-dasharray':[1.5,1],'line-opacity':.95}},beforeAssessment);
       m.addLayer({id:'assessment-reach',source:'flood-assessment',type:'line',filter:['==',['geometry-type'],'LineString'],paint:{'line-color':'#6aadd6','line-width':2.8,'line-dasharray':[2,1],'line-opacity':.9}},beforeAssessment);
       m.addLayer({id:'assessment-identifier',source:'flood-assessment',type:'circle',filter:['==',['geometry-type'],'Point'],paint:{'circle-color':mechanismColor,'circle-radius':5,'circle-stroke-color':'#183849','circle-stroke-width':1.5}},beforeAssessment);
     }
@@ -70,8 +70,8 @@ export function MapView({state,meta,pluvialMeta,refinementMeta,buildingsMeta,cad
       const minzoom=cadastreMeta.minzoom??13;
       m.addSource('cadastre-buildings',{type:'vector',tiles:[`${origin}/api/cadastre/tiles/{z}/{x}/{y}.pbf?v=${cadastreMeta.revision}&r=${meta.renderer_revision||'v1'}`],bounds:cadastreMeta.coverage_bbox_wgs84,minzoom,maxzoom:19,attribution:cadastreMeta.source_label||'Cadastral building outlines'});
       const beforeCadastre=overlayBefore(['buildings-fill','route-existing','points','rain-stations-ok','rain-stations-rejected']);
-      m.addLayer({id:'cadastre-fill',source:'cadastre-buildings','source-layer':'buildings',type:'fill',minzoom,layout:{visibility:'visible'},paint:{'fill-color':'#eddfbe','fill-opacity':.13}},beforeCadastre);
-      m.addLayer({id:'cadastre-outline',source:'cadastre-buildings','source-layer':'buildings',type:'line',minzoom,layout:{visibility:'visible'},paint:{'line-color':'#795e2a','line-width':['interpolate',['linear'],['zoom'],13,.65,17,1.4],'line-opacity':.9}},beforeCadastre);
+      m.addLayer({id:'cadastre-fill',source:'cadastre-buildings','source-layer':'buildings',type:'fill',minzoom,layout:{visibility:'visible'},paint:{'fill-color':'#efbc61','fill-opacity':.08}},beforeCadastre);
+      m.addLayer({id:'cadastre-outline',source:'cadastre-buildings','source-layer':'buildings',type:'line',minzoom,layout:{visibility:'visible'},paint:{'line-color':'#aa741b','line-width':['interpolate',['linear'],['zoom'],13,.8,17,1.6],'line-opacity':.95}},beforeCadastre);
     }
     if(s.buildings&&buildingsMeta?.available&&m.getZoom()>=(buildingsMeta.minzoom??13)&&!m.getSource('buildings')){
       const minzoom=buildingsMeta.minzoom??13;
@@ -85,6 +85,9 @@ export function MapView({state,meta,pluvialMeta,refinementMeta,buildingsMeta,cad
     if(!m.getSource('routes')){
       m.addSource('routes',{type:'vector',tiles:vector('routes','&zone='+s.zone),maxzoom:18,attribution:'Supplied sewer routes · source 2009'});
       [['existing','#00e5ff'],['planned','#ff4dce'],['open','#ffeb3b']].forEach(([status,color])=>{
+        m.addLayer({id:'route-casing-'+status,source:'routes','source-layer':'routes',type:'line',filter:['==',['get','status'],status],
+          layout:{'line-cap':'round','line-join':'round',visibility:s.statuses.includes(status)?'visible':'none'},
+          paint:{'line-color':'#15333d','line-opacity':.78,'line-width':['interpolate',['linear'],['zoom'],9,2.6,16,5.6],...(status==='planned'?{'line-dasharray':[2,1.4]}:{})}} as any);
         m.addLayer({id:'route-'+status,source:'routes','source-layer':'routes',type:'line',filter:['==',['get','status'],status],
           layout:{'line-cap':'round','line-join':'round',visibility:s.statuses.includes(status)?'visible':'none'},
           paint:{'line-color':color,'line-width':['interpolate',['linear'],['zoom'],9,1.3,16,3.6],...(status==='planned'?{'line-dasharray':[2,1.4]}:{})}} as any);
@@ -142,9 +145,11 @@ export function MapView({state,meta,pluvialMeta,refinementMeta,buildingsMeta,cad
     if(historySurveyMeta?.available){const source=m.getSource('history-survey') as GeoJSONSource|undefined;const url=`${location.origin}/api/history/zones.geojson?v=${historySurveyMeta.revision}&r=${meta.renderer_revision||'v1'}`;if(source&&historyDataUrl.current!==url){historyDataUrl.current=url;source.setData(url);}}
     ['assessment-zone-fill','assessment-zone-outline','assessment-reach','assessment-identifier'].forEach(id=>{if(m.getLayer(id))m.setLayoutProperty(id,'visibility',state.assessmentOverlay&&assessmentMeta?.available?'visible':'none');});
     if(assessmentMeta?.available){const source=m.getSource('flood-assessment') as GeoJSONSource|undefined;const url=`${location.origin}/api/flood-assessment/geojson?v=${assessmentMeta.revision}`;if(source&&assessmentDataUrl.current!==url){assessmentDataUrl.current=url;source.setData(url);}}
-    ['existing','planned','open'].forEach(status=>{if(m.getLayer('route-'+status))m.setLayoutProperty('route-'+status,'visibility',state.statuses.includes(status)?'visible':'none');});
+    ['existing','planned','open'].forEach(status=>{['route-'+status,'route-casing-'+status].forEach(id=>{if(m.getLayer(id))m.setLayoutProperty(id,'visibility',state.statuses.includes(status)?'visible':'none');});});
     replaceTiles('routes',`${location.origin}/api/vector/routes/{z}/{x}/{y}.pbf?v=${meta.revision}&r=${meta.renderer_revision||'v1'}&zone=${state.zone}`);
     ['green-fill','green-outline'].forEach(id=>{if(m.getLayer(id))m.setLayoutProperty(id,'visibility',state.green==='off'?'none':'visible');});
+    if(m.getLayer('green-fill'))m.setPaintProperty('green-fill','fill-opacity',state.risk?.06:.19);
+    if(m.getLayer('green-outline'))m.setPaintProperty('green-outline','line-opacity',state.risk?.55:.8);
     replaceTiles('green',`${location.origin}/api/vector/green/{z}/{x}/{y}.pbf?v=${meta.revision}&r=${meta.renderer_revision||'v1'}&display=${state.green==='all'?'all':'subset'}`);
     if(m.getLayer('points')){m.setFilter('points',['in',['get','category'],['literal',state.points]]);m.setLayoutProperty('points','visibility',state.points.length?'visible':'none');replaceTiles('points',`${location.origin}/api/vector/points/{z}/{x}/{y}.pbf?v=${meta.revision}&r=${meta.renderer_revision||'v1'}&categories=${state.points.join(',')}`);}};
     if(ready.current)apply();else m.once('style.load',apply);

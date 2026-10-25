@@ -181,13 +181,52 @@ Source rights and limitations remain explicit in
 historical, water, rainfall and cadastral source guides. Public query/download
 availability has not been relabelled as an unrestricted reuse licence.
 
+## Version 1.8 heatmap and layer presentation
+
+Version 1.8 adds a display-only continuous heatmap of the existing 5 m ponding
+descriptor P, source band 6. It changes colour interpolation, not the analytical
+grid, source values, P/C/S formula or review categories. It uses neither point
+kernel density nor spatial averaging. Nearest source-cell rendering retains
+the mapped-water exclusion, grey uncertainty and outside-coverage states.
+Valid P = 0 is deliberately transparent in this view; the inspector distinguishes
+it from water and missing data, without interpreting it as safety.
+
+Heatmap is the fresh-link selected mode, with screening still off until enabled.
+Explicit old mode URLs keep their original choices. Its inspector and exposure
+inventory use P; the original P/C/S raster download remains unchanged. All
+categorical review, legacy terrain, historical, assessment, drainage, green,
+cadastral and rainfall functions remain available. No extra scientific input
+or preprocessing step is needed beyond the matching terrain-score raster and
+water-mask prerequisites already documented above.
+
+The Layers switchboard groups independent visibility controls with distinctive
+source swatches. Warm heat colours, blue observed-flood boundaries, ordinal
+official-assessment outlines, amber cadastre, green boundaries and cased sewer
+status lines remain visually distinct. Lighter green fill over screening is
+presentation only; no polygons or route-overlap results are removed.
+**Flood focus** enables heatmap, hides elevation colours, enables hillshade and
+selects all green polygons. **Terrain focus** disables screening and enables
+elevation colours and hillshade. These presets preserve camera, rainfall,
+evidence visibility, route statuses and asset filters. They do not write data
+or recompute scores.
+
+The heatmap tests exercise the continuous palette and real-source pixels,
+including Ariana water/island, Vasil Levski stadium, positive ponding and
+uncertain terrain. They also check cache validation, missing-mask rejection
+and preservation of source signatures, receipts and sampled values. Record
+the complete suite/build outcome in the current verification receipt after
+running it; previous receipts retain their original scope and test counts.
+
 ## Publishing a tested update
 
 1. Implement the requested work while preserving unrelated changes and originals.
 2. Run meaningful targeted checks and the required build. With the full matching
-   local data restored, the current full suites pass **214 Python tests + 28 frontend
-   tests (242 total)**. Check the production build separately. Data-dependent checks on
-   an incomplete clone are not equivalent to that full baseline.
+   local data restored, run `python -m pytest tests -q`, `pnpm test` and
+   `pnpm build`, then record their actual results in the current verification
+   receipt. The v1.7 evidence-review baseline passed **214 Python tests + 28
+   frontend tests (242 total)**; it is a historical baseline, not a substitute
+   for checking later updates. Data-dependent checks on an incomplete clone
+   are not equivalent to a complete restored-data run.
 3. Review `git status --short`, `git diff`, staged paths, file sizes and the
    intended commit diff. Check that no credentials, native rasters, caches or
    unintended original datasets are staged.

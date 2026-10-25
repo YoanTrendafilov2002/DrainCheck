@@ -1,25 +1,187 @@
 {
   "prepared_on": "2026-10-25",
   "application": "Sofia Terrain, Sewer, Rainfall & Pluvial Screening Explorer",
-  "application_version": "1.7.0",
+  "application_version": "1.8.0",
   "frontend_package_version": "1.0.0",
-  "version_provenance": "Current API version verified in evidence_review; earlier receipts retain their original version and scope",
+  "version_provenance": "Current API version verified in heatmap_presentation; earlier receipts retain their original version and scope",
   "status": "PASS for independent implemented app checks",
   "automated_tests": {
     "python_integration": {
-      "passed": 214,
+      "passed": 220,
       "failed": 0,
       "junit": "../test-results.xml"
     },
     "javascript_rules": {
-      "passed": 28,
+      "passed": 30,
       "failed": 0
     },
-    "total_passed": 242
+    "total_passed": 250
   },
   "production_build": "PASS: TypeScript and Vite production build",
   "launcher_smoke_check": "PASS: scripts/serve.py --no-browser correctly reuses the running app",
-  "browser_checks_scope": "Earlier checks retain their original scope. Current categorical review, green coverage, drainage and official-assessment checks are in evidence_review below.",
+  "browser_checks_scope": "Current heatmap and independent-layer checks are in heatmap_presentation. Earlier evidence review and other receipts retain their original scope.",
+  "heatmap_presentation": {
+    "status": "PASS",
+    "verified_utc": "2026-10-25T09:49:51.623922+00:00",
+    "application_version": "1.8.0",
+    "scope": "v1.8 display-only continuous ponding heatmap and distinctive independent map layers",
+    "automated_tests": {
+      "python": 220,
+      "javascript": 30,
+      "total": 250,
+      "failed": 0,
+      "python_run": "220 passed in77.66s; two pre-existing warnings",
+      "javascript_run": "30 passed; includes actual MapLibre validation of all five modes, layer order and route casings"
+    },
+    "production_build": "PASS: TypeScript/Vite and static gzip;1749modules;1964563originalbytes/535359gzipbytes",
+    "remaining_build_notice": "The MapLibre-related main JavaScript chunk exceeds500kB; gzip reduces transfer size, not parse cost.",
+    "source_mode": "Original ponding P, band6; numerical scores and all source rasters unchanged",
+    "heatmap": {
+      "numeric_descriptor": "ponding",
+      "source_band": 6,
+      "units": "relative score 0\u2013100",
+      "stops": [
+        0,
+        25,
+        50,
+        70,
+        85,
+        100
+      ],
+      "colors_rgba": [
+        [
+          255,
+          246,
+          180,
+          0
+        ],
+        [
+          255,
+          225,
+          125,
+          25
+        ],
+        [
+          255,
+          178,
+          45,
+          105
+        ],
+        [
+          246,
+          98,
+          33,
+          185
+        ],
+        [
+          218,
+          37,
+          83,
+          225
+        ],
+        [
+          130,
+          24,
+          144,
+          245
+        ]
+      ],
+      "interpretation": "Continuous colour rendering of the original ponding P score; not flood probability, point density or a new risk calculation.",
+      "sampling": "Nearest source cells and nearest display pixels; no smoothing across water, uncertainty or NoData boundaries."
+    },
+    "source_revisions": {
+      "land_screening": "2a0d5f6899cd036c",
+      "terrain": "f42644a668cdc14d",
+      "water": "ee06795221a5005e",
+      "review": "853d77c47901ec54"
+    },
+    "display_method": "Continuous RGBA interpolation across originalP0..100; nearest source/display cells, no spatial smoothing, kernel density or category interpolation.",
+    "mask_policy": "Valid0 is deliberately transparent tint, never reclassified as NoData; water/outside transparent; actual invalid/boundary terrain remains grey.",
+    "numeric_semantics": "Heatmap inspector, summary and infrastructure exposure use ponding. Original P/C/S exports retained; no new flood probability, depth or damages raster.",
+    "browser_checks": {
+      "server": "http://127.0.0.1:8040",
+      "positive_native_cell": {
+        "longitude": 23.33370350350254,
+        "latitude": 42.6866436907843,
+        "analysis_resolution_m": 5,
+        "method": "terrain-relative-screen-v1",
+        "status": "ok",
+        "class": "Strongest signal",
+        "score": 92.94451141357422,
+        "water_excluded": false,
+        "row": 4685,
+        "column": 4620,
+        "factors": {
+          "mean_ground_elevation_m": 543.078125,
+          "depression_fill_depth_m": 2.8985595703125,
+          "slope_degrees": 28.02037239074707,
+          "upstream_contributing_area_m2": 125.0,
+          "possible_missing_upstream_terrain": 0.0,
+          "depression_percentile": 92.94451141357422,
+          "concentration_flatness_score": 12.018258094787598,
+          "relative_screening_score": 92.94451141357422
+        },
+        "pixel_center": [
+          322494.5,
+          4730183.5
+        ],
+        "crs": "EPSG:7801",
+        "ponding_score": 92.94451141357422,
+        "concentration_score": 12.018258094787598,
+        "depression_depth_m": 2.8985595703125,
+        "slope_degrees": 28.02037239074707,
+        "contributing_area_m2": 125.0,
+        "boundary_influence": false,
+        "class_label": "Strongest signal",
+        "class_index": 3,
+        "dominant_pathway": "depression",
+        "interpretation": "Relative terrain signal, not flood probability or event flood depth."
+      },
+      "actual_inspector": "Heatmap92.9/100, P92.9, experimentalC12.0, combinedS92.9",
+      "categorical_review_still_selectable": true,
+      "legacy_modes_preserved": true,
+      "historical_assessment_overlays_independently_switchable": true,
+      "focus_presets_preserve_camera_rain_and_evidence_filters": true,
+      "rainfall_retained_off_at_30_percent": true,
+      "console_errors": [],
+      "screenshots": [
+        "heatmap-overview.png",
+        "distinct-layers.png"
+      ],
+      "screenshot_method": "Actual browser compositor captures"
+    },
+    "stadium_native_regression": {
+      "location": "Vasil Levski National Stadium pitch",
+      "ponding_P": 0.0,
+      "experimental_combined_S": 75.79025268554688,
+      "interpretation": "ZeroP yields transparent heat tint; experimental combined routing is not substituted."
+    },
+    "distinct_layer_styles": {
+      "heatmap": "Transparent light amber to orange/red/deep magenta",
+      "green": "All source polygons retained;lighterfill.06withrisk/.19without, greenoutline",
+      "cadastre": "Amber footprint outlines, subtlefill",
+      "sewers": "Cyanexisting, pinkplanned, yellowopen, with dark casings sharing status visibility",
+      "historical": "Blue surveyed boundaries and independent priority styling",
+      "official_assessment": "Separate ordinal high/medium/low dashed boundary styles; no buffer or continuous probability inferred"
+    },
+    "presets": {
+      "flood_focus": {
+        "risk": true,
+        "riskMode": "heatmap",
+        "terrain": false,
+        "hillshade": true,
+        "green": "all"
+      },
+      "terrain_focus": {
+        "risk": false,
+        "terrain": true,
+        "hillshade": true
+      },
+      "unchanged": "Camera, route/point filters, source overlays, rain settings, assets and scale choices"
+    },
+    "source_integrity": "Full original-data suite plus exact native P/mask/uncertainty tests and read-only source signatures pass. Packaging also rechecks original/native hashes.",
+    "previous_receipts": "v1.7 evidence_review_verification.json and earlier receipts keep their original scope and historical totals."
+  },
   "evidence_review": {
     "verified_utc": "2026-10-25T09:34:23.152045+00:00",
     "status": "PASS",
@@ -390,6 +552,8 @@
     "No browser errors in the separate final QA tab"
   ],
   "screenshots": [
+    "heatmap-overview.png",
+    "distinct-layers.png",
     "evidence-review.png",
     "flood-assessment.png",
     "all-green-drainage.png",

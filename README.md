@@ -2,10 +2,11 @@
 
 A working local React + TypeScript + MapLibre application with a Python spatial
 API. It uses real supplied geometries, the real municipal 1 m DTM, and all
-322,025 infrastructure point records. Version 1.7 adds a separate categorical
-evidence-review map, historical mechanism/certainty filters and official
-assessment context while retaining AGKK cadastral buildings and every legacy
-P/C/S mode. It retains the supplied 27 June 2025 daily
+322,025 infrastructure point records. Version 1.8 adds a continuous ponding
+heatmap and a grouped layer switchboard with distinctive source symbols and
+map styling. It retains the categorical evidence-review map, historical
+mechanism/certainty filters, official assessment context, AGKK cadastral
+buildings and every legacy P/C/S mode. It retains the supplied 27 June 2025 daily
 rainfall products and stations and the complete original Earth Engine whole-area
 colour reference. Imperviousness is absent from the map.
 
@@ -115,11 +116,17 @@ pnpm dev
   curve defines a continuous transform, not 201 elevation bands. Real height
   values remain unchanged. Native readouts are 1 m; whole-area colour statistics
   are 60 m, local statistics normally 10 m (coarser if the pixel cap requires it).
-- **Layers** provides elevation opacity, hillshade, green display selection,
-  all infrastructure categories (initially off), and basemap choice. Green
-  display starts at **All green areas**, showing the complete indexed source.
-  It does not change the already computed route partition. Attribution remains
-  on the map.
+- **Layers** provides a grouped switchboard with independent controls and
+  source-specific symbols for flood screening/evidence, terrain, mapped assets
+  and supplemental weather. Detailed opacity, filter, green-display,
+  infrastructure-category and basemap controls remain available. Green display
+  starts at **All green areas**, showing the complete indexed source without
+  changing the computed route partition. Attribution remains on the map.
+- **Flood focus** enables the ponding heatmap, hides elevation colours, enables
+  hillshade and selects all green polygons. **Terrain focus** hides screening
+  and enables elevation colours and hillshade. Both preserve camera, rainfall,
+  historical/assessment visibility, route statuses and asset filters; they do
+  not reset analysis values or change source data.
 - Point data loads only when enabled, through viewport vector tiles. No route
   connectivity or capacity is inferred from those points.
 - **Share view** copies the URL with map position, zone, statuses, layers,
@@ -231,9 +238,10 @@ pnpm test
 pnpm build
 ```
 
-The current v1.7 full suites pass **214 Python tests and 28 frontend tests
-(242 total)**. The production build is checked separately. The earlier 159-test
-result remains historical. The three supplied validation flows also pass,
+The v1.7 baseline passed **214 Python tests and 28 frontend tests
+(242 total)**. Later updates run the complete commands above and record their
+actual counts and production-build result in the current verification receipt;
+older results retain their original scope. The three supplied validation flows also pass,
 including all rainfall pixels/masks, the 15 supplied point checks and five
 original elevation-scale tests; these are separate checks, not added again to
 the application-suite total. Current integration results are recorded in
@@ -263,8 +271,8 @@ This partition uses the union of all 64,956 nonempty green-source polygons;
 **25.52%** of total source-route length lies geometrically inside them. It is
 not a measure of green-area drainage, infiltration, sewer capacity or clogging.
 The former 2,175-polygon display subset is not the partition mask.
-The Pluvial tab offers categorical evidence review alongside the original
-analyst-defined terrain screening and infrastructure overlap. Daily rainfall is
+The Pluvial tab offers a continuous ponding heatmap, categorical evidence review
+and the original analyst-defined terrain screening and infrastructure overlap. Daily rainfall is
 a separate observed-product context layer; it does not calibrate or alter P/C/S
 scores. There is no validated event
 flood model, pipe invert, capacity or connectivity.
@@ -280,11 +288,48 @@ loopback; the optional public basemap/font
 assets are fetched by the browser. Choose **No external basemap** for a map
 without that external tile dependency.
 
+## Flood susceptibility heatmap and distinctive layers
+
+Open **Layers** and choose **Flood focus**, or open **Pluvial**, select
+**Flood susceptibility heatmap** and enable **Show flood susceptibility heatmap**.
+Heatmap is the selected mode for a fresh or unspecified map link; the overlay
+still starts off. Explicit saved categorical and legacy mode choices remain
+unchanged.
+
+The heatmap continuously colours the existing **ponding P** descriptor
+(`depression_percentile`, source band 6) on its original 5 m grid. Colours run
+from faint amber through orange/red to deep purple as P increases from 0 to 100.
+This is a colour interpolation, with no kernel-density estimate, averaging of
+neighbouring scores, new model weights or change to the stored raster. Display
+tiles and final heatmap rendering use nearest source cells, preserving the
+water mask and uncertainty boundaries. Grey denotes known terrain with an
+unassigned score; mapped water and outside coverage stay transparent. A valid
+P of zero is also deliberately transparent in this view, so the inspector
+distinguishes a low signal from excluded/missing data. Neither means safety.
+
+Clicking the heatmap reads the original P value, not a colour-derived estimate
+or the combined S score. Infrastructure exposure uses the original ponding
+classes. The existing raster download retains its original P/C/S bands and
+explicit water flag; the heatmap creates no replacement numerical risk product.
+Elevation Fit/Reset affects elevation colours only. The heatmap describes
+relative terrain susceptibility, without calibrated flood probability, event
+water depth or expected damage.
+
+Layer styles distinguish their source meanings: warm heat colours for ponding,
+blue survey boundaries for observed flooding, separate ordinal assessment
+outlines/reaches/identifiers, amber cadastral outlines and green land-cover
+boundaries. Existing, planned and open sewer routes retain cyan, dashed magenta
+and yellow status colours, with dark casings for contrast. When screening is
+visible, green fill becomes lighter while its boundaries remain visible;
+this styling does not remove green polygons or change their route partition.
+Rainfall keeps its independent scale and controls. These layers can be compared
+without treating their colours as one shared numerical index.
+
 ## Evidence review and legacy pluvial screening
 
 Open **Pluvial**, choose **Refined evidence review · categorical** and enable
-**Show evidence review**. This is the default selected mode; the overlay itself
-starts off. The separate 5 m review raster combines the existing ponding P
+**Show evidence review**. This categorical view remains selectable separately
+from the continuous heatmap. The separate 5 m review raster combines the existing ponding P
 categories with actual historical footprints and potential cadastral footprint
 intersections. On eligible land, historical evidence takes category priority;
 building intersections distinguish potential exposure. Water, uncertain terrain

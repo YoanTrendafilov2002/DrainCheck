@@ -26,7 +26,11 @@ SCORE_THRESHOLDS = (50, 70, 85)
 CLASS_LABELS = ('Lower signal', 'Raised', 'Higher signal', 'Strongest signal')
 PALETTE = np.array([[255, 225, 150, 65], [250, 173, 66, 135],
                     [238, 91, 56, 190], [143, 32, 107, 215]], dtype=np.uint8)
-LAYERS = {'screening': 8, 'depressions': 6, 'concentration': 7, 'boundary': 5}
+LAYERS = {'screening': 8, 'depressions': 6, 'heatmap': 6, 'concentration': 7, 'boundary': 5}
+HEATMAP_STOPS = np.array([0, 25, 50, 70, 85, 100], dtype=np.float32)
+HEATMAP_RGBA = np.array([[255, 246, 180, 0], [255, 225, 125, 25],
+                        [255, 178, 45, 105], [246, 98, 33, 185],
+                        [218, 37, 83, 225], [130, 24, 144, 245]], dtype=np.uint8)
 BAND_NAMES = ('mean_ground_elevation_m', 'depression_fill_depth_m', 'slope_degrees',
               'upstream_contributing_area_m2', 'possible_missing_upstream_terrain',
               'depression_percentile', 'concentration_flatness_score', 'relative_screening_score')
@@ -92,6 +96,22 @@ def colour_rgba(values, layer='screening'):
         result[valid & (values == 1)] = [120, 127, 136, 185]
         return result
     result = PALETTE[class_indices(np.clip(np.nan_to_num(values), 0, 100))].copy()
+    result[~valid] = 0
+    return result
+
+
+def heatmap_rgba(values):
+    """Continuous colour of unchanged ponding P; no spatial smoothing or density fit.
+
+    Zero is valid lower signal with transparent tint. Missing/out-of-range values
+    remain transparent; the tile renderer separately applies uncertainty/water.
+    """
+    values = np.asarray(values, dtype=np.float32)
+    valid = np.isfinite(values) & (values >= 0) & (values <= 100)
+    safe = np.where(valid, values, 0)
+    result = np.stack([np.interp(safe, HEATMAP_STOPS, HEATMAP_RGBA[:, channel])
+                       for channel in range(4)], axis=-1)
+    result = np.rint(result).astype(np.uint8)
     result[~valid] = 0
     return result
 
@@ -219,7 +239,7 @@ class LocalPluvial:
                           src_nodata=None,
                           dst_transform=Affine(spacing,0,west,0,-spacing,north),dst_crs='EPSG:3857',
                           dst_nodata=np.nan,resampling=Resampling.nearest,num_threads=1,warp_mem_limit=64)
-        rgba = colour_rgba(dst, mode)
+        rgba = heatmap_rgba(dst) if mode == 'heatmap' else colour_rgba(dst, mode)
         if mode != 'boundary':
             rgba[np.isfinite(terrain) & ~np.isfinite(dst)] = [120, 127, 136, 155]
         rgba[water==1,3]=0

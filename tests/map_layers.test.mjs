@@ -49,3 +49,47 @@ test('historical map filters retain unknowns honestly and require both selected 
     }
   }
 });
+
+function thematicLayers(riskMode='heatmap'){
+  const state={...defaults,risk:true,riskMode,historySurvey:true,assessmentOverlay:true,statuses:['planned']};
+  const buildings={available:true,revision:'test',minzoom:13,coverage_bbox_wgs84:[23,42.4,23.7,42.95]};
+  const config=JSON.parse(readFileSync(new URL('../config/map_config.json',import.meta.url),'utf8'));
+  const latest={current:{state,meta:{revision:'test',renderer_revision:'renderer',terrain_available:true,config},
+    pluvialMeta:{available:true,revision:'ponding-source'},refinementMeta:{available:true,revision:'review-source'},
+    buildingsMeta:buildings,cadastreMeta:buildings,historySurveyMeta:buildings,assessmentMeta:buildings,scale:{id:'whole'}}};
+  const layers=[],sources={};
+  const map={getStyle:()=>({layers}),getZoom:()=>16,getLayer:id=>layers.find(l=>l.id===id),getSource:id=>sources[id],
+    addSource:(id,s)=>{sources[id]=s;},addLayer:(layer,before)=>{const i=layers.findIndex(l=>l.id===before);if(i<0)layers.push(layer);else layers.splice(i,0,layer);}};
+  const code=ts.transpileModule(['historyFilter','screeningTileUrl','setup'].map(declaration).join('\n')+'\nreturn setup;',
+    {compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.None}}).outputText;
+  const location={origin:'https://example.test'};
+  const setup=new Function('latest','ready','historyDataUrl','assessmentDataUrl','window','location',code)
+    (latest,{current:false},{current:''},{current:''},{location},location);
+  setup(map);return {layers,sources,style:{version:8,sources,layers}};
+}
+
+test('complete thematic overlays validate and keep heatmap cells separate from categorical review',()=>{
+  for(const mode of ['heatmap','review','ponding','combined','concentration']){
+    const {style,sources,layers}=thematicLayers(mode);
+    assert.deepEqual(validateStyleMin(style).map(error=>error.message),[]);
+    assert.match(sources.pluvial.tiles[0],mode==='review'?/\/refinement\/tiles\//:new RegExp('/pluvial/'+mode+'/'));
+    assert.equal(layers.find(l=>l.id==='pluvial').paint['raster-resampling'],'nearest');
+    const order=id=>layers.findIndex(l=>l.id===id);
+    assert.ok(order('green-fill')<order('pluvial'));
+    assert.ok(order('pluvial')<order('green-outline'));
+    assert.ok(order('pluvial')<order('history-survey-fill'));
+    assert.ok(order('history-survey-outline')<order('cadastre-outline'));
+  }
+});
+
+test('distinct sewer casings share status visibility and preserve coloured foreground lines',()=>{
+  const {layers}=thematicLayers();
+  for(const status of ['existing','planned','open']){
+    const line=layers.find(l=>l.id==='route-'+status),casing=layers.find(l=>l.id==='route-casing-'+status);
+    assert.deepEqual(line.filter,casing.filter);
+    assert.equal(line.layout.visibility,status==='planned'?'visible':'none');
+    assert.equal(casing.layout.visibility,line.layout.visibility);
+    assert.notEqual(line.paint['line-color'],casing.paint['line-color']);
+    assert.ok(layers.indexOf(casing)<layers.indexOf(line));
+  }
+});

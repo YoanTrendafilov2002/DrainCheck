@@ -49,7 +49,7 @@ review_priority=LocalReviewPriority(ROOT,pluvial,cadastre,history_survey,assessm
 CONFIG=json.loads((ROOT/'config/map_config.json').read_text(encoding='utf-8'))
 PROJECT=Transformer.from_crs(4326,3857,always_xy=True).transform
 UNPROJECT=Transformer.from_crs(3857,4326,always_xy=True)
-app=FastAPI(title='Sofia Terrain, Rainfall & Pluvial Screening',version='1.7.0')
+app=FastAPI(title='Sofia Terrain, Rainfall & Pluvial Screening',version='1.8.0')
 RENDERER_REVISION='fast-map-'+hashlib.sha256(b''.join((ROOT/'backend'/name).read_bytes() for name in ['app.py','vector.py','terrain.py','pluvial.py','open_water.py','scale.py','http_cache.py','tile_cache.py','context_layers.py','rainfall.py','rainfall_routes.py','cadastre_routes.py','flood_assessment.py','refinement.py','refinement_routes.py'])+(ROOT/'config/map_config.json').read_bytes()+((CACHE/'whole_scale.json').read_bytes() if (CACHE/'whole_scale.json').is_file() else b'')+package_version('mapbox-vector-tile').encode()).hexdigest()[:12]
 TILE_CACHE=get_tile_cache(str(CACHE/'rendered_tiles'))
 METRICS=PerformanceMetrics()
@@ -307,7 +307,12 @@ def pluvial_meta():
             result['summary']={'classes':[],'counts':{},'sensitivity':[],
                 'message':'Water-excluded land summaries are being prepared. Original water-inclusive totals are not substituted.'}
             result['classes']=[];result['counts']={};result['sensitivity']=[]
-        result['recommended_view']='ponding'
+        result['recommended_view']='heatmap'
+        result['heatmap']={'numeric_descriptor':'ponding','source_band':6,'units':'relative score 0–100',
+            'stops':[0,25,50,70,85,100],
+            'colors_rgba':[[255,246,180,0],[255,225,125,25],[255,178,45,105],[246,98,33,185],[218,37,83,225],[130,24,144,245]],
+            'interpretation':'Continuous colour rendering of the original ponding P score; not flood probability, point density or a new risk calculation.',
+            'sampling':'Nearest source cells and nearest display pixels; no smoothing across water, uncertainty or NoData boundaries.'}
         result['experimental_views']=['combined','concentration']
         result['routing_warning']='Real city-window inspection shows strong diagonal and parallel patterns in D8 contributing area. Combined and concentration scores amplify this routing structure; these patterns are not verified physical flood hotspots.'
         result.setdefault('method',{})
@@ -377,13 +382,13 @@ def pluvial_download(kind:Literal['raster','points','routes','water-mask']):
     return FileResponse(path,filename=path.name,media_type='image/tiff' if kind in ('raster','water-mask') else 'text/csv')
 
 @app.get('/api/pluvial/{mode}/{z}/{x}/{y}.png')
-def pluvial_tile(mode:Literal['combined','ponding','concentration'],z:int,x:int,y:int,v:str):
+def pluvial_tile(request:Request,mode:Literal['heatmap','combined','ponding','concentration'],z:int,x:int,y:int,v:str):
     if not pluvial.available:raise HTTPException(503,'Terrain screening unavailable')
     if v!=pluvial.meta()['revision']:raise HTTPException(409,'Screening data revision changed; reload the app')
-    try:data=pluvial.tile({'combined':'screening','ponding':'depressions','concentration':'concentration'}[mode],z,x,y,pluvial.meta()['revision'])
+    try:data=pluvial.tile({'heatmap':'heatmap','combined':'screening','ponding':'depressions','concentration':'concentration'}[mode],z,x,y,pluvial.meta()['revision'])
     except ValueError as e:raise HTTPException(422,str(e))
     except Exception:raise HTTPException(503,'Screening tile failed; no substituted risk surface')
-    return Response(data,media_type='image/png',headers={'Cache-Control':'public,max-age=604800,immutable'})
+    return representation(request,data,'image/png',True)
 
 @app.get('/api/performance')
 def performance():
