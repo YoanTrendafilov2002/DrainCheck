@@ -11,7 +11,7 @@ import re
 import sqlite3
 import tempfile
 import threading
-from contextlib import closing
+from contextlib import closing, nullcontext
 from collections import OrderedDict
 from functools import lru_cache
 from pathlib import Path
@@ -30,6 +30,7 @@ from scipy.ndimage import binary_dilation, find_objects, label
 
 from .terrain import RASTER_SLOTS, tile_bounds, png
 from .tile_cache import file_signature, read_json_cached
+from .cloud_state import MAX_SCENARIO_BYTES
 
 TO_METRIC = Transformer.from_crs(4326, 7801, always_xy=True)
 TO_GEO = Transformer.from_crs(7801, 4326, always_xy=True)
@@ -202,13 +203,15 @@ def storage_depths(elevation, fill_depth, eligible, baseline_mm, clogged_mm,
 
 
 class CloggingScenarios:
-    def __init__(self, root, pluvial, river_context=None):
+    def __init__(self, root, pluvial, river_context=None, cloud_state=None, snapshot=None):
         self.root = Path(root)
         self.pluvial = pluvial
         self.database = self.root/'data/cache/spatial.sqlite'
         self.directory = self.root/'data/cache/clogging'
         self.tiles = pluvial.tiles
         self.river_context = river_context
+        self.cloud_state = cloud_state
+        self.snapshot = snapshot
         # Rainfall edits do not alter geometry, eligibility or river distances.
         # Keep at most four bounded grids so slider updates reuse exact distances.
         self.river_grids = OrderedDict()
@@ -235,13 +238,18 @@ class CloggingScenarios:
         if revision_path.is_file():
             paths.append(revision_path)
         river_meta = self.river_context.meta() if self.river_context is not None else {}
-        return {'implementation_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        state = {'implementation_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 'river_implementation_sha256': hashlib.sha256(Path(__file__).with_name('river_context.py').read_bytes()).hexdigest() if self.river_context is not None else None,
                 'pluvial_revision': meta['revision'],
                 'river_revision': river_meta.get('revision') if river_meta.get('available') else None,
                 'water_revision': meta['water_exclusion']['revision'],
                 'spatial_revision': revision_path.read_text(encoding='ascii').strip() if revision_path.is_file() else None,
                 'files': [list(file_signature(path)) for path in paths]}
+        if self.snapshot is not None:
+            # The manifest was SHA-verified at startup. Portable source identity
+            # excludes host paths, inode numbers and filesystem timestamps.
+            state.update(self.snapshot.state(paths))
+        return state
 
     def meta(self):
         try:
@@ -345,9 +353,14 @@ class CloggingScenarios:
         key = {'method': METHOD, 'geometry': geometry, 'selected_route_ids': sorted(selected), 'parameters': params, 'source': source}
         identity = hashlib.sha256(json.dumps(key, sort_keys=True, allow_nan=False, separators=(',', ':')).encode()).hexdigest()[:32]
         target = self.directory/identity
-        with BUILD_LOCK:
+        with BUILD_LOCK, self.cache_lease(identity,reserve_bytes=MAX_SCENARIO_BYTES):
+            if self.cloud_state is not None and not (target/'result.json').is_file():
+                self.cloud_state.restore_scenario(target,identity)
             if (target/'result.json').is_file():
-                return self.result(identity)
+                result = self.result(identity)
+                if self.cloud_state is not None:
+                    self.cloud_state.persist_scenario(target,identity)
+                return result
             self.directory.mkdir(parents=True, exist_ok=True)
             active = [r['_geometry'] for r in candidates if r['source_id'] in selected and r['status'] == 'existing']
             shape_hw = (height, width)
@@ -467,13 +480,21 @@ class CloggingScenarios:
                 if source != self.source_state():
                     raise ScenarioStale('Sources changed during scenario calculation; retry against the new snapshot')
                 (scratch_path/'result.json').write_text(json.dumps(result,ensure_ascii=False,allow_nan=False,indent=2)+'\n',encoding='utf-8')
-                scratch_path.rename(target)
+                with self.cloud_state.lock if self.cloud_state is not None else nullcontext():
+                    scratch_path.rename(target)
+            if self.cloud_state is not None:
+                self.cloud_state.persist_scenario(target,identity)
             return result
 
     def path(self, identity):
         if not re.fullmatch(r'[a-f0-9]{32}', identity):
             raise KeyError('Unknown scenario ID')
         return self.directory/identity
+
+    def cache_lease(self, identity, reserve_bytes=0):
+        if self.cloud_state is None:
+            return nullcontext()
+        return self.cloud_state.scenario_lease(self.path(identity),reserve_bytes)
 
     @staticmethod
     @lru_cache(maxsize=16)
@@ -495,7 +516,13 @@ class CloggingScenarios:
                 raise ScenarioStale('Cached river-context mask is not aligned with the scenario raster')
 
     def result(self, identity):
+        with self.cache_lease(identity):
+            return self._result(identity)
+
+    def _result(self, identity):
         directory = self.path(identity)
+        if self.cloud_state is not None and not (directory/'result.json').is_file():
+            self.cloud_state.restore_scenario(directory,identity)
         if not (directory/'result.json').is_file():
             raise KeyError('Scenario not found; calculate it first')
         result = read_json_cached(directory/'result.json')
@@ -507,6 +534,10 @@ class CloggingScenarios:
         return result
 
     def tile(self, identity, mode, z, x, y, renderer='', river_filter='all'):
+        with self.cache_lease(identity):
+            return self._tile(identity,mode,z,x,y,renderer,river_filter)
+
+    def _tile(self, identity, mode, z, x, y, renderer='', river_filter='all'):
         if mode not in MODES: raise ValueError('Unknown scenario display mode')
         aliases = {'river_adjacent_possible_mixed':'river_adjacent','away_from_mapped_river':'away'}
         river_filter = aliases.get(river_filter,river_filter)

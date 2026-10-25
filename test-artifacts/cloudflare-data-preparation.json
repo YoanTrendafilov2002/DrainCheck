@@ -1,0 +1,8 @@
+{
+  "schema": "draincheck-runtime-data-receipt-v1",
+  "files": 828,
+  "data_bytes": 4159548683,
+  "archive_bytes": 4161249280,
+  "archive_sha256": "fa2e1abd44b82ee37d753425846cde0183c991f0890dfdc7413d2441f356f9e6",
+  "manifest_sha256": "e95ab4ae4acf820b70ecf0d79cb8014882935f9dc948e0a365cca7235ef10288"
+}

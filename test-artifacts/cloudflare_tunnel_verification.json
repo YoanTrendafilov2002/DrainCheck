@@ -1,0 +1,158 @@
+{
+  "verified_utc": "2026-10-25T11:15:41.404906+00:00",
+  "status": "PASS",
+  "hosting": "Free Cloudflare Quick Tunnel; native API remains on this PC",
+  "public_url": "https://willing-platinum-tries-their.trycloudflare.com",
+  "origin": "http://127.0.0.1:8040",
+  "application_version": "1.9.1",
+  "paid_plan_enabled": false,
+  "cloud_container_deployed": false,
+  "originals_unchanged": true,
+  "checks": {
+    "health": {
+      "status": "ok",
+      "spatial_ready": true,
+      "terrain_available": true
+    },
+    "data_availability": {
+      "/api/health": {
+        "http_status": 200,
+        "terrain_available": true,
+        "spatial_ready": true
+      },
+      "/api/meta": {
+        "http_status": 200,
+        "terrain_available": true
+      },
+      "/api/pluvial/meta": {
+        "http_status": 200,
+        "available": true
+      },
+      "/api/green-absorption/meta": {
+        "http_status": 200,
+        "available": true
+      },
+      "/api/cadastre/meta": {
+        "http_status": 200,
+        "available": true,
+        "feature_count": 334033
+      },
+      "/api/rainfall/meta": {
+        "http_status": 200,
+        "available": true
+      },
+      "/api/river-context/meta": {
+        "http_status": 200,
+        "available": true
+      },
+      "/api/history/meta": {
+        "http_status": 200,
+        "available": true
+      },
+      "/api/history/zones/meta": {
+        "http_status": 200,
+        "available": true,
+        "feature_count": 136
+      },
+      "/api/flood-assessment/meta": {
+        "http_status": 200,
+        "available": true,
+        "feature_count": 29,
+        "zone_count": 6
+      },
+      "/api/refinement/meta": {
+        "http_status": 200,
+        "available": true
+      },
+      "/api/pluvial/water-mask/meta": {
+        "http_status": 200,
+        "available": true
+      },
+      "/api/clogging/meta": {
+        "http_status": 200,
+        "available": true
+      }
+    },
+    "frontend_module": {
+      "http_status": 200,
+      "bytes": 1433501,
+      "mime": "text/javascript"
+    },
+    "native_elevation": {
+      "public_equals_local": true,
+      "response": {
+        "longitude": 23.267111,
+        "latitude": 42.684845,
+        "crs": "EPSG:7801",
+        "vertical_datum": "Baltic 1982",
+        "sample_resolution_m": 1,
+        "row": 23485,
+        "column": 17641,
+        "pixel_center_easting": 317033.5,
+        "pixel_center_northing": 4730125.5,
+        "status": "ok",
+        "elevation_m": 585.0816650390625
+      }
+    },
+    "map_tiles": {
+      "elevation": {
+        "http_status": 200,
+        "bytes": 10332,
+        "sha256": "8842db71b532cf49d6b82d9bf4c13994f7476b4e43d7326b1ca6aa71cc2db7c9",
+        "pixels": [
+          256,
+          256
+        ]
+      },
+      "hillshade": {
+        "http_status": 200,
+        "bytes": 21186,
+        "sha256": "8764f2b1d65c5dbce40a9d48d99524ae3b566fc6b68092aa966b99a1b32a8f55",
+        "pixels": [
+          256,
+          256
+        ]
+      },
+      "cadastre": {
+        "http_status": 200,
+        "bytes": 24551,
+        "sha256": "978a37cb7a710531b79dd9b9c3ec12e157b27900251f62d8292dff7889fcd109",
+        "features": 185
+      }
+    },
+    "real_clogging_scenario": {
+      "scenario_id": "309db084ce1a7cedcef400558317e365",
+      "rainfall_mm": 60,
+      "public_equals_local": true,
+      "result_get_equals_post": true,
+      "download_http_status": 206,
+      "download_range_bytes": 1024,
+      "download_range_equals_local": true,
+      "content_range": "bytes 0-1023/9929",
+      "depth_tile_http_status": 200,
+      "depth_tile_sha256": "3b860d85b604e032a2858cd16586991b36346fee76b229c22017b8cad9b0466b",
+      "raster_sha256": "b24e95af40b539674f2f1ac84e9f0c0bb070bb1f33cc19e55f794bf44485872b"
+    }
+  },
+  "limitations": [
+    "Keep this PC awake, online and the app and cloudflared processes running",
+    "The hostname changes when the Quick Tunnel is restarted; no uptime guarantee",
+    "Saved scenarios remain on this PC; this demo does not use the prepared private R2 service"
+  ],
+  "browser_checks": {
+    "status": "PASS",
+    "url": "https://willing-platinum-tries-their.trycloudflare.com/#lon=23.267111&lat=42.684845&z=15.5&risk=1&terrain=0&shade=1&historySurvey=1",
+    "screen": "cloudflare-demo.jpg",
+    "heatmap_rendered": true,
+    "grey_buildings_rendered": true,
+    "green_and_routes_rendered": true,
+    "independent_layers_verified": true,
+    "browser_console_errors": []
+  },
+  "official_executable": {
+    "version": "2026.10.3",
+    "bytes": 55329336,
+    "sha256": "76b2805253d0d6ffacb092a7acfbee99e7af6917835c0c5410e23f3ef5052da2",
+    "release": "https://github.com/cloudflare/cloudflared/releases/tag/2026.10.3"
+  }
+}

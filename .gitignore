@@ -7,6 +7,11 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .vite/
+.wrangler/
+.cloudflare-data/
+cloudflare/.wrangler/
+cloudflare/.dev.vars*
+runtime-data-manifest.json
 dist/
 coverage/
 htmlcov/

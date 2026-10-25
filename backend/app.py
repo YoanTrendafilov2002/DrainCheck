@@ -31,6 +31,7 @@ from .green_absorption import GreenAbsorption
 from .river_context import RiverContext
 from .clogging import CloggingScenarios
 from .clogging_routes import create_clogging_router
+from .cloud_state import PrivateStateStore,VerifiedDataSnapshot,CloudStateUnavailable
 
 ROOT=Path(__file__).resolve().parents[1];CACHE=ROOT/'data/cache'
 # Windows registry associations can incorrectly classify .js as text/plain.
@@ -54,12 +55,15 @@ green_absorption=GreenAbsorption(ROOT)
 pluvial.green=green_absorption
 review_priority.green=green_absorption
 river_context=RiverContext(ROOT)
-clogging_scenarios=CloggingScenarios(ROOT,pluvial,river_context)
+cloud_snapshot=VerifiedDataSnapshot.from_env(ROOT)
+cloud_state=PrivateStateStore.from_env()
+if cloud_state:cloud_state.install_terrain(terrain)
+clogging_scenarios=CloggingScenarios(ROOT,pluvial,river_context,cloud_state=cloud_state,snapshot=cloud_snapshot)
 CONFIG=json.loads((ROOT/'config/map_config.json').read_text(encoding='utf-8'))
 PROJECT=Transformer.from_crs(4326,3857,always_xy=True).transform
 UNPROJECT=Transformer.from_crs(3857,4326,always_xy=True)
-app=FastAPI(title='Sofia Terrain, Rainfall & Pluvial Screening',version='1.9.0')
-RENDERER_REVISION='fast-map-'+hashlib.sha256(b''.join((ROOT/'backend'/name).read_bytes() for name in ['app.py','vector.py','terrain.py','pluvial.py','open_water.py','scale.py','http_cache.py','tile_cache.py','context_layers.py','rainfall.py','rainfall_routes.py','cadastre_routes.py','flood_assessment.py','refinement.py','refinement_routes.py','green_absorption.py','river_context.py','clogging.py','clogging_routes.py'])+(ROOT/'config/map_config.json').read_bytes()+((CACHE/'whole_scale.json').read_bytes() if (CACHE/'whole_scale.json').is_file() else b'')+package_version('mapbox-vector-tile').encode()).hexdigest()[:12]
+app=FastAPI(title='Sofia Terrain, Rainfall & Pluvial Screening',version='1.9.1')
+RENDERER_REVISION='fast-map-'+hashlib.sha256(b''.join((ROOT/'backend'/name).read_bytes() for name in ['app.py','vector.py','terrain.py','pluvial.py','open_water.py','scale.py','http_cache.py','tile_cache.py','context_layers.py','rainfall.py','rainfall_routes.py','cadastre_routes.py','flood_assessment.py','refinement.py','refinement_routes.py','green_absorption.py','river_context.py','clogging.py','clogging_routes.py','cloud_state.py'])+(ROOT/'config/map_config.json').read_bytes()+((CACHE/'whole_scale.json').read_bytes() if (CACHE/'whole_scale.json').is_file() else b'')+package_version('mapbox-vector-tile').encode()).hexdigest()[:12]
 TILE_CACHE=get_tile_cache(str(CACHE/'rendered_tiles'))
 METRICS=PerformanceMetrics()
 app.add_middleware(RequestTiming,metrics=METRICS)
@@ -104,6 +108,7 @@ def meta():
 def get_scale(scale_id:str):
     try:return terrain.scale(scale_id)
     except KeyError as e:raise HTTPException(404,str(e))
+    except CloudStateUnavailable as e:raise HTTPException(503,str(e))
 
 class ViewBounds(BaseModel):
     bounds:list[float]=Field(min_length=4,max_length=4)

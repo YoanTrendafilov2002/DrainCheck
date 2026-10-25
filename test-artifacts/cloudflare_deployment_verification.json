@@ -1,0 +1,419 @@
+{
+  "verified_utc": "2026-10-25T11:19:36.639627+00:00",
+  "application_version": "1.9.1",
+  "preparation_status": "PASS",
+  "deployment_status": "FREE_TUNNEL_DEMO_LIVE",
+  "automated_tests": {
+    "python": 293,
+    "javascript": 35,
+    "cloudflare_worker": 9,
+    "total": 337,
+    "failures": 0
+  },
+  "python_run_scope": {
+    "full_backend_suite": 288,
+    "additional_tunnel_launcher_suite": 5,
+    "junit": "test-results.xml; merged from the two actual successful runs"
+  },
+  "production_build": "PASS: TypeScript, Vite and compressed assets",
+  "worker_typecheck": "PASS",
+  "wrangler_bundle_dry_run": {
+    "status": "PASS",
+    "bytes": 62592,
+    "reported_gzip_kib": 15.28,
+    "containers_rollout": "none",
+    "builds_or_deploys_image": false
+  },
+  "real_data_snapshot": {
+    "schema": "draincheck-runtime-data-receipt-v1",
+    "files": 828,
+    "data_bytes": 4159548683,
+    "archive_bytes": 4161249280,
+    "archive_sha256": "fa2e1abd44b82ee37d753425846cde0183c991f0890dfdc7413d2441f356f9e6",
+    "manifest_sha256": "e95ab4ae4acf820b70ecf0d79cb8014882935f9dc948e0a365cca7235ef10288"
+  },
+  "restored_runtime_smoke": {
+    "schema": "draincheck-restored-runtime-smoke-v1",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.12.14",
+    "restored_root": "work/cloudflare-runtime-data-smoke",
+    "linux_container_built": false,
+    "private_state_service_exercised": false,
+    "verified_manifest_files": 828,
+    "portable_data_identity": "b92cfd8b60125e75214e8b8fa22d5d83a7340daf1ea60af6814835c862f82e14",
+    "implementation_sha256": {
+      "backend/app.py": "e9f8c628a987a853155ed11e515d0f1bc210999c3635a45a5e4135255dff970b",
+      "backend/cloud_state.py": "77a9cc346f4a786a45e031b50f5930d5b113670391cda6ecb29a9838ef47b85a",
+      "backend/clogging.py": "002549a5bee2eea15a7112faea52631aad92c31b9845a742c6ab2834d2bc23bb",
+      "backend/clogging_routes.py": "601ecbeff0765a586aff4614fc6637919beea79db9dd29ca7e3928b28697c4e9"
+    },
+    "endpoints": {
+      "/api/health": {
+        "http_status": 200,
+        "status": "ok",
+        "terrain_available": true,
+        "spatial_ready": true
+      },
+      "/api/meta": {
+        "http_status": 200,
+        "revision": "af34c6d53d5b26fd",
+        "terrain_available": true,
+        "points_available": true
+      },
+      "/api/pluvial/meta": {
+        "http_status": 200,
+        "available": true,
+        "revision": "2a0d5f6899cd036c"
+      },
+      "/api/green-absorption/meta": {
+        "http_status": 200,
+        "available": true,
+        "revision": "feb6a7b62ce21050"
+      },
+      "/api/cadastre/meta": {
+        "http_status": 200,
+        "available": true,
+        "revision": "568d80b32ddb42f2",
+        "feature_count": 334033
+      },
+      "/api/rainfall/meta": {
+        "http_status": 200,
+        "available": true,
+        "revision": "88036868558c20ce"
+      },
+      "/api/river-context/meta": {
+        "http_status": 200,
+        "available": true,
+        "revision": "b8c31089ac11b734"
+      },
+      "/api/history/meta": {
+        "http_status": 200,
+        "available": true
+      },
+      "/api/history/zones/meta": {
+        "http_status": 200,
+        "available": true,
+        "revision": "7fbfbcee6ee933f4",
+        "feature_count": 136
+      },
+      "/api/flood-assessment/meta": {
+        "http_status": 200,
+        "available": true,
+        "status": "Earlier municipal assessment zones; 2026 draft PFRA reaches and schematic identifiers",
+        "revision": "8641e0276fb3d96b",
+        "feature_count": 29,
+        "zone_count": 6
+      },
+      "/api/refinement/meta": {
+        "http_status": 200,
+        "available": true,
+        "revision": "853d77c47901ec54"
+      },
+      "/api/pluvial/water-mask/meta": {
+        "http_status": 200,
+        "available": true,
+        "revision": "ee06795221a5005e"
+      },
+      "/api/clogging/meta": {
+        "http_status": 200,
+        "available": true
+      }
+    },
+    "restoration": {
+      "schema": "draincheck-runtime-data-receipt-v1",
+      "files": 828,
+      "data_bytes": 4159548683,
+      "archive_bytes": 4161249280,
+      "archive_sha256": "fa2e1abd44b82ee37d753425846cde0183c991f0890dfdc7413d2441f356f9e6",
+      "manifest_sha256": "e95ab4ae4acf820b70ecf0d79cb8014882935f9dc948e0a365cca7235ef10288",
+      "all_payloads_verified": true,
+      "exact_input_file_inventory": true,
+      "all_archived_mtime_ns_preserved": true,
+      "live_source_timestamp_changes_after_snapshot": [
+        "data/cache/revision.txt",
+        "data/cache/spatial_revision_inputs.json"
+      ],
+      "restoration_overwrites_allowed": false
+    },
+    "elevation": {
+      "longitude": 23.33370350350254,
+      "latitude": 42.6866436907843,
+      "actual_m": 542.6434326171875,
+      "original_native_m": 542.6434326171875,
+      "exact_match": true,
+      "native_sample_resolution_m": 1
+    },
+    "pluvial_sample": {
+      "longitude": 23.33370350350254,
+      "latitude": 42.6866436907843,
+      "analysis_resolution_m": 5,
+      "method": "terrain-relative-screen-v1",
+      "status": "ok",
+      "class": "Strongest signal",
+      "score": 92.94451141357422,
+      "water_excluded": false,
+      "row": 4685,
+      "column": 4620,
+      "factors": {
+        "mean_ground_elevation_m": 543.078125,
+        "depression_fill_depth_m": 2.8985595703125,
+        "slope_degrees": 28.02037239074707,
+        "upstream_contributing_area_m2": 125.0,
+        "possible_missing_upstream_terrain": 0.0,
+        "depression_percentile": 92.94451141357422,
+        "concentration_flatness_score": 12.018258094787598,
+        "relative_screening_score": 92.94451141357422
+      },
+      "pixel_center": [
+        322494.5,
+        4730183.5
+      ],
+      "crs": "EPSG:7801",
+      "ponding_score": 92.94451141357422,
+      "concentration_score": 12.018258094787598,
+      "depression_depth_m": 2.8985595703125,
+      "slope_degrees": 28.02037239074707,
+      "contributing_area_m2": 125.0,
+      "boundary_influence": false,
+      "class_label": "Strongest signal",
+      "class_index": 3,
+      "dominant_pathway": "depression",
+      "river_context": {
+        "available": true,
+        "revision": "b8c31089ac11b734",
+        "category": "away_from_mapped_river",
+        "nearest_distance_m": 137.01464687688238,
+        "threshold_m": 100.0,
+        "nearest_source": {
+          "source_id": "bddr-pfra2026-ID_10062",
+          "source_kind": "official_assessment_reach",
+          "source_url": "https://www.bd-dunav.bg/uploads/content/files/upravlenie-na-vodite/PURN%202028-2033/aktual_PORN/12_PFRA_BG1_APP12_APSFR_kmz.zip",
+          "label": "Перловска р."
+        },
+        "reported_mechanism": null,
+        "causation": "not_determined",
+        "distance_basis": "Point to nearest actual mapped river footprint or official river-reach line",
+        "source_counts": {
+          "open_water_source_polygons": 537,
+          "osm_river_polygons": 18,
+          "nonriver_water_polygons_excluded": 519,
+          "official_context_source_features": 23,
+          "official_river_reaches": 19,
+          "schematic_or_nonreach_features_excluded": 4,
+          "included_river_geometries": 37
+        },
+        "interpretation": "Proximity to mapped river geometry is contextual evidence only. River-adjacent land may have mixed rainfall, river or drainage influences; distance does not determine flood cause. Away from mapped rivers does not establish pluvial causation or absence of an unmapped river."
+      },
+      "interpretation": "Relative terrain signal, not flood probability or event flood depth."
+    },
+    "elapsed_seconds": 19.433
+  },
+  "persistence_checks": [
+    "Real terrain scenarios have identical content identity across different container roots",
+    "Scenario files restore atomically after private-storage restart, with SHA256 checks",
+    "Failed private persistence returns 503 and retry completes the durable commit",
+    "Large valid selection JSON above 2 MiB persists and restores within the 32 MiB object limit",
+    "Saved local colour scales restore without changing the dataset revision checks",
+    "Only durably committed unleased scenario cache entries can be evicted"
+  ],
+  "architecture": {
+    "worker": "draincheck",
+    "assets": "Existing React production frontend",
+    "backend": "Python 3.12 Linux-amd64 Container with native geospatial libraries",
+    "instance_type": "standard-2",
+    "max_instances": 1,
+    "idle_sleep": "10m",
+    "private_state_bucket": "draincheck-state",
+    "public_bucket_access": false,
+    "native_dtm_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3"
+  },
+  "external_state": {
+    "dashboard_authenticated": true,
+    "account_plan": "Workers Free",
+    "cli_oauth_authorized": false,
+    "workers_paid_enabled": false,
+    "r2_bucket_created": false,
+    "worker_deployed": false,
+    "container_image_built": false,
+    "data_uploaded": false,
+    "public_end_to_end_verified": true,
+    "free_tunnel_live": true
+  },
+  "verification_limits": [
+    "Restored-data API smoke ran on Windows Python 3.12, not inside a Linux Container",
+    "Linux binary-wheel availability is verified for all 36 locked dependencies; execution is not",
+    "Wrangler dry-run validates the Worker bundle and bindings, not live private outbound interception",
+    "Earlier browser screenshots retain their original version and scope",
+    "Quick Tunnel URLs last only while the local origin and tunnel processes remain online"
+  ],
+  "originals_unchanged": true,
+  "pricing_source": "https://developers.cloudflare.com/containers/platform/pricing/",
+  "selected_hosting_mode": "Free Cloudflare Quick Tunnel; this PC stays online",
+  "public_url": "https://willing-platinum-tries-their.trycloudflare.com",
+  "full_cloud_container_deployment_status": "NOT_DEPLOYED; optional future paid setup",
+  "free_tunnel_demo": {
+    "verified_utc": "2026-10-25T11:15:41.404906+00:00",
+    "status": "PASS",
+    "hosting": "Free Cloudflare Quick Tunnel; native API remains on this PC",
+    "public_url": "https://willing-platinum-tries-their.trycloudflare.com",
+    "origin": "http://127.0.0.1:8040",
+    "application_version": "1.9.1",
+    "paid_plan_enabled": false,
+    "cloud_container_deployed": false,
+    "originals_unchanged": true,
+    "checks": {
+      "health": {
+        "status": "ok",
+        "spatial_ready": true,
+        "terrain_available": true
+      },
+      "data_availability": {
+        "/api/health": {
+          "http_status": 200,
+          "terrain_available": true,
+          "spatial_ready": true
+        },
+        "/api/meta": {
+          "http_status": 200,
+          "terrain_available": true
+        },
+        "/api/pluvial/meta": {
+          "http_status": 200,
+          "available": true
+        },
+        "/api/green-absorption/meta": {
+          "http_status": 200,
+          "available": true
+        },
+        "/api/cadastre/meta": {
+          "http_status": 200,
+          "available": true,
+          "feature_count": 334033
+        },
+        "/api/rainfall/meta": {
+          "http_status": 200,
+          "available": true
+        },
+        "/api/river-context/meta": {
+          "http_status": 200,
+          "available": true
+        },
+        "/api/history/meta": {
+          "http_status": 200,
+          "available": true
+        },
+        "/api/history/zones/meta": {
+          "http_status": 200,
+          "available": true,
+          "feature_count": 136
+        },
+        "/api/flood-assessment/meta": {
+          "http_status": 200,
+          "available": true,
+          "feature_count": 29,
+          "zone_count": 6
+        },
+        "/api/refinement/meta": {
+          "http_status": 200,
+          "available": true
+        },
+        "/api/pluvial/water-mask/meta": {
+          "http_status": 200,
+          "available": true
+        },
+        "/api/clogging/meta": {
+          "http_status": 200,
+          "available": true
+        }
+      },
+      "frontend_module": {
+        "http_status": 200,
+        "bytes": 1433501,
+        "mime": "text/javascript"
+      },
+      "native_elevation": {
+        "public_equals_local": true,
+        "response": {
+          "longitude": 23.267111,
+          "latitude": 42.684845,
+          "crs": "EPSG:7801",
+          "vertical_datum": "Baltic 1982",
+          "sample_resolution_m": 1,
+          "row": 23485,
+          "column": 17641,
+          "pixel_center_easting": 317033.5,
+          "pixel_center_northing": 4730125.5,
+          "status": "ok",
+          "elevation_m": 585.0816650390625
+        }
+      },
+      "map_tiles": {
+        "elevation": {
+          "http_status": 200,
+          "bytes": 10332,
+          "sha256": "8842db71b532cf49d6b82d9bf4c13994f7476b4e43d7326b1ca6aa71cc2db7c9",
+          "pixels": [
+            256,
+            256
+          ]
+        },
+        "hillshade": {
+          "http_status": 200,
+          "bytes": 21186,
+          "sha256": "8764f2b1d65c5dbce40a9d48d99524ae3b566fc6b68092aa966b99a1b32a8f55",
+          "pixels": [
+            256,
+            256
+          ]
+        },
+        "cadastre": {
+          "http_status": 200,
+          "bytes": 24551,
+          "sha256": "978a37cb7a710531b79dd9b9c3ec12e157b27900251f62d8292dff7889fcd109",
+          "features": 185
+        }
+      },
+      "real_clogging_scenario": {
+        "scenario_id": "309db084ce1a7cedcef400558317e365",
+        "rainfall_mm": 60,
+        "public_equals_local": true,
+        "result_get_equals_post": true,
+        "download_http_status": 206,
+        "download_range_bytes": 1024,
+        "download_range_equals_local": true,
+        "content_range": "bytes 0-1023/9929",
+        "depth_tile_http_status": 200,
+        "depth_tile_sha256": "3b860d85b604e032a2858cd16586991b36346fee76b229c22017b8cad9b0466b",
+        "raster_sha256": "b24e95af40b539674f2f1ac84e9f0c0bb070bb1f33cc19e55f794bf44485872b"
+      }
+    },
+    "limitations": [
+      "Keep this PC awake, online and the app and cloudflared processes running",
+      "The hostname changes when the Quick Tunnel is restarted; no uptime guarantee",
+      "Saved scenarios remain on this PC; this demo does not use the prepared private R2 service"
+    ],
+    "browser_checks": {
+      "status": "PASS",
+      "url": "https://willing-platinum-tries-their.trycloudflare.com/#lon=23.267111&lat=42.684845&z=15.5&risk=1&terrain=0&shade=1&historySurvey=1",
+      "screen": "cloudflare-demo.jpg",
+      "heatmap_rendered": true,
+      "grey_buildings_rendered": true,
+      "green_and_routes_rendered": true,
+      "independent_layers_verified": true,
+      "browser_console_errors": []
+    },
+    "official_executable": {
+      "version": "2026.10.3",
+      "bytes": 55329336,
+      "sha256": "76b2805253d0d6ffacb092a7acfbee99e7af6917835c0c5410e23f3ef5052da2",
+      "release": "https://github.com/cloudflare/cloudflared/releases/tag/2026.10.3"
+    }
+  },
+  "optional_full_cloud_requirements": [
+    "User enables Workers Paid and accepts the new recurring and usage-based cost",
+    "Authorize the limited official Wrangler deployment connection",
+    "Build the native Linux image on a Docker-capable local or private remote builder",
+    "Deploy Container, Worker and private state bucket, then verify real public map and restart behavior"
+  ],
+  "remaining_requirements_for_selected_demo": []
+}

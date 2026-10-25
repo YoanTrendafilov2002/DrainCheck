@@ -8,6 +8,19 @@ from .clogging import ScenarioStale
 from .rainfall_routes import representation
 
 
+class ScenarioFileResponse(FileResponse):
+    """Keep a cloud cache lease until file/range sending ends or is cancelled."""
+    def __init__(self,*args,lease,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.lease=lease
+
+    async def __call__(self,scope,receive,send):
+        try:
+            await super().__call__(scope,receive,send)
+        finally:
+            self.lease.__exit__(None,None,None)
+
+
 class ScenarioRequest(BaseModel):
     model_config = ConfigDict(extra='forbid')
     geometry: dict
@@ -65,8 +78,14 @@ def create_clogging_router(scenarios, renderer=''):
 
     @router.get('/scenarios/{scenario_id}/download')
     def download(scenario_id: str):
-        call(lambda: scenarios.result(scenario_id))
-        return FileResponse(scenarios.path(scenario_id)/'runoff.tif',media_type='image/tiff',
-                            filename='drainage_loss_'+scenario_id+'.tif')
+        lease=call(lambda: scenarios.cache_lease(scenario_id))
+        call(lease.__enter__)
+        try:
+            call(lambda: scenarios.result(scenario_id))
+            return ScenarioFileResponse(scenarios.path(scenario_id)/'runoff.tif',media_type='image/tiff',
+                                        filename='drainage_loss_'+scenario_id+'.tif',lease=lease)
+        except BaseException:
+            lease.__exit__(None,None,None)
+            raise
 
     return router

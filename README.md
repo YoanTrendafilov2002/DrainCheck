@@ -21,6 +21,16 @@ preparation rather than an already generated `dist/` directory.
 
 ## Run on this computer
 
+For full Cloudflare hosting, see [the deployment guide](docs/CLOUDFLARE_DEPLOYMENT.md).
+For the selected free demo, double-click **Run_Cloudflare_Demo.cmd** and keep
+this PC online. See [the Tunnel guide](docs/CLOUDFLARE_TUNNEL_DEMO.md) for the
+temporary HTTPS address, restart behavior and command-line options.
+Version 1.9.1 adds an opt-in native Python Container deployment, a verified
+snapshot of the actual inputs, and private persistence for saved local scales
+and scenarios. It preserves the local application and its analysis functions.
+Containers require Workers Paid; deployment status and verification are recorded
+separately from the earlier local map checks.
+
 Double-click **Run_Sofia_App.cmd**. It uses the existing Python environment,
 starts the server at **http://127.0.0.1:8040**, and opens the app when ready.
 Keep the terminal open. Press Ctrl+C in it to stop.

@@ -1,0 +1,38 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "draincheck",
+  "account_id": "abeef81bb3a4248c72956a9246527d8b",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-25",
+  "workers_dev": true,
+  "assets": {
+    "directory": "../dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api", "/api/*"]
+  },
+  "containers": [
+    {
+      "class_name": "DrainCheckContainer",
+      "image": "../Dockerfile",
+      "image_build_context": "..",
+      "instance_type": "standard-2",
+      "max_instances": 1
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      { "name": "DRAINCHECK", "class_name": "DrainCheckContainer" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["DrainCheckContainer"] }
+  ],
+  "r2_buckets": [
+    { "binding": "DRAINCHECK_STATE", "bucket_name": "draincheck-state" }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1
+  }
+}

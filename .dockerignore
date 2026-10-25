@@ -1,0 +1,33 @@
+# Strict allow-list: credentials, original working datasets and local account
+# state cannot accidentally enter a remote image build context.
+**
+!Dockerfile
+!.dockerignore
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!index.html
+!tsconfig.json
+!vite.config.ts
+!requirements-lock.txt
+!src/
+!src/**
+!shared/
+!shared/**
+!backend/
+!backend/**
+!scripts/
+!scripts/**
+!config/
+!config/**
+!docs/
+!docs/**
+!.cloudflare-data/
+!.cloudflare-data/runtime-data.tar
+!.cloudflare-data/runtime-data-manifest.json
+**/__pycache__/
+**/*.pyc
+**/*.private.json
+**/.env
+**/*.key
+**/*.pem
