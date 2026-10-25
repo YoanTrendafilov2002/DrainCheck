@@ -197,10 +197,12 @@ class LocalPluvial:
                 for name in BAND_NAMES[5:]:factors[name]=None
                 reason=REASONS[policy_flags]
                 result.update(status='excluded_user_screening',screening_excluded=True,
+                              screening_exclusion_flags=policy_flags,
+                              screening_exclusion_method='terrain_connected' if policy_flags&4 else 'mapped_geometry',
                               screening_exclusion_reason=reason,score=None,class_label=None,
                               ponding_score=None,concentration_score=None,unmasked_scores=original,
                               original_terrain=original,exclusion_reason='user-requested-'+reason,
-                              message='Mapped river channel or stadium footprint is excluded from screening and scenarios at the user’s request; this is not evidence of no flood risk.')
+                              message=('Terrain-connected channel candidate is excluded by screening policy; its bank boundary is inferred, not surveyed.' if policy_flags&4 else 'Mapped river channel or stadium footprint is excluded by screening policy.')+' Exclusion does not establish flood safety.')
             elif self.water.sample_cell(row,col):
                 original={name:factors[name] for name in BAND_NAMES[5:]}
                 for name in BAND_NAMES[5:]:factors[name]=None

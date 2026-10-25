@@ -22,7 +22,7 @@ from .tile_cache import file_signature, read_json_cached
 SHAPE = (10869, 10345)
 GRID = Affine(5, 0, 299392, 0, -5, 4753611)
 VALIDATION_LOCK = threading.RLock()
-REASONS = {1: 'river', 2: 'stadium', 3: 'river_and_stadium'}
+REASONS = {1: 'river', 2: 'stadium', 3: 'river_and_stadium', 5: 'river', 7: 'river_and_stadium'}
 
 
 class ScreeningExclusions:
@@ -49,7 +49,8 @@ class ScreeningExclusions:
                 raise ValueError('Screening-exclusion receipt declares a different grid')
             with VALIDATION_LOCK:
                 self._validate(file_signature(self.path), file_signature(self.receipt), checksum,
-                               tuple(counts[key] for key in ('river_channel_cells', 'stadium_cells', 'union_cells')))
+                               tuple(counts[key] for key in ('river_channel_cells', 'stadium_cells', 'union_cells'))
+                               +(counts.get('terrain_connected_cells',0),))
             self.error = ''
             return True
         except (OSError, KeyError, TypeError, ValueError, rasterio.errors.RasterioError) as error:
@@ -65,7 +66,7 @@ class ScreeningExclusions:
                 checksum.update(block)
         if checksum.hexdigest() != expected_sha256:
             raise ValueError('Screening-exclusion raster checksum differs from its receipt')
-        counts = np.zeros(3, dtype='int64')
+        counts = np.zeros(4, dtype='int64')
         with rasterio.open(signature[0]) as src:
             if (src.crs is None or src.crs.to_epsg() != 7801 or src.shape != SHAPE
                     or src.count != 1 or src.dtypes != ('uint8',) or src.nodata is not None
@@ -73,18 +74,22 @@ class ScreeningExclusions:
                 raise ValueError('Screening-exclusion raster is not the verified 5 m grid')
             for _, window in src.block_windows(1):
                 values = src.read(1, window=window)
-                if np.any(values > 3):
+                if np.any(~np.isin(values, [0,1,2,3,5,7])):
                     raise ValueError('Screening-exclusion raster contains unsupported flags')
                 counts += [np.count_nonzero(values & 1), np.count_nonzero(values & 2),
-                           np.count_nonzero(values)]
+                           np.count_nonzero(values),np.count_nonzero(values&4)]
         if tuple(counts) != expected_counts:
             raise ValueError('Screening-exclusion counts differ from the receipt')
 
     def meta(self):
         if not self.available:
             return {'available': False, 'enabled': True, 'message': self.error}
-        return {**read_json_cached(self.receipt), 'enabled': True,
-                'interpretation': 'Mapped river channels and stadium footprints are omitted from screening and scenarios at the user’s request. Exclusion does not mean safe from flooding; original terrain and historical observations remain unchanged.'}
+        # The preserved receipt retains every omitted source object's tags.
+        # Do not repeat that audit inventory in each map/scenario API response.
+        summary = {key:value for key,value in read_json_cached(self.receipt).items()
+                   if key != 'omitted_centerlines'}
+        return {**summary, 'enabled': True,
+                'interpretation': 'Mapped channels, terrain-connected channel candidates and stadiums are omitted by user screening policy. Inferred channel candidates are not observed water or surveyed bank boundaries. Exclusion does not mean safe; original terrain and historical observations remain unchanged.'}
 
     def sample_cell(self, row, col):
         if not self.available:
@@ -106,11 +111,17 @@ class ScreeningExclusions:
         west, south, east, north = bounds
         destination = np.full((256, 256), 255, dtype='uint8')
         transform = Affine((east-west)/256, 0, west, 0, -(north-south)/256, north)
-        with rasterio.Env(PROJ_NETWORK='OFF', GDAL_CACHEMAX=64000000), rasterio.open(signature[0]) as src:
+        # Any destination pixel overlapping a source exclusion stays clear.
+        # Nearest sampling also leaks at inspection scales: its pixel centre
+        # can fall on dry land while part of that pixel covers a channel cell.
+        # This conservative display clipping changes no source cells or scores.
+        # Read the native mask explicitly: its nearest overviews can already
+        # have discarded the cells that the max reduction must retain.
+        with rasterio.Env(PROJ_NETWORK='OFF', GDAL_CACHEMAX=64000000), rasterio.open(signature[0], OVERVIEW_LEVEL='NONE') as src:
             reproject(rasterio.band(src, 1), destination,
                       src_transform=src.transform, src_crs=src.crs, src_nodata=None,
                       dst_transform=transform, dst_crs='EPSG:3857', dst_nodata=255,
-                      resampling=Resampling.nearest, init_dest_nodata=True, num_threads=1)
+                      resampling=Resampling.max, init_dest_nodata=True, num_threads=1)
         result = (destination > 0) & (destination != 255)
         result.flags.writeable = False
         return result

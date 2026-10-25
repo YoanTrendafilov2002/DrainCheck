@@ -14,9 +14,11 @@ CLIENT = TestClient(app)
 def test_river_context_metadata_and_actual_sample_thresholds_in_all_readouts():
     meta = CLIENT.get('/api/river-context/meta')
     assert meta.status_code == 200 and meta.json()['available']
-    assert meta.json()['source_counts']['included_river_geometries'] == 37
+    counts = meta.json()['source_counts']
+    assert counts['osm_river_centerlines'] > 0
+    assert counts['included_river_geometries'] == 18+19+counts['osm_river_centerlines']
     lon, lat = 23.337247642167377, 42.690042699335194
-    # Actual Ariana lake point is 34.2 m from a designated river reach. The lake
+    # Actual Ariana lake point is 27 m from a verified open river centerline. The lake
     # itself is not a river source, and changing a threshold must not change P.
     for endpoint in ['/api/river-context/sample', '/api/pluvial/sample', '/api/refinement/sample']:
         near = CLIENT.get(endpoint, params={'lon': lon, 'lat': lat, 'river_proximity_m': 100})
@@ -27,7 +29,7 @@ def test_river_context_metadata_and_actual_sample_thresholds_in_all_readouts():
         context_b = b if endpoint == '/api/river-context/sample' else b.pop('river_context')
         assert context_a['category'] == 'river_adjacent_possible_mixed'
         assert context_b['category'] == 'away_from_mapped_river'
-        assert 30 < context_a['nearest_distance_m'] < 40
+        assert 26 < context_a['nearest_distance_m'] < 28
         assert context_a['nearest_distance_m'] == context_b['nearest_distance_m']
         assert context_a['causation'] == context_b['causation'] == 'not_determined'
         if endpoint != '/api/river-context/sample':

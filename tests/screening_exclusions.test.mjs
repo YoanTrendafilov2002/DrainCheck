@@ -32,3 +32,14 @@ test('river and stadium exclusions are shown as user policy, without a numeric r
     }
   }
 });
+
+test('terrain-inferred channel exclusions are distinguished from mapped footprints',()=>{
+  for(const Component of [PluvialReadout,RefinementReadout]){
+    const sample={status:'excluded_user_screening',screening_excluded:true,
+      screening_exclusion_reason:'river',screening_exclusion_method:'terrain_connected',
+      score:null,ponding_score:null,review_class:null};
+    const html=renderToStaticMarkup(React.createElement(Component,{sample,error:null,mode:'heatmap',meta:{}}));
+    assert.match(html,/Terrain-aligned channel candidate/);
+    assert.doesNotMatch(html,/Mapped river footprint|class="screening-value/);
+  }
+});

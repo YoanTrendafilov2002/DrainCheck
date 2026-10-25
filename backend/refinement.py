@@ -127,9 +127,11 @@ class LocalReviewPriority:
                 'interpretation': 'Rule-based review category. Class numbers are identifiers, not probabilities, flood depths or damage scores.'}
         if status=='excluded_user_screening':
             result.update(screening_excluded=True,screening_exclusion_reason=legacy.get('screening_exclusion_reason'),
+                          screening_exclusion_method=legacy.get('screening_exclusion_method'),
+                          screening_exclusion_flags=legacy.get('screening_exclusion_flags'),
                           exclusion_reason=legacy.get('exclusion_reason'),legacy_ponding_score=None,
                           original_terrain=legacy.get('unmasked_scores'),
-                          interpretation='Mapped river channel or stadium is omitted at the user’s request; historical observations remain separately available and exclusion is not a safety finding.')
+                          interpretation=legacy.get('message','Channel or stadium is omitted by screening policy; exclusion is not a safety finding.'))
         if green_absorption:
             if self.green is None or not self.green.available:
                 raise ValueError('Full-green absorption mask unavailable')

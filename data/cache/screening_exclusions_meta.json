@@ -1,12 +1,12 @@
 {
   "available": true,
   "enabled": true,
-  "method": "user-requested-mapped-channel-stadium-suppression-v1",
-  "revision": "bfdf087d674d5c81",
-  "sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd",
+  "method": "user-requested-terrain-aligned-open-channel-suppression-v3",
+  "revision": "1adc07f7f415b86e",
+  "sha256": "1adc07f7f415b86ea85503a4de8717f25ca06e23f0cf1172dc4b81367e610a54",
   "file": "data/cache/screening_exclusions_5m.tif",
   "exclusions_are_policy": true,
-  "retrieved": "2026-10-25T12:50:19.871616+00:00",
+  "retrieved": "2026-10-25T15:12:32.978126+00:00",
   "grid": {
     "crs": "EPSG:7801",
     "width": 10345,
@@ -30,17 +30,43 @@
       "0": "not suppressed",
       "1": "mapped channel",
       "2": "stadium",
-      "3": "both"
+      "3": "mapped channel and stadium",
+      "5": "terrain-connected channel candidate",
+      "7": "terrain-connected channel candidate and stadium"
     }
   },
+  "terrain_alignment": {
+    "method": "positive-fill-connected-within-bounded-channel-search",
+    "connectivity": 8,
+    "original_river_cells": 352028,
+    "eligible_candidate_cells": 106779,
+    "additional_river_cells": 104027,
+    "terrain_candidate_cells": 104027,
+    "unconnected_candidate_cells": 2752,
+    "result_river_cells": 456055,
+    "search_distance_m": 20.0,
+    "river_seed_cells_valid_before_propagation": true,
+    "final_valid_river_cells": 456055,
+    "search_policy": "Native cell centres within 20 m of open mapped centerlines; flat end caps. Distance alone never excludes land.",
+    "criterion": "Finite positive depression fill depth and valid real 5 m terrain, 8-connected to a mapped river seed.",
+    "terrain_file": "data/cache/pluvial_5m.tif",
+    "terrain_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+    "interpretation": "Inferred channel-alignment candidates excluded by screening policy, not observed water or surveyed bank boundaries."
+  },
   "counts": {
-    "river_channel_cells": 55770,
+    "river_channel_cells": 456055,
     "stadium_cells": 20291,
-    "union_cells": 76061,
+    "union_cells": 476346,
     "overlap_cells": 0,
+    "terrain_connected_cells": 104027,
     "channel_polygons": 52,
+    "channel_centerlines": 2191,
+    "centerlines_with_source_width": 73,
+    "centerline_length_m": 2309877.538134774,
+    "omitted_covered_or_inactive_centerlines": 656,
     "stadium_polygons": 40,
-    "outside_valid_terrain_removed": 20890
+    "invalid_river_seed_cells_removed_before_propagation": 311285,
+    "outside_valid_terrain_removed": 6416
   },
   "source": {
     "provider": "OpenStreetMap contributors",
@@ -81,16 +107,34 @@
       "osm_base_timestamp": "2026-10-25T12:49:03Z",
       "attempts": []
     },
+    "waterway_acquisition": {
+      "endpoint": "https://overpass-api.de/api/interpreter",
+      "raw_file": "screening_exclusions_waterways_20261025T151232Z.json",
+      "query_file": "screening_exclusions_waterways_20261025T151232Z.overpass",
+      "download_utc": "2026-10-25T15:12:32.978126+00:00",
+      "bbox": [
+        23.033601825086354,
+        42.392740683952645,
+        23.700971220841907,
+        42.913568431160385
+      ],
+      "elements": 2988,
+      "raw_sha256": "f9f34ab13bb45cc886e4087f4b0ebec4300bafd8761ba07d2bb7e9a653ea6a89",
+      "query_sha256": "d4663d58f6e0e54718cc5c4a7293ef8ce85da1222387085e7f3c99d2b75f356f",
+      "osm_base_timestamp": "2026-10-25T15:11:03Z"
+    },
     "geojson_file": "data/reference/screening_exclusions.geojson",
-    "geojson_sha256": "3a0d7bbd116d8dcf4c72276b41cda96b78c9ec4f1bd507039bb0b3704189c249"
+    "geojson_sha256": "7f0a4418d6dcab30d8bc99d0ebb05de0a3f36249b0c9361c979eb319086d4b4a"
   },
   "policy": "Suppress mapped channel and whole stadium footprints in derived risk screening and scenario displays. Includes mapped intermittent channels. Original terrain and historical observations are retained.",
   "limitations": [
     "This is a user-requested screening exclusion, not evidence of safety or absence of flood hazard.",
     "OSM community geometry may be incomplete, outdated or misclassified. Whole stadium footprint is used, not only the pitch.",
-    "Channels use explicit water/riverbank polygons, including intermittent natural-water polygons without a water subtype. No river-line buffer or inferred floodplain exclusion is applied.",
+    "Mapped open river, stream, canal, drain and ditch centerlines supplement water/riverbank polygons. Explicit width tags supply width where present; otherwise only intersecting 5 m cells are excluded, not a measured physical channel width.",
+    "Covered, tunnel, indoor, underground and inactive mapped line segments are omitted; culvert crossings do not automatically exclude surface roads.",
+    "Terrain alignment adds only connected positive-fill candidates within a 20 m search allowance. It can include nearby connected depressions and does not independently establish actual bank boundaries; inference bit4 distinguishes these cells from mapped geometry.",
     "Every 5 m cell intersecting an actual footprint is suppressed (all_touched=True), including partial edge cells. This is grid-cell coverage, not a river/floodplain buffer.",
-    "Missing stadium tags or river polygons remain gaps. River flooding is not simulated by suppressing channel pixels."
+    "Unmapped channels and unknown bank widths remain source limitations. No river-distance or floodplain buffer is applied. River flooding is not simulated by suppressing channel pixels."
   ],
   "control_points": [
     {
@@ -137,11 +181,6530 @@
     }
   ],
   "rejected_geometry": [],
+  "omitted_centerlines": [
+    {
+      "osm_id": "way/20308274",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-2",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "name:en": "Perlovska River",
+        "name:fr": "R. Perlovsk",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/20308323",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "name:en": "Perlovska River",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/22388644",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/23114261",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "name:en": "Perlovska River",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/25116220",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u041a\u044a\u0442\u0438\u043d\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u041a\u044a\u0442\u0438\u043d\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Katinska reka",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/58893816",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "GPS / approximation",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/88690624",
+      "reason": "covered=yes",
+      "tags": {
+        "boat": "no",
+        "covered": "yes",
+        "name": "\u041a\u0430\u043a\u0430\u0447",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/89114677",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "bing",
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/89114686",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "bing",
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/89114736",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "bing",
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/89114742",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "bing",
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/89114755",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "bing",
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/96944746",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "int_name": "Vladayska reka",
+        "layer": "-1",
+        "name": "\u0412\u043b\u0430\u0434\u0430\u0439\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0412\u043b\u0430\u0434\u0430\u0439\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "river",
+        "wikidata": "Q3657979",
+        "wikipedia": "bg:\u0412\u043b\u0430\u0434\u0430\u0439\u0441\u043a\u0430 \u0440\u0435\u043a\u0430"
+      }
+    },
+    {
+      "osm_id": "way/97198995",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0435\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/98390285",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "int_name": "Iskar",
+        "layer": "-1",
+        "name": "\u0418\u0441\u043a\u044a\u0440",
+        "name:en": "Iskar",
+        "source": "Landsat;bing",
+        "tunnel": "yes",
+        "usage": "spillway",
+        "waterway": "canal",
+        "wikipedia": "bg:\u0418\u0441\u043a\u044a\u0440",
+        "wikipedia:en": "Iskar (river)"
+      }
+    },
+    {
+      "osm_id": "way/157690101",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-2",
+        "name": "\u0411\u043e\u044f\u043d\u0441\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/157691280",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "layer": "-4",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "name:en": "Perlovska River",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/157694463",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u043e\u044f\u043d\u0441\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/157755997",
+      "reason": "tunnel=yes",
+      "tags": {
+        "alt_name": "\u0422\u0440\u044a\u0441\u0442\u0443\u043b\u0438\u0442\u0435",
+        "layer": "-1",
+        "name": "\u041b\u0438\u0441\u0430\u0448\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/198207383",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0435\u0440\u0430\u0432\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/198207384",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u0411\u0435\u0440\u0430\u0432\u0438\u0446\u0430",
+        "tunnel": "yes",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/198207401",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0435\u0440\u0430\u0432\u0438\u0446\u0430",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/218428373",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u0430\u0442\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/247323148",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u0413\u0443\u0440\u043c\u0430\u0437\u043e\u0432\u0441\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream",
+        "width": "3"
+      }
+    },
+    {
+      "osm_id": "way/255971094",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041d\u043e\u0432\u0430\u0447\u0438\u0446\u0430",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/255975838",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041d\u043e\u0432\u0430\u0447\u0438\u0446\u0430",
+        "source": "approximation",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/256813273",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "name:en": "Perlovska River",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/259046057",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u0430\u0442\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/259434616",
+      "reason": "tunnel=yes",
+      "tags": {
+        "alt_name": "\u0422\u0440\u044a\u0441\u0442\u0443\u043b\u0438\u0442\u0435",
+        "layer": "-1",
+        "name": "\u041b\u0438\u0441\u0430\u0448\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/259434628",
+      "reason": "tunnel=yes",
+      "tags": {
+        "alt_name": "\u0422\u0440\u044a\u0441\u0442\u0443\u043b\u0438\u0442\u0435",
+        "layer": "-1",
+        "name": "\u041b\u0438\u0441\u0430\u0448\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/259649603",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-2",
+        "name": "\u0411\u0435\u0440\u0430\u0432\u0438\u0446\u0430",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/278586473",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/287999015",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u043e\u044f\u043d\u0441\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/292522752",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Suhodolska reka",
+        "tunnel": "yes",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/292522753",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "permissive",
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Suhodolska reka",
+        "tunnel": "yes",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/293066144",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u043e\u0436\u0430\u0440\u0435\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/296402674",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/296698101",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/296698103",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0442\u0430\u0440\u0430\u0442\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/296936296",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0430\u0433\u0430\u043b\u0435\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "approximation",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/301046670",
+      "reason": "tunnel=yes",
+      "tags": {
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/301046845",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/301046846",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/301046847",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/301046950",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/301915650",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0420\u0435\u043a\u043c\u0430\u0440\u0438\u0446\u0430",
+        "name:bg": "\u0420\u0435\u043a\u043c\u0430\u0440\u0438\u0446\u0430",
+        "name:en": "Rekmaritsa",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/331489931",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041a\u044a\u0442\u0438\u043d\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u041a\u044a\u0442\u0438\u043d\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Katinska reka",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/334378542",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041d\u043e\u0432\u0430\u0447\u0438\u0446\u0430",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/334378543",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u044a\u0440\u0442\u043e\u043f\u043e",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/334378544",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041d\u043e\u0432\u0430\u0447\u0438\u0446\u0430",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/334378545",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u043b\u0430\u0442\u0438\u043d\u0441\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/336856265",
+      "reason": "tunnel=yes",
+      "tags": {
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/336872809",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "name": "\u041f\u043e\u0436\u0430\u0440\u0435\u0432\u0441\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream",
+        "width": "3"
+      }
+    },
+    {
+      "osm_id": "way/338139911",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/351618133",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0418\u0437\u0442\u043e\u0447\u0435\u043d \u043d\u0430\u043f\u043e\u0438\u0442\u0435\u043b\u0435\u043d \u043a\u0430\u043d\u0430\u043b",
+        "tunnel": "culvert",
+        "waterway": "drain",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/352297659",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/352297660",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/355488197",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0440\u043e\u043b\u0435\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/364878233",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "int_name": "Iskar",
+        "layer": "-1",
+        "name": "\u0418\u0441\u043a\u044a\u0440",
+        "name:en": "Iskar",
+        "source": "Landsat;bing",
+        "tunnel": "yes",
+        "waterway": "river",
+        "wikidata": "Q217805",
+        "wikipedia": "en:Iskar (river)"
+      }
+    },
+    {
+      "osm_id": "way/373573468",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/378946767",
+      "reason": "tunnel=yes",
+      "tags": {
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/378946768",
+      "reason": "tunnel=yes",
+      "tags": {
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/378946769",
+      "reason": "tunnel=yes",
+      "tags": {
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/390162048",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/390162057",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/390162069",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/392356043",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/392359713",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/392361429",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/392688108",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/400063653",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/402266654",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/417969771",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0442\u0430\u0440\u0430\u0442\u0430 \u0440\u0435\u043a\u0430",
+        "note": "actual path is a best guess, from sat imagery",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/417969823",
+      "reason": "tunnel=yes",
+      "tags": {
+        "alt_name": "\u0420\u0435\u043a\u043c\u0430\u043d\u0438\u0446\u0430",
+        "layer": "-1",
+        "name": "\u0420\u0435\u043a\u043c\u0430\u0440\u0438\u0446\u0430",
+        "name:bg": "\u0420\u0435\u043a\u043c\u0430\u0440\u0438\u0446\u0430",
+        "name:en": "Rekmaritsa",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/425382986",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/425426440",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/425426441",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/425426442",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/425463823",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "permissive",
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Suhodolska reka",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/425544969",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0440\u043e\u043b\u0435\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/425610973",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "permissive",
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Suhodolska reka",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/430872270",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/450228581",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/450607173",
+      "reason": "tunnel=yes",
+      "tags": {
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/459568779",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0430\u0433\u0430\u043b\u0435\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "approximation",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/459620161",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u044a\u0440\u0442\u043e\u043f\u043e",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/461225691",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0410\u0434\u0436\u0438\u0431\u0430\u0440\u0438\u0446\u0430",
+        "name:bg": "\u0410\u0434\u0436\u0438\u0431\u0430\u0440\u0438\u0446\u0430",
+        "name:en": "Adzhibaritsa",
+        "source": "approximation",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/461239768",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/461239769",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "approximation",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/461239771",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/461239772",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "approximation",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/471100026",
+      "reason": "tunnel=yes",
+      "tags": {
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/471100241",
+      "reason": "tunnel=yes",
+      "tags": {
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/484166396",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0418\u0437\u0442\u043e\u0447\u0435\u043d \u043d\u0430\u043f\u043e\u0438\u0442\u0435\u043b\u0435\u043d \u043a\u0430\u043d\u0430\u043b",
+        "tunnel": "yes",
+        "waterway": "drain",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/484166398",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0418\u0437\u0442\u043e\u0447\u0435\u043d \u043d\u0430\u043f\u043e\u0438\u0442\u0435\u043b\u0435\u043d \u043a\u0430\u043d\u0430\u043b",
+        "tunnel": "yes",
+        "waterway": "drain",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/484166400",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0418\u0437\u0442\u043e\u0447\u0435\u043d \u043d\u0430\u043f\u043e\u0438\u0442\u0435\u043b\u0435\u043d \u043a\u0430\u043d\u0430\u043b",
+        "tunnel": "yes",
+        "waterway": "drain",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/484353554",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0413\u0443\u0448\u0435\u0432\u0430 \u0431\u0430\u0440\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/484364223",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/489162328",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/532787522",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0442\u0443\u0431\u0435\u043b\u0430",
+        "name:bg": "\u0421\u0442\u0443\u0431\u0435\u043b\u0430",
+        "name:en": "Stubela",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/534626087",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/534626091",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/537457747",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/537466822",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/539863796",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/544391068",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/566779430",
+      "reason": "tunnel=yes",
+      "tags": {
+        "name": "\u042f\u043d\u0447\u043e\u0432\u0441\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/582322458",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/587111630",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "bing",
+        "tunnel": "yes",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/591065369",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/598732656",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0420\u0430\u043a\u0438\u0442\u0430",
+        "name:en": "Rakita",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/603080787",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u044a\u0440\u0442\u043e\u043f\u043e",
+        "name:bg": "\u0412\u044a\u0440\u0442\u043e\u043f\u043e",
+        "old_name": "\u0414\u044a\u0440\u0432\u0435\u043d\u0438\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "river",
+        "width": "3"
+      }
+    },
+    {
+      "osm_id": "way/619889620",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0418\u0437\u0442\u043e\u0447\u0435\u043d \u043d\u0430\u043f\u043e\u0438\u0442\u0435\u043b\u0435\u043d \u043a\u0430\u043d\u0430\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/620158643",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "usage": "spillway",
+        "waterway": "stream",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/633111288",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0418\u0437\u0442\u043e\u0447\u0435\u043d \u043d\u0430\u043f\u043e\u0438\u0442\u0435\u043b\u0435\u043d \u043a\u0430\u043d\u0430\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/638703854",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u043e\u044f\u043d\u0441\u043a\u0430 \u0431\u0430\u0440\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/672396565",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/673427862",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/673432400",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/673665080",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/673920417",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0415\u043b\u0448\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/673990397",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/674490578",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0442\u0443\u0431\u0435\u043b\u0430",
+        "name:bg": "\u0421\u0442\u0443\u0431\u0435\u043b\u0430",
+        "name:en": "Stubela",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/674541078",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/674719190",
+      "reason": "tunnel=yes",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/674719192",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/674719194",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0415\u043b\u0448\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/674779350",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/674823814",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041a\u0430\u043b\u043d\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/675030336",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/675061489",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0435\u0440\u0430\u0432\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/676623347",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/682410049",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/682410054",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/682410061",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/682410071",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/682410073",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/682410079",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/682416372",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/682416374",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/682429921",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/682429923",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685743238",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685746234",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0443\u0439\u043d\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685746236",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0443\u0439\u043d\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685746238",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0443\u0439\u043d\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685746240",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0443\u0439\u043d\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685907344",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0420\u0430\u043a\u0438\u0442\u0430",
+        "name:en": "Rakita",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685907346",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0443\u0439\u043d\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685907348",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u043e\u0440\u043a\u0430\u043b\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685907352",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0415\u0433\u0443\u043b\u044f",
+        "alt_name:en": "Egulya",
+        "layer": "-1",
+        "name": "\u0412\u0435\u0434\u0435\u043d\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685974834",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/685977994",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685979347",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0442\u0440\u0430\u0442\u043e\u0440\u0438\u0449\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685979348",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685979351",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685979354",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685979356",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0442\u0440\u0430\u0442\u043e\u0440\u0438\u0449\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685979358",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685981535",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0435\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "1:5000",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/685981538",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0435\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "1:5000",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686165641",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0442\u0440\u0430\u0442\u043e\u0440\u0438\u0449\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686169182",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u044f\u043b\u0430 \u0432\u043e\u0434\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686169184",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686193228",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u0435\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "1:5000",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686194270",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0430\u043b\u0430\u043a\u0430\u0440\u0438\u044f",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686194273",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0413\u0440\u044a\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686194275",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686194277",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0415\u0433\u0443\u043b\u044f",
+        "alt_name:en": "Egulya",
+        "layer": "-1",
+        "name": "\u0412\u0435\u0434\u0435\u043d\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732174",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0410\u0440\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732176",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0410\u0440\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732177",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0410\u0440\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732179",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0410\u0440\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732182",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0410\u0440\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732186",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0410\u0440\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732190",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732194",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/686732197",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name:bg": "\u0421\u0442\u0440\u0438\u043c\u043e\u043d\u0430\u0441",
+        "alt_name:de": "Strym\u00f3nas",
+        "alt_name:fr": "Strym\u00f3nas",
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u0421\u0442\u0440\u0443\u043c\u0430",
+        "name:bg": "\u0421\u0442\u0440\u0443\u043c\u0430",
+        "name:bg_Ltn": "Struma",
+        "name:de": "Struma",
+        "name:el": "\u03a3\u03c4\u03c1\u03c5\u03bc\u03cc\u03bd\u03b1\u03c2",
+        "name:el-Latn": "Strym\u00f3nas",
+        "name:en": "Struma",
+        "name:fr": "Struma",
+        "name:mk": "\u0421\u0442\u0440\u0443\u043c\u0430",
+        "name:nl": "Strimon",
+        "old_name": "\u03a3\u03c4\u03c1\u03c5\u03bc\u03cc\u03bd",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "1",
+        "wikidata": "Q204127"
+      }
+    },
+    {
+      "osm_id": "way/686732200",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name:bg": "\u0421\u0442\u0440\u0438\u043c\u043e\u043d\u0430\u0441",
+        "alt_name:de": "Strym\u00f3nas",
+        "alt_name:fr": "Strym\u00f3nas",
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u0421\u0442\u0440\u0443\u043c\u0430",
+        "name:bg": "\u0421\u0442\u0440\u0443\u043c\u0430",
+        "name:bg_Ltn": "Struma",
+        "name:de": "Struma",
+        "name:el": "\u03a3\u03c4\u03c1\u03c5\u03bc\u03cc\u03bd\u03b1\u03c2",
+        "name:el-Latn": "Strym\u00f3nas",
+        "name:en": "Struma",
+        "name:fr": "Struma",
+        "name:mk": "\u0421\u0442\u0440\u0443\u043c\u0430",
+        "name:nl": "Strimon",
+        "old_name": "\u03a3\u03c4\u03c1\u03c5\u03bc\u03cc\u03bd",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "1",
+        "wikidata": "Q204127"
+      }
+    },
+    {
+      "osm_id": "way/686732204",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/686732206",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/686732208",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732211",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732214",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732217",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732220",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/686732222",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/687213941",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/688225618",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0430\u0440\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/688225620",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/688225623",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/688225630",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440. \u0411\u043b\u0430\u0442\u043e",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/688225632",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/688225634",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/688225636",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/688225638",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/688225640",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/688225642",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/693426461",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/693426463",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/693736888",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0430\u0433\u0430\u043b\u0435\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "approximation",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/693736890",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/693736892",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0430\u0433\u0430\u043b\u0435\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "approximation",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/696277347",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0418\u0437\u0442\u043e\u0447\u0435\u043d \u043d\u0430\u043f\u043e\u0438\u0442\u0435\u043b\u0435\u043d \u043a\u0430\u043d\u0430\u043b",
+        "tunnel": "culvert",
+        "waterway": "drain",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/696496634",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/696496653",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/696792026",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/697012168",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/697027281",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/697027295",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/697038237",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/697207814",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/697246451",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/697246453",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/697246455",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/699474342",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/701181670",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/701205114",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/701205123",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/701416458",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/701430528",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/701430554",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/701675931",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0443\u0445\u043e\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "layer": "-1",
+        "name": "\u042f\u043d\u0435\u0448\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/701675932",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u0416\u0435\u043b\u044f\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/701675934",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u0416\u0435\u043b\u044f\u0432\u0441\u043a\u0430",
+        "name:en": "Zhelyavska",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/701675935",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u0416\u0435\u043b\u044f\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/701675950",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0443\u0445\u043e\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "layer": "-1",
+        "name": "\u042f\u043d\u0435\u0448\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/707113113",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u0411\u0435\u0440\u043e\u0432\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/707113115",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/707488848",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0443\u0445\u043e\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "layer": "-1",
+        "name": "\u042f\u043d\u0435\u0448\u043d\u0438\u0446\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/707488850",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0443\u0445\u043e\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "layer": "-1",
+        "name": "\u042f\u043d\u0435\u0448\u043d\u0438\u0446\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/707489334",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0443\u0445\u043e\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "layer": "-1",
+        "name": "\u042f\u043d\u0435\u0448\u043d\u0438\u0446\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/721971868",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/721980735",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/722003998",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/722003999",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/722004000",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/722004002",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/722004008",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/722004010",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/722018943",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0435\u043d\u044c\u043e\u0432 \u0434\u043e\u043b",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/722018944",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/722611097",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0435\u043b\u0435\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/725677484",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/725684778",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/725684779",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/727581608",
+      "reason": "tunnel=yes",
+      "tags": {
+        "alt_name": "\u0422\u0440\u044a\u0441\u0442\u0443\u043b\u0438\u0442\u0435",
+        "layer": "-1",
+        "name": "\u041b\u0438\u0441\u0430\u0448\u043a\u0430",
+        "note": "assumed to connect these two",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/739486417",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041a\u0430\u043b\u043d\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/766716344",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/777421372",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/777421373",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190124",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190127",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190130",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190132",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190134",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190146",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190169",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190172",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190174",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190178",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190180",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190182",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/802190184",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/810690280",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/810690282",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/819819578",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440\u0435\u043a\u0430 \u0411\u0430\u043d\u0438\u0448\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/819820072",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440\u0435\u043a\u0430 \u0411\u0430\u043d\u0438\u0448\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/819820073",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440\u0435\u043a\u0430 \u0411\u0430\u043d\u0438\u0448\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/835697252",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/836061553",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/836061555",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/846785012",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "no",
+        "boundary": "administrative",
+        "int_name": "Vladayska reka",
+        "layer": "-1",
+        "name": "\u0412\u043b\u0430\u0434\u0430\u0439\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0412\u043b\u0430\u0434\u0430\u0439\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "yes",
+        "waterway": "river",
+        "wikidata": "Q3657979",
+        "wikipedia": "bg:\u0412\u043b\u0430\u0434\u0430\u0439\u0441\u043a\u0430 \u0440\u0435\u043a\u0430"
+      }
+    },
+    {
+      "osm_id": "way/857150668",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041d\u043e\u0432\u0430\u0447\u0438\u0446\u0430",
+        "source": "approximation",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/860473027",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/863349317",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0422\u0440\u044a\u0441\u0442\u0443\u043b\u0438\u0442\u0435",
+        "layer": "-1",
+        "name": "\u041b\u0438\u0441\u0430\u0448\u043a\u0430",
+        "note": "shape guesstimated",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/885268931",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0413\u0430\u0431\u0440\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/885621755",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u041a\u0443\u0441\u0435\u043d\u0441\u043a\u0438 \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/886223429",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0410\u0434\u0436\u0438\u0431\u0430\u0440\u0438\u0446\u0430",
+        "name:bg": "\u0410\u0434\u0436\u0438\u0431\u0430\u0440\u0438\u0446\u0430",
+        "name:en": "Adzhibaritsa",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/889225025",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/889225029",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/889225032",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/891437027",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/891437030",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/891482514",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/891482515",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/891482516",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/891482518",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/892086338",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/892086341",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0421\u043e\u0440\u043a\u0443\u043d\u0434\u0435\u0440\u0435",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/909476320",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/909601476",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u044a\u0440\u0431\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/909601478",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/914632610",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/914632613",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/914632617",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/914632619",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/914859952",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0440\u0443\u0441\u043e\u0432 \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/921421939",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/921421941",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/921651069",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/921651071",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/921651661",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0430\u0433\u0430\u043b\u0435\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "approximation",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/921651663",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0430\u0433\u0430\u043b\u0435\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "approximation",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/921669325",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/922024371",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Suhodolska reka",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/922028288",
+      "reason": "covered=yes",
+      "tags": {
+        "boat": "permissive",
+        "covered": "yes",
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Suhodolska reka",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/922639719",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0440\u043e\u043b\u0435\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:ro": "R\u00e2ul Prole\u0219ka",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/931035734",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/935888080",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0443\u0439\u043d\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/944544619",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u0413\u0430\u0431\u0440\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/944544621",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u0413\u0430\u0431\u0440\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/944742963",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u043b\u0430\u0442\u043e",
+        "name:ro": "Blato",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/944742965",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/944754841",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/944754842",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/944754844",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/944754846",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/944754880",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/944754882",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/945696180",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/945696181",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/951239506",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440\u0435\u043a\u0430 \u0411\u0430\u043d\u0438\u0448\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/951239561",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440\u0435\u043a\u0430 \u0411\u0430\u043d\u0438\u0448\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/954969208",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/970731003",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/976215188",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/976215190",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/976215192",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/976230232",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-2",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/976230234",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/976230238",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/976230240",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/976230246",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0425\u0435\u0440\u0430\u043a\u043e\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:ro": "R\u00e2ul Herakovska",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "8"
+      }
+    },
+    {
+      "osm_id": "way/976230248",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/976230250",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440. \u0426\u044a\u0440\u043d\u0430 \u0431\u0430\u0440\u0430",
+        "name:en": "Tsarna Baba",
+        "tunnel": "culvert",
+        "waterway": "stream",
+        "width": "2"
+      }
+    },
+    {
+      "osm_id": "way/976231746",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0435\u043b\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "2"
+      }
+    },
+    {
+      "osm_id": "way/976235525",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/976235527",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/979777921",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/988832529",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/988832531",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/988834068",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/988834070",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u043e\u043c\u0443\u0437 \u0434\u0435\u0440\u0435",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/996644018",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "name": "\u0413\u0430\u0431\u0440\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1021173865",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "int_name": "Slatinska",
+        "layer": "-1",
+        "name": "\u0421\u043b\u0430\u0442\u0438\u043d\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1021232438",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0435\u0440\u0430\u0432\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1021232440",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0435\u0440\u0430\u0432\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1026168124",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "no",
+        "layer": "-1",
+        "name": "\u041a\u043b\u0430\u0434\u043d\u0435\u0448\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1026168126",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "no",
+        "layer": "-1",
+        "name": "\u041a\u043b\u0430\u0434\u043d\u0435\u0448\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1027139779",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1029309999",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1029432694",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1029432696",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1029432698",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1029979499",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1029979501",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1029979503",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1029979505",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1029979507",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1029979509",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1029979511",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1029979513",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1034473658",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u041a\u043b\u0438\u0441\u0443\u0440\u0441\u043a\u0430",
+        "layer": "-1",
+        "name": "\u041a\u0430\u043a\u0430\u0447",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1034473660",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u041a\u043b\u0438\u0441\u0443\u0440\u0441\u043a\u0430",
+        "layer": "-1",
+        "name": "\u041a\u0430\u043a\u0430\u0447",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1037068336",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440. \u0414\u043e\u043b \u043f\u043e\u0442\u043e\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1037068340",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440. \u0414\u043e\u043b \u043f\u043e\u0442\u043e\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1037068343",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440. \u0421\u0438\u043d\u0430\u043d\u043e\u0432 \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1037068345",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440. \u0414\u043e\u043b \u043f\u043e\u0442\u043e\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1037068347",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440. \u0421\u0438\u043d\u0430\u043d\u043e\u0432 \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1040346727",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1042422662",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1042422673",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1042422681",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1042422710",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1042422713",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1043864722",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1050571419",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "name:en": "Perlovska River",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1051337822",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1051337832",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1051337835",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1051337837",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1058333158",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1058339911",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0422\u0435\u0439\u043d\u0430\u0442\u0430",
+        "name:bg": "\u0422\u0435\u0439\u043d\u0430\u0442\u0430",
+        "name:en": "Teynata",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1058339912",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0422\u0435\u0439\u043d\u0430\u0442\u0430",
+        "name:bg": "\u0422\u0435\u0439\u043d\u0430\u0442\u0430",
+        "name:en": "Teynata",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1058339913",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0422\u0435\u0439\u043d\u0430\u0442\u0430",
+        "name:bg": "\u0422\u0435\u0439\u043d\u0430\u0442\u0430",
+        "name:en": "Teynata",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1067081253",
+      "reason": "tunnel=yes",
+      "tags": {
+        "name": "\u041a\u0430\u043b\u043d\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1067081255",
+      "reason": "tunnel=yes",
+      "tags": {
+        "name": "\u041a\u0430\u043b\u043d\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1067244715",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "yes",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1069558144",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0413\u0430\u0431\u0440\u043e\u0432\u043d\u0438\u0446\u0430",
+        "name:bg": "\u0413\u0430\u0431\u0440\u043e\u0432\u043d\u0438\u0446\u0430",
+        "name:en": "Gabrovnitsa",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1069559229",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0423\u0440\u0448\u0430\u043a\u0430",
+        "name:bg": "\u0423\u0440\u0448\u0430\u043a\u0430",
+        "name:en": "Urshaka",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1069561754",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0430\u043b\u0448\u0430\u043d\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0411\u0430\u043b\u0448\u0430\u043d\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Balshanska reka",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1073545147",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1075504238",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0430\u043d\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1078416934",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1078416935",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1080024533",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1080024535",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1080985759",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1082047208",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1082047210",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0430\u043d\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1082047217",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1082047223",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1082047227",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u0435\u043b\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "2"
+      }
+    },
+    {
+      "osm_id": "way/1082047234",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0420\u043e\u0441\u043e\u043c\u043e\u0430\u043d\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1082047236",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0420\u043e\u0441\u043e\u043c\u043e\u0430\u043d\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1082047238",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0420\u043e\u0441\u043e\u043c\u043e\u0430\u043d\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1082047359",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1100561586",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1106420381",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u0411\u0430\u0431\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1110022834",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1110022837",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1110022840",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1110022842",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u0420\u0435\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1110022844",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u0420\u0435\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1110022846",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u0420\u0435\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1110833787",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1111150247",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1111150248",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1111150249",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1111842092",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1113162798",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1113162800",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1113162804",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1113162808",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1115940275",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1115940277",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1117720272",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1121067944",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u041b\u0438\u043f\u0435\u0446",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1124604967",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1124604968",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1124604971",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1124604973",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1124604976",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1124604977",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1124604979",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1124604981",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1129692191",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1129692201",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1134251200",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1134272850",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1134455356",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1134455357",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1135222512",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u042f\u043d\u0447\u043e\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1149814567",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1149814569",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1150168038",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1150168040",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1150168042",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1150168044",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1152780905",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159026419",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "no",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159026429",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159033670",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159036420",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159039439",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159046022",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "no",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159046576",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159046578",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159048855",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159098550",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159099218",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159099220",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159099222",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101495",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name:bg": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101497",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101498",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name:bg": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101500",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101502",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101504",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101506",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101508",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101510",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101512",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101514",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101516",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101518",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101521",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101523",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101525",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159101528",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0430\u0440\u0430 \u0418\u0437\u043b\u0438\u0432\u043e",
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159104427",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159104429",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159104433",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041c\u044a\u0442\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159104435",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041c\u044a\u0442\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159104438",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041c\u044a\u0442\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159104440",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041c\u044a\u0442\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159104444",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041c\u044a\u0442\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159104454",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0413\u043e\u043b\u043e\u0431\u0440\u0435\u0448\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159105111",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159105113",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159105115",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159106743",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0413\u043e\u043b\u043e\u0431\u0440\u0435\u0448\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159106747",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159142122",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159142124",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159142129",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159142138",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041a\u043e\u0441\u0430\u043d\u0438\u043d \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159142141",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159142143",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159142145",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1159143336",
+      "reason": "tunnel=yes",
+      "tags": {
+        "embankment": "yes",
+        "tunnel": "yes",
+        "usage": "spillway",
+        "waterway": "drain",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/1159144374",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1163089170",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1164893941",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1174948993",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u043e\u044f\u043d\u0441\u043a\u0430 \u0431\u0430\u0440\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1175390810",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1175669652",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u043e\u044f\u043d\u0441\u043a\u0430 \u0431\u0430\u0440\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1184213525",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-2",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "name:en": "Perlovska River",
+        "name:fr": "R. Perlovsk",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1184253111",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "oneway": "no",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1184253116",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "oneway": "no",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1184259157",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1192351231",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1192351232",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1192351233",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1214145476",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1218653135",
+      "reason": "covered=yes",
+      "tags": {
+        "covered": "yes",
+        "layer": "-1",
+        "name": "\u0412\u044a\u0440\u0442\u043e\u043f\u043e",
+        "name:bg": "\u0412\u044a\u0440\u0442\u043e\u043f\u043e",
+        "old_name": "\u0414\u044a\u0440\u0432\u0435\u043d\u0438\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "3"
+      }
+    },
+    {
+      "osm_id": "way/1222579881",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1224977837",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "lock": "no",
+        "name": "\u0414\u0437\u0443\u043a\u0430\u0442\u0430",
+        "name:bg": "\u0414\u0437\u0443\u043a\u0430\u0442\u0430",
+        "name:en": "Dzukata",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1226131890",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041a\u043e\u043f\u0430\u043d\u0438\u0446\u0430",
+        "name:bg": "\u041a\u043e\u043f\u0430\u043d\u0438\u0446\u0430",
+        "name:en": "Kopanitsa",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1228283581",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1228283583",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1228283584",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1228295286",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1228863116",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0440\u0438\u043c\u0438\u0447\u043e\u0432 \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1228864186",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0413\u0430\u0431\u0440\u043e\u0432\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1229431537",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1229431543",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1230292777",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041a\u0430\u043a\u0430\u0447",
+        "name:en": "Kakach",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/1230897727",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1231085299",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041b\u044e\u043b\u0438\u043d\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1233404429",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0430\u0433\u0430\u043b\u0435\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1233589280",
+      "reason": "covered=yes",
+      "tags": {
+        "covered": "yes",
+        "layer": "-1",
+        "name": "\u0412\u044a\u0440\u0442\u043e\u043f\u043e",
+        "name:bg": "\u0412\u044a\u0440\u0442\u043e\u043f\u043e",
+        "old_name": "\u0414\u044a\u0440\u0432\u0435\u043d\u0438\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "3"
+      }
+    },
+    {
+      "osm_id": "way/1234412640",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1234588872",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "name:en": "Perlovska River",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1235791015",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0430\u0440\u0430 \u0418\u0437\u043b\u0438\u0432\u043e",
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1235832472",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1236680290",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1241396415",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "permissive",
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Suhodolska reka",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/1241396416",
+      "reason": "tunnel=yes",
+      "tags": {
+        "boat": "permissive",
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Suhodolska reka",
+        "tunnel": "yes",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/1241709028",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1244026730",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1244026731",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1251981091",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u043e\u043b\u043e",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1251981112",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1253892277",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1253892283",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1253892285",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1253892287",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1259764863",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1263454287",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0430\u0433\u0430\u043b\u0435\u0432\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1278229236",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0415\u043b\u0435\u0448\u043d\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1280387624",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0430\u0440\u0430 \u0418\u0437\u043b\u0438\u0432\u043e",
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1280387626",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0430\u0440\u0430 \u0418\u0437\u043b\u0438\u0432\u043e",
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1294743395",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1294743397",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1294743400",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1294743415",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1294743420",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1294756330",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1294756332",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1294756334",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1294756336",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1294756338",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1294756340",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1294756347",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1294756349",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1294767394",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1294767400",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1294767406",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1298147376",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298147384",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298147386",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298325623",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298325625",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298325627",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298602324",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0427\u0435\u043d\u0433\u0435\u043d\u0435\u0434\u0435\u0440\u0432\u0435\u043d\u0442",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298604898",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0426\u0432\u0435\u0442\u043a\u043e\u0432\u0441\u043a\u043e \u0434\u0435\u0440\u0435",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298604904",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0425\u0440\u0438\u0441\u0442\u043e\u0432\u043e \u0434\u0435\u0440\u0435",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298604906",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298604908",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "no",
+        "layer": "-1",
+        "name": "\u041c\u0430\u043b\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298604910",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298604912",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "no",
+        "layer": "-1",
+        "name": "\u041c\u0430\u043b\u043a\u0430\u0442\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1298604914",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0425\u0430\u0440\u0430\u043c\u0430\u043d \u0434\u0435\u0440\u0435",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1300473896",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0413\u0430\u0431\u0440\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1300473901",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0413\u0430\u0431\u0440\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1300519438",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "name": "\u0412\u044a\u0440\u043b\u0438 \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1308620031",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1308739072",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1308739073",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1324971936",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1324972926",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1337380065",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u044a\u043b\u0431\u043e\u0447\u0438\u0446\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1352500007",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1378622481",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "permissive",
+        "layer": "-1",
+        "name": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0421\u0443\u0445\u043e\u0434\u043e\u043b\u0441\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:en": "Suhodolska reka",
+        "tunnel": "culvert",
+        "waterway": "river",
+        "width": "4"
+      }
+    },
+    {
+      "osm_id": "way/1383286859",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0412\u0430\u0442\u0430\u0448\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1390128553",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1390128555",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "name:bg": "\u0414\u0440\u0435\u043d\u043e\u0432\u0438\u0447\u043a\u0430 \u0440\u0435\u043a\u0430",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1396832165",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1412679634",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1420687681",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1426411629",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1426411630",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1431945719",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "canal"
+      }
+    },
+    {
+      "osm_id": "way/1441984557",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1442894930",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0411\u0430\u0440\u0430 \u0418\u0437\u043b\u0438\u0432\u043e",
+        "layer": "-1",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1445924679",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1448121716",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1454667823",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u043e\u0436\u0430\u0440\u0435\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1454667825",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u043e\u0436\u0430\u0440\u0435\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1454667827",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u043e\u0436\u0430\u0440\u0435\u0432\u0441\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1454684015",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1454897760",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1454897763",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1455405831",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1455405834",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1455405842",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1456169954",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1458297213",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1459374334",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1459547966",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-2",
+        "name": "\u041f\u0435\u0440\u043b\u043e\u0432\u0441\u043a\u0430",
+        "name:en": "Perlovska River",
+        "name:fr": "R. Perlovsk",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1462108694",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0422\u0440\u044a\u0441\u0442\u0443\u043b\u0438\u0442\u0435",
+        "layer": "-1",
+        "name": "\u041b\u0438\u0441\u0430\u0448\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1462108695",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0422\u0440\u044a\u0441\u0442\u0443\u043b\u0438\u0442\u0435",
+        "layer": "-1",
+        "name": "\u041b\u0438\u0441\u0430\u0448\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1462108696",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "alt_name": "\u0422\u0440\u044a\u0441\u0442\u0443\u043b\u0438\u0442\u0435",
+        "layer": "-1",
+        "name": "\u041b\u0438\u0441\u0430\u0448\u043a\u0430",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1462411763",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1462411767",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1467844104",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1469843578",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1469843580",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1469843582",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1469843584",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "boat": "no",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1476151826",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "source": "Bing",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1498011687",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "fixme": "assumed position",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1498011688",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "fixme": "assumed position",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1503406194",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "drain"
+      }
+    },
+    {
+      "osm_id": "way/1512895171",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "yes",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "ditch"
+      }
+    },
+    {
+      "osm_id": "way/1518692286",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518692290",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041f\u0440\u044a\u0434\u043b\u044c\u043e\u0432 \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518702463",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u042f\u0431\u043b\u0430\u043d\u043e\u0432 \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518702467",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518702470",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711931",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u044a\u0440\u0437\u0438\u0447\u0438\u043d \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711935",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711937",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711939",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0411\u044a\u0440\u0437\u0438\u0447\u0438\u043d \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711942",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711944",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711948",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0414\u044a\u043b\u0431\u043e\u043a\u0438 \u0434\u043e\u043b",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711953",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711956",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711959",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711962",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1518711965",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "intermittent": "no",
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1526082251",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "name": "\u0440. \u0414\u043e\u043b\u043e",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    },
+    {
+      "osm_id": "way/1527290192",
+      "reason": "tunnel=yes",
+      "tags": {
+        "layer": "-1",
+        "name": "\u041d\u043e\u0432\u0430\u0447\u0438\u0446\u0430",
+        "tunnel": "yes",
+        "waterway": "river"
+      }
+    },
+    {
+      "osm_id": "way/1545087272",
+      "reason": "tunnel=culvert",
+      "tags": {
+        "layer": "-1",
+        "tunnel": "culvert",
+        "waterway": "stream"
+      }
+    }
+  ],
   "verification": {
     "exact_grid_type_nodata_and_pixels_checked": true,
     "mandatory_real_controls_passed": true,
+    "exact_centerline_grid_supercover": true,
     "original_water_source_sha256_unchanged": true,
     "pluvial_source_read_only": true,
-    "elapsed_seconds": 3.31
+    "elapsed_seconds": 16.36
   }
 }

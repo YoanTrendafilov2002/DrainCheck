@@ -1,0 +1,16 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "raw_file": "screening_exclusions_waterways_20261025T151232Z.json",
+  "query_file": "screening_exclusions_waterways_20261025T151232Z.overpass",
+  "download_utc": "2026-10-25T15:12:32.978126+00:00",
+  "bbox": [
+    23.033601825086354,
+    42.392740683952645,
+    23.700971220841907,
+    42.913568431160385
+  ],
+  "elements": 2988,
+  "raw_sha256": "f9f34ab13bb45cc886e4087f4b0ebec4300bafd8761ba07d2bb7e9a653ea6a89",
+  "query_sha256": "d4663d58f6e0e54718cc5c4a7293ef8ce85da1222387085e7f3c99d2b75f356f",
+  "osm_base_timestamp": "2026-10-25T15:11:03Z"
+}

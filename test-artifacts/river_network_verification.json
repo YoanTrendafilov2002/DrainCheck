@@ -1,0 +1,252 @@
+{
+  "verified_utc": "2026-10-25T15:48:11.881750+00:00",
+  "baseline_commit": "e903ffa99ec607b30005b15b8938c9d48f10dccb",
+  "mask_revision": "1adc07f7f415b86e",
+  "raw_source_coverage": {
+    "raw_source_sha256": "f9f34ab13bb45cc886e4087f4b0ebec4300bafd8761ba07d2bb7e9a653ea6a89",
+    "mask_sha256": "1adc07f7f415b86ea85503a4de8717f25ca06e23f0cf1172dc4b81367e610a54",
+    "raw_elements": 2988,
+    "open_active_source_ways": 2332,
+    "sample_strategy": "Every raw OSM vertex and segment midpoint, before generated mask controls",
+    "all_source_samples": 122066,
+    "valid_native_terrain_samples": 53165,
+    "valid_native_terrain_ways": 1283,
+    "old_mask_missed_valid_samples": 51240,
+    "new_mask_missed_valid_samples": 0,
+    "new_mask_missing_examples": []
+  },
+  "terrain_alignment": {
+    "mask_revision": "1adc07f7f415b86e",
+    "mapped_open_centerlines": 2191,
+    "inferred_cells_independently_checked": 104027,
+    "inferred_cells_with_missing_or_invalid_real_terrain": 0,
+    "inferred_cells_with_zero_or_negative_fill": 0,
+    "mapped_seeds_with_missing_or_invalid_ground": 0,
+    "inferred_eight_connected_components_checked": 6070,
+    "inferred_components_without_a_retained_valid_mapped_seed": 0,
+    "inferred_cells_without_a_retained_valid_mapped_seed": 0,
+    "minimum_actual_positive_fill_m": 6.103515625e-05,
+    "maximum_native_cell_center_distance_to_real_open_centerline_m": 19.99920915608651,
+    "all_inferred_flags_include_river_bit": true,
+    "interpretation": "Bounded positive-fill screening candidates, not surveyed bank boundaries or observed water."
+  },
+  "preservation": {
+    "original_sources": {
+      "sofia_dtm_2024_1m_gee.tif": {
+        "expected_original_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3",
+        "actual_sha256": "bc76434415d1ea6ee7dccb44d1dcaf35381914ff3129fb7398f38a9cc7e212a3",
+        "unchanged": true
+      },
+      "pluvial_5m.tif": {
+        "expected_original_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+        "actual_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+        "unchanged": true
+      },
+      "open_water_mask_5m.tif": {
+        "expected_original_sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030",
+        "actual_sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030",
+        "unchanged": true
+      },
+      "sofia_infrastructure_points.csv": {
+        "expected_original_sha256": "4771d2330e93d22739d45b859c107e5f986622228d496acf52872fd9765d0652",
+        "actual_sha256": "4771d2330e93d22739d45b859c107e5f986622228d496acf52872fd9765d0652",
+        "unchanged": true
+      }
+    },
+    "data/derived/review_priority_5m.tif": {
+      "old_sha256": "6fa92adb3696ed3bc9c36dc5aeb38ab1811fab79d189ececc377a451a2605132",
+      "new_sha256": "043acd663ee54fdceb471d4903f7605220241dfcc7a0d078291746d9ab52dd3d",
+      "outside_current_policy_cells_verified_identical": 111963459,
+      "current_policy_cells": 476346,
+      "changed_cells": 400285,
+      "crs_grid_dimensions_bands_dtype_nodata_unchanged": true
+    },
+    "data/derived/pluvial_land_screening_5m.tif": {
+      "old_sha256": "4b5254e53b45b07929f8ace6f39d323c95eed87e81a4334fa93a0056f9303a2e",
+      "new_sha256": "04e6afee6db1cc22b4e5f0f43ca5d693e101d330defbe523a90525838b64eb0f",
+      "outside_current_policy_cells_verified_identical": 111963459,
+      "current_policy_cells": 476346,
+      "changed_cells": 400285,
+      "crs_grid_dimensions_bands_dtype_nodata_unchanged": true
+    },
+    "data/derived/infrastructure_terrain_screening.csv": {
+      "all_source_ids_coordinates_categories_and_boundary_flags_identical": true,
+      "outside_current_policy_point_records_verified_identical": 321216,
+      "changed_point_records_inside_current_policy": 351,
+      "new_sha256": "1d0125bdf96558af68332a1647aba72f774ed1b68a5a70d622cf9caf97baee58",
+      "old_sha256": "a46a71371ed200eaccb7b9c87eb2c01720a6939e4ded653a0d0b0ddd9e36d336"
+    },
+    "data/derived/sewer_route_terrain_screening.csv": {
+      "route_mode_groups": 2151,
+      "source_route_ids_statuses_years_identical": true,
+      "all_route_lengths_preserved_across_reclassified_categories": true,
+      "maximum_total_length_difference_m": 1.000444171950221e-11,
+      "new_sha256": "8362da85740e571e08f28ef62873958a68822cd0fd7b33f6490752ccc0547d56",
+      "old_sha256": "330a8452017d5d43a623ea7a3f28350e34924b8629baffb2628244a7b4ebbc1f"
+    }
+  },
+  "live_map": {
+    "public_url": "https://willing-platinum-tries-their.trycloudflare.com",
+    "renderer_revision": "fast-map-781d56bfd3c2",
+    "pluvial_revision": "35d0332da70c8feb",
+    "review_revision": "b415a381e022e918",
+    "mask_revision": "1adc07f7f415b86e",
+    "samples": [
+      {
+        "location": "Perlovska offset bed",
+        "status": "excluded_user_screening",
+        "flags": 5,
+        "method": "terrain_connected",
+        "score": null,
+        "retained_original_ponding": 92.70869445800781,
+        "distance_to_actual_river_geometry_m": 6.388025016491085
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "status": "excluded_user_screening",
+        "flags": 5,
+        "method": "terrain_connected",
+        "score": null,
+        "retained_original_ponding": 65.74343872070312,
+        "distance_to_actual_river_geometry_m": 4.000000000073102
+      }
+    ],
+    "dry_bank_preserved": {
+      "status": "ok",
+      "score": 75.18818664550781,
+      "fill_depth_m": 0.0
+    },
+    "rendered_tile_checks": [
+      {
+        "location": "Perlovska offset bed",
+        "mode": "heatmap",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska offset bed",
+        "mode": "heatmap",
+        "zoom": 18,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska offset bed",
+        "mode": "ponding",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska offset bed",
+        "mode": "ponding",
+        "zoom": 18,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska offset bed",
+        "mode": "combined",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska offset bed",
+        "mode": "combined",
+        "zoom": 18,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska offset bed",
+        "mode": "concentration",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska offset bed",
+        "mode": "concentration",
+        "zoom": 18,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska offset bed",
+        "mode": "review",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska offset bed",
+        "mode": "review",
+        "zoom": 18,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "heatmap",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "heatmap",
+        "zoom": 18,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "ponding",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "ponding",
+        "zoom": 18,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "combined",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "combined",
+        "zoom": 18,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "concentration",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "concentration",
+        "zoom": 18,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "review",
+        "zoom": 16,
+        "alpha": 0
+      },
+      {
+        "location": "Perlovska mixed edge",
+        "mode": "review",
+        "zoom": 18,
+        "alpha": 0
+      }
+    ]
+  },
+  "validation": {
+    "python_baseline_and_context_tests_passed": 296,
+    "python_network_and_rendering_tests_passed": 53,
+    "python_grid_terrain_policy_and_review_tests_passed": 39,
+    "javascript_tests_passed": 37,
+    "production_build_passed": true,
+    "rendered_network_location_checks": 280,
+    "public_rendered_tile_checks": 20
+  },
+  "interpretation": "Mapped channels and separately flagged, terrain-connected candidates are excluded by user screening policy. Inferred candidates are not observed water or surveyed banks. Native terrain and scores are preserved; river proximity does not determine flood cause."
+}

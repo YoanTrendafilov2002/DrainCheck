@@ -39,10 +39,15 @@ def test_actual_product_identity_and_source_hashes(meta):
 
 def test_full_grid_accounting_and_original_terrain_rules(meta):
     counts=np.zeros(256,dtype='int64')
+    unmasked_eligible=unmasked_known_water=0
     with rasterio.open(APP/meta['output_file']) as dst,rasterio.open(APP/'data/cache/pluvial_5m.tif') as src,rasterio.open(APP/'data/cache/open_water_mask_5m.tif') as water,rasterio.open(APP/'data/cache/screening_exclusions_5m.tif') as policy:
         for _,w in dst.block_windows(1):
             out=dst.read(1,window=w);a=src.read([1,5,6,7,8],window=w)
-            known=np.isfinite(a[0])&(a[0]!=src.nodata);excluded=known&(policy.read(1,window=w)>0);wet=known&~excluded&(water.read(1,window=w)==1)
+            known=np.isfinite(a[0])&(a[0]!=src.nodata);excluded=known&(policy.read(1,window=w)>0)
+            original_water=water.read(1,window=w)==1;wet=known&~excluded&original_water
+            original_eligible=known&~original_water&(a[1]==0)&np.all(np.isfinite(a[2:])&(a[2:]>=0),axis=0)
+            unmasked_eligible+=int(np.count_nonzero(original_eligible))
+            unmasked_known_water+=int(np.count_nonzero(known&original_water))
             good=known&~wet&~excluded&(a[1]==0)&np.all(np.isfinite(a[2:])&(a[2:]>=0),axis=0)
             assert np.array_equal(out==255,~known)
             assert np.array_equal(out==252,excluded)
@@ -60,9 +65,10 @@ def test_full_grid_accounting_and_original_terrain_rules(meta):
     assert counts[252]==meta['counts']['screening_policy_excluded_cells']>0
     assert counts[253]==meta['counts']['mapped_water_cells']
     assert counts[254]==meta['counts']['uncertain_cells']
-    assert meta['unmasked_review_counts']['eligible_land_cells']==51682623
-    assert meta['unmasked_review_counts']['mapped_water_cells']==1519688
-    assert meta['verification']['nonexcluded_review_pixels_identical']
+    # Independently verify the unchanged source population, whether this
+    # derivative was rebuilt in full or recut from an earlier review raster.
+    assert unmasked_eligible==51682623
+    assert unmasked_known_water==1519688
 
 def test_actual_historical_union_membership_and_exclusions(meta):
     source=load(APP/'data/reference/historical_floods/sofiaplan_flood_zones_2021_display.geojson')

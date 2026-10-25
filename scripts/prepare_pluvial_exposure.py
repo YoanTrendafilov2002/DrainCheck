@@ -133,7 +133,7 @@ def export_land_raster(src,water_src,meta,exclusion_src=None):
         dst.update_tags(SCREENING_REVISION=meta['revision'],TERRAIN_REVISION=meta['terrain_revision'],
             OPEN_WATER_REVISION=meta['water_exclusion']['revision'],VERTICAL_DATUM='Baltic 1982',
             SCREENING_EXCLUSIONS_REVISION=meta['screening_exclusions']['revision'],
-            POLICY='Mapped water, river channels and stadiums are NoData in score bands, never zero or safe; no hydrology recomputed. User flags:1=river,2=stadium,3=both.')
+            POLICY='Water, channels, inferred channel candidates and stadiums are NoData in score bands, never zero or safe. User bits:1=river exclusion,2=stadium,4=terrain inference (with bit1); values0,1,2,3,5,7.')
         for _,window in src.block_windows(1):
             a=src.read([1,6,7,8],window=window);water=water_src.read(1,window=window)
             policy=exclusion_src.read(1,window=window)
@@ -157,7 +157,7 @@ def export_land_raster(src,water_src,meta,exclusion_src=None):
         'screening_exclusions_revision':meta['screening_exclusions']['revision'],'screening_exclusions_sha256':meta['screening_exclusions']['sha256'],
         'source_sha256':meta['verification']['output_sha256'],'open_water_sha256':meta['water_exclusion']['sha256'],
         'grid':meta['grid'],'bands':names,'nodata':-9999,
-        'policy':'Score bands equal original scores outside all exclusions and NoData over mapped water, channels and stadiums. Flags are NoData outside known terrain; zero is not a safety conclusion. Policy flags:1=river,2=stadium,3=both.',
+        'policy':'Scores equal original values outside exclusions and NoData over water, mapped channels, inferred channel candidates and stadiums. Flags are NoData outside known terrain; zero is not safety. Bits:1=river exclusion,2=stadium,4=terrain inference with bit1; values0,1,2,3,5,7.',
         'verification':{'all_nonexcluded_land_score_pixels_identical':True,'all_water_score_pixels_nodata':True,'all_policy_score_pixels_nodata':True,'all_flag_pixels_match':True}}
     output.with_suffix('.json').write_text(json.dumps(receipt,indent=2),encoding='utf-8')
     return receipt

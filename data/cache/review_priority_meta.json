@@ -1,12 +1,12 @@
 {
   "available": true,
-  "revision": "973703f7b5f64d0b",
-  "method": "evidence-review-priority-policy-v2",
+  "revision": "b415a381e022e918",
+  "method": "evidence-review-priority-v1",
   "title": "Evidence-informed review priority",
   "interpretation": "Rule-based inspection categories; no calibrated flood likelihood, intensity, depth, vulnerability or damage",
   "scenario_assumption": "At the user’s request, the available datasets are treated as compatible for a combined review scenario. Actual source dates, spatial gaps and unknown currency remain recorded. This does not establish that the 2025 rainfall caused the 2021 mapped flooding or calibrate forecast skill.",
   "output_file": "data/derived/review_priority_5m.tif",
-  "output_sha256": "6fa92adb3696ed3bc9c36dc5aeb38ab1811fab79d189ececc377a451a2605132",
+  "output_sha256": "043acd663ee54fdceb471d4903f7605220241dfcc7a0d078291746d9ab52dd3d",
   "grid": {
     "crs": "EPSG:7801",
     "shape": [
@@ -35,8 +35,8 @@
         196,
         190
       ],
-      "cell_count": 50768572,
-      "area_km2": 1269.2143
+      "cell_count": 50512325,
+      "area_km2": 1262.808125
     },
     {
       "code": 1,
@@ -48,8 +48,8 @@
         110,
         190
       ],
-      "cell_count": 379975,
-      "area_km2": 9.499375
+      "cell_count": 359746,
+      "area_km2": 8.99365
     },
     {
       "code": 2,
@@ -61,8 +61,8 @@
         75,
         190
       ],
-      "cell_count": 404370,
-      "area_km2": 10.10925
+      "cell_count": 372447,
+      "area_km2": 9.311175
     },
     {
       "code": 3,
@@ -74,8 +74,8 @@
         64,
         190
       ],
-      "cell_count": 7213,
-      "area_km2": 0.180325
+      "cell_count": 7131,
+      "area_km2": 0.178275
     },
     {
       "code": 4,
@@ -87,8 +87,8 @@
         194,
         190
       ],
-      "cell_count": 75475,
-      "area_km2": 1.886875
+      "cell_count": 72610,
+      "area_km2": 1.81525
     },
     {
       "code": 5,
@@ -113,8 +113,8 @@
         0,
         0
       ],
-      "cell_count": 76061,
-      "area_km2": 1.901525
+      "cell_count": 476346,
+      "area_km2": 11.90865
     },
     {
       "code": 253,
@@ -126,8 +126,8 @@
         0,
         0
       ],
-      "cell_count": 1493036,
-      "area_km2": 37.3259
+      "cell_count": 1438827,
+      "area_km2": 35.970675
     },
     {
       "code": 254,
@@ -139,8 +139,8 @@
         140,
         185
       ],
-      "cell_count": 477855,
-      "area_km2": 11.946375
+      "cell_count": 443125,
+      "area_km2": 11.078125
     },
     {
       "code": 255,
@@ -158,17 +158,18 @@
   ],
   "counts": {
     "all_cells": 112439805,
-    "eligible_land_cells": 51635834,
+    "eligible_land_cells": 51324488,
     "known_terrain_cells": 53682786,
-    "mapped_water_cells": 1493036,
-    "uncertain_cells": 477855,
+    "mapped_water_cells": 1438827,
+    "screening_policy_excluded_cells": 476346,
+    "uncertain_cells": 443125,
     "outside_cells": 58757019,
     "potential_footprint_cells_known_terrain": 2677243,
+    "potential_footprint_cells_eligible_land": 2669404,
     "historical_union_cell_centres": 76343,
     "historical_union_known_terrain_cells": 76262,
     "queried_distinct_cadastral_source_records": 274633,
-    "query_rows_including_repeated_window_candidates": 290395,
-    "screening_policy_excluded_cells": 76061
+    "query_rows_including_repeated_window_candidates": 290395
   },
   "formula": {
     "ordered_rules": [
@@ -189,13 +190,13 @@
     "unchanged": "Original P/C/S raster, ground heights and source values remain unchanged; historical evidence changes this separate display class only"
   },
   "source_revisions": {
+    "pluvial": "35d0332da70c8feb",
+    "screening_exclusions": "1adc07f7f415b86e",
     "terrain": "f42644a668cdc14d",
-    "cadastre": "568d80b32ddb42f2",
-    "rainfall_context": "88036868558c20ce",
     "water": "ee06795221a5005e",
+    "cadastre": "568d80b32ddb42f2",
     "history": "7fbfbcee6ee933f4",
-    "pluvial": "0a7a8ca315510679",
-    "screening_exclusions": "bfdf087d674d5c81"
+    "rainfall_context": "88036868558c20ce"
   },
   "source_dates": {
     "terrain": "Source filename2024; measurement date/vertical accuracy unverified",
@@ -218,6 +219,18 @@
       "mtime_ns": 1792913643817910200,
       "sha256": "ee06795221a5005eb7edeefa8b4d21c19656e3e1e82b10965eff41a5dd4f5030"
     },
+    "screening_exclusions": {
+      "file": "data/cache/screening_exclusions_5m.tif",
+      "size_bytes": 838554,
+      "mtime_ns": 1792942594822070100,
+      "sha256": "1adc07f7f415b86ea85503a4de8717f25ca06e23f0cf1172dc4b81367e610a54"
+    },
+    "screening_exclusions_receipt": {
+      "file": "data/cache/screening_exclusions_meta.json",
+      "size_bytes": 169771,
+      "mtime_ns": 1792942598055441600,
+      "sha256": "06f580b3992c4dcda4f432a3ffc25ea75fefb0ec7b39701d5d8343ec1104cc5c"
+    },
     "historical_polygons": {
       "file": "data/reference/historical_floods/sofiaplan_flood_zones_2021_display.geojson",
       "size_bytes": 246224,
@@ -229,82 +242,21 @@
       "size_bytes": 419184640,
       "mtime_ns": 1792917259165180300,
       "sha256": "e6aa6ac4744b8899527652b7a6579ea5db1865982513a5cca78ffce5bfe92eef"
-    },
-    "screening_exclusions": {
-      "file": "data/cache/screening_exclusions_5m.tif",
-      "size_bytes": 229104,
-      "mtime_ns": 1792932636659814800,
-      "sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd"
-    },
-    "screening_exclusions_receipt": {
-      "file": "data/cache/screening_exclusions_meta.json",
-      "size_bytes": 5343,
-      "mtime_ns": 1792932637315390900,
-      "sha256": "afd98b9266ddd5cd76099d87e68b10f37e5efdc639ee630b46f4ded6509cf0cd"
     }
   },
   "source_counts": {
     "historical_features": 136,
     "cadastre_source_records": 334033
   },
-  "context_not_numerical_hazard_inputs": [
-    "2025 daily rainfall",
-    "green-area labels",
-    "sewer route/point density or status",
-    "reported clogging or drainage narratives without spatially resolved hydraulic inputs"
-  ],
-  "limitations": [
-    "This is review priority, not a calibrated flood hazard/risk index; category ordering is an explicit analyst operational choice.",
-    "Historical footprints are partial northern survey coverage and mixed river/rainfall/snowmelt context. No polygon does not mean no previous flooding.",
-    "Cadastral footprints indicate potential exposure only; no floor levels, occupancy, protective measures or damage model enter the classification.",
-    "All-touched5m building membership can include a small footprint sliver; cells are not treated as100% sealed and cell area is not exposed building area.",
-    "Rainfall daily totals provide event context, not short-duration intensity or sewer exceedance; fine-rain grids have zero spatial overlap with2021 survey polygons.",
-    "Green polygons do not establish soil infiltration; route/point presence does not establish operational drainage or blockage probability.",
-    "Original concentration/combined modes retain D8 routing/terrain-facet limitations; C is intentionally not added to review priority.",
-    "Open-water exclusions preserve source policy, including unmapped/intermittent channel gaps; adjacent land is not assumed safe.",
-    "No changes to buildings as terrain barriers, upstream hydrology, DTM resolution, original source files or legacy map modes."
-  ],
-  "verification": {
-    "all_listed_sources_unchanged": true,
-    "source_hashes_checked_before_after": true,
-    "nonexcluded_review_pixels_identical": true,
-    "all_policy_cells_excluded": true,
-    "policy_changed_cells": 76061,
-    "previous_review_sha256": "6da518c22b2dd002c153532b270aaa572ccb088dc7b0c09794ddf4d84527b64c",
-    "all_original_sources_unchanged": true
-  },
-  "created_utc": "2026-10-25T12:51:57.042864+00:00",
-  "runtime_seconds": 69.457,
-  "reproduce": "python scripts/prepare_review_priority.py --mask-only (requires matching original review); or full preparation",
-  "source_urls": {
-    "historical": "https://urbandata.sofia.bg/dataset/flooded-areas-identified-by-drone-survey-february-2021",
-    "cadastre": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
-    "open_water": "https://www.openstreetmap.org",
-    "terrain": "https://api.sofiaplan.bg/datasets/656"
-  },
-  "unmasked_review_counts": {
-    "all_cells": 112439805,
-    "eligible_land_cells": 51682623,
-    "known_terrain_cells": 53682786,
-    "mapped_water_cells": 1519688,
-    "uncertain_cells": 480475,
-    "outside_cells": 58757019,
-    "potential_footprint_cells_known_terrain": 2677243,
-    "potential_footprint_cells_eligible_land": 2675795,
-    "historical_union_cell_centres": 76343,
-    "historical_union_known_terrain_cells": 76262,
-    "queried_distinct_cadastral_source_records": 274633,
-    "query_rows_including_repeated_window_candidates": 290395
-  },
   "screening_exclusions": {
     "available": true,
     "enabled": true,
-    "method": "user-requested-mapped-channel-stadium-suppression-v1",
-    "revision": "bfdf087d674d5c81",
-    "sha256": "bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd",
+    "method": "user-requested-terrain-aligned-open-channel-suppression-v3",
+    "revision": "1adc07f7f415b86e",
+    "sha256": "1adc07f7f415b86ea85503a4de8717f25ca06e23f0cf1172dc4b81367e610a54",
     "file": "data/cache/screening_exclusions_5m.tif",
     "exclusions_are_policy": true,
-    "retrieved": "2026-10-25T12:50:19.871616+00:00",
+    "retrieved": "2026-10-25T15:12:32.978126+00:00",
     "grid": {
       "crs": "EPSG:7801",
       "width": 10345,
@@ -328,17 +280,43 @@
         "0": "not suppressed",
         "1": "mapped channel",
         "2": "stadium",
-        "3": "both"
+        "3": "mapped channel and stadium",
+        "5": "terrain-connected channel candidate",
+        "7": "terrain-connected channel candidate and stadium"
       }
     },
+    "terrain_alignment": {
+      "method": "positive-fill-connected-within-bounded-channel-search",
+      "connectivity": 8,
+      "original_river_cells": 352028,
+      "eligible_candidate_cells": 106779,
+      "additional_river_cells": 104027,
+      "terrain_candidate_cells": 104027,
+      "unconnected_candidate_cells": 2752,
+      "result_river_cells": 456055,
+      "search_distance_m": 20.0,
+      "river_seed_cells_valid_before_propagation": true,
+      "final_valid_river_cells": 456055,
+      "search_policy": "Native cell centres within 20 m of open mapped centerlines; flat end caps. Distance alone never excludes land.",
+      "criterion": "Finite positive depression fill depth and valid real 5 m terrain, 8-connected to a mapped river seed.",
+      "terrain_file": "data/cache/pluvial_5m.tif",
+      "terrain_sha256": "f42644a668cdc14d1589573a7791a1f60c6fee2cb3e2d4458d4243fb474e9a6e",
+      "interpretation": "Inferred channel-alignment candidates excluded by screening policy, not observed water or surveyed bank boundaries."
+    },
     "counts": {
-      "river_channel_cells": 55770,
+      "river_channel_cells": 456055,
       "stadium_cells": 20291,
-      "union_cells": 76061,
+      "union_cells": 476346,
       "overlap_cells": 0,
+      "terrain_connected_cells": 104027,
       "channel_polygons": 52,
+      "channel_centerlines": 2191,
+      "centerlines_with_source_width": 73,
+      "centerline_length_m": 2309877.538134774,
+      "omitted_covered_or_inactive_centerlines": 656,
       "stadium_polygons": 40,
-      "outside_valid_terrain_removed": 20890
+      "invalid_river_seed_cells_removed_before_propagation": 311285,
+      "outside_valid_terrain_removed": 6416
     },
     "source": {
       "provider": "OpenStreetMap contributors",
@@ -379,16 +357,34 @@
         "osm_base_timestamp": "2026-10-25T12:49:03Z",
         "attempts": []
       },
+      "waterway_acquisition": {
+        "endpoint": "https://overpass-api.de/api/interpreter",
+        "raw_file": "screening_exclusions_waterways_20261025T151232Z.json",
+        "query_file": "screening_exclusions_waterways_20261025T151232Z.overpass",
+        "download_utc": "2026-10-25T15:12:32.978126+00:00",
+        "bbox": [
+          23.033601825086354,
+          42.392740683952645,
+          23.700971220841907,
+          42.913568431160385
+        ],
+        "elements": 2988,
+        "raw_sha256": "f9f34ab13bb45cc886e4087f4b0ebec4300bafd8761ba07d2bb7e9a653ea6a89",
+        "query_sha256": "d4663d58f6e0e54718cc5c4a7293ef8ce85da1222387085e7f3c99d2b75f356f",
+        "osm_base_timestamp": "2026-10-25T15:11:03Z"
+      },
       "geojson_file": "data/reference/screening_exclusions.geojson",
-      "geojson_sha256": "3a0d7bbd116d8dcf4c72276b41cda96b78c9ec4f1bd507039bb0b3704189c249"
+      "geojson_sha256": "7f0a4418d6dcab30d8bc99d0ebb05de0a3f36249b0c9361c979eb319086d4b4a"
     },
     "policy": "Suppress mapped channel and whole stadium footprints in derived risk screening and scenario displays. Includes mapped intermittent channels. Original terrain and historical observations are retained.",
     "limitations": [
       "This is a user-requested screening exclusion, not evidence of safety or absence of flood hazard.",
       "OSM community geometry may be incomplete, outdated or misclassified. Whole stadium footprint is used, not only the pitch.",
-      "Channels use explicit water/riverbank polygons, including intermittent natural-water polygons without a water subtype. No river-line buffer or inferred floodplain exclusion is applied.",
+      "Mapped open river, stream, canal, drain and ditch centerlines supplement water/riverbank polygons. Explicit width tags supply width where present; otherwise only intersecting 5 m cells are excluded, not a measured physical channel width.",
+      "Covered, tunnel, indoor, underground and inactive mapped line segments are omitted; culvert crossings do not automatically exclude surface roads.",
+      "Terrain alignment adds only connected positive-fill candidates within a 20 m search allowance. It can include nearby connected depressions and does not independently establish actual bank boundaries; inference bit4 distinguishes these cells from mapped geometry.",
       "Every 5 m cell intersecting an actual footprint is suppressed (all_touched=True), including partial edge cells. This is grid-cell coverage, not a river/floodplain buffer.",
-      "Missing stadium tags or river polygons remain gaps. River flooding is not simulated by suppressing channel pixels."
+      "Unmapped channels and unknown bank widths remain source limitations. No river-distance or floodplain buffer is applied. River flooding is not simulated by suppressing channel pixels."
     ],
     "control_points": [
       {
@@ -438,10 +434,41 @@
     "verification": {
       "exact_grid_type_nodata_and_pixels_checked": true,
       "mandatory_real_controls_passed": true,
+      "exact_centerline_grid_supercover": true,
       "original_water_source_sha256_unchanged": true,
       "pluvial_source_read_only": true,
-      "elapsed_seconds": 3.31
+      "elapsed_seconds": 16.36
     },
-    "interpretation": "Mapped river channels and stadium footprints are omitted from screening and scenarios at the user’s request. Exclusion does not mean safe from flooding; original terrain and historical observations remain unchanged."
-  }
+    "interpretation": "Mapped channels, terrain-connected channel candidates and stadiums are omitted by user screening policy. Inferred channel candidates are not observed water or surveyed bank boundaries. Exclusion does not mean safe; original terrain and historical observations remain unchanged."
+  },
+  "source_urls": {
+    "historical": "https://urbandata.sofia.bg/dataset/flooded-areas-identified-by-drone-survey-february-2021",
+    "cadastre": "https://inspire.cadastre.bg/arcgis/rest/services/Building/MapServer/0",
+    "open_water": "https://www.openstreetmap.org",
+    "terrain": "https://api.sofiaplan.bg/datasets/656"
+  },
+  "context_not_numerical_hazard_inputs": [
+    "2025 daily rainfall",
+    "green-area labels",
+    "sewer route/point density or status",
+    "reported clogging or drainage narratives without spatially resolved hydraulic inputs"
+  ],
+  "limitations": [
+    "This is review priority, not a calibrated flood hazard/risk index; category ordering is an explicit analyst operational choice.",
+    "Historical footprints are partial northern survey coverage and mixed river/rainfall/snowmelt context. No polygon does not mean no previous flooding.",
+    "Cadastral footprints indicate potential exposure only; no floor levels, occupancy, protective measures or damage model enter the classification.",
+    "All-touched5m building membership can include a small footprint sliver; cells are not treated as100% sealed and cell area is not exposed building area.",
+    "Rainfall daily totals provide event context, not short-duration intensity or sewer exceedance; fine-rain grids have zero spatial overlap with2021 survey polygons.",
+    "Green polygons do not establish soil infiltration; route/point presence does not establish operational drainage or blockage probability.",
+    "Original concentration/combined modes retain D8 routing/terrain-facet limitations; C is intentionally not added to review priority.",
+    "Open-water exclusions preserve source policy, including unmapped/intermittent channel gaps; adjacent land is not assumed safe.",
+    "No changes to buildings as terrain barriers, upstream hydrology, DTM resolution, original source files or legacy map modes."
+  ],
+  "verification": {
+    "all_listed_sources_unchanged": true,
+    "source_hashes_checked_before_after": true
+  },
+  "created_utc": "2026-10-25T15:38:22.529074+00:00",
+  "runtime_seconds": 55.947,
+  "reproduce": "python scripts/prepare_review_priority.py"
 }

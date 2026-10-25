@@ -34,7 +34,9 @@ def test_real_sources_include_only_actual_rivers_and_reaches_and_preserve_inputs
     assert all(f['properties']['geometry_role'] == 'assessment_reach' for f, r in selected if r['source_kind'] == 'official_assessment_reach')
     assert before_water == water and before_official == official
     meta = river.meta()
-    assert meta['available'] and meta['source_counts'] == counts
+    _, current_counts = river_features(water, official, document(river.channel_path))
+    assert meta['available'] and meta['source_counts'] == current_counts
+    assert current_counts['included_river_geometries'] == counts['included_river_geometries']+current_counts['osm_river_centerlines']
     assert meta['source_hashes']['open_water_polygons'] == hashlib.sha256(river.water_path.read_bytes()).hexdigest()
     assert meta['source_hashes']['official_context'] == hashlib.sha256(river.context_path.read_bytes()).hexdigest()
 
@@ -51,7 +53,7 @@ def test_exact_real_distances_and_adjustable_threshold_do_not_infer_causation():
     # Ariana is a real lake; its interior must not be counted as river distance0.
     lon, lat = 23.337247642167377, 42.690042699335194
     result = river.sample(lon, lat)
-    assert 30 < result['nearest_distance_m'] < 40
+    assert 26 < result['nearest_distance_m'] < 28
     geometries = river._sources()[0]
     point = Point(*TO_METRIC.transform(lon, lat))
     expected = min(point.distance(g) for g in geometries)

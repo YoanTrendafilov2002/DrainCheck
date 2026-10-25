@@ -6,18 +6,28 @@ mask**. This is a presentation/analysis policy, not evidence that a river channe
 or a stadium cannot flood. Original terrain values, source scores and original
 flood observations are preserved.
 
-## Actual source footprints
+## Source geometry
 
-The source is © OpenStreetMap contributors, licensed under
+Mapped geometry comes from © OpenStreetMap contributors, licensed under
 [ODbL 1.0](https://www.openstreetmap.org/copyright).
 
-- Channel geometry reuses the unchanged, checksum-verified
+- Channel polygons reuse the unchanged, checksum-verified
   `data/reference/osm_open_water_20261025T073109Z.json` snapshot. It selects actual
   water polygons tagged `water=river`, `water=canal`, `water=stream`, or legacy
   `waterway=riverbank`. Intermittent `natural=water` polygons without a water
   subtype are also included, retaining their original tags. These are mapped
   water/channel footprints; an untyped footprint is not independently confirmed
   to be a river.
+- The citywide waterway query also acquires `waterway=river`, `stream`, `canal`,
+  `drain` and `ditch` centerlines. Its preserved response is
+  `data/reference/screening_exclusions_waterways_20261025T151232Z.json`, with
+  the matching `.overpass` query and acquisition receipt. The pointer is
+  `data/reference/screening_exclusions_waterways_acquisition.json`.
+  Lines tagged covered, tunnel, indoor, underground or inactive are omitted;
+  a buried culvert does not automatically exclude the surface road above it.
+- An unambiguous positive [OSM `width` tag](https://wiki.openstreetmap.org/wiki/Key:width) supplies a centered footprint of that
+  width, projected in metres. Without a usable width, the mapped line itself
+  selects intersecting 5 m cells. That is a grid policy, not a measured bank width.
 - Stadium geometry was acquired with a citywide bounding-box Overpass query for
   polygon ways/relations tagged `leisure=stadium` or `building=stadium`, on
   **25 October 2026**. The exact query, unmodified response and checksummed
@@ -35,10 +45,12 @@ The source is © OpenStreetMap contributors, licensed under
 
 The accepted source geometry is recorded, with OSM object IDs, versions,
 timestamps, complete original tags and source links, in
-`data/reference/screening_exclusions.geojson`. This snapshot has **52 channel/
-water polygons and 40 stadium polygons**; stadium polygons are not a count of
-unique venues because a venue can have both a facility and a building outline.
-No source geometry was rejected during this acquisition.
+`data/reference/screening_exclusions.geojson`. Source line counts describe
+features intersecting the rectangular analysis grid; they do not establish that
+every feature intersects valid terrain. Stadium polygons are not a count of
+unique venues because facility and building outlines can overlap. Current
+counts, omitted records and checksums are in
+`data/cache/screening_exclusions_meta.json`.
 
 ## Exact raster and edge policy
 
@@ -50,24 +62,49 @@ of **10,345 columns × 10,869 rows**, with affine transform
 | Value | Meaning |
 |---|---|
 | 0 | Not suppressed by this mask; not a safety classification |
-| 1 | Mapped channel/water footprint |
+| 1 | Mapped channel polygon, source-width footprint or intersected centerline cell |
 | 2 | Stadium footprint |
-| 3 | Both |
+| 3 | Mapped channel and stadium |
+| 5 | Terrain-connected channel candidate (river bit 1 plus inference bit 4) |
+| 7 | Terrain-connected channel candidate and stadium |
 
-Rasterization uses **all_touched=True**: every 5 m cell intersecting an actual
-source footprint is suppressed, including partial boundary cells. This prevents
-thin mapped channels from disappearing under pixel-centre rasterization. It
-does not add an arbitrary river buffer or remove a surrounding floodplain.
-Cells outside actual valid terrain are zero. Nearest-neighbour overviews retain
-the categorical flags.
+Rasterization uses **all_touched=True**: every 5 m cell intersecting accepted
+geometry is suppressed, including partial boundary cells and line crossings.
+Centerlines also use exact segment/grid traversal to retain nearly horizontal
+crossings and cells touched at a grid edge or corner.
+Cells outside actual valid terrain are zero. Grid-cell area includes partial
+cells and must not be described as surveyed channel area.
 
-The prepared snapshot contains **55,770 channel cells**, **20,291 stadium
-cells**, and **76,061 union cells**, with no overlap. The represented union
-grid-cell area is 1.901525 km²; this includes partial edge cells and is not the
-surveyed footprint area. Current SHA-256 is
-`bfdf087d674d5c81f80107d1c2ecf5d6c83ae7312756e1e5bbe8528a70a8a9fd`.
-The installed metadata file is authoritative for the full checksum; verify it
-against the binary rather than relying on this explanatory text.
+### Connected terrain candidates
+
+Mapped centerlines can miss part of an incised channel in the terrain raster.
+The alignment input is the municipal DTM's existing 5 m ground-elevation and
+depression-fill bands in `data/cache/pluvial_5m.tif`.
+The separate screening policy searches within **20 m** of actual open
+waterway lines, with flat end caps, using native 5 m cell centres. A candidate
+must have finite valid ground elevation and finite, strictly positive terrain
+depression fill depth. Mapped river seeds outside valid terrain are removed
+before propagation. Only candidate components connected to the remaining seeds
+through eight-neighbour cell adjacency are added. They receive
+river bit 1 and inference bit 4, keeping terrain inference distinct from mapped
+channel geometry in the raster and sample responses.
+
+Zero-fill land, disconnected depressions and cells outside this search corridor
+remain unchanged by this extension. The 20 m limit is a bounded screening
+assumption; it is neither a measured bank width nor a floodplain boundary. Added
+cells are terrain-derived exclusions, **not observed water**. Original terrain,
+fill depth and screening values remain intact.
+
+Native 1 m Perlovska cross-sections showed an incised trough beside the mapped
+centerline cells, explaining why alignment was needed there. That local check
+does not validate channel boundaries throughout the study area.
+
+Tile masks read the **native 5 m raster**, bypass nearest-neighbour overviews
+and use maximum reduction at every zoom: any overlapping excluded native cell
+suppresses that display pixel. This also clips partial edge pixels whose centres
+fall on neighbouring land. It prevents channel colours from returning at zoom
+changes; adjacent land within the same display pixel may be hidden without
+changing any analysis cell or source score.
 
 ## Reproduce and verify
 
@@ -79,12 +116,14 @@ python scripts/prepare_screening_exclusions.py
 ```
 
 The default reuses the preserved snapshots and fails if their hashes change.
-`--refresh` downloads a new dated stadium snapshot without deleting originals.
+`--refresh` downloads new dated waterway and stadium snapshots without deleting
+originals.
 Changing the source snapshot creates a new derivative and revision.
 
 The script checks the exact grid, data type, absence of NoData, and every saved
-pixel against the prepared array. It also requires the actual whole-stadium and
-two central-channel source polygons and verifies real pixel centres inside each.
+pixel against the prepared array. It requires the open-waterway network as well
+as the actual whole-stadium and two central-channel source polygons, with real
+pixel controls inside each mandatory polygon.
 The confirmed Vasil Levski pitch centroid at longitude 23.3352531692, latitude
 42.6875642953, row 4665/column 4646, must carry stadium bit 2.
 `data/cache/screening_exclusions_meta.json` records source receipts, checksums,
@@ -93,11 +132,13 @@ opened read-only and is not rewritten.
 
 ## Limits
 
-Community mapping can be incomplete, stale or misclassified. A missing stadium
-tag, an unmapped channel polygon or a river represented only as a line remains
-a gap. No invented line width or fabricated footprint is substituted. The mask
-does not infer river flood extent, simulate river levels, verify stadium
-drainage capacity, or establish absence of flood hazard. Historical observations
+Community mapping can be incomplete, stale or misclassified. Missing channels,
+stadium tags and unknown bank widths remain limitations. Mapped geometry plus
+connected terrain candidates does not establish complete physical bank coverage;
+connected adjacent depressions can also enter the bounded policy exclusion.
+The mask does not infer river flood
+extent, simulate river levels, verify stadium drainage capacity, or establish
+absence of flood hazard. Historical observations
 remain an independent evidence source, rather than being erased from originals.
 
 The earlier open-water mask remains a separate input. This new mask supplements

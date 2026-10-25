@@ -1,7 +1,8 @@
 """Exact metric proximity to documented river geometry, without inferring cause.
 
-Only explicitly tagged OSM river polygons and actual official river-reach lines
-are used. Lakes, reservoirs, ponds and schematic assessment points are excluded.
+Explicit OSM river polygons, verified open river/stream/canal centrelines and
+official river-reach lines are used. Lakes and inferred terrain corridors are
+excluded, as are drains, ditches, covered channels and schematic points.
 Distance identifies contextual proximity; it cannot prove fluvial/pluvial cause.
 """
 import hashlib
@@ -18,7 +19,7 @@ from shapely.geometry import Point, shape
 
 from .tile_cache import file_signature
 
-METHOD = 'documented-river-geometry-exact-metric-proximity-v1'
+METHOD = 'documented-river-geometry-with-open-centerlines-v2'
 DEFAULT_THRESHOLD_M = 100.0
 CATEGORIES = ('river_adjacent_possible_mixed', 'away_from_mapped_river', 'unknown')
 TO_METRIC = Transformer.from_crs(4326, 7801, always_xy=True)
@@ -39,7 +40,20 @@ def sha(path):
     return h.hexdigest()
 
 
-def river_features(water, assessment):
+def _open_centerline(tags):
+    if tags.get('waterway') not in ('river', 'stream', 'canal'):
+        return False
+    if any(str(tags.get(key, '')).strip().lower() not in ('', 'no', 'false', '0')
+           for key in ('covered', 'tunnel', 'indoor')):
+        return False
+    if str(tags.get('location', '')).lower() in ('underground', 'indoor'):
+        return False
+    inactive = ('disused', 'abandoned', 'demolished', 'removed', 'razed', 'construction', 'proposed')
+    return not any(str(value).lower() not in ('', 'no', 'false', '0')
+                   for key, value in tags.items() if key.split(':')[0] in inactive)
+
+
+def river_features(water, assessment, channels=None):
     """Keep source features intact; return selected records and source counts."""
     selected = []
     counts = {'open_water_source_polygons': len(water.get('features', [])),
@@ -69,6 +83,23 @@ def river_features(water, assessment):
             counts['official_river_reaches'] += 1
         else:
             counts['schematic_or_nonreach_features_excluded'] += 1
+    if channels is not None:
+        counts.update(channel_network_source_features=len(channels.get('features', [])),
+                      osm_river_centerlines=0, nonriver_or_noncenterline_features_excluded=0)
+        for feature in channels.get('features', []):
+            props = feature.get('properties') or {}
+            tags = props.get('tags') or {}
+            geometry = feature.get('geometry') or {}
+            if (geometry.get('type') in ('LineString', 'MultiLineString')
+                    and props.get('geometry_role') == 'channel_centerline'
+                    and _open_centerline(tags)):
+                identifier = f"{props.get('osm_type')}/{props.get('osm_id')}"
+                selected.append((feature, {'source_id': identifier, 'source_kind': 'osm_open_river_centerline',
+                                          'source_url': props.get('source_url'),
+                                          'label': tags.get('name') or 'Mapped '+tags['waterway']+' '+identifier}))
+                counts['osm_river_centerlines'] += 1
+            else:
+                counts['nonriver_or_noncenterline_features_excluded'] += 1
     counts['included_river_geometries'] = len(selected)
     return selected, counts
 
@@ -100,7 +131,8 @@ def grid_index(tree):
 
 
 @lru_cache(maxsize=4)
-def load_sources(water_signature, water_meta_signature, context_signature, assessment_meta_signature):
+def load_sources(water_signature, water_meta_signature, context_signature, assessment_meta_signature,
+                 channel_signature=None, channel_meta_signature=None):
     water_meta = json.loads(Path(water_meta_signature[0]).read_text(encoding='utf-8'))
     assessment_meta = json.loads(Path(assessment_meta_signature[0]).read_text(encoding='utf-8'))
     water_hash = sha(water_signature[0])
@@ -111,10 +143,22 @@ def load_sources(water_signature, water_meta_signature, context_signature, asses
         raise ValueError('Official assessment context checksum differs from its preserved receipt')
     water = json.loads(Path(water_signature[0]).read_text(encoding='utf-8'))
     context = json.loads(Path(context_signature[0]).read_text(encoding='utf-8'))
-    for document in [water, context]:
+    channels, channel_hash = None, None
+    if channel_signature is not None or channel_meta_signature is not None:
+        if channel_signature is None or channel_meta_signature is None:
+            raise ValueError('Mapped channel geometry and its verification receipt are both required')
+        channel_meta = json.loads(Path(channel_meta_signature[0]).read_text(encoding='utf-8'))
+        source = channel_meta.get('source', {})
+        if source.get('geojson_file') != 'data/reference/screening_exclusions.geojson':
+            raise ValueError('Mapped channel receipt identifies a different geometry source')
+        channel_hash = sha(channel_signature[0])
+        if channel_hash != source.get('geojson_sha256'):
+            raise ValueError('Mapped channel geometry checksum differs from its preserved receipt')
+        channels = json.loads(Path(channel_signature[0]).read_text(encoding='utf-8'))
+    for document in [water, context, *([channels] if channels is not None else [])]:
         if document.get('type') != 'FeatureCollection' or not isinstance(document.get('features'), list):
             raise ValueError('River context source must be a real GeoJSON FeatureCollection')
-    selected, counts = river_features(water, context)
+    selected, counts = river_features(water, context, channels)
     geometries = []
     records = []
     for feature, record in selected:
@@ -131,18 +175,23 @@ def load_sources(water_signature, water_meta_signature, context_signature, asses
         geometries.append(metric)
         records.append(record)
     identity = {'method': METHOD, 'water_sha256': water_hash, 'official_context_sha256': context_hash}
+    if channel_hash is not None:
+        identity['open_centerline_source_sha256'] = channel_hash
     revision = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:16]
     meta = {'available': bool(geometries), 'method': METHOD, 'revision': revision,
             'default_threshold_m': DEFAULT_THRESHOLD_M, 'distance_unit': 'metres', 'distance_crs': 'EPSG:7801',
             'source_counts': counts,
-            'source_revisions': {'mapped_water': water_meta.get('revision'), 'official_assessment': assessment_meta.get('revision')},
-            'source_hashes': {'open_water_polygons': water_hash, 'official_context': context_hash},
-            'source_urls': sorted({r['source_url'] for r in records if r.get('source_url')}),
-            'filter': 'Only exact water=river or legacy waterway=riverbank polygons, plus official geometry_role=assessment_reach LineString/MultiLineString. No schematic points, lake/reservoir/pond distance or invented river buffers enter nearest distances.',
+            'source_revisions': {'mapped_water': water_meta.get('revision'), 'official_assessment': assessment_meta.get('revision'),
+                                 **({'open_centerline_geometry': channel_hash[:16]} if channel_hash else {})},
+            'source_hashes': {'open_water_polygons': water_hash, 'official_context': context_hash,
+                              **({'open_centerline_geometry': channel_hash} if channel_hash else {})},
+            'source_urls': sorted({r['source_url'] for r in records if r.get('source_url') and r['source_kind'] == 'official_assessment_reach'}
+                                  | ({'https://www.openstreetmap.org/copyright'} if any(r['source_kind'].startswith('osm_') for r in records) else set())),
+            'filter': 'Exact water=river or legacy waterway=riverbank polygons; verified original open river/stream/canal centerlines; and official assessment reaches. Drains, ditches, covered/inactive channels, stadiums, terrain-inferred corridors, schematic points and lake/reservoir/pond footprints do not enter nearest distances.',
             'interpretation': INTERPRETATION,
-            'limitations': ['Source snapshots and designated reaches are incomplete river mapping; narrow, intermittent, covered or unmapped channels may be missing.',
+            'limitations': ['Source snapshots and designated reaches are incomplete river mapping; unmapped channels may be missing. Covered channels are omitted from surface river context.',
                             'The threshold is an adjustable proximity screening choice, not a floodplain boundary, return period or hydraulic connection.',
-                            'Distances to river polygons measure distance to their actual footprint; points inside have distance zero. Distances to reaches use their supplied line geometry.',
+                            'Distances to river polygons use their actual footprint; points inside have distance zero. Centerlines and reaches use original supplied line geometry, with no inferred width or terrain-search corridor.',
                             'Reported flood mechanisms are preserved. This context never relabels an observed event as fluvial or pluvial.',
                             'Official reaches are prospective designations, not observed flood extents. Source dates are retained under the requested time-compatible scenario.']}
     return geometries, records, shapely.STRtree(geometries) if geometries else None, meta
@@ -155,9 +204,17 @@ class RiverContext:
         self.water_meta = self.root/'data/cache/open_water_meta.json'
         self.context_path = self.root/'data/reference/flood_assessment/assessment_context.geojson'
         self.assessment_meta = self.root/'data/reference/flood_assessment/metadata.json'
+        self.channel_path = self.root/'data/reference/screening_exclusions.geojson'
+        self.channel_meta = self.root/'data/cache/screening_exclusions_meta.json'
 
     def _sources(self):
-        return load_sources(*(file_signature(p) for p in [self.water_path, self.water_meta, self.context_path, self.assessment_meta]))
+        signatures = tuple(file_signature(p) for p in [self.water_path, self.water_meta, self.context_path, self.assessment_meta])
+        # If either supplement file exists, require the matching source/receipt
+        # pair; silently reverting to old polygon-only context would mislabel
+        # a known channel as distant after a missing or changed data restore.
+        if self.channel_path.exists() or self.channel_meta.exists():
+            signatures += (file_signature(self.channel_path), file_signature(self.channel_meta))
+        return load_sources(*signatures)
 
     def meta(self):
         try:
@@ -179,7 +236,7 @@ class RiverContext:
                 or not -180 <= lon <= 180 or not -85 <= lat <= 85):
             raise ValueError('Finite WGS84 longitude/latitude required')
         result = self.classify_geometry({'type': 'Point', 'coordinates': [lon, lat]}, threshold_m, reported_mechanism)
-        result['distance_basis'] = 'Point to nearest actual mapped river footprint or official river-reach line'
+        result['distance_basis'] = 'Point to nearest actual mapped river footprint, open river/stream/canal centerline or official river-reach line'
         return result
 
     def classify_geometry(self, geometry, threshold_m=DEFAULT_THRESHOLD_M, reported_mechanism=None):

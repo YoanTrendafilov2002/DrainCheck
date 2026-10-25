@@ -149,7 +149,9 @@ def test_real_river_proximity_strata_and_display_filter(real_scenario):
     service,result=real_scenario
     river=result['river_context']
     assert river['available'] and river['threshold_m']==100
-    assert river['source_counts']['included_river_geometries']==37
+    counts=river['source_counts']
+    assert counts['osm_river_centerlines']>0
+    assert counts['included_river_geometries']==18+19+counts['osm_river_centerlines']
     assert math.isclose(sum(river['class_area_m2'].values()),result['statistics']['eligible_nongreen_land_area_m2'],abs_tol=1e-6)
     for mode in ['baseline','clogged']:
         strata=river['depth_by_proximity'][mode]
